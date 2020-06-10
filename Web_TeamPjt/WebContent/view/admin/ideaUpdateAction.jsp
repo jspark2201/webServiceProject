@@ -16,7 +16,7 @@
 	String requirements = request.getParameter("ideaRequirements");
 	int number_participants = Integer.parseInt(request.getParameter("ideaNumber_participants"));
 	String url = request.getParameter("ideaUrl");
-	String state = request.getParameter("ideaState");
+	int stateIdx = Integer.parseInt(request.getParameter("ideaState"));
 	
 	
 	Idea idea = new Idea();
@@ -27,11 +27,11 @@
 	idea.setRequirements(requirements);
 	idea.setNumber_participants(number_participants);
 	idea.setUrl(url);
-	idea.setState(state);
+	idea.setStateIdx(stateIdx);
 
 	
-	if (idea.getId() == 0 || idea.getTitle() == null
-		|| idea.getContent() == null || idea.getState() == null){
+	
+	if (idea.getId() == 0 || idea.getTitle() == null || idea.getContent() == null) {
 			PrintWriter script = response.getWriter();
 			script.println("<script>");
 			script.println("alert('입력이 안 된 사항이 있습니다.')");

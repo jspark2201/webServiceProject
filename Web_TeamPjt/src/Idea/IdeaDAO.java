@@ -59,14 +59,6 @@ public class IdeaDAO {
 		
 		String sql;
 		
-		System.out.println(idea.getId());
-		System.out.println(idea.getTitle());
-		System.out.println(idea.getContent());
-		System.out.println(idea.getRequirements());
-		System.out.println(idea.getNumber_participants());
-		System.out.println(idea.getUrl());
-		System.out.println(idea.getState());
-		
 		try { // 상태에 따라 sql이 달라질 것.
 			sql = "update idea set title=?, content=?, requirements=?,"
 					+" number_participants=?, url=?, state=? where id=?";
@@ -76,9 +68,8 @@ public class IdeaDAO {
 			pstmt.setString(3, idea.getRequirements());
 			pstmt.setInt(4, idea.getNumber_participants());
 			pstmt.setString(5, idea.getUrl());
-			pstmt.setString(6, idea.getState());
+			pstmt.setInt(6, idea.getStateIdx());
 			pstmt.setInt(7, idea.getId());
-			
 			pstmt.executeUpdate();
 		}
 		catch(SQLException e) {
@@ -140,7 +131,7 @@ public class IdeaDAO {
 			idea.setComplete_date(rs.getString("complete_date"));
 			idea.setNumber_participants(rs.getInt("number_participants"));
 			idea.setUrl(rs.getString("url"));
-			idea.setState(rs.getString("state"));
+			idea.setStateIdx(rs.getInt("state"));
 			
 			rs.close();
 		}
@@ -157,7 +148,7 @@ public class IdeaDAO {
 	
 	
 
-	public ArrayList getDBList (String type, String search, String order, int pageN)
+	public ArrayList getDBList (String type, String search, int filter, String order, int pageN)
 	{
 		connect();
 		
@@ -171,12 +162,16 @@ public class IdeaDAO {
 				case "title":
 					sql += " where title like ?";
 					break;
-				case "state":
-					sql += " where state like ?";
-					break;
 			}
 			
 			search = '%' + search.trim() + '%';
+		}
+		
+		if (search != null && filter != -1) {
+			sql += " and state = ?";
+		}
+		else if (filter != -1) {
+			sql += " where state = ?";
 		}
 		
 		sql += " order by " + order;
@@ -187,8 +182,19 @@ public class IdeaDAO {
 		try {
 			pstmt = conn.prepareStatement(sql);
 
-			if (search != null) {
+			if (search != null && filter != -1) {
+				pstmt.setString(1,  search);
+				pstmt.setInt(2, filter);
+				pstmt.setInt(3, (pageN-1)*10);
+				pstmt.setInt(4, 10);
+			}
+			else if (search != null) {
 				pstmt.setString(1, search);
+				pstmt.setInt(2, (pageN-1)*10);
+				pstmt.setInt(3, 10);
+			}
+			else if (filter != -1) {
+				pstmt.setInt(1, filter);			
 				pstmt.setInt(2, (pageN-1)*10);
 				pstmt.setInt(3, 10);
 			}
@@ -211,7 +217,7 @@ public class IdeaDAO {
 				idea.setComplete_date(rs.getString("complete_date"));
 				idea.setNumber_participants(rs.getInt("number_participants"));
 				idea.setUrl(rs.getString("url"));
-				idea.setState(rs.getString("state"));
+				idea.setStateIdx(rs.getInt("state"));
 				
 				ideas.add(idea);
 			}
@@ -227,7 +233,7 @@ public class IdeaDAO {
 		return ideas;
 	}
 	
-	public int getDBCount (String type, String search)
+	public int getDBCount (String type, String search, int filter)
 	{
 		connect();
 		
@@ -241,20 +247,32 @@ public class IdeaDAO {
 				case "title":
 					sql += " where title like ?";
 					break;
-				case "state":
-					sql += " where state like ?";
-					break;
 			}
 			
 			search = '%' + search.trim() + '%';
 		}
 		
+		if (search != null && filter != -1) {
+			sql += " and state = ?";
+		}
+		else if (filter != -1) {
+			sql += " where state = ?";
+		}
+		
+		
 		int count = 0;
 		try {
 			pstmt = conn.prepareStatement(sql);
 			
-			if (search != null)
+			if (search != null && filter != -1) {
+				pstmt.setString(1,  search);
+				pstmt.setInt(2, filter);
+			}
+			else if (search != null)
 				pstmt.setString(1, search);
+			else if (filter != -1)
+				pstmt.setInt(1, filter);
+			
 
 			ResultSet rs = pstmt.executeQuery();
 			

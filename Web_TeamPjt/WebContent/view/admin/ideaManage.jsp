@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=EUC-KR" pageEncoding="EUC-KR"%>
 <%@ page import="Idea.Idea"%>
+<%@ page import="Idea.IdeaState"%>
 <%@ page import="Idea.IdeaDAO"%>
 <%@ page import="java.util.ArrayList"%>
 <%@ page import="java.io.PrintWriter" %>
@@ -23,6 +24,24 @@
 	*/
 		
 		IdeaDAO ideaDAO = new IdeaDAO();
+	
+		// 필터 조건 (default: -1)
+		int filter = -1;
+		
+		try {
+			if (request.getParameter("filter") != null) {
+				
+				filter = Integer.parseInt(request.getParameter("filter"));
+			}
+			
+			if (filter < -1 || 5 < filter) {
+				filter = -1;
+			}
+		}
+		catch (Exception e) {
+			filter = -1;
+		}
+		
 
 		// 검색 조건  (default: "writer")
 		String type = "writer";
@@ -53,7 +72,7 @@
 			curPageNum = Integer.parseInt(request.getParameter("pageNum"));
 		
 
-		int pageCount = (ideaDAO.getDBCount(type, search) - 1) / 10 + 1;
+		int pageCount = (ideaDAO.getDBCount(type, search, filter) - 1) / 10 + 1;
 		
 		if (curPageNum < 0 || curPageNum > pageCount)
 			curPageNum = 1;
@@ -62,19 +81,25 @@
 		// 정렬 방식 (default: "date")
 		String order = "id";
 
-		if (request.getParameter("id") != null)
-			order = request.getParameter("id");
+		if (request.getParameter("order") != null)
+			order = request.getParameter("order");
 		
 		switch(order) {
-			case "id": case "writer": case "title":
-			case "date": case "state":
+			case "id": case "writer": case "title": case "state":
 				break;
 			default:
 				order = "id";
 		}
 
 		
-		PrintWriter printer = response.getWriter();
+		String src = "ideaManage.jsp?";
+		
+		if (search != null) {
+			if (!search.equals("")) {
+				src += "type=" + type + "&";
+				src += "search=" + search + "&";
+			}
+		}
 
 	%>
 
@@ -105,16 +130,44 @@
 	
 		<div class="search_div">
 			<div class="row">
-   				<div class="col-md-8">
+   				<div class="col-md-4 text-left">
+					<select class="mdb-select md-form colorful-select dropdown-primary" searchable="Status filtering" name="ideaState"
+						onchange="location.href='<%=src%>filter='+(this.value);">
+						<option value="-1">전체보기</option>
+						<%
+							for (int i=0; i<6; i++) {
+								
+								if (i == filter) {
+						%>
+							<option value="<%=i%>" selected><%=IdeaState.getState(i)%></option>
+						<%
+								}
+								
+								else {
+						%>
+							<option value="<%=i%>"><%=IdeaState.getState(i)%></option>
+						<% 
+								}
+							}
+						%>
+					</select>
+					<%
+						if (filter != -1)
+							src += "filter=" + filter + "&";
+					%>
+					<button type="button" class="btn" onclick="groupDel();">삭제</button>
+   				</div>
+   				<div class="col-md-8 text-right">
 					<form class="form" method="get" action="ideaManage.jsp">
-						<div class="col-md-2">
+						<input type="hidden" name="filter" value="<%=filter%>">
+						<div style="display:inline-block">
 							<select class="mdb-select md-form colorful-select dropdown-primary" searchable="Search here.." name="type">
 								<option value="writer">작성자</option>
 								<option value="title">제목</option>
 								<option value="state">상태</option>
 							</select>
 						</div>
-	   					<div class="col-md-3">
+						<div style="display:inline-block">
 	   						<%
 								String tmp = search;
 								if (search == null)
@@ -122,14 +175,11 @@
 							%>
 							<input type="text" class="form-control" name="search" value="<%=tmp%>"/>
 						</div>
-						<div class="col-md-1">
+						<div style="display:inline-block">
 	   						<button type="submit" class="btn btn-default" id="searchBtn">Search</button>
 	   					</div>
 					</form>
 				</div>
-   				<div class="col-md-4 text-right">
-					<button type="button" class="btn" onclick="groupDel();">삭제</button>
-   				</div>
 			</div>
 		</div>
 
@@ -141,10 +191,10 @@
 				<thead>
 					<tr>
 						<th style="background-color: #eeeeee; text-align: center;">
-							<a href="ideaManage.jsp?order=writer">작성자</a>
+							<a href="<%=src%>order=writer">작성자</a>
 						</th>
 						<th style="background-color: #eeeeee; text-align: center;">
-							<a href="ideaManage.jsp?order=title">제목</a>
+							<a href="<%=src%>order=title">제목</a>
 						</th>
 						<th style="background-color: #eeeeee; text-align: center;">
 							등록 시간
@@ -156,7 +206,7 @@
 							팀원 수
 						</th>
 						<th style="background-color: #eeeeee; text-align: center;">
-							<a href="ideaManage.jsp?order=state">상태</a>
+							<a href="<%=src%>order=state">상태</a>
 						</th>
 						<th style="background-color: #eeeeee; text-align: center;">조회/수정</th>
 						<th style="background-color: #eeeeee; text-align: center;">비고</th>
@@ -164,7 +214,7 @@
 				</thead>
 				<tbody>
 					<%
-						ArrayList<Idea> list = ideaDAO.getDBList(type, search, order, curPageNum);
+						ArrayList<Idea> list = ideaDAO.getDBList(type, search, filter, order, curPageNum);
 					
 						for (int i = 0; i < list.size(); i++) {
 							if (list.get(i) != null) {
@@ -175,8 +225,8 @@
 						<td><%=list.get(i).getRegistration_date()%></td>
 						<td><%=list.get(i).getComplete_date()%></td>
 						<td><%=list.get(i).getNumber_participants()%></td>
-						<td><%=list.get(i).getState()%></td>
-						<td><a href="ideaUpdate.jsp?id=<%=list.get(i).getId()%>">조회/수정</td>
+						<td><%=IdeaState.getState(list.get(i).getStateIdx())%></td>
+						<td><a href="ideaUpdate.jsp?id=<%=list.get(i).getId()%>">조회/수정</a></td>
 						<td><input type="checkbox" id="<%=list.get(i).getId()%>"></td>
 						
 					</tr>
@@ -192,13 +242,8 @@
 				<%
 					// 페이지 넘버링
 				
-					String src = "ideaManage.jsp?";
 					int pageNum = 0;
-					
-					if (search != null) {
-						src += "type=" + type + "&";
-						src += "search=" + search + "&";
-					}
+				
 					src += "pageNum=";
 					
 				%>
@@ -281,7 +326,7 @@
 		location.reload();
 
 	}
-
+	
 
 	
 	</script>

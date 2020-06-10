@@ -10,7 +10,7 @@ public class Idea {
 	private String complete_date;
 	private int number_participants;
 	private String url;
-	private String state;
+	private int stateIdx;
 	
 	public int getId() {
 		return id;
@@ -66,12 +66,16 @@ public class Idea {
 	public void setUrl(String url) {
 		this.url = url;
 	}
-	public String getState() {
-		return state;
+	public int getStateIdx() {
+		return stateIdx;
 	}
-	public void setState(String state) {
-		this.state = state;
+	public void setStateIdx(int stateIdx) {
+		this.stateIdx = stateIdx;
 	}
 	
+	public String getState() {
+		return IdeaState.getState(this.stateIdx);
+	}
+
 	
 }

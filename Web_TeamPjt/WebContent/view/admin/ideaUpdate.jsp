@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=EUC-KR" pageEncoding="EUC-KR"%>
 <%@ page import="Idea.Idea"%>
+<%@ page import="Idea.IdeaState"%>
 <%@ page import="Idea.IdeaDAO"%>
 <%@ page import="java.util.ArrayList"%>
 
@@ -84,8 +85,24 @@
 					</div>
 					<div class="form-group">
 						<span>상태</span>
-						<input type="text" class="form-control" placeholder="상태"
-							name="ideaState" maxlength="20" value="<%=idea.getState()%>">
+						<select class="mdb-select md-form colorful-select dropdown-primary" searchable="Search here.." name="ideaState">
+						<%
+							for (int i=0; i<6; i++) {
+								
+								if (i == idea.getStateIdx()) {
+						%>
+							<option value="<%=i%>" selected><%=IdeaState.getState(i)%></option>
+						<%
+								}
+								
+								else {
+						%>
+							<option value="<%=i%>"><%=IdeaState.getState(i)%></option>
+						<% 
+								}
+							}
+						%>
+						</select>
 					</div>
 
 					<input type="submit" class="btn btn-primary form-control" value="저장">
