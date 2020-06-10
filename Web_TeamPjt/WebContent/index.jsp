@@ -7,6 +7,6 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<p>안녕하세요</p>
+	<p>알림, 신고, 메시지 기능</p>
 </body>
 </html>
