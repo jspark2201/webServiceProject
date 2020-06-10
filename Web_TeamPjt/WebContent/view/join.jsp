@@ -136,9 +136,6 @@
 							<input type="submit" value="Register"
 								class="btn btn-primary btn-block btn-lg" tabindex="7">
 						</div>
-						<div class="col-xs-12 col-md-6">
-							<a href="#" class="btn btn-success btn-block btn-lg">Sign In</a>
-						</div>
 					</div>
 				</form>
 			</div>

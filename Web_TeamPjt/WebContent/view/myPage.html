@@ -45,7 +45,7 @@
 						</a>
 					</li>
 					<!-- <li class="nav-item"><a class="nav-link" href="#">회원가입</a></li> -->
-					<li class="nav-item"><a class="nav-link a_400" href="#">로그아웃</a></li>
+					<li class="nav-item"><a class="nav-link a_400" onclick="logoutAlert()">로그아웃</a></li>
 					<li class="nav-item"><a class="nav-link a_400" href="#">마이페이지</a></li>
 				</ul>
 			</div>
@@ -142,9 +142,11 @@
 			</ul>
 	    </div>
 	    <div id="menu1" class="container tab-pane fade"><br>
-	      <h3>Menu 1</h3>
-	      <p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+	      <p class="p_400" style="color:#cccccc;">개인정보 조회 및 수정은 인증이 필요합니다.</p>
+	      <button type="button" class="btn btn-outline-dark" style="margin-right:20px;">개인정보 조회</button>
+	      <button type="button" class="btn btn-outline-dark">개인정보 수정</button>
 	    </div>
+	    <hr>
 	    <div id="menu2" class="container tab-pane fade"><br>
 		    <div id="home" class="container tab-pane active" ><br>
 			    <ul class="pagination justify-content-center">
@@ -252,6 +254,8 @@
 	<!-- Bootstrap core JavaScript -->
 	<script src="../vendor/jquery/jquery.min.js"></script>
 	<script src="../vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
+	<script type="text/javascript" src="../js/alertScript.js" ></script>
 
 </body>
 </html>
