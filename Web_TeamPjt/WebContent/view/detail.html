@@ -67,9 +67,16 @@
   <div class="container" style="padding:100px; background-color:#ffffff; border:1px solid #a6a6a6; margin-bottom:50px;">
     <hr class="hr1">
     <div class="row">
+    	<div class="col-sm-2" style="width:100%; text-align:right; margin-left:80%;">
+    		<a class="text-muted" style="font-size:10px;">Number of likes</a><br>
+      		<a class="h4">9,123</a>
+      		<img alt="" src="../img/heart.png" style="height:32px; width:32px; margin-bottom:10px;">
+  		</div>
 		<div class="row a_400" style="font-size:2rem; margin:30px; ">
 			프로젝트 제목
 		</div>
+		
+  	
       <!-- Post Content Column -->
       <div><!-- class="col-lg-8" -->
 	
@@ -105,9 +112,12 @@
         <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Harum, dolor quis. Sunt, ut, explicabo, aliquam tenetur ratione tempore quidem voluptates cupiditate voluptas illo saepe quaerat numquam recusandae? Qui, necessitatibus, est!</p>
 
         <hr class="hr1">
+        	
+        <button type="button" class="btn btn-outline-danger" id="likeBtn">좋아요<img alt="" src="../img/heart2.png" style="margin-bottom:5px;"></button>
+        
         <hr class="hr1">
-
-
+		
+		
         <!-- Comments Form -->
         <div class="card my-4">
           <h5 class="card-header">Leave a Comment:</h5>
@@ -156,7 +166,6 @@
           </div>
         </div>
 		</div>
-      </div>
     </div>
     <!-- /.row -->
 
@@ -212,6 +221,13 @@
 
 	
 </body>
+	<script>
+		$(document).ready(function(){
+		  $("#likeBtn").click(function(){
+		    $('.toast').toast('show');
+		  });
+		});
+	</script>
 </html>
 
 

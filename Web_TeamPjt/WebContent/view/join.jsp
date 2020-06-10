@@ -38,48 +38,9 @@
 			</button>
 			<div class="collapse navbar-collapse" id="navbarResponsive">
 				<ul class="navbar-nav ml-auto">
-					<li class="nav-item"><a class="nav-link" href="about.html">About</a>
-					</li>
-					<li class="nav-item"><a class="nav-link" href="services.html">Services</a>
-					</li>
-					<li class="nav-item"><a class="nav-link" href="contact.html">Contact</a>
-					</li>
-					<li class="nav-item active dropdown"><a
-						class="nav-link dropdown-toggle" href="#"
-						id="navbarDropdownPortfolio" data-toggle="dropdown"
-						aria-haspopup="true" aria-expanded="false"> Portfolio </a>
-						<div class="dropdown-menu dropdown-menu-right"
-							aria-labelledby="navbarDropdownPortfolio">
-							<a class="dropdown-item" href="portfolio-1-col.html">1 Column
-								Portfolio</a> <a class="dropdown-item" href="portfolio-2-col.html">2
-								Column Portfolio</a> <a class="dropdown-item active"
-								href="portfolio-3-col.html">3 Column Portfolio</a> <a
-								class="dropdown-item" href="portfolio-4-col.html">4 Column
-								Portfolio</a> <a class="dropdown-item" href="portfolio-item.html">Single
-								Portfolio Item</a>
-						</div></li>
-					<li class="nav-item dropdown"><a
-						class="nav-link dropdown-toggle" href="#" id="navbarDropdownBlog"
-						data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-							Blog </a>
-						<div class="dropdown-menu dropdown-menu-right"
-							aria-labelledby="navbarDropdownBlog">
-							<a class="dropdown-item" href="blog-home-1.html">Blog Home 1</a>
-							<a class="dropdown-item" href="blog-home-2.html">Blog Home 2</a>
-							<a class="dropdown-item" href="blog-post.html">Blog Post</a>
-						</div></li>
-					<li class="nav-item dropdown"><a
-						class="nav-link dropdown-toggle" href="#" id="navbarDropdownBlog"
-						data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-							Other Pages </a>
-						<div class="dropdown-menu dropdown-menu-right"
-							aria-labelledby="navbarDropdownBlog">
-							<a class="dropdown-item" href="full-width.html">Full Width
-								Page</a> <a class="dropdown-item" href="sidebar.html">Sidebar
-								Page</a> <a class="dropdown-item" href="faq.html">FAQ</a> <a
-								class="dropdown-item" href="404.html">404</a> <a
-								class="dropdown-item" href="pricing.html">Pricing Table</a>
-						</div></li>
+					<li class="nav-item active"><a class="nav-link a_400" href="#">Home
+							<span class="sr-only">(current)</span>
+					</a></li>
 				</ul>
 			</div>
 		</div>
@@ -96,35 +57,11 @@
 						Please Sign Up <small>It's free and always will be.</small>
 					</h2>
 					<hr class="colorgraph">
-					<div class="row">
-						<div class="col-xs-12 col-sm-6 col-md-6">
-							<div class="form-group">
-								<input type="text" name="first_name" id="first_name"
-									class="form-control input-lg" placeholder="First Name"
-									tabindex="1">
-							</div>
-						</div>
-						<div class="col-xs-12 col-sm-6 col-md-6">
-							<div class="form-group">
-								<input type="text" name="last_name" id="last_name"
-									class="form-control input-lg" placeholder="Last Name"
-									tabindex="2">
-							</div>
-						</div>
-					</div>
+					
 					<div class="form-group">
 						<input type="text" name="display_name" id="display_name"
-							class="form-control input-lg" placeholder="Username" tabindex="3">
-					</div>
-					<div class="form-group">
-						<input type="email" name="email" id="email"
-							class="form-control input-lg" placeholder="Email Address"
-							tabindex="4">
-					</div>
-					<div class="form-group">
-						<input type="phone" name="phone" id="phone"
-							class="form-control input-lg" placeholder="Phone Number"
-							tabindex="4">
+							class="form-control input-lg" style="width:50%;" placeholder="Username" tabindex="3">
+							<button type="button" class="btn btn-outline-primary""><a class="a_400">중복확인</a></button>
 					</div>
 					<div class="row">
 						<div class="col-xs-12 col-sm-6 col-md-6">
@@ -142,9 +79,34 @@
 							</div>
 						</div>
 					</div>
+					<div class="form-group">
+						<input type="email" name="email" id="email"
+							class="form-control input-lg" placeholder="Email Address"
+							tabindex="4">
+					</div>
+					<div class="form-group">
+						<input type="phone" name="phone" id="phone"
+							class="form-control input-lg" placeholder="Phone Number"
+							tabindex="4">
+					</div>
 					
+					
+					<div class="btn-group" style="margin-bottom:20px;">
+					  <button type="button" class="btn btn-primary a_400">관심 플랫폼</button>
+					  <button type="button" class="btn btn-primary dropdown-toggle dropdown-toggle-split" data-toggle="dropdown">
+					    <span class="caret"></span>
+					  </button>
+					  
+					  <div class="dropdown-menu">
+					    <a class="dropdown-item" href="#">인공지능</a>
+					    <a class="dropdown-item" href="#">안드로이드</a>
+					    <a class="dropdown-item" href="#">IOS</a>
+					  </div>
+					  <input type="text" name="intertest" id="display_name"
+							class="form-control input-lg" placeholder="NONE">
+					</div>
 					<div class="btn-group">
-					  <button type="button" class="btn btn-primary">Interests</button>
+					  <button type="button" class="btn btn-primary a_400">흥미 분야</button>
 					  <button type="button" class="btn btn-primary dropdown-toggle dropdown-toggle-split" data-toggle="dropdown">
 					    <span class="caret"></span>
 					  </button>
@@ -166,6 +128,7 @@
 							 set out by this site, including our Cookie Use.
 						</div>
 					</div>
+					
 
 					<hr class="colorgraph">
 					<div class="row">
