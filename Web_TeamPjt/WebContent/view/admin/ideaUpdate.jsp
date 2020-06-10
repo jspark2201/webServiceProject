@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=EUC-KR" pageEncoding="EUC-KR"%>
-<%@ page import="Web_TeamPjt.Idea"%>
-<%@ page import="Web_TeamPjt.IdeaDAO"%>
+<%@ page import="Idea.Idea"%>
+<%@ page import="Idea.IdeaDAO"%>
 <%@ page import="java.util.ArrayList"%>
 
 

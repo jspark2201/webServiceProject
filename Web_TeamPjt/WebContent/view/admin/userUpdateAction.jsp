@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=EUC-KR" pageEncoding="EUC-KR"%>
-<%@ page import="Web_TeamPjt.User"%>
-<%@ page import="Web_TeamPjt.UserDAO"%>
+<%@ page import="User.User"%>
+<%@ page import="User.UserDAO"%>
 <%@ page import="java.io.PrintWriter" %>
 <!DOCTYPE html>
 <html>
