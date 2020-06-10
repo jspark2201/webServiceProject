@@ -1,3 +1,9 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+    <%@ page import="java.io.PrintWriter" %>
+    <%@ page import="receiveNotification.ReceiveNotificationDAO" %>
+    <%@ page import="receiveNotification.ReceiveNotificationDTO" %>
+    <%@ page import="java.util.ArrayList" %>
 <!doctype html>
 <html lang="ko">
 <head>
@@ -171,56 +177,29 @@
 	    <table class="table">
 					<thead>
 						<tr>
-							<th></th>
-							<th>이름</th>
+
+							<th>보낸 사람</th>
 							<th>Email</th>
 							<th>내용</th>
 							<th>아이디어 링크</th>
 						</tr>
 					</thead>
 					<tbody>
+					<%
+						ReceiveNotificationDAO receiveNotificationDAO = new ReceiveNotificationDAO();
+						ArrayList<ReceiveNotificationDTO> list = receiveNotificationDAO.getList(1);
+						for(int i=0; i<list.size(); i++) {
+					%>
 						<tr>
-							<td>1</td>
-							<td>Kent</td>
-							<td>clarkkent@mail.com</td>
+							<td><%=list.get(i).getGiveID() %></td>
+							<td><%=list.get(i).getGiveEmail() %></td>
 							<td>컨택 요청이 들어왔습니다.</td>
-							<td><a href="">링크1</a></td>
+							<td><a href=""><%=list.get(i).getIdeaLink()%></a></td>
 						</tr>
-						<tr>
-							<td>2</td>
-							<td>Carter</td>
-							<td>johncarter@mail.com</td>
-							<td>컨택 요청이 들어왔습니다.</td>
-							<td><a href="">링크2</a></td>
-						</tr>
-						<tr>
-							<td>3</td>
-							<td>Parker</td>
-							<td>peterparker@mail.com</td>
-							<td>컨택 요청이 들어왔습니다.</td>
-							<td><a href="">링크3</a></td>
-						</tr>
-						<tr>
-							<td>4</td>
-							<td>Parker</td>
-							<td>peterparker@mail.com</td>
-							<td>컨택 요청이 들어왔습니다.</td>
-							<td><a href="">링크4</a></td>
-						</tr>
-						<tr>
-							<td>5</td>
-							<td>Parker</td>
-							<td>peterparker@mail.com</td>
-							<td>컨택 요청이 들어왔습니다.</td>
-							<td><a href="">링크5</a></td>
-						</tr>
-						<tr>
-							<td>6</td>
-							<td>Parker</td>
-							<td>peterparker@mail.com</td>
-							<td>컨택 요청이 들어왔습니다.</td>
-							<td><a href="">링크6</a></td>
-						</tr>
+					<%
+						}
+					%>
+
 					</tbody>
 				</table>
 	    
