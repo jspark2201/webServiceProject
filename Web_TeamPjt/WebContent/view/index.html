@@ -12,7 +12,6 @@
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500&display=swap" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css2?family=Calligraffitti&family=Permanent+Marker&family=Special+Elite&display=swap" rel="stylesheet">
 
-
 </head>
 <body>
 	<!-- Navigation -->
@@ -99,11 +98,16 @@
 									class="form-control input-lg" placeholder="Password">
 							</div>
 								<img class="question_img" src="../img/login/question.png" alt="">
-								<a href="#" data-toggle="modal" data-target="#forgotModal">Forgot Password?</a>
+								<a href="#" data-toggle="modal" data-target="#myModal">Forgot Password?</a>
 							<hr class="colorgraph">
 							<div class="row">
-								<button type="button" class="btn btn-primary" style="margin-right:20px;"><a class="a_400">로그인</a></button>
-								<button type="button" class="btn btn-info"><a class="a_400">회원가입</a></button>
+								<div class="col-xs-6 col-sm-6 col-md-6">
+									<input type="submit" class="btn btn-lg btn-success btn-block"
+										value="Sign In">
+								</div>
+								<div class="col-xs-6 col-sm-6 col-md-6">
+									<a href="" class="btn btn-lg btn-primary btn-block">Register</a>
+								</div>
 							</div>
 						</fieldset>
 					</form>
@@ -123,7 +127,7 @@
 
 
 <!-- ABOUT -->
-<!-- aboutModal -->
+<!-- The Modal -->
   <div class="modal fade" id="aboutModal">
     <div class="modal-dialog modal-dialog-centered">
       <div class="modal-content">
@@ -148,30 +152,7 @@
     </div>
   </div>
 
-<!-- forgotModal -->
-  <div class="modal fade" id="forgotModal">
-    <div class="modal-dialog modal-dialog-centered">
-      <div class="modal-content">
-      
-        <!-- Modal Header -->
-        <div class="modal-header">
-          <h4 class="modal-title">Modal Heading</h4>
-          <button type="button" class="close" data-dismiss="modal">&times;</button>
-        </div>
-        
-        <!-- Modal body -->
-        <div class="modal-body">
-          Modal body..
-        </div>
-        
-        <!-- Modal footer -->
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        </div>
-        
-      </div>
-    </div>
-  </div>
+
 
 
 
