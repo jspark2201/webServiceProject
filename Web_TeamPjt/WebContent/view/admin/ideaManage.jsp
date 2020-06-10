@@ -11,7 +11,17 @@
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
 </head>
 <body>
+
 	<%
+	/*
+		// admin이 아닌 경우	
+		String sessId = (String)session.getAttribute("id");            // request에서 id 파라미터를 가져온다
+		
+		if (sessId == null || !sessId.equals("admin")) {
+			response.sendRedirect("../index.jsp");    // 로그인 페이지로 리다이렉트 한다.
+		}
+	*/
+		
 		IdeaDAO ideaDAO = new IdeaDAO();
 
 		// 검색 조건  (default: "writer")
