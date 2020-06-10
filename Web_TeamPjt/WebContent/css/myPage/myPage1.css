@@ -1,0 +1,22 @@
+.jumbotron{
+	background-color : #f2f2f2 !important;
+}
+body {
+	background-color: #f2f2f2 !important;
+	font-family: 'Noto Sans KR', sans-serif; 
+	font-weight:400;
+}
+
+.p1 {
+		text-align:center;
+       font-size: 4rem !important;
+       font-weight: bold;
+       color: #ffffff;
+       text-shadow: 2px 2px 2px gray;
+}
+.hr1{
+	border: 0;
+	height: 1.5px;
+	background : #000000;
+}
+
