@@ -62,6 +62,16 @@
 				order = "date";
 		}
 
+		
+		
+		String src = "userManage.jsp?";
+		
+		if (search != null) {
+			if (!search.equals("")) {
+				src += "type=" + type + "&";
+				src += "search=" + search + "&";
+			}
+		}
 
 	%>
 
@@ -92,16 +102,20 @@
 	
 		<div class="search_div">
 			<div class="row">
-   				<div class="col-md-8">
+   				<div class="col-md-4 text-left">
+   					<button type="button" class="btn" onclick="location.href='userAdd.jsp' ">회원추가</button>
+					<button type="button" class="btn" onclick="groupDel();">삭제</button>
+   				</div>
+   				<div class="col-md-8 text-right">
 					<form class="form" method="get" action="userManage.jsp">
-						<div class="col-md-2">
+						<div style="display:inline-block">
 							<select class="mdb-select md-form colorful-select dropdown-primary" searchable="Search here.." name="type">
 								<option value="id">아이디</option>
 								<option value="nickname">닉네임</option>
 								<option value="email">이메일</option>
 							</select>
 						</div>
-	   					<div class="col-md-3">
+						<div style="display:inline-block">
 	   						<%
 								String tmp = search;
 								if (search == null)
@@ -109,15 +123,11 @@
 							%>
 							<input type="text" class="form-control" name="search" value="<%=tmp%>"/>
 						</div>
-						<div class="col-md-1">
+						<div style="display:inline-block">
 	   						<button type="submit" class="btn btn-default" id="searchBtn">Search</button>
 	   					</div>
 					</form>
 				</div>
-   				<div class="col-md-4 text-right">
-   					<button type="button" class="btn" onclick="location.href='userAdd.jsp' ">회원추가</button>
-					<button type="button" class="btn" onclick="groupDel();">삭제</button>
-   				</div>
 			</div>
 		</div>
 
@@ -129,16 +139,16 @@
 				<thead>
 					<tr>
 						<th style="background-color: #eeeeee; text-align: center;">
-							<a href="userManage.jsp?order=id">아이디</a>
+							<a href="<%=src%>order=id">아이디</a>
 						</th>
 						<th style="background-color: #eeeeee; text-align: center;">
-							<a href="userManage.jsp?order=nickname">닉네임</a>
+							<a href="<%=src%>order=nickname">닉네임</a>
 						</th>
 						<th style="background-color: #eeeeee; text-align: center;">
-							<a href="userManage.jsp?order=email">이메일</a>
+							<a href="<%=src%>order=email">이메일</a>
 						</th>
 						<th style="background-color: #eeeeee; text-align: center;">
-							<a href="userManage.jsp?order=date">가입일</a>
+							<a href="<%=src%>order=date">가입일</a>
 						</th>
 						<th style="background-color: #eeeeee; text-align: center;">수정</th>
 						<th style="background-color: #eeeeee; text-align: center;">비고</th>
@@ -171,13 +181,8 @@
 				<%
 					// 페이지 넘버링
 				
-					String src = "userManage.jsp?";
 					int pageNum = 0;
 					
-					if (search != null) {
-						src += "type=" + type + "&";
-						src += "search=" + search + "&";
-					}
 					src += "pageNum=";
 					
 				%>

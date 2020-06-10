@@ -85,7 +85,8 @@
 			order = request.getParameter("order");
 		
 		switch(order) {
-			case "id": case "writer": case "title": case "state":
+			case "id": case "writer": case "title":
+			case "state": case "registration_date":
 				break;
 			default:
 				order = "id";
@@ -197,7 +198,7 @@
 							<a href="<%=src%>order=title">제목</a>
 						</th>
 						<th style="background-color: #eeeeee; text-align: center;">
-							등록 시간
+							<a href="<%=src%>order=registration_date">등록 시간</a>
 						</th>
 						<th style="background-color: #eeeeee; text-align: center;">
 							완료 시간
