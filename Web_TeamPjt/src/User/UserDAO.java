@@ -282,4 +282,43 @@ public class UserDAO
 		return count;
 	}
 
+	
+	public int getDBCount (int type) {
+		connect();
+		
+		String sql = "select count(*) as cnt from user";
+		
+		switch(type) {
+		// 전체 인원 수
+		case 0:
+			break;
+		// 이번 달 인원 수
+		case 1:
+			sql += " where date > last_day(now() - interval 1 month)";
+			sql += " and date <= last_day(now())";
+			break;
+		// 이번 주 인원 수
+		case 2:
+			sql += " WHERE YEARWEEK(date) = YEARWEEK(now())";
+			break;
+		}
+
+		
+		int count = 0;
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			ResultSet rs = pstmt.executeQuery();
+			
+			rs.next();
+			count = rs.getInt("cnt");
+		}
+		catch(SQLException e) {
+			System.out.println("getDBCount 실패");
+			return -1;
+		}
+		
+		return count;
+	}
+	
 }

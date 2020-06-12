@@ -3,6 +3,7 @@
 <%@ page import="User.UserDAO"%>
 <%@ page import="java.util.ArrayList"%>
 <%@ page import="java.io.PrintWriter" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -12,59 +13,14 @@
 </head>
 <body>
 	<%
-		UserDAO userDAO = new UserDAO();
-
-		// 검색 조건  (default: "id")
-		String type = "id";
-		
-		if (request.getParameter("type") != null)
-			type = request.getParameter("type");
-		
-		switch(type) {
-			case "id": case "nickname": case "email":
-				break;
-			default:
-				type = "id";
-		}
-	
-		
-		// 검색어
-		String search = null;
-	
-		if (request.getParameter("search") != null)
-			search = request.getParameter("search");
-		
-	
-		// 페이지 넘버 (default: 1)
-		int curPageNum = 1;
-
-		if (request.getParameter("pageNum") != null)
-			curPageNum = Integer.parseInt(request.getParameter("pageNum"));
-		
-
-		int pageCount = (userDAO.getDBCount(type, search) - 1) / 10 + 1;
-		
-		if (curPageNum < 0 || curPageNum > pageCount)
-			curPageNum = 1;
-
-		
-		// 정렬 방식 (default: "date")
-		String order = "date";
-
-		if (request.getParameter("order") != null)
-			order = request.getParameter("order");
-		
-		switch(order) {
-			case "id": case "nickname":
-			case "email": case "date":
-				break;
-			default:
-				order = "date";
-		}
-
+	String type = request.getParameter("type");
+	String search = request.getParameter("search");
+	String order = request.getParameter("order");
+	int curPageNum = (Integer)request.getAttribute("curPageNum");
+	int pageCount = (Integer)request.getAttribute("PageCount");
 		
 		
-		String src = "userManage.jsp?";
+		String src = "users.do?";
 		
 		if (search != null) {
 			if (!search.equals("")) {
@@ -103,7 +59,7 @@
 		<div class="search_div">
 			<div class="row">
    				<div class="col-md-4 text-left">
-   					<button type="button" class="btn" onclick="location.href='userAdd.jsp' ">회원추가</button>
+   					<button type="button" class="btn" onclick="location.href='userAdd.do' ">회원추가</button>
 					<button type="button" class="btn" onclick="groupDel();">삭제</button>
    				</div>
    				<div class="col-md-8 text-right">
@@ -155,25 +111,16 @@
 					</tr>
 				</thead>
 				<tbody>
-					<%
-						ArrayList<User> list = userDAO.getDBList(type, search, order, curPageNum);
-						for (int i = 0; i < list.size(); i++) {
-							if (list.get(i) != null) {
-					%>
-					<tr>
-						<td><%=list.get(i).getId()%></td>
-						<td><%=list.get(i).getNickname()%></td>
-						<td><%=list.get(i).getEmail()%></td>
-						<td><%=list.get(i).getDate()%></td>
-						<td><a href="userUpdate.jsp?id=<%=list.get(i).getId()%>">수정</td>
-						<td><input type="checkbox" id="<%=list.get(i).getId()%>"></td>
-						
-					</tr>
-					<%
-							}
-						}
-					%>
-
+					<c:forEach var="user" items="${UserList}">
+						<tr>
+							<td><c:out value="${user.id}"/></td>
+							<td><c:out value="${user.nickname}"/></td>
+							<td><c:out value="${user.email}"/></td>
+							<td><c:out value="${user.date}"/></td>
+							<td><a href='userUpdate.do?id=<c:out value="${user.id}"/>'/>수정</td>
+							<td><input type="checkbox" id='<c:out value="${user.id}"/>'/></td>							
+						</tr>					
+					</c:forEach>
 				</tbody>
 			</table>
 			
@@ -251,7 +198,7 @@
 		 console.log(array);
 		 
 		$.ajax({
-			url: "userDelAction.jsp",
+			url: "userDelete.do",
 			data: { 'idArray' : array },
 			type: "post",
 			success: function(data) {

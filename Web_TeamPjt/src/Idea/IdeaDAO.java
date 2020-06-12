@@ -287,4 +287,31 @@ public class IdeaDAO {
 		return count;
 	}
 
+	
+	
+	public int getDBCount (int stateIdx)
+	{
+		connect();
+		
+		String sql = "select count(*) as cnt from idea";
+		
+		sql += " where state = ?";
+		
+		int count = 0;
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, stateIdx);
+			
+			ResultSet rs = pstmt.executeQuery();
+			
+			rs.next();
+			count = rs.getInt("cnt");
+		}
+		catch(SQLException e) {
+			System.out.println("getDBCount ½ÇÆÐ");
+			return -1;
+		}
+		
+		return count;
+	}
 }
