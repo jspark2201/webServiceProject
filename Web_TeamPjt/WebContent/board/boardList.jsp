@@ -117,9 +117,9 @@ List<Board> list = boardDao.selectBoardListPerPage(beginRow, pagePerRow);
 		<div class="row">
             <div class="col-md-12" style="margin-bottom:10px;">
 						<label class="btn btn-warning"></label>
-						<a href="<%=request.getContextPath()%>/board/boardRecruitList.jsp"> class="a_400" style="color:#333333;">모집 중 아이디어 보기</a>
+						<a href="<%=request.getContextPath()%>/board/boardRecruitList.jsp" class="a_400" style="color:#333333;">모집 중 아이디어 보기</a>
 						<label class="btn btn-warning"></label>
-						<a href="<%=request.getContextPath()%>/board/boardCompleteList.jsp"> class="a_400" style="color:#333333;">모집 완료 아이디어 보기</a>										
+						<a href="<%=request.getContextPath()%>/board/boardCompleteList.jsp" class="a_400" style="color:#333333;">모집 완료 아이디어 보기</a>										
             </div>
         </div>
  

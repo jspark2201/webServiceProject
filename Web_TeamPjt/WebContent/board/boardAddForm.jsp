@@ -91,11 +91,12 @@
 				</div>
 				<div class="col-sm-8">
 					<div class="form-group ">
-						<label for= "platform" style="width:5%"></label>
-				        <input type = "checkbox" name = "platform" value = "web">web
-				        <input type = "checkbox" name = "platform" value = "android">android
-				        <input type = "checkbox" name = "platform" value = "embeded">embeded
-						<input type = "checkbox" name = "platform" value = "ios">ios
+						<select name = "interest_1" id="interest_1" class="form-control a_400" style="width:50%">
+							<option value="web">WEB</option>
+							<option value="android">안드로이드</option>
+							<option value="embeded">임베디드</option>
+							<option value="ios">IOS</option>
+						</select>
 					</div>
 				</div>
 			</div>
@@ -105,10 +106,11 @@
 				</div>
 				<div class="col-sm-8">
 					<div class="form-group ">
-						<label for= "genre" style="width:5%"></label>
-				        <input type = "checkbox" name = "genre" value = "health">health
-				        <input type = "checkbox" name = "genre" value = "psychology">psychlogy
-				        <input type = "checkbox" name = "genre" value = "game">game
+						<select id="interest_2" name ="interest_2" class="form-control a_400" style="width:50%">
+							<option value="health">건강</option>
+							<option value="psychology">심리학</option>
+							<option value="game">게임</option>
+						</select>
 					</div>
 				</div>
 			</div>

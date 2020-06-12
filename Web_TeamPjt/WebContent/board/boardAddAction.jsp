@@ -29,8 +29,8 @@
 	 
 	String Title = multi.getParameter("title");
 	System.out.println(Title);
-	String []platform = multi.getParameterValues("platform");
-	
+	String []platform = multi.getParameterValues("interest_1");
+	System.out.println(platform.length);
 	if(platform.length==1){
 		if(platform[0].equals("web")){
 			board.setWeb(true);
@@ -58,77 +58,9 @@
 		}
 		
 	}
-	else if(platform.length==2){
-		if(platform[0].equals("web") && platform[1].equals("android")){
-			board.setWeb(true);
-			board.setAndroid(true);
-			board.setEmbeded(false);
-			board.setIos(false);
-		}else if(platform[0].equals("web") && platform[1].equals("embeded")){
-			board.setWeb(true);
-			board.setAndroid(false);
-			board.setEmbeded(true);
-			board.setIos(false);
-		}else if(platform[0].equals("web") && platform[1].equals("ios")){
-			board.setWeb(true);
-			board.setAndroid(false);
-			board.setEmbeded(false);
-			board.setIos(true);
-		}else if(platform[0].equals("android") && platform[1].equals("embeded")){
-			board.setWeb(false);
-			board.setAndroid(true);
-			board.setEmbeded(true);
-			board.setIos(false);
-		}else if(platform[0].equals("android") && platform[1].equals("ios")){
-			board.setWeb(false);
-			board.setAndroid(true);
-			board.setEmbeded(false);
-			board.setIos(true);
-		}else if(platform[0].equals("embeded") && platform[1].equals("ios")){
-			board.setWeb(false);
-			board.setAndroid(false);
-			board.setEmbeded(true);
-			board.setIos(true);
-		}	
-	}
-	else if(platform.length==3){
-		if(platform[0].equals("web") && platform[1].equals("android") && platform[2].equals("embeded")){
-			board.setWeb(true);
-			board.setAndroid(true);
-			board.setEmbeded(true);
-			board.setIos(false);
-		}else if(platform[0].equals("web") && platform[1].equals("embeded") && platform[2].equals("ios")){
-			board.setWeb(true);
-			board.setAndroid(false);
-			board.setEmbeded(true);
-			board.setIos(true);
-		}else if(platform[0].equals("web") && platform[1].equals("android") && platform[2].equals("ios")){
-			board.setWeb(true);
-			board.setAndroid(true);
-			board.setEmbeded(false);
-			board.setIos(true);
-		}else if(platform[0].equals("android") && platform[1].equals("embeded") && platform[2].equals("ios")){
-			board.setWeb(false);
-			board.setAndroid(true);
-			board.setEmbeded(true);
-			board.setIos(true);
-		}
-		
-	}
-	else if(platform.length==4){
-		board.setWeb(true);
-		board.setAndroid(true);
-		board.setEmbeded(true);
-		board.setIos(true);
-	}
-	else if(platform.length==0){
-		board.setWeb(false);
-		board.setAndroid(false);
-		board.setEmbeded(false);
-		board.setIos(false);	
-	}
+
 	
-	String []genre = multi.getParameterValues("genre");
+	String []genre = multi.getParameterValues("interest_2");
 
 	if(genre.length==1){
 		if(genre[0].equals("health")){
@@ -146,31 +78,6 @@
 			board.setPsychology(false);
 			board.setGame(true);
 		}
-	}
-	else if(genre.length==2){
-		if(genre[0].equals("health") && genre[1].equals("psychology")){
-			board.setHealth(true);
-			board.setPsychology(true);
-			board.setGame(false);
-		}else if(genre[0].equals("health") && genre[1].equals("game")){
-			board.setHealth(true);
-			board.setPsychology(false);
-			board.setGame(true);
-		}if(genre[0].equals("psychology") && genre[1].equals("game")){
-			board.setHealth(false);
-			board.setPsychology(true);
-			board.setGame(true);
-		}
-	}
-	else if(genre.length==3){
-		board.setHealth(true);
-		board.setPsychology(true);
-		board.setGame(true);
-	}
-	else if(genre.length==0){
-		board.setHealth(false);
-		board.setPsychology(false);
-		board.setGame(false);
 	}
 
 	String Content = multi.getParameter("content");

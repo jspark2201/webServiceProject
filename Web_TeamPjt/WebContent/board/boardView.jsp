@@ -35,7 +35,47 @@ if(request.getParameter("boardNo") == null) {
     int cnt=mlist.size();
     List<Board> clist = boardDao.SelectParticipantsBoard(boardNo);//완료된 참여자
     List<Board> tlist = boardDao.SelectTempParticipantsBoard(boardNo);//신청한 참여자
- 
+   	String []platform = new String[4];
+    if(board.isWeb()){//
+   		  platform[0]="WEB";
+   	}else{
+   		platform[0]="";
+   	}
+    if(board.isAndroid()){
+    	platform[1]="안드로이드";
+    }else{
+    	platform[1]="";
+    }
+    if(board.isIos()){
+    	platform[2]="임베디드";
+    }else{
+    	platform[2]="";    	
+    }   
+    if(board.isIos()){
+    	platform[3]="IOS";
+    }else{
+    	platform[3]="";    	
+    }
+    String []type = new String[3];
+    if(board.isHealth()){//
+ 		  type[0]="건강";
+ 	}else{
+ 		type[0]="";
+ 	}
+    
+  if(board.isPsychology()){
+  	type[1]="심리학";
+  }else{
+  	type[1]="";
+  }
+  if(board.isGame()){
+  	type[2]="게임";
+  }else{
+  	type[2]="";    	
+  }   
+  
+    
+    
 %>
 	<!-- Navigation -->
 	<nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
@@ -116,22 +156,18 @@ if(request.getParameter("boardNo") == null) {
         <p><%=board.getRegistration_date()%> <%=board.getWriter()%></p>
 
         <hr class="hr1">
-		
+		<%=platform[0]%>
+		<%=platform[1]%>
+		<%=platform[2]%>
+		<%=platform[3]%>
+		<%=type[0]%>
+		<%=type[1]%>
+		<%=type[2]%>
+			
 		<div class="row a_400" style="font-size:1.5rem; margin:30px; ">
 			프로젝트 소개
 		</div>
    	
-   	
-		<div>플랫폼 및 장르</div>
-		<div class="row a_200" style="font-size:1.5rem; margin:5px; ">
-	    <p><%=board.isWeb()%></p>
-	  	<p><%=board.isAndroid()%></p>
-	    <p><%=board.isEmbeded()%></p>
-	    <p><%=board.isIos()%></p>
-	    <p><%=board.isHealth()%></p>
-	    <p><%=board.isPsychology()%></p>
-	    <p><%=board.isGame()%></p>
-		</div>
 		
    	  <!-- Post Content -->
         <p class="lead">
