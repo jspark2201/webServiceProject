@@ -241,10 +241,13 @@
 								</p>
 
 								<div>
-									<button type="button" class="btn btn-outline-danger btn-sm"
+								<form action="portfolio_delete_action.jsp" method="post">
+								<input name="bbsID" value="<%=list.get(i).getBbs_id()%>" type="hidden"/>
+									<button type="submit" method="post" class="btn btn-outline-danger btn-sm"
 										style="position: absolute; left: 60%; top: 90%;" onclick="">
 										<a class="a_400">삭제하기</a>
 									</button>
+									</form>
 								</div>
 							</div>
 						</div>
@@ -265,7 +268,7 @@
 					if (pageNumber != 1) {
 				%>
 				<li class="page-item"><a class="page-link"
-					href="portfolio.jsp?pageNumber=<%=pageNumber - 1%>"
+					href="myPage.jsp?pageNumber=<%=pageNumber - 1%>"
 					aria-label="Previous"> <span aria-hidden="true">&laquo;</span>
 						<span class="sr-only">이전</span>
 				</a></li>
@@ -276,31 +279,31 @@
 				if (pageNumber - 2 > 0) {
 				%>
 				<li class="page-item"><a class="page-link"
-					href="portfolio.jsp?pageNumber=<%=pageNumber - 2%>"> <%=pageNumber - 2%>
+					href="myPage.jsp?pageNumber=<%=pageNumber - 2%>"> <%=pageNumber - 2%>
 				</a></li>
 				<li class="page-item"><a class="page-link"
-					href="portfolio.jsp?pageNumber=<%=pageNumber - 1%>"> <%=pageNumber - 1%>
+					href="myPage.jsp?pageNumber=<%=pageNumber - 1%>"> <%=pageNumber - 1%>
 				</a></li>
 				<%
 					} else if (pageNumber - 1 > 0) {
 				%>
 				<li class="page-item"><a class="page-link"
-					href="portfolio.jsp?pageNumber=<%=pageNumber - 1%>"> <%=pageNumber - 1%>
+					href="myPage.jsp?pageNumber=<%=pageNumber - 1%>"> <%=pageNumber - 1%>
 				</a></li>
 				<%
 					}
 				%>
 				<li class="page-item"><a class="page-link"
-					href="portfolio.jsp?pageNumber=<%=pageNumber%>"> <%=pageNumber%>
+					href="myPage.jsp?pageNumber=<%=pageNumber%>"> <%=pageNumber%>
 				</a></li>
 				<%
 				if (pageNumber + 2 <= totalPageNum) {
 				%>
 				<li class="page-item"><a class="page-link"
-					href="portfolio.jsp?pageNumber=<%=pageNumber + 1%>"> <%=pageNumber + 1%>
+					href="myPage.jsp?pageNumber=<%=pageNumber + 1%>"> <%=pageNumber + 1%>
 				</a></li>
 				<li class="page-item"><a class="page-link"
-					href="portfolio.jsp?pageNumber=<%=pageNumber + 2%>"> <%=pageNumber + 2%>
+					href="myPage.jsp?pageNumber=<%=pageNumber + 2%>"> <%=pageNumber + 2%>
 				</a></li>
 
 
@@ -308,7 +311,7 @@
 					} else if (pageNumber + 1 <= totalPageNum) {
 				%>
 				<li class="page-item"><a class="page-link"
-					href="portfolio.jsp?pageNumber=<%=pageNumber + 1%>"> <%=pageNumber + 1%>
+					href="myPage.jsp?pageNumber=<%=pageNumber + 1%>"> <%=pageNumber + 1%>
 				</a></li>
 
 				<%
@@ -317,7 +320,7 @@
 				if (bbsDAO.nextPage(userID, pageNumber)) {
 				%>
 				<li class="page-item"><a class="page-link"
-					href="portfolio.jsp?pageNumber=<%=pageNumber + 1%>"
+					href="myPage.jsp?pageNumber=<%=pageNumber + 1%>"
 					aria-label="Next"> <span aria-hidden="true">&raquo;</span> <span
 						class="sr-only">다음</span>
 				</a></li>

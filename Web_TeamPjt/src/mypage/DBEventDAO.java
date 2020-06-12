@@ -550,7 +550,7 @@ public class DBEventDAO {
 
 	public int delete(int bbsID) {
 
-		String SQL = "DELETE FROM idea WHERE WHERE id = ?";
+		String SQL = "DELETE FROM idea WHERE id = ?";
 
 		try {
 

@@ -117,7 +117,7 @@
 
 				script.println("<script>");
 
-				script.println("location.href='bbs.jsp'");
+				script.println("location.href='myPage.jsp'");
 
 				script.println("</script>");
 
