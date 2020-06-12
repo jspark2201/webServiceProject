@@ -365,7 +365,7 @@ public class DBEventDAO {
 			while (rs.next()) {
 
 				PortfolioBean port = new PortfolioBean();
-
+				
 				port.setBbs_id(rs.getInt(1));
 
 				port.setUserID(rs.getString(2));
@@ -384,6 +384,8 @@ public class DBEventDAO {
 
 				port.setState(rs.getInt(10));
 
+				port.setPictsrc(getPic(rs.getInt(1)));
+				
 				list.add(port);
 
 			}

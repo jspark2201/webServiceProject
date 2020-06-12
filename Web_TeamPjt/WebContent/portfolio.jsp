@@ -8,6 +8,8 @@
 
 <%@ page import="mypage.DBEventDAO"%>
 <%@ page import="java.util.ArrayList"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <!DOCTYPE html>
 
 <html lang="ko">
@@ -34,12 +36,12 @@
 		//로긴한사람이라면	 userID라는 변수에 해당 아이디가 담기고 그렇지 않으면 null값
 
 	String userID = "admin3";
-/*
-	if (session.getAttribute("userid") != null) {
+	/*
+		if (session.getAttribute("userid") != null) {
 
-		userID = (String) session.getAttribute("userid");
+			userID = (String) session.getAttribute("userid");
 
-	}*/
+		}*/
 
 	int pageNumber = 1; //기본 페이지 넘버
 
@@ -169,49 +171,44 @@
 
 				<a href="portfolio_write.jsp">외부 프로젝트 추가</a>
 			</div>
-			<%
-				DBEventDAO bbsDAO = new DBEventDAO();
+			<c:forEach items="${Plist}" var="item">
 
-			ArrayList<PortfolioBean> list = bbsDAO.getList(userID, pageNumber);
 
-			for (int i = 0; i < list.size(); i++) {
-				System.out.println(list.get(i).getBbs_id());
-			%>
-			<div class="col-lg-4 col-sm-6 portfolio-item"
-				style="margin-bottom: 30px">
-				<div class="card h-100">
-					<a href="#"><img class="card-img-top"
-						src=<%if(bbsDAO.getPic(list.get(i).getBbs_id())==null){
-						%>"http://placehold.it/700x400"
-						<%}else{ %>
-						<%=bbsDAO.getPic(list.get(i).getBbs_id()) %>
-						<%} %>
-						 alt=""></a>
-					<div class="card-body">
-						<h4 class="card-title">
-							<a href="#"><a
-								href="portfolioView.jsp?bbsID=<%=list.get(i).getBbs_id()%>"><%=list.get(i).getBbs_title()%></a>
-						</h4>
-						<p class="card-text">
-							<%if(list.get(i).getBbsContent().length()>30){%>
-							<%=list.get(i).getBbsContent().substring(0, 31) %>
-							<%}else{%>
-							<%=list.get(i).getBbsContent()%>
-							<%} %>
-							<br> 진행 기간 :
-							<%=list.get(i).getRegistrationDate()%>
-							~
-							<%=list.get(i).getCompleteDate()%>
-						</p>
+
+
+				<div class="col-lg-4 col-sm-6 portfolio-item"
+					style="margin-bottom: 30px">
+					<div class="card h-100">
+						<a href="#"><img class="card-img-top"
+							src=<c:when ${item.pictsrc eq null}>
+						"http://placehold.it/700x400"
+						</c:when>
+							<c:otherwise>
+						${item.pictsrc}
+						</c:otherwise> alt=""></a>
+						<div class="card-body">
+							<h4 class="card-title">
+								<a href="#"><a href="portfolioView.jsp?bbsID="${item.bbs_id}">${item.bbs_title}</a>
+							</h4>
+							<p class="card-text">
+								<c:choose>
+									<c:when test="${fn:length(item.bbsContent)>30}">
+								${item.bbsContent.substring(0,31)}
+								</c:when>
+									<c:otherwise>
+							${item.bbsContent}
+							</c:otherwise>
+								</c:choose>
+								<br> 진행 기간 : {item..registrationDate} ~
+								${item.completeDate}
+
+							</p>
+						</div>
 					</div>
 				</div>
-			</div>
+			</c:forEach>
 
 
-
-			<%
-				}
-			%>
 
 
 			<ul class="pagination justify-content-center">
@@ -226,7 +223,7 @@
 
 				<%
 					}
-				int totalPageNum = bbsDAO.totalPage(userID);
+				int totalPageNum = (int) session.getAttribute("totalPage");
 				if (pageNumber - 2 > 0) {
 				%>
 				<li class="page-item"><a class="page-link"
@@ -248,7 +245,7 @@
 					href="portfolio.jsp?pageNumber=<%=pageNumber%>"> <%=pageNumber%>
 				</a></li>
 				<%
-				if (pageNumber + 2 <= totalPageNum) {
+					if (pageNumber + 2 <= totalPageNum) {
 				%>
 				<li class="page-item"><a class="page-link"
 					href="portfolio.jsp?pageNumber=<%=pageNumber + 1%>"> <%=pageNumber + 1%>
@@ -267,8 +264,8 @@
 
 				<%
 					}
-
-				if (bbsDAO.nextPage(userID, pageNumber)) {
+				boolean isNext = (boolean) session.getAttribute("isNext");
+				if (isNext) {
 				%>
 				<li class="page-item"><a class="page-link"
 					href="portfolio.jsp?pageNumber=<%=pageNumber + 1%>"

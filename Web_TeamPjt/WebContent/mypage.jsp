@@ -8,6 +8,8 @@
 
 <%@ page import="mypage.DBEventDAO"%>
 <%@ page import="java.util.ArrayList"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <!doctype html>
 <html lang="ko">
 <head>
@@ -16,11 +18,11 @@
 	content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <title>IDEARIA</title>
 
-<link rel="shortcut icon" href="../img/favicon/ecology.png">
-<link rel="stylesheet" href="../css/myPage/myPage.css">
-<link rel="stylesheet" href="../css/bootstrap.min.css">
-<link rel="stylesheet" href="../css/googleFont.css">
-<link rel="stylesheet" href="../css/card.css">
+<link rel="shortcut icon" href="./img/favicon/ecology.png">
+<link rel="stylesheet" href="./css/myPage/myPage.css">
+<link rel="stylesheet" href="./css/bootstrap.min.css">
+<link rel="stylesheet" href="./css/googleFont.css">
+<link rel="stylesheet" href="./css/card.css">
 <link
 	href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500&display=swap"
 	rel="stylesheet">
@@ -203,26 +205,24 @@
 				<hr>
 
 				<div class="row">
-					<%
-				DBEventDAO bbsDAO = new DBEventDAO();
+			<c:forEach items="${Plist}" var="item">
 
-			ArrayList<PortfolioBean> list = bbsDAO.getList(userID, pageNumber);
 
-			for (int i = 0; i < list.size(); i++) {
-				System.out.println(list.get(i).getBbs_id());
-			%>
 					<div class="col-lg-4 col-sm-6 portfolio-item"
 						style="margin-bottom: 30px;">
 						<div class="card h-100"
 							style="border-color: red; border-width: 5px;">
 							<div class="card_img">
-								<img style="width: 100%; height: 100%;" alt="" src=
-									<%if(bbsDAO.getPic(list.get(i).getBbs_id())==null){%>
-									"http://placehold.it/700x400"
-						<% }else{ %>
-									<%=bbsDAO.getPic(list.get(i).getBbs_id()) %>
-									 <%} %>
-									 >
+								<img style="width: 100%; height: 100%;" alt=""
+									src=
+									<c:choose>
+									<c:when test="${empty item.pictsrc}">
+						"http://placehold.it/700x400"
+						</c:when>
+							<c:otherwise>
+						${item.pictsrc}
+						</c:otherwise> 
+							</c:choose>		>
 							</div>
 							<div class="card-body">
 								<h4 class="card-title">
@@ -230,15 +230,17 @@
 										One</a>
 								</h4>
 								<p class="card-text">
-									<%if(list.get(i).getBbsContent().length()>30){%>
-									<%=list.get(i).getBbsContent().substring(0, 31) %>
-									<%}else{%>
-									<%=list.get(i).getBbsContent()%>
-									<%} %>
-									<br> 진행 기간 :
-									<%=list.get(i).getRegistrationDate()%>
-									~
-									<%=list.get(i).getCompleteDate()%>
+																	<c:choose>
+									<c:when test="${fn:length(item.bbsContent)>30}">
+								${item.bbsContent.substring(0,31)}
+								</c:when>
+									<c:otherwise>
+							${item.bbsContent}
+							</c:otherwise>
+								</c:choose>
+								<br> 진행 기간 : {item..registrationDate} ~
+								${item.completeDate}
+
 								</p>
 
 								<div>
@@ -250,9 +252,7 @@
 							</div>
 						</div>
 					</div>
-			<%
-				}
-			%>
+			</c:forEach>
 
 				</div>
 
@@ -266,42 +266,42 @@
 					if (pageNumber != 1) {
 				%>
 				<li class="page-item"><a class="page-link"
-					href="portfolio.jsp?pageNumber=<%=pageNumber - 1%>"
+					href="mypage.jsp?pageNumber=<%=pageNumber - 1%>"
 					aria-label="Previous"> <span aria-hidden="true">&laquo;</span>
 						<span class="sr-only">이전</span>
 				</a></li>
 
 				<%
 					}
-				int totalPageNum = bbsDAO.totalPage(userID);
+				int totalPageNum = (int) session.getAttribute("totalPage");
 				if (pageNumber - 2 > 0) {
 				%>
 				<li class="page-item"><a class="page-link"
-					href="portfolio.jsp?pageNumber=<%=pageNumber - 2%>"> <%=pageNumber - 2%>
+					href="mypage.jsp?pageNumber=<%=pageNumber - 2%>"> <%=pageNumber - 2%>
 				</a></li>
 				<li class="page-item"><a class="page-link"
-					href="portfolio.jsp?pageNumber=<%=pageNumber - 1%>"> <%=pageNumber - 1%>
+					href="mypage.jsp?pageNumber=<%=pageNumber - 1%>"> <%=pageNumber - 1%>
 				</a></li>
 				<%
 					} else if (pageNumber - 1 > 0) {
 				%>
 				<li class="page-item"><a class="page-link"
-					href="portfolio.jsp?pageNumber=<%=pageNumber - 1%>"> <%=pageNumber - 1%>
+					href="mypage.jsp?pageNumber=<%=pageNumber - 1%>"> <%=pageNumber - 1%>
 				</a></li>
 				<%
 					}
 				%>
 				<li class="page-item"><a class="page-link"
-					href="portfolio.jsp?pageNumber=<%=pageNumber%>"> <%=pageNumber%>
+					href="mypage.jsp?pageNumber=<%=pageNumber%>"> <%=pageNumber%>
 				</a></li>
 				<%
 				if (pageNumber + 2 <= totalPageNum) {
 				%>
 				<li class="page-item"><a class="page-link"
-					href="portfolio.jsp?pageNumber=<%=pageNumber + 1%>"> <%=pageNumber + 1%>
+					href="mypage.jsp?pageNumber=<%=pageNumber + 1%>"> <%=pageNumber + 1%>
 				</a></li>
 				<li class="page-item"><a class="page-link"
-					href="portfolio.jsp?pageNumber=<%=pageNumber + 2%>"> <%=pageNumber + 2%>
+					href="mypage.jsp?pageNumber=<%=pageNumber + 2%>"> <%=pageNumber + 2%>
 				</a></li>
 
 
@@ -309,16 +309,16 @@
 					} else if (pageNumber + 1 <= totalPageNum) {
 				%>
 				<li class="page-item"><a class="page-link"
-					href="portfolio.jsp?pageNumber=<%=pageNumber + 1%>"> <%=pageNumber + 1%>
+					href="mypage.jsp?pageNumber=<%=pageNumber + 1%>"> <%=pageNumber + 1%>
 				</a></li>
 
 				<%
 					}
-
-				if (bbsDAO.nextPage(userID, pageNumber)) {
+				boolean isNext = (boolean) session.getAttribute("isNext");
+				if (isNext) {
 				%>
 				<li class="page-item"><a class="page-link"
-					href="portfolio.jsp?pageNumber=<%=pageNumber + 1%>"
+					href="mypage.jsp?pageNumber=<%=pageNumber + 1%>"
 					aria-label="Next"> <span aria-hidden="true">&raquo;</span> <span
 						class="sr-only">다음</span>
 				</a></li>
@@ -513,11 +513,11 @@
 
 
 	<!-- Bootstrap core JavaScript -->
-	<script src="../vendor/jquery/jquery.min.js"></script>
-	<script src="../vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+	<script src="./vendor/jquery/jquery.min.js"></script>
+	<script src="./vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
-	<script type="text/javascript" src="../js/alertScript.js"></script>
-	<script src="../js/myPage/myPage.js"></script>
+	<script type="text/javascript" src="./js/alertScript.js"></script>
+	<script src="./js/myPage/myPage.js"></script>
 
 	<script type="text/javascript">
 		/*global $, console*/

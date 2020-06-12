@@ -16,11 +16,11 @@
 	content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <title>IDEARIA</title>
 
-<link rel="shortcut icon" href="../img/favicon/ecology.png">
-<link rel="stylesheet" href="../css/myPage/myPage.css">
-<link rel="stylesheet" href="../css/bootstrap.min.css">
-<link rel="stylesheet" href="../css/googleFont.css">
-<link rel="stylesheet" href="../css/card.css">
+<link rel="shortcut icon" href="./img/favicon/ecology.png">
+<link rel="stylesheet" href="./css/myPage/myPage.css">
+<link rel="stylesheet" href="./css/bootstrap.min.css">
+<link rel="stylesheet" href="./css/googleFont.css">
+<link rel="stylesheet" href="./css/card.css">
 <link
 	href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500&display=swap"
 	rel="stylesheet">
@@ -221,6 +221,7 @@
 									"http://placehold.it/700x400"
 						<%}else{ %>
 									<%=bbsDAO.getPic(list.get(i).getBbs_id()) %> <%} %>
+									>
 							</div>
 							<div class="card-body">
 								<h4 class="card-title">
@@ -511,11 +512,11 @@
 
 
 	<!-- Bootstrap core JavaScript -->
-	<script src="../vendor/jquery/jquery.min.js"></script>
-	<script src="../vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+	<script src="./vendor/jquery/jquery.min.js"></script>
+	<script src="./vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
-	<script type="text/javascript" src="../js/alertScript.js"></script>
-	<script src="../js/myPage/myPage.js"></script>
+	<script type="text/javascript" src="./js/alertScript.js"></script>
+	<script src="./js/myPage/myPage.js"></script>
 
 	<script type="text/javascript">
 		/*global $, console*/

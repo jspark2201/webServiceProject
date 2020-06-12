@@ -5,7 +5,7 @@
 
 <%@ page import="java.io.PrintWriter"%>
 
-<%@ page import="mypage.portfolio"%>
+<%@ page import="mypage.PortfolioBean"%>
 
 <%@ page import="mypage.DBEventDAO"%>
 
@@ -67,7 +67,7 @@
 
 		}
 
-		portfolio port = new DBEventDAO().getPortfolio(bbsID);
+		PortfolioBean port = new DBEventDAO().getPortfolio(bbsID);
 
 	%>
 
