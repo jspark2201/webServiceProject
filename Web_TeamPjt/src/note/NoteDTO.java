@@ -1,17 +1,16 @@
-package notification;
+package note;
 
-public class NotificationDTO {
-	private int notiNumber;
+public class NoteDTO {
+	private int noteNumber;
 	private String receiveID;
 	private String giveID;
 	private String giveEmail;
-	private String ideaLink;
-	
-	public int getNotiNumber() {
-		return notiNumber;
+	private String comment;
+	public int getNoteNumber() {
+		return noteNumber;
 	}
-	public void setNotiNumber(int notiNumber) {
-		this.notiNumber = notiNumber;
+	public void setNoteNumber(int noteNumber) {
+		this.noteNumber = noteNumber;
 	}
 	public String getReceiveID() {
 		return receiveID;
@@ -31,12 +30,13 @@ public class NotificationDTO {
 	public void setGiveEmail(String giveEmail) {
 		this.giveEmail = giveEmail;
 	}
-	public String getIdeaLink() {
-		return ideaLink;
+	public String getComment() {
+		return comment;
 	}
-	public void setIdeaLink(String ideaLink) {
-		this.ideaLink = ideaLink;
+	public void setComment(String comment) {
+		this.comment = comment;
 	}
+	
 	
 	
 }

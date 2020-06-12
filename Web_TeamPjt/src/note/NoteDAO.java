@@ -1,4 +1,4 @@
-package notification;
+package note;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -6,9 +6,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 
-import note.NoteDTO;
-
-public class NotificationDAO {
+public class NoteDAO {
+	
 	public Connection dbConn() {
         Connection conn = null; // db접속 객체
         try {
@@ -30,31 +29,32 @@ public class NotificationDAO {
         return conn;
     }
 	
-	public ArrayList<NotificationDTO> notificationList() {
-		ArrayList<NotificationDTO> list = new ArrayList<NotificationDTO>();
+	public ArrayList<NoteDTO> noteList() {
+		ArrayList<NoteDTO> list = new ArrayList<NoteDTO>();
         Connection conn = null; // DB접속 객체
         PreparedStatement pstmt = null; // SQL실행객체
         ResultSet rs = null; // 결과셋 처리 객체
  
         try {
             conn = dbConn(); // db연결 키
-            String sql = "select * from NOTIFICATION";
+            String sql = "select * from NOTE";
             pstmt = conn.prepareStatement(sql); // sql을 실행시키는 객체 만들어짐
             rs = pstmt.executeQuery(); // 실행 후 결과 값이 rs에 넘어옴
  
             while (rs.next()) {                    //결과셋.next(); 다음 레코드가 있으면 true
  
-            	NotificationDTO dto = new NotificationDTO();
+            	NoteDTO dto = new NoteDTO();
 //                dto.setId(rs.getInt("id"));
 //                dto.setTitle(rs.getString("title"));
 //                dto.setAuthor(rs.getString("author"));
 //                dto.setPrice(rs.getInt("price"));
 //                dto.setQty(rs.getInt("qty"));
-            	dto.setNotiNumber(rs.getInt("notiNumber"));
+            	
+            	dto.setNoteNumber(rs.getInt("noteNumber"));
             	dto.setReceiveID(rs.getString("receiveID"));
             	dto.setGiveID(rs.getString("giveID"));
             	dto.setGiveEmail(rs.getString("giveEmail"));
-            	dto.setIdeaLink(rs.getString("ideaLink"));
+            	dto.setComment(rs.getString("comment"));
                 
                 //ArrayList에 추가
                 list.add(dto);
@@ -92,5 +92,7 @@ public class NotificationDAO {
 
 		
 	}
+
+	
 	
 }

@@ -1,9 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    <%@ page import="java.io.PrintWriter" %>
-    <%@ page import="notification.NotificationDAO" %>
-    <%@ page import="notification.NotificationDTO" %>
-    <%@ page import="java.util.ArrayList" %>
+    <%@page import="note.*" %>
+    <%@page import="notification.*" %>
+    <%@page import="java.util.ArrayList" %>
 <!doctype html>
 <html lang="ko">
 <head>
@@ -101,11 +100,23 @@
 						</tr>
 					</thead>
 					<tbody>
+					
+					<%
+					NoteDAO dao = new NoteDAO();
+					
+					ArrayList<NoteDTO> list = dao.noteList();
+					for(NoteDTO dto:list) {
+					
+					%>
 						<tr>
-							<td>Kent</td>
-							<td>Kent@gmail.com</td>
-							<td><a data-toggle="modal" data-target="#mailModal">이메일 확인 부탁드립니다..</a></td>
+							<td><%=dto.getGiveID() %></td>
+							<td><%=dto.getGiveEmail()  %></td>
+							<td><a data-toggle="modal" data-target="#mailModal"><%=dto.getComment() %></a></td>
 						</tr>
+					<%
+					}
+					%>
+
 					</tbody>
 				</table>
 				<p class="p_400" style="color:#cccccc;">쪽지 내용을 클릭하시면 상세 보기가 가능합니다.</p>
@@ -156,13 +167,22 @@
 						</tr>
 					</thead>
 					<tbody>
+					<%
+						NotificationDAO dao2 = new NotificationDAO();
 					
+						ArrayList<NotificationDTO> list2 = dao2.notificationList();
+						for(NotificationDTO dto:list2) {
+					%>
 						<tr>
-							<td></td>
-							<td></td>
+							<td><%=dto.getGiveID() %></td>
+							<td><%=dto.getGiveEmail() %></td>
 							<td>컨택 요청이 들어왔습니다.</td>
-							<td><a href=""></a></td>
+							<td><a href=""><%=dto.getIdeaLink() %></a></td>
 						</tr>
+						
+					<%
+						}	
+					%>
 
 					</tbody>
 				</table>
