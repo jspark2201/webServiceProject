@@ -4,6 +4,7 @@
 <%@ page import="java.util.ArrayList"%>
 <%@ page import="java.io.PrintWriter" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 
 <!doctype html>
 <html lang="ko">
@@ -13,12 +14,15 @@
 		content="width=device-width, initial-scale=1, shrink-to-fit=no">
 	<title>IDEARIA</title>
 	
-	<link rel="shortcut icon" href="/img/favicon/ecology.png">
-	<link rel="stylesheet" href="/css/myPage/myPage1.css">
-	<link rel="stylesheet" href="/css/bootstrap.min.css">
-	<link rel="stylesheet" href="/css/googleFont.css">
+	<link rel="shortcut icon" href="/Web_TeamPjt/img/favicon/ecology.png">
+	<link rel="stylesheet" href="/Web_TeamPjt/css/myPage/myPage1.css">
+	<link rel="stylesheet" href="/Web_TeamPjt/css/bootstrap.min.css">
+	<link rel="stylesheet" href="/Web_TeamPjt/css/googleFont.css">
 	<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500&display=swap" rel="stylesheet">
 	<style>
+		.page-link.active { background: #444; }
+		.table th { height: 50px; }
+		.table tr { height: 49px; }
 		.table td { text-align: center; }
 	</style>
 </head>
@@ -126,21 +130,29 @@
 						</tr>
 					</thead>
 					<tbody>
-						<c:forEach var="user" items="${UserList}">
+						<c:forEach var="i" begin="0" end="9" step="1">
 							<tr>
-								<td><c:out value="${user.date}"/></td>
-								<td><c:out value="${user.id}"/></td>
-								<td><c:out value="${user.nickname}"/></td>
-								<td><c:out value="${user.email}"/></td>
-								<td><a href='userUpdate.do?id=<c:out value="${user.id}"/>'/>수정</td>
-								<td><input type="checkbox" id='<c:out value="${user.id}"/>'/></td>							
+								<c:choose>
+									<c:when test="${fn:length(UserList) > i}">
+										<td><c:out value="${UserList[i].date}"/></td>
+										<td><c:out value="${UserList[i].id}"/></td>
+										<td><c:out value="${UserList[i].nickname}"/></td>
+										<td><c:out value="${UserList[i].email}"/></td>
+										<td><a href='userUpdate.do?id=<c:out value="${UserList[i].id}"/>'/>수정</td>
+										<td><input type="checkbox" id='<c:out value="${UserList[i].id}"/>'/></td>							
+									</c:when>
+									<c:otherwise>
+										<td></td><td></td><td></td>
+										<td></td><td></td><td></td>
+									</c:otherwise>
+								</c:choose>
 							</tr>					
 						</c:forEach>
 					</tbody>
 				</table>
 
 				<div>
-					<form class="form" method="post" action="users.do">
+					<form class="form" method="post" action="<%=src%>">
 		            	<div class="form-group" style="display: inline-block;">
 		                    <select id="search_type" class="form-control a_400" style="width:100px;" name="type">
 		                        <option value="id">아이디</option>
@@ -151,7 +163,7 @@
 			            <input style="width:200px; display:inline-block;" type="text" class="form-control" name="search" value='${search}'>
 			            <button type="submit" class="btn btn-outline-dark">검색</button>
 			            <button type="button" onclick="location.href='userAdd.do'" class="btn btn-outline-dark" style="float:right;">삭제</button>
-			            <button type="button" onclick="groupDel();" class="btn btn-outline-dark" style="float:right;margin-right:10px;">삽입</button>
+			            <button type="button" onclick="groupDel();" class="btn btn-outline-dark" style="float:right;margin-right:10px;">추가</button>
 		            </form>
 		         </div>
 
@@ -253,8 +265,8 @@
   </div>
 
 	<!-- Bootstrap core JavaScript -->
-	<script src="/vendor/jquery/jquery.min.js"></script>
-	<script src="/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+	<script src="/Web_TeamPjt/vendor/jquery/jquery.min.js"></script>
+	<script src="/Web_TeamPjt/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
 	<script>
 	
@@ -294,6 +306,13 @@
 	
 	window.onload = function () {
 		$("#search_type").val("${type}").attr("selected", "selected");
+		$(".page-link").each(function(index, value) {
+			console.log(value.innerText);
+			if ($(this).innerText === '${curPageNum}') {
+				$(this).addClass("active");
+				console.log(1);
+			}			
+		})
 	}
 	</script>
 </body>

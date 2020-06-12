@@ -4,6 +4,7 @@
 <%@ page import="java.util.ArrayList"%>
 <%@ page import="java.io.PrintWriter" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 
 <!doctype html>
 <html lang="ko">
@@ -13,12 +14,14 @@
 		content="width=device-width, initial-scale=1, shrink-to-fit=no">
 	<title>IDEARIA</title>
 	
-	<link rel="shortcut icon" href="/img/favicon/ecology.png">
-	<link rel="stylesheet" href="/css/myPage/myPage1.css">
-	<link rel="stylesheet" href="/css/bootstrap.min.css">
-	<link rel="stylesheet" href="/css/googleFont.css">
+	<link rel="shortcut icon" href="/Web_TeamPjt/img/favicon/ecology.png">
+	<link rel="stylesheet" href="/Web_TeamPjt/css/myPage/myPage1.css">
+	<link rel="stylesheet" href="/Web_TeamPjt/css/bootstrap.min.css">
+	<link rel="stylesheet" href="/Web_TeamPjt/css/googleFont.css">
 	<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500&display=swap" rel="stylesheet">
 	<style>
+		.table th { height: 50px; }
+		.table tr { height: 49px; }
 		.table td { text-align: center; }
 	</style>
 </head>
@@ -70,6 +73,7 @@
 		String type = request.getParameter("type");
 		String search = request.getParameter("search");
 		String order = request.getParameter("order");
+		int filter = (Integer)request.getAttribute("filter");
 		int curPageNum = (Integer)request.getAttribute("curPageNum");
 		int pageCount = (Integer)request.getAttribute("PageCount");
 			
@@ -126,21 +130,29 @@
 						</tr>
 					</thead>
 					<tbody>
-						<c:forEach var="idea" items="${IdeaList}">
+						<c:forEach var="i" begin="0" end="9" step="1">
 							<tr>
-								<td><c:out value="${idea.registration_date}"/></td>
-								<td><c:out value="${idea.writer}"/></td>
-								<td><c:out value="${idea.title}"/></td>
-								<td><c:out value="${idea.state}"/></td>
-								<td><a href='#id=<c:out value="${idea.id}"/>'/>수정</td>
-								<td><input type="checkbox" id='<c:out value="${idea.id}"/>'/></td>							
+								<c:choose>
+									<c:when test="${fn:length(IdeaList) > i}">
+										<td><c:out value="${IdeaList[i].registration_date}"/></td>
+										<td><c:out value="${IdeaList[i].writer}"/></td>
+										<td><c:out value="${IdeaList[i].title}"/></td>
+										<td><c:out value="${IdeaList[i].state}"/></td>
+										<td><a href='#id=<c:out value="${IdeaList[i].id}"/>'/>수정</td>
+										<td><input type="checkbox" id='<c:out value="${IdeaList[i].id}"/>'/></td>							
+									</c:when>
+									<c:otherwise>
+										<td></td><td></td><td></td>
+										<td></td><td></td><td></td>
+									</c:otherwise>
+								</c:choose>
 							</tr>					
-						</c:forEach>	
+						</c:forEach>
 					</tbody>
 				</table>
 
 				<div>
-					<form class="form" method="post" action="users.do">
+					<form class="form" method="post" action="<%=src%>">
 		            	<div class="form-group" style="display: inline-block;">
 		                    <select id="search_type" class="form-control a_400" style="width:100px;" name="type">
 		                        <option value="writer">작성자</option>
@@ -150,7 +162,8 @@
 		                </div>
 			            <input style="width:200px; display:inline-block;" type="text" class="form-control" name="search" value='${search}'>
 			            <button type="submit" class="btn btn-outline-dark">검색</button>
-		            	<div class="form-group" style="display: inline-block;">
+
+		            	<div class="form-group" style="display: inline-block; float: right">
 		                    <select id="filtered" class="form-control a_400" onchange="location.href='<%=src%>filter='+(this.value);" style="width:150px;" >
 		                        <option value="-1">전체보기</option>
 		                        <option value="0">모집 중</option>
@@ -160,7 +173,7 @@
 		                        <option value="4">외부 프로젝트</option>
 		                    </select>
 	                    </div>
-			            <button type="button" onclick="groupDel();" class="btn btn-outline-dark" style="float:right;margin-right:10px;">삽입</button>
+			            <button type="button" onclick="groupDel();" class="btn btn-outline-dark" style="float:right;margin-right:10px;">삭제</button>
 		            </form>
 		         </div>
 
@@ -262,8 +275,8 @@
   </div>
 
 	<!-- Bootstrap core JavaScript -->
-	<script src="/vendor/jquery/jquery.min.js"></script>
-	<script src="/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+	<script src="/Web_TeamPjt/vendor/jquery/jquery.min.js"></script>
+	<script src="/Web_TeamPjt/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
 	<script>
 	

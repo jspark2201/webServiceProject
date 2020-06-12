@@ -20,7 +20,7 @@ public class UserListAction implements Action {
 	private int curPageNum = 1;
 	
 	public void execute(HttpServletRequest request, HttpServletResponse response) {
-				
+		
 		UserDAO userDAO = new UserDAO();
 
 		/***** Parameter 값 가져오기 */
