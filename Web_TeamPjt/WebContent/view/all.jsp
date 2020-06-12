@@ -1,3 +1,5 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <!doctype html>
 <html lang="ko">
 <head>
@@ -8,6 +10,7 @@
 
 <link rel="shortcut icon" href="../img/favicon/ecology.png">
 <link rel="stylesheet" href="../css/all/all.css">
+<link rel="stylesheet" href="../css/card.css">
 <link rel="stylesheet" href="../css/bootstrap.min.css">
 <link rel="stylesheet" href="../css/googleFont.css">
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500&display=swap" rel="stylesheet">
@@ -40,7 +43,7 @@
 						</a>
 					</li>
 					<!-- <li class="nav-item"><a class="nav-link" href="#">회원가입</a></li> -->
-					<li class="nav-item"><a class="nav-link a_400" href="#">로그아웃</a></li>
+					<li class="nav-item"><a class="nav-link a_400" onclick="logoutAlert()">로그아웃</a></li>
 					<li class="nav-item"><a class="nav-link a_400" href="#">마이페이지</a></li>
 				</ul>
 			</div>
@@ -97,6 +100,26 @@
 	
 	<!-- Page Content -->
 	<div class="container">
+	
+		<!-- 필터링 박스  -->
+		<div class="row">
+            <div class="col-md-12" style="margin-bottom:10px;">
+                    <div class="btn-group btn-group-toggle" data-toggle="buttons">
+						<label class="btn btn-warning">
+							<input type="radio" name="jb-radio" id="jb-radio-1" checked><a class="a_400" style="color:#333333;">전체 아이디어 보기</a>
+						</label>
+						<label class="btn btn-warning">
+							<input type="radio" name="jb-radio" id="jb-radio-2"><a class="a_400" style="color:#333333;">모집 중 아이디어 보기</a>
+						</label>
+						<label class="btn btn-warning">
+							<input type="radio" name="jb-radio" id="jb-radio-3"><a class="a_400" style="color:#333333;">모집 완료 아이디어 보기</a>
+						</label>
+					</div>
+            </div>
+        </div>
+		
+        
+        <!-- 검색 박스  -->
 		<div class="row">
             <div class="col-md-12">
                 <div class="card acik-renk-form">
@@ -107,8 +130,9 @@
                                 <div class="form-group ">
                                     <select id="interest_1" class="form-control a_400" >
                                         <option>없음</option>
-                                        <option>인공지능</option>
+                                        <option>WEB</option>
                                         <option>안드로이드</option>
+                                        <option>임베디드</option>
                                         <option>IOS</option>
                                     </select>
                                 </div>
@@ -117,19 +141,9 @@
                                 <div class="form-group ">
                                     <select id="interest_2" class="form-control a_400" >
                                         <option>없음</option>
-                                        <option>인공지능</option>
-                                        <option>안드로이드</option>
-                                        <option>IOS</option>
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="col-md-4">
-                                <div class="form-group ">
-                                    <select id="interest_3" class="form-control a_400" >
-                                        <option>없음</option>
-                                        <option>인공지능</option>
-                                        <option>안드로이드</option>
-                                        <option>IOS</option>
+                                        <option>건강</option>
+                                        <option>심리학</option>
+                                        <option>게임</option>
                                     </select>
                                 </div>
                             </div>
@@ -156,11 +170,15 @@
 		<div class="row">
 			<div class="col-lg-4 col-sm-6 portfolio-item" style="margin-bottom:30px">
 				<div class="card h-100">
-					<a href="#"><img class="card-img-top"
-						src="http://placehold.it/700x400" alt=""></a>
+					<div class="card_img">
+						<img style="width:100%; height:100%;" alt="" src="../img/main/main_1.jpg">
+					</div>
+					<hr>
+						<p class="a_400" style="text-align:center;">기간 입력!</p>
+					<hr>
 					<div class="card-body">
 						<h4 class="card-title">
-							<a href="#">Project One</a>
+							<a href="#" class="a_400" style="color:#FFCE1E">Project One</a>
 						</h4>
 						<p class="card-text">Lorem ipsum dolor sit amet, consectetur
 							adipisicing elit. Amet numquam aspernatur eum quasi sapiente
@@ -171,11 +189,15 @@
 			</div>
 			<div class="col-lg-4 col-sm-6 portfolio-item" style="margin-bottom:30px">
 				<div class="card h-100">
-					<a href="#"><img class="card-img-top"
-						src="http://placehold.it/700x400" alt=""></a>
+					<div class="card_img">
+						<img style="width:100%; height:100%;" alt="" src="../img/main/main_1.jpg">
+					</div>
+					<hr>
+						<p class="a_400" style="text-align:center;">기간 입력!</p>
+					<hr>
 					<div class="card-body">
 						<h4 class="card-title">
-							<a href="#">Project Two</a>
+							<a href="#" class="a_400" style="color:#FFCE1E">Project Two</a>
 						</h4>
 						<p class="card-text">Lorem ipsum dolor sit amet, consectetur
 							adipiscing elit. Nam viverra euismod odio, gravida pellentesque
@@ -185,11 +207,15 @@
 			</div>
 			<div class="col-lg-4 col-sm-6 portfolio-item" style="margin-bottom:30px">
 				<div class="card h-100">
-					<a href="#"><img class="card-img-top"
-						src="http://placehold.it/700x400" alt=""></a>
+					<div class="card_img">
+						<img style="width:100%; height:100%;" alt="" src="../img/main/main_1.jpg">
+					</div>
+					<hr>
+						<p class="a_400" style="text-align:center;">기간 입력!</p>
+					<hr>
 					<div class="card-body">
 						<h4 class="card-title">
-							<a href="#">Project Three</a>
+							<a href="#" class="a_400" style="color:#FFCE1E">Project Three</a>
 						</h4>
 						<p class="card-text">Lorem ipsum dolor sit amet, consectetur
 							adipisicing elit. Quos quisquam, error quod sed cumque, odio
@@ -200,11 +226,15 @@
 			</div>
 			<div class="col-lg-4 col-sm-6 portfolio-item" style="margin-bottom:30px">
 				<div class="card h-100">
-					<a href="#"><img class="card-img-top"
-						src="http://placehold.it/700x400" alt=""></a>
+					<div class="card_img">
+						<img style="width:100%; height:100%;" alt="" src="../img/main/main_1.jpg">
+					</div>
+					<hr>
+						<p class="a_400" style="text-align:center;">기간 입력!</p>
+					<hr>
 					<div class="card-body">
 						<h4 class="card-title">
-							<a href="#">Project Four</a>
+							<a href="#" class="a_400" style="color:#FFCE1E">Project Four</a>
 						</h4>
 						<p class="card-text">Lorem ipsum dolor sit amet, consectetur
 							adipiscing elit. Nam viverra euismod odio, gravida pellentesque
@@ -214,11 +244,15 @@
 			</div>
 			<div class="col-lg-4 col-sm-6 portfolio-item" style="margin-bottom:30px">
 				<div class="card h-100">
-					<a href="#"><img class="card-img-top"
-						src="http://placehold.it/700x400" alt=""></a>
+					<div class="card_img">
+						<img style="width:100%; height:100%;" alt="" src="../img/main/main_1.jpg">
+					</div>
+					<hr>
+						<p class="a_400" style="text-align:center;">기간 입력!</p>
+					<hr>
 					<div class="card-body">
 						<h4 class="card-title">
-							<a href="#">Project Five</a>
+							<a href="#" class="a_400" style="color:#FFCE1E">Project Five</a>
 						</h4>
 						<p class="card-text">Lorem ipsum dolor sit amet, consectetur
 							adipiscing elit. Nam viverra euismod odio, gravida pellentesque
@@ -228,11 +262,15 @@
 			</div>
 			<div class="col-lg-4 col-sm-6 portfolio-item" style="margin-bottom:30px">
 				<div class="card h-100">
-					<a href="#"><img class="card-img-top"
-						src="http://placehold.it/700x400" alt=""></a>
+					<div class="card_img">
+						<img style="width:100%; height:100%;" alt="" src="../img/main/main_1.jpg">
+					</div>
+					<hr>
+						<p class="a_400" style="text-align:center;">기간 입력!</p>
+					<hr>
 					<div class="card-body">
 						<h4 class="card-title">
-							<a href="#">Project Six</a>
+							<a href="#" class="a_400" style="color:#FFCE1E">Project Six</a>
 						</h4>
 						<p class="card-text">Lorem ipsum dolor sit amet, consectetur
 							adipisicing elit. Itaque earum nostrum suscipit ducimus nihil
@@ -257,7 +295,7 @@
 					class="sr-only">Next</span>
 			</a></li>
 		</ul>
-
+	
 	</div>
 	<!-- /.container -->
 	<!-- Footer -->
@@ -281,8 +319,8 @@
       <div class="modal-content">
       
         <!-- Modal Header -->
-        <div class="modal-header">
-          <h4 class="modal-title">Modal Heading</h4>
+        <div class="modal-header" style="text-align:center;" >
+          <h4 class="modal-title a_400">-이용가이드-</h4>
           <button type="button" class="close" data-dismiss="modal">&times;</button>
         </div>
         
@@ -311,6 +349,8 @@
 		src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
 		integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
 		crossorigin="anonymous"></script>
-
+	<!-- alert -->
+	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
+	<script type="text/javascript" src="../js/alertScript.js" ></script> 
 </body>
 </html>

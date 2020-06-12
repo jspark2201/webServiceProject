@@ -1,3 +1,5 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <!doctype html>
 <html lang="ko">
 <head>
@@ -40,7 +42,7 @@
 						</a>
 					</li>
 					<!-- <li class="nav-item"><a class="nav-link" href="#">회원가입</a></li> -->
-					<li class="nav-item"><a class="nav-link a_400" href="#">로그아웃</a></li>
+					<li class="nav-item"><a class="nav-link a_400" onclick="logoutAlert()">로그아웃</a></li>
 					<li class="nav-item"><a class="nav-link a_400" href="#">마이페이지</a></li>
 				</ul>
 			</div>
@@ -242,7 +244,8 @@
 		src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
 		integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
 		crossorigin="anonymous"></script>
-
+	<script type="text/javascript" src="../js/alertScript.js" ></script>
+	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
 </body>
 </html>
 
