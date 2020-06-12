@@ -1,3 +1,8 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+    <%@page import="note.*" %>
+    <%@page import="notification.*" %>
+    <%@page import="java.util.ArrayList" %>
 <!doctype html>
 <html lang="ko">
 <head>
@@ -78,6 +83,9 @@
 	    <li class="nav-item">
 	      <a class="nav-link a_500" style="color:#FFCE1E;" data-toggle="tab" href="#menu4">알림</a>
 	    </li>
+<!-- 	    <li class="nav-item">
+	      <a class="nav-link a_500" style="color:#FFCE1E;" data-toggle="tab" href="#menu4">알림</a>
+	    </li> -->
 	  </ul>
 	
 	  <!-- Tab panes -->
@@ -86,53 +94,33 @@
 				<table class="table">
 					<thead>
 						<tr>
-							<th></th>
-							<th>이름</th>
-							<th>Email</th>
+							<th>보낸 사람</th>
+							<th>이메일</th>
 							<th>내용</th>
 						</tr>
 					</thead>
 					<tbody>
+					
+					<%
+					NoteDAO dao = new NoteDAO();
+					
+					ArrayList<NoteDTO> list = dao.noteList();
+					for(NoteDTO dto:list) {
+					
+					%>
 						<tr>
-							<td>1</td>
-							<td>Kent</td>
-							<td>clarkkent@mail.com</td>
-							<td><a data-toggle="modal" data-target="#mailModal">a</a></td>
+							<td><%=dto.getGiveID() %></td>
+							<td><%=dto.getGiveEmail()  %></td>
+							<td><a data-toggle="modal" data-target="#mailModal"><%=dto.getComment() %></a></td>
 						</tr>
-						<tr>
-							<td>2</td>
-							
-							<td>Carter</td>
-							<td>johncarter@mail.com</td>
-							<td><a data-toggle="modal" data-target="#mailModal">b</a></td>
-						</tr>
-						<tr>
-							<td>3</td>
-							<td>Parker</td>
-							<td>peterparker@mail.com</td>
-							<td><a data-toggle="modal" data-target="#mailModal">c</a></td>
-						</tr>
-						<tr>
-							<td>4</td>
-							<td>Parker</td>
-							<td>peterparker@mail.com</td>
-							<td><a data-toggle="modal" data-target="#mailModal">d</a></td>
-						</tr>
-						<tr>
-							<td>5</td>
-							<td>Parker</td>
-							<td>peterparker@mail.com</td>
-							<td><a data-toggle="modal" data-target="#mailModal">e</a></td>
-						</tr>
-						<tr>
-							<td>6</td>
-							<td>Parker</td>
-							<td>peterparker@mail.com</td>
-							<td><a data-toggle="modal" data-target="#mailModal">f</a></td>
-						</tr>
+					<%
+					}
+					%>
+
 					</tbody>
 				</table>
 				<p class="p_400" style="color:#cccccc;">쪽지 내용을 클릭하시면 상세 보기가 가능합니다.</p>
+				<button type="button" onclick="location='WriteNote.jsp'">쪽지 보내기</button>
 				<ul class="pagination justify-content-center">
 			  <li class="page-item"><a class="page-link" href="#">Previous</a></li>
 			  <li class="page-item"><a class="page-link" href="#">1</a></li>
@@ -171,56 +159,30 @@
 	    <table class="table">
 					<thead>
 						<tr>
-							<th></th>
-							<th>이름</th>
-							<th>Email</th>
+
+							<th>보낸 사람</th>
+							<th>이메일</th>
 							<th>내용</th>
 							<th>아이디어 링크</th>
 						</tr>
 					</thead>
 					<tbody>
+					<%
+						NotificationDAO dao2 = new NotificationDAO();
+					
+						ArrayList<NotificationDTO> list2 = dao2.notificationList();
+						for(NotificationDTO dto:list2) {
+					%>
 						<tr>
-							<td>1</td>
-							<td>Kent</td>
-							<td>clarkkent@mail.com</td>
+							<td><%=dto.getGiveID() %></td>
+							<td><%=dto.getGiveEmail() %></td>
 							<td>컨택 요청이 들어왔습니다.</td>
-							<td><a href="">링크1</a></td>
+							<td><a href="detail.html"><%=dto.getIdeaLink() %></a></td>
 						</tr>
-						<tr>
-							<td>2</td>
-							<td>Carter</td>
-							<td>johncarter@mail.com</td>
-							<td>컨택 요청이 들어왔습니다.</td>
-							<td><a href="">링크2</a></td>
-						</tr>
-						<tr>
-							<td>3</td>
-							<td>Parker</td>
-							<td>peterparker@mail.com</td>
-							<td>컨택 요청이 들어왔습니다.</td>
-							<td><a href="">링크3</a></td>
-						</tr>
-						<tr>
-							<td>4</td>
-							<td>Parker</td>
-							<td>peterparker@mail.com</td>
-							<td>컨택 요청이 들어왔습니다.</td>
-							<td><a href="">링크4</a></td>
-						</tr>
-						<tr>
-							<td>5</td>
-							<td>Parker</td>
-							<td>peterparker@mail.com</td>
-							<td>컨택 요청이 들어왔습니다.</td>
-							<td><a href="">링크5</a></td>
-						</tr>
-						<tr>
-							<td>6</td>
-							<td>Parker</td>
-							<td>peterparker@mail.com</td>
-							<td>컨택 요청이 들어왔습니다.</td>
-							<td><a href="">링크6</a></td>
-						</tr>
+					<%
+						}	
+					%>
+
 					</tbody>
 				</table>
 	    
