@@ -1,6 +1,6 @@
-package receiveNotification;
+package notification;
 
-public class ReceiveNotificationDTO {
+public class NotificationDTO {
 	String receiveID;
 	String giveID;
 	String giveEmail;

@@ -1,8 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     <%@ page import="java.io.PrintWriter" %>
-    <%@ page import="receiveNotification.ReceiveNotificationDAO" %>
-    <%@ page import="receiveNotification.ReceiveNotificationDTO" %>
+    <%@ page import="notification.NotificationDAO" %>
+    <%@ page import="notification.NotificationDTO" %>
     <%@ page import="java.util.ArrayList" %>
 <!doctype html>
 <html lang="ko">
@@ -109,7 +109,7 @@
 					</tbody>
 				</table>
 				<p class="p_400" style="color:#cccccc;">쪽지 내용을 클릭하시면 상세 보기가 가능합니다.</p>
-				<button type="button" onclick="location='message.jsp'">쪽지 보내기</button>
+				<button type="button" onclick="location='WriteNote.jsp'">쪽지 보내기</button>
 				<ul class="pagination justify-content-center">
 			  <li class="page-item"><a class="page-link" href="#">Previous</a></li>
 			  <li class="page-item"><a class="page-link" href="#">1</a></li>
@@ -156,20 +156,13 @@
 						</tr>
 					</thead>
 					<tbody>
-					<%
-						ReceiveNotificationDAO receiveNotificationDAO = new ReceiveNotificationDAO();
-						ArrayList<ReceiveNotificationDTO> list = receiveNotificationDAO.getList(1);
-						for(int i=0; i<list.size(); i++) {
-					%>
+					
 						<tr>
-							<td><%=list.get(i).getGiveID() %></td>
-							<td><%=list.get(i).getGiveEmail() %></td>
+							<td></td>
+							<td></td>
 							<td>컨택 요청이 들어왔습니다.</td>
-							<td><a href=""><%=list.get(i).getIdeaLink()%></a></td>
+							<td><a href=""></a></td>
 						</tr>
-					<%
-						}
-					%>
 
 					</tbody>
 				</table>
