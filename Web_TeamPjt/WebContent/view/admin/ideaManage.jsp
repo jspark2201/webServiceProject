@@ -294,40 +294,7 @@
 
 	<script>
 	
-	function groupDel() {
-		
-		if (!confirm("정말로 삭제하시겠습니까?"))
-			return;
-		
-		var array = [];
-		
-		var id = '';
-		 $('input:checkbox').each(function() {
-		     if(this.checked){
-		    	 id = this.id;
-		    	 array.push(id);
-		    	 console.log(id);
-		      }
-		 });
-		 
-		 console.log(array);
-		 
-		$.ajax({
-			url: "ideaDelAction.jsp",
-			data: { 'idArray' : array },
-			type: "post",
-			success: function(data) {
-				alert("삭제되었습니다.");
-			},
-			error: function(request, status, error) {
-				alert("code: "+request.status+"\n"+"message: "+request.responseText+"\n"+"error: "+error);
-			}
-		});
-		
-		location.reload();
 
-	}
-	
 
 	
 	</script>

@@ -12,18 +12,26 @@ import javax.servlet.http.HttpServletResponse;
 import User.*;
 import Idea.*;
 
-public class UserListAction implements Action {
+public class IdeaListAction implements Action {
 
-	private String type = "id";		// 검색 기준
+	private int filter = -1;
+	private String type = "writer";		// 검색 기준
 	private String search = "";	// 검색어
-	private String order = "date";	// 정렬 기준
+	private String order = "id";	// 정렬 기준
 	private int curPageNum = 1;
 	
 	public void execute(HttpServletRequest request, HttpServletResponse response) {
 				
-		UserDAO userDAO = new UserDAO();
+		IdeaDAO ideaDAO = new IdeaDAO();
 
 		/***** Parameter 값 가져오기 */
+		try {
+			if (request.getParameter("filter") != null)
+				filter = Integer.parseInt(request.getParameter("filter"));
+		} catch (Exception e) {
+			filter = -1;
+		}
+				
 		if (request.getParameter("type") != null)
 			type = request.getParameter("type");
 
@@ -33,18 +41,26 @@ public class UserListAction implements Action {
 		if (request.getParameter("order") != null)
 			order = request.getParameter("order");
 
-		if (request.getParameter("pageNum") != null)
-			curPageNum = Integer.parseInt(request.getParameter("pageNum"));
+		try {
+			if (request.getParameter("pageNum") != null)
+				curPageNum = Integer.parseInt(request.getParameter("pageNum"));
+		} catch (Exception e) {
+			filter = -1;
+		}
 
 		
 		/***** Parameter 값 검증 */
 		
+		// filter 값 검증
+		if (filter < -1 || 5 < filter)
+			filter = -1;
+		
 		// type 값 검증
 		switch(type) {
-			case "id": case "nickname": case "email":
+			case "writer": case "title": case "state":
 				break;
 			default:
-				type = "id";
+				type = "writer";
 		}
 		
 		// search 값 검증
@@ -57,11 +73,11 @@ public class UserListAction implements Action {
 			case "email": case "date":
 				break;
 			default:
-				order = "date";
+				order = "id";
 		}
 
 		// curPageNum 값 검증
-		int pageCount = (userDAO.getDBCount(type, search) - 1) / 10 + 1;
+		int pageCount = (ideaDAO.getDBCount(type, search, filter) - 1) / 10 + 1;
 		
 		if (curPageNum < 0)
 			curPageNum = 1;
@@ -70,18 +86,17 @@ public class UserListAction implements Action {
 
 		
 		/***** request 보내기 */
-		ArrayList<User> userList = userDAO.getDBList(type, search, order, curPageNum);
-		
+		ArrayList<User> ideaList = ideaDAO.getDBList(type, search, filter, order, curPageNum);
 		
 		request.setAttribute("PageCount", pageCount);	// 페이지 수
-		request.setAttribute("UserList", userList);		// 사용자 리스트
+		request.setAttribute("IdeaList", ideaList);		// 사용자 리스트
 
 		// 입력받은 Parameter 반환
+		request.setAttribute("filter", this.filter);
 		request.setAttribute("type", this.type);
 		request.setAttribute("search", this.search);
 		request.setAttribute("order", this.order);
 		request.setAttribute("curPageNum", this.curPageNum);
-
 	}
 
 }

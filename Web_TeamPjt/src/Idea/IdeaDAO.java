@@ -90,7 +90,7 @@ public class IdeaDAO {
 		connect();
 		
 		String sql = "delete from idea where id=?";
-		
+
 		try {
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setInt(1, id);

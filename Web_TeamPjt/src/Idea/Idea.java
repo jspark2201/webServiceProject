@@ -11,6 +11,7 @@ public class Idea {
 	private int number_participants;
 	private String url;
 	private int stateIdx;
+	private String state;
 	
 	public int getId() {
 		return id;

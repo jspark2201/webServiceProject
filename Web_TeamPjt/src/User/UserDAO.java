@@ -123,7 +123,7 @@ public class UserDAO
 		connect();
 		
 		String sql = "delete from user where id=?";
-		
+
 		try {
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, id);

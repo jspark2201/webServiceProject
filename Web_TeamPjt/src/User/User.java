@@ -43,7 +43,7 @@ public class User {
 	}
 	public void setDate(String date) {
 		this.date = date;
-		this.date = this.date.substring(0,16);
+		this.date = this.date.substring(0,10);
 	}
 	
 }

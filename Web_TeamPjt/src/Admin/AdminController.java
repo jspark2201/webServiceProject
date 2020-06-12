@@ -40,7 +40,6 @@ public class AdminController extends HttpServlet {
 		String viewPage = null;
 		Action action = null;
 
-		System.out.println(com);
 		if(com.contentEquals("/admin/main.do")) {
 			action = new MainAction();
 			action.execute(request,  response);
@@ -50,8 +49,25 @@ public class AdminController extends HttpServlet {
 		else if (com.contentEquals("/admin/users.do")) {
 			action = new UserListAction();
 			action.execute(request,  response);
-			viewPage = "/view/admin/userManage.jsp";
+			viewPage = "/view/admin/users.jsp";
 		}
+		else if (com.contentEquals("/admin/userDelete.do")) {
+			action = new UserDeleteAction();
+			action.execute(request, response);
+			viewPage = "/view/admin/blank.html";
+		}
+		
+		else if (com.contentEquals("/admin/ideas.do")) {
+			action = new IdeaListAction();
+			action.execute(request,  response);
+			viewPage = "/view/admin/ideas.jsp";
+		}
+		else if (com.contentEquals("/admin/ideaDelete.do")) {
+			action = new IdeaDeleteAction();
+			action.execute(request,  response);
+			viewPage = "/view/admin/blank.html";
+		}
+
 		
 		RequestDispatcher dispatcher = request.getRequestDispatcher(viewPage);
 		dispatcher.forward(request, response);
