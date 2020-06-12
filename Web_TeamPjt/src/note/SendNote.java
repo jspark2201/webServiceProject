@@ -27,7 +27,7 @@ public class SendNote extends HttpServlet {
 	
 		      
 		      if(action == null || action.equals("send")) {
-		    	  	      address = "/view/login.jsp"; 
+		    	  	      address = "/view/detail.jsp"; 
 		      }
 		      
 		      
