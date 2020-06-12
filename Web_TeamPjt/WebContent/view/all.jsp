@@ -1,3 +1,5 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <!doctype html>
 <html lang="ko">
 <head>
@@ -8,7 +10,7 @@
 
 <link rel="shortcut icon" href="../img/favicon/ecology.png">
 <link rel="stylesheet" href="../css/all/all.css">
-<link rel="stylesheet" href="../css/all.css">
+<link rel="stylesheet" href="../css/card.css">
 <link rel="stylesheet" href="../css/bootstrap.min.css">
 <link rel="stylesheet" href="../css/googleFont.css">
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500&display=swap" rel="stylesheet">
@@ -168,8 +170,12 @@
 		<div class="row">
 			<div class="col-lg-4 col-sm-6 portfolio-item" style="margin-bottom:30px">
 				<div class="card h-100">
-					<a href="#"><img class="card-img-top"
-						src="http://placehold.it/700x400" alt=""></a>
+					<div class="card_img">
+						<img style="width:100%; height:100%;" alt="" src="../img/main/main_1.jpg">
+					</div>
+					<hr>
+						<p class="a_400" style="text-align:center;">기간 입력!</p>
+					<hr>
 					<div class="card-body">
 						<h4 class="card-title">
 							<a href="#" class="a_400" style="color:#FFCE1E">Project One</a>
@@ -183,8 +189,12 @@
 			</div>
 			<div class="col-lg-4 col-sm-6 portfolio-item" style="margin-bottom:30px">
 				<div class="card h-100">
-					<a href="#"><img class="card-img-top"
-						src="http://placehold.it/700x400" alt=""></a>
+					<div class="card_img">
+						<img style="width:100%; height:100%;" alt="" src="../img/main/main_1.jpg">
+					</div>
+					<hr>
+						<p class="a_400" style="text-align:center;">기간 입력!</p>
+					<hr>
 					<div class="card-body">
 						<h4 class="card-title">
 							<a href="#" class="a_400" style="color:#FFCE1E">Project Two</a>
@@ -197,8 +207,12 @@
 			</div>
 			<div class="col-lg-4 col-sm-6 portfolio-item" style="margin-bottom:30px">
 				<div class="card h-100">
-					<a href="#"><img class="card-img-top"
-						src="http://placehold.it/700x400" alt=""></a>
+					<div class="card_img">
+						<img style="width:100%; height:100%;" alt="" src="../img/main/main_1.jpg">
+					</div>
+					<hr>
+						<p class="a_400" style="text-align:center;">기간 입력!</p>
+					<hr>
 					<div class="card-body">
 						<h4 class="card-title">
 							<a href="#" class="a_400" style="color:#FFCE1E">Project Three</a>
@@ -212,8 +226,12 @@
 			</div>
 			<div class="col-lg-4 col-sm-6 portfolio-item" style="margin-bottom:30px">
 				<div class="card h-100">
-					<a href="#"><img class="card-img-top"
-						src="http://placehold.it/700x400" alt=""></a>
+					<div class="card_img">
+						<img style="width:100%; height:100%;" alt="" src="../img/main/main_1.jpg">
+					</div>
+					<hr>
+						<p class="a_400" style="text-align:center;">기간 입력!</p>
+					<hr>
 					<div class="card-body">
 						<h4 class="card-title">
 							<a href="#" class="a_400" style="color:#FFCE1E">Project Four</a>
@@ -226,8 +244,12 @@
 			</div>
 			<div class="col-lg-4 col-sm-6 portfolio-item" style="margin-bottom:30px">
 				<div class="card h-100">
-					<a href="#"><img class="card-img-top"
-						src="http://placehold.it/700x400" alt=""></a>
+					<div class="card_img">
+						<img style="width:100%; height:100%;" alt="" src="../img/main/main_1.jpg">
+					</div>
+					<hr>
+						<p class="a_400" style="text-align:center;">기간 입력!</p>
+					<hr>
 					<div class="card-body">
 						<h4 class="card-title">
 							<a href="#" class="a_400" style="color:#FFCE1E">Project Five</a>
@@ -240,13 +262,12 @@
 			</div>
 			<div class="col-lg-4 col-sm-6 portfolio-item" style="margin-bottom:30px">
 				<div class="card h-100">
-					<a href="#">
-						<div style="max-width:700px; max-height:400px;">
-							<img style="width:100%; height:100%;" alt="" src="../img/main/main_1.jpg">
-						</div>
-						<div style="max-width:700px; max-height:400px;background-color:black;">
-						</div>
-					</a>
+					<div class="card_img">
+						<img style="width:100%; height:100%;" alt="" src="../img/main/main_1.jpg">
+					</div>
+					<hr>
+						<p class="a_400" style="text-align:center;">기간 입력!</p>
+					<hr>
 					<div class="card-body">
 						<h4 class="card-title">
 							<a href="#" class="a_400" style="color:#FFCE1E">Project Six</a>

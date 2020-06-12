@@ -1,3 +1,6 @@
+<%@page import="org.apache.catalina.Session"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <!doctype html>
 <html lang="ko">
 <head>
@@ -5,6 +8,19 @@
 <meta name="viewport"
 	content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <title>IDEARIA</title>
+
+<%-- <%
+      String userid = null;
+	
+   if (session.getAttribute("userid") != null) {
+      userid = (String) session.getAttribute("userid");
+   }else{
+	   out.println("<script>alert('로그인하신 후 이용해주십시오.');</script>");
+	   %>
+	   <script type="text/javascript">setTimeout(response.sendRedirect("index.jsp"), 1000);</script>
+	   <%
+   }
+%> --%>
 
 <link rel="shortcut icon" href="../img/favicon/ecology.png">
 <link rel="stylesheet" href="../css/detail/detail1.css">

@@ -1,3 +1,5 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <!doctype html>
 <html lang="ko">
 <head>
@@ -161,6 +163,7 @@
 	      	<button type="button" class="btn btn-outline-dark" data-toggle="modal" data-target="#portfolioModal">
 	      		<a class="a_400">추가하기</a>
 	      	</button>
+	      	<button type="button" class="btn btn-outline-info a_400" data-toggle="modal" data-target="#infoModal">도움말</button>
 		    <hr>
 		    
 		    <div class="row">
@@ -335,25 +338,77 @@
     </div>
   </div>
   
-  <!-- 쪽지 MODAL -->
+  <!-- 도움말 ( 색깔 설명 ) MODAL -->
+	<div class="modal fade" id="infoModal">
+		<div class="modal-dialog modal-sm">
+			<div class="modal-content" style="text-align:center;">
+	
+				<!-- Modal body -->
+				<hr>
+				<p class="p_400" style="background-color:#e2d0d8;">모집중</p>
+				<p class="p_400" style="background-color:#e6f5ff;">모집 완료</p>
+				<p class="p_400" style="background-color:#0099ff;">개발 완료</p>
+				<p class="p_400" style="background-color:#ff4d4d;">개발 중단</p>
+				<p class="p_400" style="background-color:#9933ff;">외부프로젝트</p>
+	
+				<!-- Modal footer -->
+				<div class="modal-footer">
+					<button type="button" class="btn btn-secondary"
+						data-dismiss="modal">Close</button>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<!-- 쪽지 MODAL -->
   <div class="modal fade" id="mailModal">
     <div class="modal-dialog modal-xl">
       <div class="modal-content">
       
         <!-- Modal Header -->
         <div class="modal-header">
-          <h4 class="modal-title">Modal Heading</h4>
+          <h4 class="modal-title">쪽지 제목</h4>
           <button type="button" class="close" data-dismiss="modal">&times;</button>
         </div>
         
         <!-- Modal body -->
         <div class="modal-body">
-          Modal body..
+        <p class="a_500">작성자 : </p>
+        <hr>
+          	<p class="a_400">쪽지 내용..</p>
         </div>
         
         <!-- Modal footer -->
         <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-secondary" data-dismiss="modal" data-toggle="modal" data-target="#response_mailModal"><a class="a_400">답장하기</a></button>
+          <button type="button" class="btn btn-secondary" data-dismiss="modal"><a class="a_400">닫기</a></button>
+        </div>
+        
+      </div>
+    </div>
+  </div>
+  
+  <!-- 쪽지 작성 MODAL -->
+    <div class="modal fade" id="response_mailModal">
+    <div class="modal-dialog modal-xl">
+      <div class="modal-content">
+      
+        <!-- Modal Header -->
+        <div class="modal-header">
+          <h4 class="modal-title">쪽지 제목</h4>
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+        </div>
+        
+        <!-- Modal body -->
+        <div class="modal-body">
+        <hr>
+          	<textarea class="a_400" "id="field" placeholder="보내실 내용을 입력하여 주세요.(200자)" maxlength="200" rows="10" cols="40"></textarea>
+        </div>
+        
+        <!-- Modal footer -->
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal"><a class="a_400">보내기</a></button>
+          <button type="button" class="btn btn-secondary" data-dismiss="modal"><a class="a_400">닫기</a></button>
         </div>
         
       </div>
