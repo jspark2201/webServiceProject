@@ -295,7 +295,7 @@ public class DBEventDAO {
 		return false;
 	}
 
-	public portfolio getPortfolio(int bbsID) {
+	public PortfolioBean getPortfolio(int bbsID) {
 
 		String SQL = "SELECT * FROM idea WHERE id = ?";
 
@@ -309,7 +309,7 @@ public class DBEventDAO {
 
 			if (rs.next()) {
 
-				portfolio port = new portfolio();
+				PortfolioBean port = new PortfolioBean();
 
 				port.setBbs_id(rs.getInt(1));
 
@@ -343,14 +343,14 @@ public class DBEventDAO {
 
 	}
 
-	public ArrayList<portfolio> getList(String user, int pageNumber) {
+	public ArrayList<PortfolioBean> getList(String user, int pageNumber) {
 
 		// String SQL = "SELECT * FROM idea WHERE writer = ? and id < ? ORDER BY
 		// registration_date DESC LIMIT 10";
 		String SQL = "SELECT idea.id, idea.writer, idea.title, idea.content, idea.requirements, idea.registration_date, idea.complete_date, idea.number_participants, idea.projectURL, idea.state  FROM participants, idea"
 				+ " WHERE idea.id = participants.idea_id and participants.user_id = ? and idea.id < ? ORDER BY idea.registration_date DESC LIMIT 9";
 
-		ArrayList<portfolio> list = new ArrayList<portfolio>();
+		ArrayList<PortfolioBean> list = new ArrayList<PortfolioBean>();
 
 		try {
 
@@ -364,7 +364,7 @@ public class DBEventDAO {
 
 			while (rs.next()) {
 
-				portfolio port = new portfolio();
+				PortfolioBean port = new PortfolioBean();
 
 				port.setBbs_id(rs.getInt(1));
 
@@ -433,7 +433,7 @@ public class DBEventDAO {
 		String SQL = "SELECT idea.id, idea.writer, idea.title, idea.content, idea.requirements, idea.registration_date, idea.complete_date, idea.number_participants, idea.projectURL, idea.state  FROM participants, idea"
 				+ " WHERE idea.id = participants.idea_id and participants.user_id = ? and idea.id < ? ORDER BY idea.registration_date DESC LIMIT 9";
 
-		ArrayList<portfolio> list = new ArrayList<portfolio>();
+		ArrayList<PortfolioBean> list = new ArrayList<PortfolioBean>();
 
 		try {
 
@@ -465,7 +465,7 @@ public class DBEventDAO {
 
 		String SQL = "SELECT COUNT(*)  FROM participants, idea WHERE idea.id = participants.idea_id and participants.user_id = ?";
 
-		ArrayList<portfolio> list = new ArrayList<portfolio>();
+		ArrayList<PortfolioBean> list = new ArrayList<PortfolioBean>();
 
 		int result;
 

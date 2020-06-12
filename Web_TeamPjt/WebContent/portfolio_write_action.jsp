@@ -24,7 +24,7 @@
 
 <!-- 한명의 회원정보를 담는 user클래스를 자바 빈즈로 사용 / scope:페이지 현재의 페이지에서만 사용-->
 
-<jsp:useBean id="port" class="mypage.portfolio" scope="page" />
+<jsp:useBean id="port" class="mypage.PortfolioBean" scope="page" />
 
 <!-- // Bbs bbs = new Bbs(); -->
 

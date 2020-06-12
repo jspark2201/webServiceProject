@@ -4,7 +4,7 @@
 
 <%@ page import="java.io.PrintWriter"%>
 
-<%@ page import="mypage.portfolio"%>
+<%@ page import="mypage.PortfolioBean"%>
 
 <%@ page import="mypage.DBEventDAO"%>
 <%@ page import="java.util.ArrayList"%>
@@ -172,7 +172,7 @@
 			<%
 				DBEventDAO bbsDAO = new DBEventDAO();
 
-			ArrayList<portfolio> list = bbsDAO.getList(userID, pageNumber);
+			ArrayList<PortfolioBean> list = bbsDAO.getList(userID, pageNumber);
 
 			for (int i = 0; i < list.size(); i++) {
 				System.out.println(list.get(i).getBbs_id());

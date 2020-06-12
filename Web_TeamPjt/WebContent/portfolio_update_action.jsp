@@ -3,7 +3,7 @@
 
 	pageEncoding="UTF-8"%>
 
-<%@ page import="mypage.portfolio"%>
+<%@ page import="mypage.PortfolioBean"%>
 
 <%@ page import="mypage.DBEventDAO"%>
 
@@ -83,7 +83,7 @@
 
 		}
 
-		portfolio bbs = new DBEventDAO().getPortfolio(bbsID);
+		PortfolioBean bbs = new DBEventDAO().getPortfolio(bbsID);
 
 		if (!userID.equals(bbs.getUserID())) {
 
