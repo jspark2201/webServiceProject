@@ -34,12 +34,12 @@
 		//로긴한사람이라면	 userID라는 변수에 해당 아이디가 담기고 그렇지 않으면 null값
 
 	String userID = "admin3";
+/*
+	if (session.getAttribute("userid") != null) {
 
-	if (session.getAttribute("userID") != null) {
+		userID = (String) session.getAttribute("userid");
 
-		userID = (String) session.getAttribute("userID");
-
-	}
+	}*/
 
 	int pageNumber = 1; //기본 페이지 넘버
 
@@ -181,7 +181,12 @@
 				style="margin-bottom: 30px">
 				<div class="card h-100">
 					<a href="#"><img class="card-img-top"
-						src="http://placehold.it/700x400" alt=""></a>
+						src=<%if(bbsDAO.getPic(list.get(i).getBbs_id())==null){
+						%>"http://placehold.it/700x400"
+						<%}else{ %>
+						<%=bbsDAO.getPic(list.get(i).getBbs_id()) %>
+						<%} %>
+						 alt=""></a>
 					<div class="card-body">
 						<h4 class="card-title">
 							<a href="#"><a
@@ -189,9 +194,9 @@
 						</h4>
 						<p class="card-text">
 							<%if(list.get(i).getBbsContent().length()>30){%>
-								<%=list.get(i).getBbsContent().substring(0, 31) %>
+							<%=list.get(i).getBbsContent().substring(0, 31) %>
 							<%}else{%>
-									<%=list.get(i).getBbsContent()%>
+							<%=list.get(i).getBbsContent()%>
 							<%} %>
 							<br> 진행 기간 :
 							<%=list.get(i).getRegistrationDate()%>
@@ -238,6 +243,11 @@
 				</a></li>
 				<%
 					}
+				%>
+				<li class="page-item"><a class="page-link"
+					href="portfolio.jsp?pageNumber=<%=pageNumber%>"> <%=pageNumber%>
+				</a></li>
+				<%
 				if (pageNumber + 2 <= totalPageNum) {
 				%>
 				<li class="page-item"><a class="page-link"
@@ -246,6 +256,8 @@
 				<li class="page-item"><a class="page-link"
 					href="portfolio.jsp?pageNumber=<%=pageNumber + 2%>"> <%=pageNumber + 2%>
 				</a></li>
+
+
 				<%
 					} else if (pageNumber + 1 <= totalPageNum) {
 				%>

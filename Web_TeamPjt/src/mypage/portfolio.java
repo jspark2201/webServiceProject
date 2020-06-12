@@ -13,7 +13,15 @@ public class portfolio {
 	private int participantsNumber;
 	private String requirement;
 	private String bbsContent;
+	private String pictsrc;
 	
+
+	public String getPictsrc() {
+		return pictsrc;
+	}
+	public void setPictsrc(String pictsrc) {
+		this.pictsrc = pictsrc;
+	}
 	public int getBbs_id() {
 		return bbs_id;
 	}

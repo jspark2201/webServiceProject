@@ -135,6 +135,20 @@
 							<td><input type="date" class="form-control" placeholder="종료 날짜" name="completeDate" maxlength="50"/></td>
 
 						</tr>
+						<tr><label for = "favorite">플랫폼 : </label>
+						        <input type = "checkbox" name = "favorite" value = "web">web
+        <input type = "checkbox" name = "favorite" value = "android">android
+        <input type = "checkbox" name = "favorite" value = "embeded">embeded
+      <input type = "checkbox" name = "favorite" value = "ios">ios
+						</tr>
+						    <label for = "favorite">장르 : </label>
+        <input type = "checkbox" name = "favorite" value = "health">health
+        <input type = "checkbox" name = "favorite" value = "psychology">psychology
+        <input type = "checkbox" name = "favorite" value = "game">game
+						
+						<tr>
+						
+						</tr>
 						<tr>
 
 							<td><textarea class="form-control" placeholder="글 내용" name="bbsContent" maxlength="2048" style="height: 350px;"></textarea></td>
@@ -144,6 +158,9 @@
 
 							<td><input type="text" class="form-control" placeholder="프로젝트 링크" name="projectUrl" maxlength="50"/></td>
 
+						</tr>
+						<tr>
+						<td><input type="file" name="pictsrc"/></td>
 						</tr>
 					</tbody>
 

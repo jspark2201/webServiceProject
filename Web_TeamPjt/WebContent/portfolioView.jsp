@@ -47,7 +47,7 @@
 
 		int bbsID = 0;
 
-		if (request.getParameter("portID") != null) {
+		if (request.getParameter("bbsID") != null) {
 
 			bbsID = Integer.parseInt(request.getParameter("bbsID"));
 
@@ -219,14 +219,14 @@
 
 							<td>프로젝트 시작 일</td>	
 
-							<td colspan="2"><%= port.getRegistrationDate().substring(0, 11)%></td>
+							<td colspan="2"><%= port.getRegistrationDate()%></td>
 
 						</tr>
 						<tr>
 
 							<td>프로젝트 종료 일</td>	
 
-							<td colspan="2"><%= port.getCompleteDate().substring(0, 11)%></td>
+							<td colspan="2"><%= port.getCompleteDate()%></td>
 
 						</tr>
 						<tr>

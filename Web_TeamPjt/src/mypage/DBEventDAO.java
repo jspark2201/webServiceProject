@@ -71,7 +71,8 @@ public class DBEventDAO {
 			String complete_date, int number_participants, String projectUrl) {
 
 		String SQL = "INSERT INTO idea(writer,title,content,registration_date,complete_date,number_participants,projectURL,state) VALUES(?, ?, ?, ?, ?, ?, ?, ?)";
-
+		
+		int result;
 		try {
 
 			PreparedStatement pstmt = conn.prepareStatement(SQL);
@@ -90,16 +91,19 @@ public class DBEventDAO {
 
 			pstmt.setString(7, projectUrl);
 
-			pstmt.setString(8, "portfolio");
+			pstmt.setInt(8, 5);
 
-			System.out.print("success");
+			result = pstmt.executeUpdate();
+			
+			
+			System.out.println("success");
 
+			System.out.println(result);
+			
 			if (writeparticipants(userID, registration_date, complete_date) == -1)
 				return -1;
 
-			
-			
-			return pstmt.executeUpdate();
+			return result;
 
 		} catch (SQLException sqex) {
 			System.out.println("SQLException: " + sqex.getMessage());
@@ -110,15 +114,24 @@ public class DBEventDAO {
 		return -1; // 데이터베이스 오류
 
 	}
-	
-	public int writeIdeaFavorite(int ideaID,
-			 boolean web,
-			 boolean android,
-			 boolean embeded,
-			 boolean ios,
-			 boolean health,
-			 boolean psychology,
-			 boolean game) {
+
+	public int writePict(String pictSRC, int ideaID) {
+		String SQL = "INSERT INTO pictures(src, idea_id) VALUES(?,?)";
+		try {
+			PreparedStatement pstmt = conn.prepareStatement(SQL);
+			pstmt.setString(1,pictSRC);
+			pstmt.setInt(2,ideaID);
+			return pstmt.executeUpdate();
+		} catch (SQLException sqex) {
+			System.out.println("SQLException: " + sqex.getMessage());
+			System.out.println("SQLState: " + sqex.getSQLState());
+
+		}
+		return -1;
+	}
+
+	public int writeIdeaFavorite(int ideaID, boolean web, boolean android, boolean embeded, boolean ios, boolean health,
+			boolean psychology, boolean game) {
 		String SQL = "INSTER INTO idea_favorite VALUES(?,?,?,?,?,?,?,?)";
 		try {
 
@@ -143,8 +156,6 @@ public class DBEventDAO {
 
 			pstmt.setBoolean(8, game);
 
-
-
 			System.out.print("success");
 			return pstmt.executeUpdate();
 
@@ -155,11 +166,10 @@ public class DBEventDAO {
 		}
 
 		return -1; // 데이터베이스 오류
-		
+
 	}
-	
-	
-	public int writePict(int idea_id, String src ) {
+
+	public int writePict(int idea_id, String src) {
 		String SQL = "INSTERT INTO pictures(idea_id,src) VALUES(?,?)";
 
 		try {
@@ -181,33 +191,31 @@ public class DBEventDAO {
 
 		return -1; // 데이터베이스 오류
 	}
-	
-	
+
 	public String getPict(String bbsID) {
-		String SQL = "SELECT src FROM pictures WHERE idea_id  = '"+ bbsID +"'";
+		String SQL = "SELECT src FROM pictures WHERE idea_id  = '" + bbsID + "'";
 
 		try {
 
-			ResultSet rset =  stmt.executeQuery(SQL);
+			ResultSet rset = stmt.executeQuery(SQL);
 
-			
 			if (rs.next()) {
 				return rset.getString(1);
 			}
-		} catch (Exception e) {
+		} catch (SQLException sqex) {
+			System.out.println("SQLException: " + sqex.getMessage());
+			System.out.println("SQLState: " + sqex.getSQLState());
 
-			e.printStackTrace();
 		}
 		return null;
 	}
-	
 
 	public int getPortfolilID(String userID, String registration_date, String complete_date) {
 
-		String SQL = "SELECT id FROM idea WHERE id = ? and registration_date = ? and complete_date=?";
+		String SQL = "SELECT id FROM idea WHERE writer = ? and registration_date = ? and complete_date=?";
 
 		try {
-
+			System.out.println("여기까진왔다");
 			PreparedStatement pstmt = conn.prepareStatement(SQL);
 
 			pstmt.setString(1, userID);
@@ -223,9 +231,9 @@ public class DBEventDAO {
 
 			}
 
-		} catch (Exception e) {
-
-			e.printStackTrace();
+		} catch (SQLException sqex) {
+			System.out.println("SQLException: " + sqex.getMessage());
+			System.out.println("SQLState: " + sqex.getSQLState());
 
 		}
 
@@ -233,14 +241,15 @@ public class DBEventDAO {
 	}
 
 	public int writeparticipants(String userID, String registration_date, String complete_date) {
-		String SQL = "INSTER INTO participants(idea_id, idea_id, type, Participate_date ) VALUES(?,?,?,?)";
+		String SQL = "INSERT INTO participants(idea_id, user_id, type, Participate_date ) VALUES(?,?,?,?)";
 
 		try {
 
 			PreparedStatement pstmt = conn.prepareStatement(SQL);
 
 			int ideaID = getPortfolilID(userID, registration_date, complete_date);
-
+			
+			System.out.println(ideaID);
 			if (ideaID == -1)
 				return -1;
 
@@ -248,7 +257,7 @@ public class DBEventDAO {
 
 			pstmt.setString(2, userID);
 
-			pstmt.setInt(3, 4);
+			pstmt.setInt(3, 0);
 
 			pstmt.setDate(4, Date.valueOf(registration_date));
 
@@ -339,7 +348,7 @@ public class DBEventDAO {
 		// String SQL = "SELECT * FROM idea WHERE writer = ? and id < ? ORDER BY
 		// registration_date DESC LIMIT 10";
 		String SQL = "SELECT idea.id, idea.writer, idea.title, idea.content, idea.requirements, idea.registration_date, idea.complete_date, idea.number_participants, idea.projectURL, idea.state  FROM participants, idea"
-				+ " WHERE idea.id = participants.idea_id and participants.user_id = ? and idea.id < ? ORDER BY idea.registration_date DESC LIMIT 10";
+				+ " WHERE idea.id = participants.idea_id and participants.user_id = ? and idea.id < ? ORDER BY idea.registration_date DESC LIMIT 9";
 
 		ArrayList<portfolio> list = new ArrayList<portfolio>();
 
@@ -349,7 +358,7 @@ public class DBEventDAO {
 
 			pstmt.setString(1, user);
 
-			pstmt.setInt(2, getNext() - (pageNumber - 1) * 10);
+			pstmt.setInt(2, getNext() - (pageNumber - 1) * 9);
 
 			rs = pstmt.executeQuery();
 
@@ -422,7 +431,7 @@ public class DBEventDAO {
 	public boolean nextPage(String user, int pageNumber) {
 
 		String SQL = "SELECT idea.id, idea.writer, idea.title, idea.content, idea.requirements, idea.registration_date, idea.complete_date, idea.number_participants, idea.projectURL, idea.state  FROM participants, idea"
-				+ " WHERE idea.id = participants.idea_id and participants.user_id = ? and idea.id < ? ORDER BY idea.registration_date DESC LIMIT 10";
+				+ " WHERE idea.id = participants.idea_id and participants.user_id = ? and idea.id < ? ORDER BY idea.registration_date DESC LIMIT 9";
 
 		ArrayList<portfolio> list = new ArrayList<portfolio>();
 
@@ -432,7 +441,7 @@ public class DBEventDAO {
 
 			pstmt.setString(1, user);
 
-			pstmt.setInt(2, getNext() - (pageNumber) * 10);
+			pstmt.setInt(2, getNext() - (pageNumber) * 9);
 
 			rs = pstmt.executeQuery();
 
@@ -451,8 +460,7 @@ public class DBEventDAO {
 		return false;
 
 	}
-	
-	
+
 	public int totalPage(String user) {
 
 		String SQL = "SELECT COUNT(*)  FROM participants, idea WHERE idea.id = participants.idea_id and participants.user_id = ?";
@@ -460,7 +468,7 @@ public class DBEventDAO {
 		ArrayList<portfolio> list = new ArrayList<portfolio>();
 
 		int result;
-		
+
 		try {
 
 			PreparedStatement pstmt = conn.prepareStatement(SQL);
@@ -468,13 +476,11 @@ public class DBEventDAO {
 			pstmt.setString(1, user);
 
 			rs = pstmt.executeQuery();
-			
-
 
 			if (rs.next()) {
 
-				result= (int)(rs.getInt(1)/10) +1 ;
-				
+				result = (int) (rs.getInt(1) / 9) + 1;
+
 				return result;
 
 			}
@@ -487,6 +493,29 @@ public class DBEventDAO {
 
 		return -1;
 
+	}
+
+	public String getPic(int idea_id) {
+
+		String SQL = "SELECT src FROM pictures WHERE idea_id = ?";
+
+		try {
+
+			PreparedStatement pstmt = conn.prepareStatement(SQL);
+
+			pstmt.setInt(1, idea_id);
+
+			rs = pstmt.executeQuery();
+			if (rs.next()) {
+				return rs.getString(1);
+			}
+
+		} catch (SQLException sqex) {
+			System.out.println("SQLException: " + sqex.getMessage());
+			System.out.println("SQLState: " + sqex.getSQLState());
+		}
+
+		return null;
 	}
 
 	// 수정 함수
@@ -521,7 +550,7 @@ public class DBEventDAO {
 
 	public int delete(int bbsID) {
 
-		String SQL = "UPDATE idea SET state = 'delete' WHERE id = ?";
+		String SQL = "DELETE FROM idea WHERE WHERE id = ?";
 
 		try {
 

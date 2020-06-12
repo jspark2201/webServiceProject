@@ -40,6 +40,8 @@
 
 <jsp:setProperty name="port" property="projectUrl" />
 
+<jsp:setProperty name="port" property="pictsrc"/>
+
 <%
 
 	System.out.println(port);
@@ -64,7 +66,7 @@
 
 	<%
 
-		String userID = null;
+		String userID = "admin3";
 /*
 		if (session.getAttribute("userID") != null) {//유저아이디이름으로 세션이 존재하는 회원들은 
 
@@ -104,8 +106,9 @@
 
 				DBEventDAO DAO = new DBEventDAO();
 
-				int result = DAO.writePortfolio(port.getBbs_title(), "test", port.getBbsContent(),port.getRegistrationDate(),port.getCompleteDate(),port.getParticipantsNumber(),port.getProjectUrl());
-
+				int result = DAO.writePortfolio(port.getBbs_title(), userID, port.getBbsContent(),port.getRegistrationDate(),port.getCompleteDate(),port.getParticipantsNumber(),port.getProjectUrl());
+				//System.out.println(result);
+				//int result2 = DAO.writePict(port.getPictsrc(),port.get);
 				if (result == -1) {
 
 					PrintWriter script = response.getWriter();
@@ -124,15 +127,15 @@
 
 					script.println("<script>");
 
-					script.println("alter('글쓰기 성공')");
+					script.println("alert('글쓰기 성공')");
 
 					script.println("history.back()");
 
 					script.println("</script>");
 
 				}
-
-
+				
+				
 
 			}
 
