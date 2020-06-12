@@ -16,11 +16,11 @@
 	content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <title>IDEARIA</title>
 
-<link rel="shortcut icon" href="../img/favicon/ecology.png">
-<link rel="stylesheet" href="../css/myPage/myPage.css">
-<link rel="stylesheet" href="../css/bootstrap.min.css">
-<link rel="stylesheet" href="../css/googleFont.css">
-<link rel="stylesheet" href="../css/card.css">
+<link rel="shortcut icon" href="./img/favicon/ecology.png">
+<link rel="stylesheet" href="./css/myPage/myPage.css">
+<link rel="stylesheet" href="./css/bootstrap.min.css">
+<link rel="stylesheet" href="./css/googleFont.css">
+<link rel="stylesheet" href="./css/card.css">
 <link
 	href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500&display=swap"
 	rel="stylesheet">
@@ -216,13 +216,12 @@
 						<div class="card h-100"
 							style="border-color: red; border-width: 5px;">
 							<div class="card_img">
-								<img style="width: 100%; height: 100%;" alt="" src=
-									<%if(bbsDAO.getPic(list.get(i).getBbs_id())==null){%>
+								<img style="width: 100%; height: 100%;" alt=""
+									src=<%if(bbsDAO.getPic(list.get(i).getBbs_id())==null){%>
 									"http://placehold.it/700x400"
-						<% }else{ %>
-									<%=bbsDAO.getPic(list.get(i).getBbs_id()) %>
-									 <%} %>
-									 >
+						<%}else{ %>
+									<%=bbsDAO.getPic(list.get(i).getBbs_id()) %> <%} %>
+									>
 							</div>
 							<div class="card-body">
 								<h4 class="card-title">
@@ -266,7 +265,7 @@
 					if (pageNumber != 1) {
 				%>
 				<li class="page-item"><a class="page-link"
-					href="portfolio.jsp?pageNumber=<%=pageNumber - 1%>"
+					href="mypage.jsp?pageNumber=<%=pageNumber - 1%>"
 					aria-label="Previous"> <span aria-hidden="true">&laquo;</span>
 						<span class="sr-only">이전</span>
 				</a></li>
@@ -277,31 +276,31 @@
 				if (pageNumber - 2 > 0) {
 				%>
 				<li class="page-item"><a class="page-link"
-					href="portfolio.jsp?pageNumber=<%=pageNumber - 2%>"> <%=pageNumber - 2%>
+					href="mypage.jsp?pageNumber=<%=pageNumber - 2%>"> <%=pageNumber - 2%>
 				</a></li>
 				<li class="page-item"><a class="page-link"
-					href="portfolio.jsp?pageNumber=<%=pageNumber - 1%>"> <%=pageNumber - 1%>
+					href="mypage.jsp?pageNumber=<%=pageNumber - 1%>"> <%=pageNumber - 1%>
 				</a></li>
 				<%
 					} else if (pageNumber - 1 > 0) {
 				%>
 				<li class="page-item"><a class="page-link"
-					href="portfolio.jsp?pageNumber=<%=pageNumber - 1%>"> <%=pageNumber - 1%>
+					href="mypage.jsp?pageNumber=<%=pageNumber - 1%>"> <%=pageNumber - 1%>
 				</a></li>
 				<%
 					}
 				%>
 				<li class="page-item"><a class="page-link"
-					href="portfolio.jsp?pageNumber=<%=pageNumber%>"> <%=pageNumber%>
+					href="mypage.jsp?pageNumber=<%=pageNumber%>"> <%=pageNumber%>
 				</a></li>
 				<%
 				if (pageNumber + 2 <= totalPageNum) {
 				%>
 				<li class="page-item"><a class="page-link"
-					href="portfolio.jsp?pageNumber=<%=pageNumber + 1%>"> <%=pageNumber + 1%>
+					href="mypage.jsp?pageNumber=<%=pageNumber + 1%>"> <%=pageNumber + 1%>
 				</a></li>
 				<li class="page-item"><a class="page-link"
-					href="portfolio.jsp?pageNumber=<%=pageNumber + 2%>"> <%=pageNumber + 2%>
+					href="mypage.jsp?pageNumber=<%=pageNumber + 2%>"> <%=pageNumber + 2%>
 				</a></li>
 
 
@@ -309,7 +308,7 @@
 					} else if (pageNumber + 1 <= totalPageNum) {
 				%>
 				<li class="page-item"><a class="page-link"
-					href="portfolio.jsp?pageNumber=<%=pageNumber + 1%>"> <%=pageNumber + 1%>
+					href="mypage.jsp?pageNumber=<%=pageNumber + 1%>"> <%=pageNumber + 1%>
 				</a></li>
 
 				<%
@@ -318,7 +317,7 @@
 				if (bbsDAO.nextPage(userID, pageNumber)) {
 				%>
 				<li class="page-item"><a class="page-link"
-					href="portfolio.jsp?pageNumber=<%=pageNumber + 1%>"
+					href="mypage.jsp?pageNumber=<%=pageNumber + 1%>"
 					aria-label="Next"> <span aria-hidden="true">&raquo;</span> <span
 						class="sr-only">다음</span>
 				</a></li>
@@ -513,11 +512,11 @@
 
 
 	<!-- Bootstrap core JavaScript -->
-	<script src="../vendor/jquery/jquery.min.js"></script>
-	<script src="../vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+	<script src="./vendor/jquery/jquery.min.js"></script>
+	<script src="./vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
 	<script type="text/javascript" src="../js/alertScript.js"></script>
-	<script src="../js/myPage/myPage.js"></script>
+	<script src="./js/myPage/myPage.js"></script>
 
 	<script type="text/javascript">
 		/*global $, console*/

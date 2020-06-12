@@ -221,6 +221,7 @@
 									"http://placehold.it/700x400"
 						<%}else{ %>
 									<%=bbsDAO.getPic(list.get(i).getBbs_id()) %> <%} %>
+									>
 							</div>
 							<div class="card-body">
 								<h4 class="card-title">
