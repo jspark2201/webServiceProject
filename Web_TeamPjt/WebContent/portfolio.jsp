@@ -165,7 +165,10 @@
 	<div class="container">
 		<hr>
 		<div class="row">
+			<div class="write_portfolio">
 
+				<a href="portfolio_write.jsp">외부 프로젝트 추가</a>
+			</div>
 			<%
 				DBEventDAO bbsDAO = new DBEventDAO();
 
