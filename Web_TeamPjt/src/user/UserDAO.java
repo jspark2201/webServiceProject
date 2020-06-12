@@ -2,7 +2,6 @@ package user;
 
 import java.sql.*;
 import java.util.ArrayList;
-
 public class UserDAO  {
 	private String jdbc_driver ="org.mariadb.jdbc.Driver";
 	private String jdbc_url="jdbc:mariadb://localhost:3306/developers";
@@ -81,8 +80,7 @@ public class UserDAO  {
 		return list;
 	}
 	public UserBean getEvent(String id) {
-		// TODO Auto-generated method stub
-		String sql ="select id,pwd,nickname,email,number from user where id="+"'"+id+"'";
+		String sql ="select id,pwd,nickname from user where="+"'"+id+"'";
 		UserBean event = new UserBean();
 		try {
 			connect();
@@ -96,8 +94,9 @@ public class UserDAO  {
 			rs.close();
 			disconnect();
 		}catch(Exception e) {
-			
+			System.out.println("ㅇㅇㅇㅇㅇㅇ");
 		}
+		System.out.println(event.getId());
 		return event;
 	}
 }

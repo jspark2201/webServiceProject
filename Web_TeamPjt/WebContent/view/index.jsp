@@ -109,11 +109,11 @@
 										<h2>Please Sign In</h2>
 										<hr class="colorgraph">
 										<div class="form-group">
-											<input type="email" name="email"
+											<input type="text" name="id"
 												class="form-control input-lg" placeholder="Email Address">
 										</div>
 										<div class="form-group">
-											<input type="password" name="password"
+											<input type="password" name="pwd"
 												class="form-control input-lg" placeholder="Password">
 										</div>
 										<img class="question_img" src="../img/login/question.png"

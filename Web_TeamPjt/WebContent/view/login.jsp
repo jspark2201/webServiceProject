@@ -94,8 +94,8 @@
 						<h2>Please Sign In</h2>
 						<hr class="colorgraph">
 						<div class="form-group">
-							<input type="email" name="email" id="email"
-								class="form-control input-lg" placeholder="Email Address">
+							<input type="text" name="id" 
+								class="form-control input-lg" placeholder="id">
 						</div>
 						<div class="form-group">
 							<input type="password" name="password" id="password"

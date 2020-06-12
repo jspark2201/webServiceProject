@@ -23,35 +23,40 @@ public class Login extends HttpServlet {
 		if (action == null || action.equals("list")) {
 			address = "view/index.jsp";
 		} else if (action.equals("view")) {
+			//System.out.println(request.getParameter("id"));
 			UserBean event = dao.getEvent(request.getParameter("id"));
+			System.out.println("서블릿에서 아이디"+request.getParameter("id"));
 			request.setAttribute("event", event);
-			address = "eventview_view.jsp";
-		} else if (action.contentEquals("add")) {
+			address = "view/view.jsp";
+		} else if (action.equals("add")) {
 			UserBean event = new UserBean();
 			event.setId((request.getParameter("id")));
 			event.setPwd(request.getParameter("pwd"));
 			event.setNickname(request.getParameter("nickname"));
 			event.setEmail(request.getParameter("email"));
 			event.setNumber(request.getParameter("number"));
+
 			if (event.getId() == "" || event.getPwd() == "" || event.getNickname() == "" || event.getEmail() == ""
 					|| event.getNumber() == "") {
-				address = "addid_fail.jsp";
+				address = "view/joinAction.jsp";
 				request.setAttribute("flag", "1");
 			} else {
 				if (dao.addid(event) == 1) {
 					request.setAttribute("event", event);
-					address = "eventview_add.jsp";
+					address = "view/main.jsp";
 				} else {
-					address = "addid_fail.jsp";
+					address = "view/joinAction2.jsp";
 					request.setAttribute("flag", "2");
 				}
 			}
+
 		} else if (action.equals("checkid")) {
 			UserBean event = new UserBean();
 			event.setId((request.getParameter("id")));
 			event.setPwd(request.getParameter("pwd"));
+			
 			if (dao.authenticate(event)) {
-				address = "main.jsp";
+				address = "view/main.jsp";
 				request.setAttribute("userinfo", event);
 				HttpSession session = request.getSession();
 				session.setAttribute("userid", event.getId());
@@ -59,8 +64,10 @@ public class Login extends HttpServlet {
 				address = "view/login_fail.jsp";
 				request.setAttribute("userinfo", event);
 			}
-		}else if(action.equals("googleid")) {
-			address="login_success.jsp";
+		} else if (action.equals("logout")) {
+			address = "view/logout.jsp";
+		}else if (action.equals("mypage")) {
+			address = "view/mypage.jsp";
 		}
 		response.sendRedirect(address);
 	}
