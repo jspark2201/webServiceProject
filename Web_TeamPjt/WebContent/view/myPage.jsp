@@ -147,7 +147,125 @@
 	      <button type="button" class="btn btn-outline-dark">개인정보 수정</button>
 	    </div>
 	    <hr>
+	    
 	    <div id="menu2" class="container tab-pane fade"><br>
+	    	<div class="row">
+			<div class="col-lg-4 col-sm-6 portfolio-item" style="margin-bottom:30px;">
+				<div class="card h-100">
+					<div class="card_img">
+						<img style="width:100%; height:100%;" alt="" src="../img/main/main_2.jpg">
+					</div>
+					<div class="card-body">
+						<h4 class="card-title">
+							<a href="#" class="a_400" style="color:#FFCE1E">Project One</a>
+						</h4>
+						<p class="card-text">Lorem ipsum dolor sit amet, consectetur
+							adipisicing elit. Amet numquam aspernatur eum quasi sapiente
+							nesciunt? Voluptatibus sit, repellat sequi itaque deserunt,
+							dolores in, nesciunt, illum tempora ex quae? Nihil, dolorem!</p>
+							<div><button type="button" class="btn btn-outline-danger btn-sm" style="position: absolute; left: 60%; top: 90%;" onclick="">
+							<a class="a_400">삭제하기</a>
+						</button></div>
+					</div>
+				</div>
+			</div>
+			<div class="col-lg-4 col-sm-6 portfolio-item" style="margin-bottom:30px">
+				<div class="card h-100">
+					<div class="card_img">
+						<img style="width:100%; height:100%;" alt="" src="../img/main/main_2.jpg">
+					</div>
+					<div class="card-body">
+						<h4 class="card-title">
+							<a href="#" class="a_400" style="color:#FFCE1E">Project Two</a>
+						</h4>
+						<p class="card-text">Lorem ipsum dolor sit amet, consectetur
+							adipiscing elit. Nam viverra euismod odio, gravida pellentesque
+							urna varius vitae.</p>
+						<button type="button" class="btn btn-outline-danger btn-sm" style="position: absolute; left: 60%; top: 90%;"onclick="">
+							<a class="a_400">삭제하기</a>
+						</button>
+					</div>
+				</div>
+			</div>
+			<div class="col-lg-4 col-sm-6 portfolio-item" style="margin-bottom:30px">
+				<div class="card h-100">
+					<div class="card_img">
+						<img style="width:100%; height:100%;" alt="" src="../img/main/main_2.jpg">
+					</div>
+					<div class="card-body">
+						<h4 class="card-title">
+							<a href="#" class="a_400" style="color:#FFCE1E">Project Three</a>
+						</h4>
+						<p class="card-text">Lorem ipsum dolor sit amet, consectetur
+							adipisicing elit. Quos quisquam, error quod sed cumque, odio
+							distinctio velit nostrum temporibus necessitatibus et facere
+							atque iure perspiciatis mollitia recusandae vero vel quam!</p>
+						<button type="button" class="btn btn-outline-danger btn-sm" style="position: absolute; left: 60%; top: 90%;"onclick="">
+							<a class="a_400">삭제하기</a>
+						</button>
+					</div>
+				</div>
+			</div>
+			<div class="col-lg-4 col-sm-6 portfolio-item" style="margin-bottom:30px">
+				<div class="card h-100">
+					<div class="card_img">
+						<img style="width:100%; height:100%;" alt="" src="../img/main/main_2.jpg">
+					</div>
+					<div class="card-body">
+						<h4 class="card-title">
+							<a href="#" class="a_400" style="color:#FFCE1E">Project Four</a>
+						</h4>
+						<p class="card-text">Lorem ipsum dolor sit amet, consectetur
+							adipiscing elit. Nam viverra euismod odio, gravida pellentesque
+							urna varius vitae.</p>
+						<button type="button" class="btn btn-outline-danger btn-sm" style="position: absolute; left: 60%; top: 90%;"onclick="">
+							<a class="a_400">삭제하기</a>
+						</button>
+					</div>
+				</div>
+			</div>
+			<div class="col-lg-4 col-sm-6 portfolio-item" style="margin-bottom:30px">
+				<div class="card h-100">
+					<div class="card_img">
+						<img style="width:100%; height:100%;" alt="" src="../img/main/main_2.jpg">
+					</div>
+					<div class="card-body">
+						<h4 class="card-title">
+							<a href="#" class="a_400" style="color:#FFCE1E">Project Five</a>
+						</h4>
+						<p class="card-text">Lorem ipsum dolor sit amet, consectetur
+							adipiscing elit. Nam viverra euismod odio, gravida pellentesque
+							urna varius vitae.</p>
+						<button type="button" class="btn btn-outline-danger btn-sm" style="position: absolute; left: 60%; top: 90%;" onclick="">
+							<a class="a_400">삭제하기</a>
+						</button>
+					</div>
+				</div>
+			</div>
+			<div class="col-lg-4 col-sm-6 portfolio-item" style="margin-bottom:30px">
+				<div class="card h-100">
+					
+					<div class="card_img">
+						<img style="width:100%; height:100%;" alt="" src="../img/main/main_1.jpg">
+					</div>
+					<div class="card-body">
+						<h4 class="card-title">
+							<a href="#" class="a_400" style="color:#FFCE1E">Project Six</a>
+						</h4>
+						<p class="card-text">Lorem ipsum dolor sit amet, consectetur
+							adipisicing elit. Itaque earum nostrum suscipit ducimus nihil
+							provident, perferendis rem illo, voluptate atque, sit eius in
+							voluptates, nemo repellat fugiat excepturi! Nemo, esse.</p>
+						<button type="button" class="btn btn-outline-danger btn-sm" style="position: absolute; left: 60%; top: 90%;" onclick="">
+							<a class="a_400" style="margin-bottom:5px;">삭제하기</a>
+						</button>
+					</div>
+				</div>
+			</div>
+		</div>
+	    	
+	    	
+	    	
 		    <div id="home" class="container tab-pane active" ><br>
 			    <ul class="pagination justify-content-center">
 				  <li class="page-item"><a class="page-link" href="#">Previous</a></li>
