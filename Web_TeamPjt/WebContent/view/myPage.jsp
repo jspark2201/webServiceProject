@@ -84,6 +84,9 @@
 	    <li class="nav-item">
 	      <a class="nav-link a_500" style="color:#FFCE1E;" data-toggle="tab" href="#menu4">알림</a>
 	    </li>
+<!-- 	    <li class="nav-item">
+	      <a class="nav-link a_500" style="color:#FFCE1E;" data-toggle="tab" href="#menu4">알림</a>
+	    </li> -->
 	  </ul>
 	
 	  <!-- Tab panes -->
@@ -92,53 +95,21 @@
 				<table class="table">
 					<thead>
 						<tr>
-							<th></th>
-							<th>이름</th>
-							<th>Email</th>
+							<th>보낸 사람</th>
+							<th>이메일</th>
 							<th>내용</th>
 						</tr>
 					</thead>
 					<tbody>
 						<tr>
-							<td>1</td>
 							<td>Kent</td>
-							<td>clarkkent@mail.com</td>
-							<td><a data-toggle="modal" data-target="#mailModal">a</a></td>
-						</tr>
-						<tr>
-							<td>2</td>
-							
-							<td>Carter</td>
-							<td>johncarter@mail.com</td>
-							<td><a data-toggle="modal" data-target="#mailModal">b</a></td>
-						</tr>
-						<tr>
-							<td>3</td>
-							<td>Parker</td>
-							<td>peterparker@mail.com</td>
-							<td><a data-toggle="modal" data-target="#mailModal">c</a></td>
-						</tr>
-						<tr>
-							<td>4</td>
-							<td>Parker</td>
-							<td>peterparker@mail.com</td>
-							<td><a data-toggle="modal" data-target="#mailModal">d</a></td>
-						</tr>
-						<tr>
-							<td>5</td>
-							<td>Parker</td>
-							<td>peterparker@mail.com</td>
-							<td><a data-toggle="modal" data-target="#mailModal">e</a></td>
-						</tr>
-						<tr>
-							<td>6</td>
-							<td>Parker</td>
-							<td>peterparker@mail.com</td>
-							<td><a data-toggle="modal" data-target="#mailModal">f</a></td>
+							<td>Kent@gmail.com</td>
+							<td><a data-toggle="modal" data-target="#mailModal">이메일 확인 부탁드립니다..</a></td>
 						</tr>
 					</tbody>
 				</table>
 				<p class="p_400" style="color:#cccccc;">쪽지 내용을 클릭하시면 상세 보기가 가능합니다.</p>
+				<button type="button" onclick="location='message.jsp'">쪽지 보내기</button>
 				<ul class="pagination justify-content-center">
 			  <li class="page-item"><a class="page-link" href="#">Previous</a></li>
 			  <li class="page-item"><a class="page-link" href="#">1</a></li>
@@ -179,7 +150,7 @@
 						<tr>
 
 							<th>보낸 사람</th>
-							<th>Email</th>
+							<th>이메일</th>
 							<th>내용</th>
 							<th>아이디어 링크</th>
 						</tr>
