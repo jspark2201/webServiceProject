@@ -11,10 +11,10 @@
 	content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <title>IDEARIA</title>
 
-<link rel="shortcut icon" href="../img/favicon/ecology.png">
-<link rel="stylesheet" href="../css/myPage/myPage1.css">
-<link rel="stylesheet" href="../css/bootstrap.min.css">
-<link rel="stylesheet" href="../css/googleFont.css">
+<link rel="shortcut icon" href="/Web_TeamPjt/img/favicon/ecology.png">
+<link rel="stylesheet" href="/Web_TeamPjt/css/myPage/myPage1.css">
+<link rel="stylesheet" href="/Web_TeamPjt/css/bootstrap.min.css">
+<link rel="stylesheet" href="/Web_TeamPjt/css/googleFont.css">
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500&display=swap" rel="stylesheet">
 
 </head>
@@ -83,9 +83,6 @@
 	    <li class="nav-item">
 	      <a class="nav-link a_500" style="color:#FFCE1E;" data-toggle="tab" href="#menu4">알림</a>
 	    </li>
-<!-- 	    <li class="nav-item">
-	      <a class="nav-link a_500" style="color:#FFCE1E;" data-toggle="tab" href="#menu4">알림</a>
-	    </li> -->
 	  </ul>
 	
 	  <!-- Tab panes -->
@@ -120,7 +117,7 @@
 					</tbody>
 				</table>
 				<p class="p_400" style="color:#cccccc;">쪽지 내용을 클릭하시면 상세 보기가 가능합니다.</p>
-				<button type="button" onclick="location='WriteNote.jsp'">쪽지 보내기</button>
+				<button type="button" onclick="location.href='/Web_TeamPjt/SendNote?action=send'">쪽지 보내기</button>
 				<ul class="pagination justify-content-center">
 			  <li class="page-item"><a class="page-link" href="#">Previous</a></li>
 			  <li class="page-item"><a class="page-link" href="#">1</a></li>
@@ -182,7 +179,6 @@
 					<%
 						}	
 					%>
-
 
 					</tbody>
 				</table>

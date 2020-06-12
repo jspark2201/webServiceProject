@@ -10,22 +10,22 @@ public class UserDAO
 	
 	private void connect()
 	{
-		// 1. Driver ·Îµù
+		// 1. Driver ï¿½Îµï¿½
 		try {
 			Class.forName("org.mariadb.jdbc.Driver");
 		}
 		catch (Exception e) {
-			System.out.println("·Îµù ½ÇÆÐ");
+			System.out.println("ï¿½Îµï¿½ ï¿½ï¿½ï¿½ï¿½");
 			return;
 		}
 		
-		// 2. DB¿Í ¿¬°á
+		// 2. DBï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 		try {
 			conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/developers", "root", "qwe123!@#");
 
 		}
 		catch (Exception e) {
-			System.out.println("¿¬°á ½ÇÆÐ : " + e);
+			System.out.println("ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ : " + e);
 		}
 	}
 	
@@ -36,7 +36,7 @@ public class UserDAO
 				pstmt.close();
 			}
 			catch(SQLException e) {
-				System.out.println("?? ½ÇÆÐ : " + e);
+				System.out.println("?? ï¿½ï¿½ï¿½ï¿½ : " + e);
 			}
 		
 		}
@@ -46,7 +46,7 @@ public class UserDAO
 				conn.close();
 			}
 			catch (SQLException e) {
-				System.out.println("¿¬°á Á¾·á ½ÇÆÐ : " + e);
+				System.out.println("ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ : " + e);
 			}
 		}
 	}
@@ -60,14 +60,14 @@ public class UserDAO
 		try {
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, user.getId());
-			pstmt.setString(2, user.getPwd());	// TODO: ¾ÏÈ£È­ ÇÒ °Í!!
+			pstmt.setString(2, user.getPwd());	// TODO: ï¿½ï¿½È£È­ ï¿½ï¿½ ï¿½ï¿½!!
 			pstmt.setString(3, user.getNickname());
 			pstmt.setString(4, user.getEmail());
 			pstmt.setString(5, user.getNumber());
-			pstmt.executeUpdate();			
+			pstmt.executeUpdate();
 		}
 		catch(SQLException e) {
-			System.out.println("insertDB ½ÇÆÐ");
+			System.out.println("insertDB ï¿½ï¿½ï¿½ï¿½");
 			return false;
 		}
 		finally {
@@ -106,7 +106,7 @@ public class UserDAO
 			pstmt.executeUpdate();
 		}
 		catch(SQLException e) {
-			System.out.println("updateDB ½ÇÆÐ");
+			System.out.println("updateDB ï¿½ï¿½ï¿½ï¿½");
 			return false;
 		}
 		finally {
@@ -130,7 +130,7 @@ public class UserDAO
 			pstmt.executeUpdate();
 		}
 		catch(SQLException e) {
-			System.out.println("deleteDB ½ÇÆÐ");
+			System.out.println("deleteDB ï¿½ï¿½ï¿½ï¿½");
 			return false;
 		}
 		finally {
@@ -163,7 +163,7 @@ public class UserDAO
 			rs.close();
 		}
 		catch(SQLException e) {
-			System.out.println("getDB ½ÇÆÐ");
+			System.out.println("getDB ï¿½ï¿½ï¿½ï¿½");
 		}
 		finally {
 			disconnect();
@@ -231,7 +231,7 @@ public class UserDAO
 			rs.close();
 		}
 		catch(SQLException e) {
-			System.out.println("getDBList ½ÇÆÐ");
+			System.out.println("getDBList ï¿½ï¿½ï¿½ï¿½");
 		}
 		finally {
 			disconnect();
@@ -275,7 +275,7 @@ public class UserDAO
 			count = rs.getInt("cnt");
 		}
 		catch(SQLException e) {
-			System.out.println("getDBCount ½ÇÆÐ");
+			System.out.println("getDBCount ï¿½ï¿½ï¿½ï¿½");
 			return -1;
 		}
 		
@@ -289,15 +289,15 @@ public class UserDAO
 		String sql = "select count(*) as cnt from user";
 		
 		switch(type) {
-		// ÀüÃ¼ ÀÎ¿ø ¼ö
+		// ï¿½ï¿½Ã¼ ï¿½Î¿ï¿½ ï¿½ï¿½
 		case 0:
 			break;
-		// ÀÌ¹ø ´Þ ÀÎ¿ø ¼ö
+		// ï¿½Ì¹ï¿½ ï¿½ï¿½ ï¿½Î¿ï¿½ ï¿½ï¿½
 		case 1:
 			sql += " where date > last_day(now() - interval 1 month)";
 			sql += " and date <= last_day(now())";
 			break;
-		// ÀÌ¹ø ÁÖ ÀÎ¿ø ¼ö
+		// ï¿½Ì¹ï¿½ ï¿½ï¿½ ï¿½Î¿ï¿½ ï¿½ï¿½
 		case 2:
 			sql += " WHERE YEARWEEK(date) = YEARWEEK(now())";
 			break;
@@ -314,7 +314,7 @@ public class UserDAO
 			count = rs.getInt("cnt");
 		}
 		catch(SQLException e) {
-			System.out.println("getDBCount ½ÇÆÐ");
+			System.out.println("getDBCount ï¿½ï¿½ï¿½ï¿½");
 			return -1;
 		}
 		
