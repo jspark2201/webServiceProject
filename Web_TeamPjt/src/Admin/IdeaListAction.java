@@ -17,7 +17,7 @@ public class IdeaListAction implements Action {
 	private int filter = -1;
 	private String type = "writer";		// 검색 기준
 	private String search = "";	// 검색어
-	private String order = "id";	// 정렬 기준
+	private String order = "registration_date";	// 정렬 기준
 	private int curPageNum = 1;
 	
 	public void execute(HttpServletRequest request, HttpServletResponse response) {
@@ -69,11 +69,11 @@ public class IdeaListAction implements Action {
 		
 		// order 값 검증
 		switch(order) {
-			case "id": case "nickname":
-			case "email": case "date":
+			case "id": case "registration_date":
+			case "writer": case "title": case "state":
 				break;
 			default:
-				order = "id";
+				order = "registration_date";
 		}
 
 		// curPageNum 값 검증

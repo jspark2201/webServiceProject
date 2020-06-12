@@ -19,8 +19,10 @@ public class MainAction implements Action {
 		int userCount[] = new int[3];
 		int ideaCount[] = new int[4];
 		
-		for (int i=0; i<3; i++) 
+		for (int i=0; i<3; i++)  {
 			userCount[i] = userDAO.getDBCount(i);
+			System.out.println(userCount[i]);
+		}
 
 		for (int i=0; i<4; i++)
 			ideaCount[i] = ideaDAO.getDBCount(i+1);

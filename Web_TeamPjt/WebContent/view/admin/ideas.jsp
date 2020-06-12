@@ -73,7 +73,7 @@
 		int curPageNum = (Integer)request.getAttribute("curPageNum");
 		int pageCount = (Integer)request.getAttribute("PageCount");
 			
-			
+		
 		String src = "ideas.do?";
 		
 		if (search != null) {
@@ -93,7 +93,7 @@
 	  <!-- Nav tabs -->
 	  <ul class="nav nav-tabs" role="tablist">
 	    <li class="nav-item">
-	      <a class="nav-link a_500" style="color:#FFCE1E;" href="home.do">Home</a>
+	      <a class="nav-link a_500" style="color:#FFCE1E;" href="main.do">Home</a>
 	    </li>
 	    <li class="nav-item">
 	      <a class="nav-link a_500" style="color:#FFCE1E;" href="users.do">회원관리</a>
@@ -138,8 +138,34 @@
 						</c:forEach>	
 					</tbody>
 				</table>
-				<p class="p_400" style="color:#cccccc;">쪽지 내용을 클릭하시면 상세 보기가 가능합니다.</p>
-				<ul class="pagination justify-content-center">
+
+				<div>
+					<form class="form" method="post" action="users.do">
+		            	<div class="form-group" style="display: inline-block;">
+		                    <select id="search_type" class="form-control a_400" style="width:100px;" name="type">
+		                        <option value="writer">작성자</option>
+		                        <option value="title">제목</option>
+		                        <option value="state">상태</option>
+		                    </select>
+		                </div>
+			            <input style="width:200px; display:inline-block;" type="text" class="form-control" name="search" value='${search}'>
+			            <button type="submit" class="btn btn-outline-dark">검색</button>
+		            	<div class="form-group" style="display: inline-block;">
+		                    <select id="filtered" class="form-control a_400" onchange="location.href='<%=src%>filter='+(this.value);" style="width:150px;" >
+		                        <option value="-1">전체보기</option>
+		                        <option value="0">모집 중</option>
+		                        <option value="1">모집 완료</option>
+		                        <option value="2">개발 완료</option>
+		                        <option value="3">개발 중단</option>
+		                        <option value="4">외부 프로젝트</option>
+		                    </select>
+	                    </div>
+			            <button type="button" onclick="groupDel();" class="btn btn-outline-dark" style="float:right;margin-right:10px;">삽입</button>
+		            </form>
+		         </div>
+
+         
+			<ul class="pagination justify-content-center">
 			  <li class="page-item"><a class="page-link" href="<%=src + (curPageNum-1)%>">Previous</a></li>
 			  <%
 
@@ -273,6 +299,12 @@
 		
 		location.reload();
 
+	}
+	
+	
+	window.onload = function () {
+		$("#search_type").val("${type}").attr("selected", "selected");
+		$("#filtered").val("${filter}").attr("selected", "selected");
 	}
 	
 	</script>
