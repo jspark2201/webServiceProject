@@ -177,9 +177,8 @@
 							<td><%=dto.getGiveID() %></td>
 							<td><%=dto.getGiveEmail() %></td>
 							<td>컨택 요청이 들어왔습니다.</td>
-							<td><a href=""><%=dto.getIdeaLink() %></a></td>
+							<td><a href="detail.html"><%=dto.getIdeaLink() %></a></td>
 						</tr>
-						
 					<%
 						}	
 					%>
