@@ -1,0 +1,59 @@
+.jumbotron{
+	background-color : #f2f2f2 !important;
+}
+body {
+	background-color: #f2f2f2 !important;
+	font-family: 'Noto Sans KR', sans-serif; 
+	font-weight:400;
+}
+
+.p1 {
+		text-align:center;
+       font-size: 4rem !important;
+       font-weight: bold;
+       color: #ffffff;
+       text-shadow: 2px 2px 2px gray;
+}
+.hr1{
+	border: 0;
+	height: 1.5px;
+	background : #000000;
+}
+
+.progressColorDiv{
+	height:50px;
+	width:100%;
+}
+.btn-bs-file{
+    position:relative;
+}
+.btn-bs-file input[type="file"]{
+    position: absolute;
+    top: -9999999;
+    filter: alpha(opacity=0);
+    opacity: 0;
+    width:0;
+    height:0;
+    outline: none;
+    cursor: inherit;
+}
+
+
+
+textarea{
+	width:80%;
+  padding:10px;
+  margin: 0 auto 10px; 
+  border:none ;font-size:20px;
+  font-family:'Montserrat Alternates';
+  border-radius:10px;outline:none;
+  transition: box-shadow .3s ease
+}
+
+textarea:-ms-input-placeholder {color: #FFCE1E}
+textarea::-moz-placeholder {color: #FFCE1E}
+textarea::-webkit-input-placeholder {color: #FFCE1E}
+
+/* textarea:focus{2px solid #2d303a91} */
+textarea:focus,
+textarea:hover{box-shadow:0px 0px 13px 0px #FFCE1E}
