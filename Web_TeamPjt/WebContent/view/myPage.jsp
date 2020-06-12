@@ -350,7 +350,7 @@
 				<p class="p_400" style="background-color:#0099ff;">개발 완료</p>
 				<p class="p_400" style="background-color:#ff4d4d;">개발 중단</p>
 				<p class="p_400" style="background-color:#9933ff;">외부프로젝트</p>
-	
+
 				<!-- Modal footer -->
 				<div class="modal-footer">
 					<button type="button" class="btn btn-secondary"
@@ -453,6 +453,14 @@
 			</div>
 			<div class="row" style="margin-top:30px;margin-bottom:30px;">
 				<div class="col-sm-4">
+					<a class="a_500">프로젝트 진행 기간</a> 
+				</div>
+				<div class="col-sm-8">
+					<input type="date"><a> ~ </a><input type="date">
+				</div>
+			</div>
+			<div class="row" style="margin-top:30px;margin-bottom:30px;">
+				<div class="col-sm-4">
 					<a class="a_500">프로젝트 플랫폼</a> 
 				</div>
 				<div class="col-sm-8">
@@ -466,6 +474,7 @@
 					</div>
 				</div>
 			</div>
+			
 			<div class="row" style="margin-top:30px;margin-bottom:30px;">
 				<div class="col-sm-4">
 					<a class="a_500">흥미 분야</a> 
@@ -478,6 +487,14 @@
 							<option>게임</option>
 						</select>
 					</div>
+				</div>
+			</div>
+			<div class="row" style="margin-top:30px;margin-bottom:30px;">
+				<div class="col-sm-4">
+					<a class="a_500">프로젝트 참여자 수</a> 
+				</div>
+				<div class="col-sm-8">
+					<input type="number" style="width:50%" min="1" max="10">
 				</div>
 			</div>
 			<div class="row" style="margin-top:30px;margin-bottom:30px;">
