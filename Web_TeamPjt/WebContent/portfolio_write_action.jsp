@@ -105,11 +105,31 @@
 			} else {
 
 				DBEventDAO DAO = new DBEventDAO();
-
+				boolean web = false, android =false, embeded=false, ios=false, health=false, psychology=false, game=false;
 				int result = DAO.writePortfolio(port.getBbs_title(), userID, port.getBbsContent(),port.getRegistrationDate(),port.getCompleteDate(),port.getParticipantsNumber(),port.getProjectUrl());
 				//System.out.println(result);
-				//int result2 = DAO.writePict(port.getPictsrc(),port.get);
-				if (result == -1) {
+				int portID = DAO.getPortfolilID(userID, port.getRegistrationDate(),port.getCompleteDate());
+				int result2 = DAO.writePict(port.getPictsrc(),portID);
+				String[] favorite = request.getParameterValues("favorite");
+				for(int i=0;i <favorite.length;i++){
+					
+					if(favorite[i].equals("web"))
+						web = true;
+					else if(favorite[i].equals("android"))
+						android = true;
+					else if(favorite[i].equals("embeded"))
+						embeded = true;
+					else if(favorite[i].equals("ios"))
+						ios = true;
+					else if(favorite[i].equals("health"))
+						health = true;
+					else if(favorite[i].equals("psychology"))
+						psychology = true;
+					else if(favorite[i].equals("game"))
+						game = true;
+				}
+				DAO.writeIdeaFavorite(portID,web,android,embeded,ios,health,psychology,game);
+				if (result == -1|result2 ==-1) {
 
 					PrintWriter script = response.getWriter();
 
