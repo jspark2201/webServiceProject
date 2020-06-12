@@ -22,7 +22,7 @@ if(request.getParameter("commentNo") == null) {
     
     
     BoardDao boardDao = new BoardDao();
-    boardDao.deleteComment(Id);
+    boardDao.deleteComment(Id);//댓글삭제
 
 
     

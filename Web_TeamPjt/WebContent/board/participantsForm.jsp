@@ -44,12 +44,21 @@ if(request.getParameter("boardNo") == null) {
                     <td><%=participant.getNickname()%></td>
                     <td><%=participant.getRegistration_date()%></td>
                		<td><%=participant.getType()%></td>
-     
+			       <form action="<%=request.getContextPath()%>/board/AcceptAction.jsp" method="post">
+			             <input name="boardNo" value="<%=request.getParameter("boardNo")%>" type="hidden"/>
+			             <input name="writer" value="<%=request.getParameter("boardNo")%>" type="hidden"/>
+			             <button type="submit" class="btn btn-primary">참가 수락 미구현</button>
+			       </form>
+			        <form action="<%=request.getContextPath()%>/board/RejectAction.jsp" method="post">
+			             <input name="boardNo" value="<%=request.getParameter("boardNo")%>" type="hidden"/>
+			             <input name="writer" value="<%=request.getParameter("boardNo")%>" type="hidden"/>
+			             <button type="submit" class="btn btn-primary">참가 거절 미구현</button>
+			       </form>
                 </tr>
 <%        	
             }
 %>
- 			        <div>참여 개발자</div>
+ 			     
         <tbody>
 <%
             for(Board participant : list) {
@@ -61,6 +70,7 @@ if(request.getParameter("boardNo") == null) {
                		<td><%=participant.getType()%></td>
      
                 </tr>
+
 <%        	
             }
 %>

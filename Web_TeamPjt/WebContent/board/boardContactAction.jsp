@@ -21,14 +21,14 @@ if(request.getParameter("boardNo") == null) {
     
     
     BoardDao boardDao = new BoardDao();
-    int n= boardDao.participantsCount(Id);
+    int n= boardDao.participantsCount(Id);//참가자 수
     
     
     System.out.println("참가자수 :" + n);
     board.setParticipants_num(n);
     
-    boardDao.UpdateParticipantsNum(board);
-    if(boardDao.InsertParticipants(board)==1){
+ //   boardDao.UpdateParticipantsNum(board);
+    if(boardDao.InsertParticipants(board)==1){//참가자를 삽입
         response.sendRedirect(request.getContextPath()+"/board/boardView.jsp?boardNo="+Id);
     } else {
         response.sendRedirect(request.getContextPath()+"/board/boardView.jsp?boardNo="+Id);

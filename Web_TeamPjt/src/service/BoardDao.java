@@ -15,8 +15,6 @@ public class BoardDao {
 	    private final String username = "root";
 	    private final String password = "3819";
 	    
-
-	    
 	    // 테이블 : idea , 기능 : 데이터 삭제 
 	    public int deleteBoard(Board board) {
 	        int rowCount = 0;
@@ -48,8 +46,7 @@ public class BoardDao {
 	            connection = this.getConnection();
 	            statement = connection.prepareStatement(sql);
 	            statement.setInt(1, board.getId());
-	            rowCount = statement.executeUpdate();
-	            
+	            rowCount = statement.executeUpdate();	            
 	        } catch (Exception e) {
 	            e.printStackTrace();
 	        } finally {
@@ -154,6 +151,26 @@ public class BoardDao {
 	           
 	            rowCount = statement.executeUpdate();
 	            
+	        } catch (Exception e) {
+	            e.printStackTrace();
+	        } finally {
+	            this.close(connection, statement, null);
+	        }
+	        return rowCount;
+	    }
+	    
+	    // 테이블 : good , 기능 : 모집 완료기능  
+	    public int updateDeadline(Board board) {
+	        int rowCount = 0;
+	        Connection connection = null;
+	        PreparedStatement statement = null;
+	        String sql = "UPDATE idea SET state=? WHERE id=?";
+	        try {
+	            connection = this.getConnection();
+	            statement = connection.prepareStatement(sql);
+	            statement.setInt(1, 2);
+	            statement.setInt(2, board.getId());
+	            rowCount = statement.executeUpdate();
 	        } catch (Exception e) {
 	            e.printStackTrace();
 	        } finally {

@@ -12,10 +12,11 @@
 	content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <title>IDEARIA</title>
 
-<link rel="shortcut icon" href="../img/favicon/ecology.png">
-<link rel="stylesheet" href="../css/all/all.css">
-<link rel="stylesheet" href="../css/bootstrap.min.css">
-<link rel="stylesheet" href="../css/googleFont.css">
+<link rel="shortcut icon" href="/Web_TeamPjt/img/favicon/ecology.png">
+<link rel="stylesheet" href="/Web_TeamPjt/css/all/all.css">
+<link rel="stylesheet" href="/Web_TeamPjt/css/all.css">
+<link rel="stylesheet" href="/Web_TeamPjt/css/bootstrap.min.css">
+<link rel="stylesheet" href="/Web_TeamPjt/css/googleFont.css">
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500&display=swap" rel="stylesheet">
 
 </head>
@@ -46,7 +47,7 @@
 						</a>
 					</li>
 					<!-- <li class="nav-item"><a class="nav-link" href="#">회원가입</a></li> -->
-					<li class="nav-item"><a class="nav-link a_400" href="#">로그아웃</a></li>
+					<li class="nav-item"><a class="nav-link a_400" onclick="logoutAlert()">로그아웃</a></li>
 					<li class="nav-item"><a class="nav-link a_400" href="#">마이페이지</a></li>
 				</ul>
 			</div>
@@ -57,7 +58,6 @@
 	</div>
 	<div style="height:5px; background-color:#b0aea9;">
 	</div>
-	
 		<!-- Carousel -->
 	<div class="bs-example">
     <div id="myCarousel" class="carousel slide" data-ride="carousel">
@@ -70,17 +70,17 @@
         <!-- Wrapper for carousel items -->
         <div class="carousel-inner">
             <div class="carousel-item active">
-                <img src="../img/main/main_1.jpg" alt="First Slide" style="height:500px; width:100%;">
+                <img src="/Web_TeamPjt/img/main/main_1.jpg" alt="First Slide" style="height:500px; width:100%;">
             	<div class="carousel-caption">
 			        <p class="a_500" style="font-size:4rem; color:#ffffff; float:left;">아이디어 랭킹전</p>
 			        <p class="a_500" style="font-size:2rem; color:#ffffff; float:left;">아이디어내고 해외여행가자!</p>
 			    </div>   
             </div>
             <div class="carousel-item">
-                <img src="../img/main/main_2.jpg" alt="Second Slide" style="height:500px; width:100%;">
+                <img src="/Web_TeamPjt/img/main/main_2.jpg" alt="Second Slide" style="height:500px; width:100%;">
             </div>
             <div class="carousel-item">
-                <img src="../img/main/main_3.jpg" alt="Third Slide" style="height:500px; width:100%;">
+                <img src="/Web_TeamPjt/img/main/main_3.jpg" alt="Third Slide" style="height:500px; width:100%;">
             	<div class="carousel-caption">
 			        <p class="a_500" style="font-size:4rem; color:#5353c6; float:right;">아이디어 전시회</p>
 			        <p class="a_500" style="font-size:2rem; color:#6666cc; float:right;">06.20~6.24 지상최대 아이디어 전시회 </p>
@@ -119,13 +119,20 @@ if(request.getParameter("Search") == null) {
 	List<Board> list = boardDao.selectSearchBoardListPerPage(Search, beginRow, pagePerRow);
 
 %>
-	<div>
-	   <a href="<%=request.getContextPath()%>/board/boardRecruitList.jsp">모집중</a>
-	   <a href="<%=request.getContextPath()%>/board/boardCompleteList.jsp">완료된</a>
-    </div>
-  	<div>
-	   <a href="<%=request.getContextPath()%>/board/boardGoodList.jsp">좋아요순으로 보기</a>
-    </div>
+
+		<!-- 필터링 박스  -->
+		<div class="row">
+            <div class="col-md-12" style="margin-bottom:10px;">
+            			<label class="btn btn-warning"></label>
+						<a href="/Web_TeamPjt/IdeaController?action=all" class="a_400" style="color:#333333;">전체 완료 아이디어 보기</a>
+						<label class="btn btn-warning"></label>
+						<a href="/Web_TeamPjt/IdeaController?action=recruit" class="a_400" style="color:#333333;">모집 중 아이디어 보기</a>
+						<label class="btn btn-warning"></label>
+						<a href="/Web_TeamPjt/IdeaController?action=complete" class="a_400" style="color:#333333;">모집 완료 아이디어 보기</a>
+										
+            </div>
+        </div>
+
     	<div class="row">
             <div class="col-md-12">
                 <div class="card acik-renk-form">
@@ -135,9 +142,9 @@ if(request.getParameter("Search") == null) {
                             <div class="col-md-4">
                                 <div class="form-group ">
                                     <select id="interest_1" class="form-control a_400" >
-                                        <option>없음</option>
-                                        <option>인공지능</option>
+                                        <option>WEB</option>
                                         <option>안드로이드</option>
+                                        <option>임베디드</option>
                                         <option>IOS</option>
                                     </select>
                                 </div>
@@ -145,20 +152,10 @@ if(request.getParameter("Search") == null) {
                             <div class="col-md-4">
                                 <div class="form-group ">
                                     <select id="interest_2" class="form-control a_400" >
-                                        <option>없음</option>
-                                        <option>인공지능</option>
+                                       <option>건강</option>
+                                        <option>심리학</option>
                                         <option>안드로이드</option>
-                                        <option>IOS</option>
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="col-md-4">
-                                <div class="form-group ">
-                                    <select id="interest_3" class="form-control a_400" >
-                                        <option>없음</option>
-                                        <option>인공지능</option>
-                                        <option>안드로이드</option>
-                                        <option>IOS</option>
+                                        <option>게임</option>
                                     </select>
                                 </div>
                             </div>
@@ -181,36 +178,8 @@ if(request.getParameter("Search") == null) {
                 </div>
             </div>
         </div> 
-    <div>
-     <form action = "result.jsp">
-    <label for = "platform">플랫폼 : </label>
-        <input type = "radio" name = "platform" value = "web">web
-        <input type = "radio" name = "platform" value = "android">android
-        <input type = "radio" name = "platform" value = "embeded">embeded
-		<input type = "radio" name = "platform" value = "ios">iso
-    </div>
-    <div>
-    <label for = "genre">장르 : </label>
-        <input type = "radio" name = "genre" value = "health">health
-        <input type = "radio" name = "genre" value = "psychology">psychology
-        <input type = "radio" name = "genre" value = "game">game
-    </div>
-	
-    </form>
 
-    <div>전체행의 수 : <%=totalRowCount%>/<%=list.size()%></div>
-    <table border="1">
-        <thead>
-            <tr>
-            	<th>Id</th>
-                <th>제목</th>
-                <th>작가</th>
-                <th>등록일</th>
-                <th>상태</th>
-                <th>사진</th>
-            </tr>
-        </thead>
-        <tbody>
+
 		<div class="row">
 		<%
             for(Board b : list) {
@@ -221,7 +190,7 @@ if(request.getParameter("Search") == null) {
 						src="<%=b.getSrc()%>" alt=""></a>
 					<div class="card-body">
 						<h4 class="card-title">
-							<a href="<%=request.getContextPath()%>/board/boardView.jsp?boardNo=<%=b.getId()%>"><%=b.getTitle()%></a>
+							<a class="a_400" style="color:#FFCE1E" href="<%=request.getContextPath()%>/board/boardView.jsp?boardNo=<%=b.getId()%>"><%=b.getTitle()%></a>
 						</h4>
 						<p class="card-text"><%=b.getWriter()%>  </p>
 						<p class="card-text"><%=b.getRegistration_date()%> </p>
@@ -277,14 +246,14 @@ if(request.getParameter("Search") == null) {
       <div class="modal-content">
       
         <!-- Modal Header -->
-        <div class="modal-header">
-          <h4 class="modal-title">Modal Heading</h4>
+        <div class="modal-header" style="text-align:center;" >
+          <h4 class="modal-title a_400">-이용가이드-</h4>
           <button type="button" class="close" data-dismiss="modal">&times;</button>
         </div>
         
         <!-- Modal body -->
         <div class="modal-body">
-          Modal body..
+          Modal body/Web_TeamPjt
         </div>
         
         <!-- Modal footer -->
@@ -297,8 +266,8 @@ if(request.getParameter("Search") == null) {
   </div>
   
   	<!-- Bootstrap core JavaScript -->
-	<script src="../vendor/jquery/jquery.min.js"></script>
-	<script src="../vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+	<script src="/Web_TeamPjt/vendor/jquery/jquery.min.js"></script>
+	<script src="/Web_TeamPjt/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
 	<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
 		integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"

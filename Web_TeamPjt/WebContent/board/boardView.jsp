@@ -28,11 +28,13 @@ if(request.getParameter("boardNo") == null) {
     int boardNo = Integer.parseInt(request.getParameter("boardNo"));
     BoardDao boardDao = new BoardDao();
 	System.out.println("view"+boardNo);
-    Board board = boardDao.selectBoardByKey(boardNo);
-    List<Board> mlist = boardDao.selectComments(boardNo);
-    int goodCount = boardDao.goodCount(boardNo);
-    int participantsCount = boardDao.participantsCount(boardNo);
+    Board board = boardDao.selectBoardByKey(boardNo);//아이디어
+    List<Board> mlist = boardDao.selectComments(boardNo);//댓글 리스트
+    int goodCount = boardDao.goodCount(boardNo);//좋아요 수
+    int participantsCount = boardDao.participantsCount(boardNo);//참여자 수
     int cnt=mlist.size();
+    List<Board> clist = boardDao.SelectParticipantsBoard(boardNo);//완료된 참여자
+    List<Board> tlist = boardDao.SelectTempParticipantsBoard(boardNo);//신청한 참여자
  
 %>
 	<!-- Navigation -->
@@ -66,7 +68,7 @@ if(request.getParameter("boardNo") == null) {
 						</a>
 					</li>
 					<!-- <li class="nav-item"><a class="nav-link" href="#">회원가입</a></li> -->
-					<li class="nav-item"><a class="nav-link a_400" href="#">로그아웃</a></li>
+					<li class="nav-item"><a class="nav-link a_400" onclick="logoutAlert()">로그아웃</a></li>
 					<li class="nav-item"><a class="nav-link a_400" href="#">마이페이지</a></li>
 				</ul>
 			</div>
@@ -84,28 +86,24 @@ if(request.getParameter("boardNo") == null) {
 
 	<!-- Page Content -->
   <div class="container" style="padding:100px; background-color:#ffffff; border:1px solid #a6a6a6; margin-bottom:50px;">
-    <hr class="hr1">
+    <form action="<%=request.getContextPath()%>/board/boardDeadlineAction.jsp" method="post">
+	    <button type="submit" class="btn btn-primary" onclick="finAlert()" style="margin-left:80%;" id="finBtn">	   
+	        <input name="boardNo" value="<%=request.getParameter("boardNo")%>" type="hidden"/>
+	    	<a class="a_400">모집완료</a><img alt="" src="../img/detail/finish.png" style="margin-left:5px; margin-bottom:5px; height:15px; width:15px;">
+	    </button>  
+   	</form>
+   	
+   	 <hr class="hr1">
     <div class="row">
+    	<div class="col-sm-2" style="width:100%; text-align:right; margin-left:80%;">
+    		<a class="text-muted" style="font-size:10px;">Number of likes</a><br>
+      		<a class="h4"><%=goodCount%></a>
+      		<img alt="" src="../img/heart.png" style="height:32px; width:32px; margin-bottom:10px;">
+  		</div>
 		<div class="row a_400" style="font-size:2rem; margin:30px; ">
 			<%=board.getTitle()%>
 		</div>
-		<div class="row a_400" style="font-size:2rem; margin:30px; ">
-			좋아요수<%=goodCount%>
-		</div>
-		
-    	<form action="<%=request.getContextPath()%>/board/boardGoodAction.jsp" method="post">
-             <input name="boardNo" value="<%=request.getParameter("boardNo")%>" type="hidden"/>
-             <button type="submit" class="btn btn-primary">좋아요</button>
-       </form>
-    	
-    
-        <form action="<%=request.getContextPath()%>/board/boardContactAction.jsp" method="post">
-        	<input name="boardNo" value="<%=request.getParameter("boardNo")%>" type="hidden"/>
-        	<div>
-            <button type="submit" class="btn btn-primary">모집 완료 미구현</button>    
-        	</div>
-   		 </form>
-    
+   	
       <!-- Post Content Column -->
       <div><!-- class="col-lg-8" -->
 
@@ -122,6 +120,8 @@ if(request.getParameter("boardNo") == null) {
 		<div class="row a_400" style="font-size:1.5rem; margin:30px; ">
 			프로젝트 소개
 		</div>
+   	
+   	
 		<div>플랫폼 및 장르</div>
 		<div class="row a_200" style="font-size:1.5rem; margin:5px; ">
 	    <p><%=board.isWeb()%></p>
@@ -133,39 +133,28 @@ if(request.getParameter("boardNo") == null) {
 	    <p><%=board.isGame()%></p>
 		</div>
 		
-		
-        <!-- Post Content -->
+   	  <!-- Post Content -->
         <p class="lead">
          <%=board.getContent()%></p>
 
         <blockquote class="blockquote">
           <p class="mb-0"><%=board.getRequirements()%></p>
         </blockquote>
-        <hr class="hr1">
-        <hr class="hr1">
 
-        <!-- Comments Form -->
+        <button type="submit" class="btn btn-outline-dark" data-toggle="modal" data-target="#memberModal"><a class="a_400">명단 관리</a></button>
 
-        
+       
+     <hr class="hr1">	
+    	<form action="<%=request.getContextPath()%>/board/boardGoodAction.jsp" method="post">
+             <input name="boardNo" value="<%=request.getParameter("boardNo")%>" type="hidden"/>
+             <button type="submit" class="btn btn-outline-danger" id="likeBtn"><a class="a_400">좋아요</a><img alt="" src="../img/heart2.png" style="margin-bottom:5px;"></button>
+       </form> 	
+          
        <form action="<%=request.getContextPath()%>/board/boardContactAction.jsp" method="post">
              <input name="boardNo" value="<%=request.getParameter("boardNo")%>" type="hidden"/>
              <button type="submit" class="btn btn-primary">컨택 하기</button>
-       </form>
-
-        <form action="<%=request.getContextPath()%>/board/participantsManagerAction.jsp" method="post">
-             <input name="boardNo" value="<%=request.getParameter("boardNo")%>" type="hidden"/>
-             <button type="submit" class="btn btn-primary">명단 관리</button>
-       </form>
-       
-       <form action="<%=request.getContextPath()%>/board/boardModifyForm.jsp" method="post">
-             <input name="boardNo" value="<%=request.getParameter("boardNo")%>" type="hidden"/>
-             <button type="submit" class="btn btn-primary">글 수정</button>
-       </form>
-       
-       <form action="<%=request.getContextPath()%>/board/boardRemoveAction.jsp" method="post">
-             <input name="boardNo" value="<%=request.getParameter("boardNo")%>" type="hidden"/>
-             <button type="submit" class="btn btn-primary">글 삭제</button>
-       </form>
+       </form>   
+        <hr class="hr1"> 	
 
         <!-- Comments Form -->
         <div class="card my-4">
@@ -209,132 +198,18 @@ if(request.getParameter("boardNo") == null) {
     </div>
     <!-- /.row -->
 
-  
+   
+       <form action="<%=request.getContextPath()%>/board/boardModifyForm.jsp" method="post">
+             <input name="boardNo" value="<%=request.getParameter("boardNo")%>" type="hidden"/>
+             <button  class="btn btn-outline-warning" onclick="" type="submit">글 수정</button>
+       </form>
+       
+       <form action="<%=request.getContextPath()%>/board/boardRemoveAction.jsp" method="post">
+             <input name="boardNo" value="<%=request.getParameter("boardNo")%>" type="hidden"/>
+             <button onclick="deleteAlert()" type="submit" class="btn btn-outline-danger">글 삭제</button>
+       </form>
+       
   <!-- /.container -->
-
-
-
-	 <div>댓글개수 : <%=cnt%></div>
-    <div>좋아요수 : <%=goodCount%></div>
-    
-         <form action="<%=request.getContextPath()%>/board/boardContactAction.jsp" method="post">
-        <input name="boardNo" value="<%=request.getParameter("boardNo")%>" type="hidden"/>
-        <div>
-            <input type="submit" value="모집완료버튼(미구현)"/>
-           
-        </div>
-    </form>
-    
-    <form action="<%=request.getContextPath()%>/board/boardGoodAction.jsp" method="post">
-        <input name="boardNo" value="<%=request.getParameter("boardNo")%>" type="hidden"/>
-        <div>
-            <input type="submit" value="좋아요"/>
-           
-        </div>
-    </form>
-    
-    <div>board_no :</div>
-    <div><%=board.getId()%></div>
-    <div>제목:</div>
-    <div><%=board.getTitle()%></div>
-    <div>글쓴이 :</div>
-    <div><%=board.getWriter()%></div>
-    <div>내용:</div>
-    <div><%=board.getContent()%></div>
-    <div>요구사항:</div>
-    <div><%=board.getRequirements()%></div>
-    <div>등록일 :</div>
-    <div><%=board.getRegistration_date()%></div>
-    <div>완료일 :</div>
-    <div><%=board.getComplete_date()%></div>
-    <div>참가자 수 :</div>
-    <div><%=participantsCount%></div>
-    <div>상태</div>
-    <div><%=board.getState()%></div>
-    <div>사진</div>
-    <div><img src="<%=board.getSrc()%>" style="width: 100px; height: 75px;"></div> 
-    <div>플랫폼 및 장르</div>
-
-    <div><%=board.isWeb()%></div>
-  	<div><%=board.isAndroid()%></div>
-    <div><%=board.isEmbeded()%></div>
-    <div><%=board.isIos()%></div>
-    <div><%=board.isHealth()%></div>
-    <div><%=board.isPsychology()%></div>
-    <div><%=board.isGame()%></div>
-
-     <form action="<%=request.getContextPath()%>/board/boardContactAction.jsp" method="post">
-        <input name="boardNo" value="<%=request.getParameter("boardNo")%>" type="hidden"/>
-        <div>
-            <input type="submit" value="컨택하기"/>
-           
-        </div>
-    </form>
-    
-    <form action="<%=request.getContextPath()%>/board/participantsManagerAction.jsp" method="post">
-        <input name="boardNo" value="<%=request.getParameter("boardNo")%>" type="hidden"/>
-        <div>
-            <input type="submit" value="명단관리"/>
-           
-        </div>
-    </form>
-    
-    
-    
-     <form action="<%=request.getContextPath()%>/board/boardCommentAction.jsp" method="post">
-        <input name="boardNo" value="<%=request.getParameter("boardNo")%>" type="hidden"/>
-        <div><textarea name="comment" id="comment" rows="5" cols="50"></textarea></div>
-        <div>
-            <input type="submit" value="댓글등록"/>
-           
-        </div>
-    </form>
-    
-        <table border="1">
-        <thead>
-            <tr>
-            	<th>댓글</th>
-                <th>글쓴이</th>
-                <th>댓글일</th>
-            </tr>
-        </thead>
-        <tbody>
-<%
-            for(Board comment : mlist) {
-%>
-                <tr>
-              	<td><%=comment.getContent2()%></td>
-                <td><%=comment.getWriter()%></td>
-                <td><%=comment.getRegistration_date()%></td>
-             	<td>
-		        <form action="<%=request.getContextPath()%>/board/boardCommentDeleteAction.jsp" method="post">
-			        <input name="commentNo" value="<%=comment.getId()%>" type="hidden"/>
-			        <input name="boardNo" value="<%=request.getParameter("boardNo")%>" type="hidden"/>
-			        <div>
-			            <input type="submit" value="댓글삭제"/>
-			           
-			        </div>
-		    	</form>
-    			</td>
-                </tr> 
-<%        
-            }
-%>
-        </tbody>
-    </table>
-    
-    <div>
-        <a href="<%=request.getContextPath()%>/board/boardModifyForm.jsp?boardNo=<%=board.getId()%>">글수정</a>
-    </div>
-    
-     <form action="<%=request.getContextPath()%>/board/boardRemoveAction.jsp" method="post">
-        <input name="boardNo" value="<%=request.getParameter("boardNo")%>" type="hidden"/>
-        <div>
-            <input type="submit" value="글삭제"/>
-           
-        </div>
-    </form>
-
 <%
 }
 %>
@@ -346,12 +221,8 @@ if(request.getParameter("boardNo") == null) {
 		</div>
 		<!-- /.container -->
 	</footer>
-	
-	
-	
-	
-	
-	<!-- MODAL  -->
+		
+<!-- MODAL  -->
 	
 	<!-- GUIDE -->
   <div class="modal fade" id="guideModal">
@@ -377,12 +248,107 @@ if(request.getParameter("boardNo") == null) {
       </div>
     </div>
   </div>
-  
-
+      
+	<!-- 참여자 명단 MODAL -->
+	<%
+if(request.getParameter("boardNo") == null) {
+    response.sendRedirect(request.getContextPath()+"/board/boardList.jsp");
+} else {
+    int boardNo = Integer.parseInt(request.getParameter("boardNo"));
+    BoardDao boardDao = new BoardDao();
+	System.out.println("view"+boardNo);
+    Board board = boardDao.selectBoardByKey(boardNo);//아이디어
+    List<Board> mlist = boardDao.selectComments(boardNo);//댓글 리스트
+    int goodCount = boardDao.goodCount(boardNo);//좋아요 수
+    int participantsCount = boardDao.participantsCount(boardNo);//참여자 수
+    int cnt=mlist.size();
+    List<Board> clist = boardDao.SelectParticipantsBoard(boardNo);//완료된 참여자
+    List<Board> tlist = boardDao.SelectTempParticipantsBoard(boardNo);//신청한 참여자
+ 
+%>
+	
+  <div class="modal fade" id="memberModal">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+      
+        <!-- Modal Header -->
+        <div class="modal-header">
+          <h4 class="modal-title"><a class="a_400">명단관리</a></h4>
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+        </div>
+        
+        <!-- Modal body -->
+        <div class="modal-body">
+        	<div class="container">
+	        	<div class="row">
+	        		<a class="a_400">개발자 : </a>
+	       		</div>
+	       		<div class="row">
+	        		<a class="a_400">참여 개발자 : </a>
+	        	</div>
+	        	<hr>
+	        	<a class="a_400" style="font-size:1rem;">신청한 개발자</a>
+	        	<%
+            for(Board participant : tlist) {
+			%>
+	        	<div class="row" style="text-align:center;">
+	        		<div class="row" style="text-align:center;">
+					  <div class="col-sm-3"><a class="a_400"><%=participant.getNickname()%></a></div>
+					  <div class="col-sm-3" style="width:600px;"><a class="a_400"><%=participant.getRegistration_date()%></a></div>
+					  <div class="col-sm-3"><img src="../img/detail/check.png" alt="추가하기" onclick="alert('이전');"/></div>
+					  <div class="col-sm-3"><img src="../img/detail/cross.png" alt="삭제하기" onclick="alert('이전');"/></div>
+					</div>
+	        	</div>
+	        	<%        	
+            }
+%>
+	     
+	     
+	    	   	<hr>
+	        	<a class="a_400" style="font-size:1rem;">참여중 개발자</a>
+	        	
+	        		        	<%
+            for(Board participant : tlist) {
+			%>
+	        	<div class="row" style="text-align:center;">
+	        		<div class="row" style="text-align:center;">
+					  <div class="col-sm-3"><a class="a_400"><%=participant.getNickname()%></a></div>
+					  <div class="col-sm-3" style="width:600px;"><a class="a_400"><%=participant.getRegistration_date()%></a></div>
+					  <div class="col-sm-3"><img src="../img/detail/check.png" alt="추가하기" onclick="alert('이전');"/></div>
+					  <div class="col-sm-3"><img src="../img/detail/cross.png" alt="삭제하기" onclick="alert('이전');"/></div>
+					</div>
+	        	</div>
+	        		        	<%        	
+            }
+%>
+        	</div>
+        </div>
+        
+        <!-- Modal footer -->
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        </div>
+        
+      </div>
+    </div>
+  </div>
+  <%
+}
+%>
 	<!-- Bootstrap core JavaScript -->
 	<script src="../vendor/jquery/jquery.min.js"></script>
 	<script src="../vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-
+	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
+	<script type="text/javascript" src="../js/alertScript.js" ></script>
+	<script type="text/javascript" src="../js/detail/detail.js" ></script>
 	
+</body>
+	<script>
+		$(document).ready(function(){
+		  $("#likeBtn").click(function(){
+		    $('.toast').toast('show');
+		  });
+		});
+	</script>
 </body>
 </html>

@@ -12,10 +12,11 @@
 	content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <title>IDEARIA</title>
 
-<link rel="shortcut icon" href="../img/favicon/ecology.png">
-<link rel="stylesheet" href="../css/all/all.css">
-<link rel="stylesheet" href="../css/bootstrap.min.css">
-<link rel="stylesheet" href="../css/googleFont.css">
+<link rel="shortcut icon" href="/Web_TeamPjt/img/favicon/ecology.png">
+<link rel="stylesheet" href="/Web_TeamPjt/css/all/all.css">
+<link rel="stylesheet" href="/Web_TeamPjt/css/all.css">
+<link rel="stylesheet" href="/Web_TeamPjt/css/bootstrap.min.css">
+<link rel="stylesheet" href="/Web_TeamPjt/css/googleFont.css">
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500&display=swap" rel="stylesheet">
 
 </head>
@@ -47,7 +48,7 @@
 						</a>
 					</li>
 					<!-- <li class="nav-item"><a class="nav-link" href="#">회원가입</a></li> -->
-					<li class="nav-item"><a class="nav-link a_400" href="#">로그아웃</a></li>
+					<li class="nav-item"><a class="nav-link a_400" onclick="logoutAlert()">로그아웃</a></li>
 					<li class="nav-item"><a class="nav-link a_400" href="#">마이페이지</a></li>
 				</ul>
 			</div>
@@ -71,17 +72,17 @@
         <!-- Wrapper for carousel items -->
         <div class="carousel-inner">
             <div class="carousel-item active">
-                <img src="../img/main/main_1.jpg" alt="First Slide" style="height:500px; width:100%;">
+                <img src="/Web_TeamPjt/img/main/main_1.jpg" alt="First Slide" style="height:500px; width:100%;">
             	<div class="carousel-caption">
 			        <p class="a_500" style="font-size:4rem; color:#ffffff; float:left;">아이디어 랭킹전</p>
 			        <p class="a_500" style="font-size:2rem; color:#ffffff; float:left;">아이디어내고 해외여행가자!</p>
 			    </div>   
             </div>
             <div class="carousel-item">
-                <img src="../img/main/main_2.jpg" alt="Second Slide" style="height:500px; width:100%;">
+                <img src="/Web_TeamPjt/img/main/main_2.jpg" alt="Second Slide" style="height:500px; width:100%;">
             </div>
             <div class="carousel-item">
-                <img src="../img/main/main_3.jpg" alt="Third Slide" style="height:500px; width:100%;">
+                <img src="/Web_TeamPjt/img/main/main_3.jpg" alt="Third Slide" style="height:500px; width:100%;">
             	<div class="carousel-caption">
 			        <p class="a_500" style="font-size:4rem; color:#5353c6; float:right;">아이디어 전시회</p>
 			        <p class="a_500" style="font-size:2rem; color:#6666cc; float:right;">06.20~6.24 지상최대 아이디어 전시회 </p>
@@ -113,17 +114,16 @@ int pagePerRow = 4;
 int beginRow = (currentPage-1)*pagePerRow;
 List<Board> list = boardDao.selectCompleteBoardListPerPage(beginRow, pagePerRow);
 %>
+		<!-- 필터링 박스  -->
+		<div class="row">
+            <div class="col-md-12" style="margin-bottom:10px;">
+						<label class="btn btn-warning"></label>
+						<a href="<%=request.getContextPath()%>/board/boardList.jsp" class="a_400" style="color:#333333;">전체 아이디어 보기</a>
+						<label class="btn btn-warning"></label>
+						<a href="<%=request.getContextPath()%>/board/boardRecruitList.jsp"" class="a_400" style="color:#333333;">모집 중인 아이디어 보기</a>										
+            </div>
+        </div>
 
-
-	<div>
-	   <td><a href="<%=request.getContextPath()%>/board/boardRecruitList.jsp">모집중</a></td>
-	   <td><a href="<%=request.getContextPath()%>/board/boardCompleteList.jsp">완료된</a></td>
-    </div>
-    <div>
-	   <a href="<%=request.getContextPath()%>/board/boardGoodList.jsp">좋아요순으로 보기</a>
-	   <a href="<%=request.getContextPath()%>/board/boardList.jsp">등록일순으로 보기</a>
-    </div>
-    
     	<div class="row">
             <div class="col-md-12">
                 <div class="card acik-renk-form">
@@ -133,9 +133,9 @@ List<Board> list = boardDao.selectCompleteBoardListPerPage(beginRow, pagePerRow)
                             <div class="col-md-4">
                                 <div class="form-group ">
                                     <select id="interest_1" class="form-control a_400" >
-                                        <option>없음</option>
-                                        <option>인공지능</option>
+                              			<option>WEB</option>
                                         <option>안드로이드</option>
+                                        <option>임베디드</option>
                                         <option>IOS</option>
                                     </select>
                                 </div>
@@ -143,20 +143,10 @@ List<Board> list = boardDao.selectCompleteBoardListPerPage(beginRow, pagePerRow)
                             <div class="col-md-4">
                                 <div class="form-group ">
                                     <select id="interest_2" class="form-control a_400" >
-                                        <option>없음</option>
-                                        <option>인공지능</option>
+                                        <option>건강</option>
+                                        <option>심리학</option>
                                         <option>안드로이드</option>
-                                        <option>IOS</option>
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="col-md-4">
-                                <div class="form-group ">
-                                    <select id="interest_3" class="form-control a_400" >
-                                        <option>없음</option>
-                                        <option>인공지능</option>
-                                        <option>안드로이드</option>
-                                        <option>IOS</option>
+                                        <option>게임</option>
                                     </select>
                                 </div>
                             </div>
@@ -179,21 +169,6 @@ List<Board> list = boardDao.selectCompleteBoardListPerPage(beginRow, pagePerRow)
                 </div>
             </div>
         </div> 
-    
-    <div>
-     <form action = "result.jsp">
-    <label for = "platform">플랫폼 : </label>
-        <input type = "radio" name = "platform" value = "web">web
-        <input type = "radio" name = "platform" value = "android">android
-        <input type = "radio" name = "platform" value = "embeded">embeded
-		<input type = "radio" name = "platform" value = "ios">iso
-    </div>
-    <div>
-    <label for = "genre">장르 : </label>
-        <input type = "radio" name = "genre" value = "health">health
-        <input type = "radio" name = "genre" value = "psychology">psychology
-        <input type = "radio" name = "genre" value = "game">game
-    </div>
 
 	<div class="row">
 		<%
@@ -205,7 +180,7 @@ List<Board> list = boardDao.selectCompleteBoardListPerPage(beginRow, pagePerRow)
 					src="<%=b.getSrc()%>" alt=""></a>
 				<div class="card-body">
 					<h4 class="card-title">
-						<a href="<%=request.getContextPath()%>/board/boardView.jsp?boardNo=<%=b.getId()%>"><%=b.getTitle()%></a>
+						<a class="a_400" style="color:#FFCE1E" href="<%=request.getContextPath()%>/board/boardView.jsp?boardNo=<%=b.getId()%>"><%=b.getTitle()%></a>
 					</h4>
 					<p class="card-text"><%=b.getWriter()%>  </p>
 					<p class="card-text"><%=b.getRegistration_date()%> </p>
@@ -268,7 +243,7 @@ List<Board> list = boardDao.selectCompleteBoardListPerPage(beginRow, pagePerRow)
         
         <!-- Modal body -->
         <div class="modal-body">
-          Modal body..
+          Modal body/Web_TeamPjt
         </div>
         
         <!-- Modal footer -->
@@ -281,8 +256,8 @@ List<Board> list = boardDao.selectCompleteBoardListPerPage(beginRow, pagePerRow)
   </div>
 
 	<!-- Bootstrap core JavaScript -->
-	<script src="../vendor/jquery/jquery.min.js"></script>
-	<script src="../vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+	<script src="/Web_TeamPjt/vendor/jquery/jquery.min.js"></script>
+	<script src="/Web_TeamPjt/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
 	<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
 		integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
@@ -291,6 +266,8 @@ List<Board> list = boardDao.selectCompleteBoardListPerPage(beginRow, pagePerRow)
 		src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
 		integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
 		crossorigin="anonymous"></script>
-	
+	<!-- alert -->
+	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
+	<script type="text/javascript" src="/Web_TeamPjt/js/alertScript.js" ></script> 
 </body>
 </html>

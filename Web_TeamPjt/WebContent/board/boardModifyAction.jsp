@@ -12,6 +12,7 @@
 </head>
 <body>
 <%
+//미완
 if(request.getParameter("boardNo") == null) {
     response.sendRedirect(request.getContextPath()+"/board/boardList.jsp");
 } else {
@@ -199,10 +200,10 @@ if(request.getParameter("boardNo") == null) {
 	board.setRequirements(Requirements);
 	
 	BoardDao boardDao = new BoardDao();
-	boardDao.updateBoard(board);
+	boardDao.updateBoard(board);//아이디어 삽입
 	
-	boardDao.updatePicturesBoard(board);
-	boardDao.updateTypeBoard(board);
+	boardDao.updatePicturesBoard(board);//사진 삽입
+	boardDao.updateTypeBoard(board);//타입 삽입
 
 
 	response.sendRedirect(request.getContextPath()+"/board/boardView.jsp?boardNo="+Id);
