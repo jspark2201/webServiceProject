@@ -31,15 +31,16 @@ public class portfolio extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+		String address="";
 		int pageNumber = 1; //기본 페이지 넘버
 		// TODO Auto-generated method stub
 		DBEventDAO bbsDAO = new DBEventDAO();
 		String userID = "admin3";
 				//(String) request.getAttribute("userID");
-		if (request.getParameter("pageNumber") != null) {
+		/*if (request.getParameter("pageNumber") != null) {
 
 			pageNumber = (int) request.getAttribute("pageNumber");
-		}
+		}*/
 		ArrayList<PortfolioBean> list = bbsDAO.getList(userID, pageNumber);
 		request.setAttribute("Plist", list);
 		int totalPage = bbsDAO.totalPage(userID);
@@ -48,11 +49,11 @@ public class portfolio extends HttpServlet {
 		
 		request.setAttribute("totalPage",totalPage);
 		request.setAttribute("isNext",isNext);
+		address="/mypage.jsp";
 		
-		
-		RequestDispatcher dispatcher = request.getRequestDispatcher("./mypage.jsp");
+		RequestDispatcher dispatcher = request.getRequestDispatcher(address);
 		dispatcher.forward(request, response);
-		//response.getWriter().append("Served at: ").append(request.getContextPath());
+		response.getWriter().append("Served at: ").append(request.getContextPath());
 	}
 
 	/**

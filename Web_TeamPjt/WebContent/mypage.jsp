@@ -31,6 +31,7 @@
 <body>
 
 	<%
+
 		//로긴한사람이라면	 userID라는 변수에 해당 아이디가 담기고 그렇지 않으면 null값
 
 	String userID = "admin3";
@@ -205,6 +206,7 @@
 				<hr>
 
 				<div class="row">
+
 			<c:forEach items="${Plist}" var="item">
 
 
@@ -238,7 +240,7 @@
 							${item.bbsContent}
 							</c:otherwise>
 								</c:choose>
-								<br> 진행 기간 : {item..registrationDate} ~
+								<br> 진행 기간 : {item.registrationDate} ~
 								${item.completeDate}
 
 								</p>
@@ -263,6 +265,7 @@
 					
 <ul class="pagination justify-content-center">
 				<%
+
 					if (pageNumber != 1) {
 				%>
 				<li class="page-item"><a class="page-link"
@@ -271,18 +274,22 @@
 						<span class="sr-only">이전</span>
 				</a></li>
 
-				<%
-					}
-				int totalPageNum = (int) session.getAttribute("totalPage");
+				<%	
+					}			
+				
+
+				int totalPageNum = (int) request.getAttribute("totalPage");
+				
 				if (pageNumber - 2 > 0) {
 				%>
+
 				<li class="page-item"><a class="page-link"
 					href="mypage.jsp?pageNumber=<%=pageNumber - 2%>"> <%=pageNumber - 2%>
 				</a></li>
 				<li class="page-item"><a class="page-link"
 					href="mypage.jsp?pageNumber=<%=pageNumber - 1%>"> <%=pageNumber - 1%>
 				</a></li>
-				<%
+				<%System.out.println("test");
 					} else if (pageNumber - 1 > 0) {
 				%>
 				<li class="page-item"><a class="page-link"

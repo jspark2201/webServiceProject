@@ -383,8 +383,9 @@ public class DBEventDAO {
 				port.setProjectUrl(rs.getString(9));
 
 				port.setState(rs.getInt(10));
-
-				port.setPictsrc(getPic(rs.getInt(1)));
+				
+				if(getPic(rs.getInt(1)) != null)
+						port.setPictsrc(getPic(rs.getInt(1)));
 				
 				list.add(port);
 
