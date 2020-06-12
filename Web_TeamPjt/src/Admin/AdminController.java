@@ -15,7 +15,6 @@ import javax.servlet.http.HttpServletResponse;
 
 @WebServlet("/admin/*")
 public class AdminController extends HttpServlet {
-	private static final long serialVersionUID = 1L;
        
     public AdminController() {
         super();
@@ -51,20 +50,22 @@ public class AdminController extends HttpServlet {
 			action.execute(request,  response);
 			viewPage = "/view/admin/users.jsp";
 		}
-		else if (com.contentEquals("/admin/userDelete.do")) {
-			action = new UserDeleteAction();
-			action.execute(request, response);
-			viewPage = "/view/admin/blank.html";
-		}
-		
+
 		else if (com.contentEquals("/admin/ideas.do")) {
 			action = new IdeaListAction();
 			action.execute(request,  response);
 			viewPage = "/view/admin/ideas.jsp";
 		}
+
 		else if (com.contentEquals("/admin/ideaDelete.do")) {
 			action = new IdeaDeleteAction();
 			action.execute(request,  response);
+			viewPage = "/view/admin/blank.html";
+		}
+		
+		else if (com.contentEquals("/admin/userDelete.do")) {
+			action = new UserDeleteAction();
+			action.execute(request, response);
 			viewPage = "/view/admin/blank.html";
 		}
 

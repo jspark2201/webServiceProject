@@ -27,7 +27,7 @@
 		.userDiv, .ideaDiv {
 			display: inline-block;
 			width: 45%;
-			min-width: 400px;
+			min-width: 380px;
 			margin: 80px 20px 60px 20px;
 		}
 	</style>

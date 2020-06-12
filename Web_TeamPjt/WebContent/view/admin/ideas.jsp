@@ -20,6 +20,7 @@
 	<link rel="stylesheet" href="/Web_TeamPjt/css/googleFont.css">
 	<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500&display=swap" rel="stylesheet">
 	<style>
+		.page-link.active { background: #CBCBCB; }
 		.table th { height: 50px; }
 		.table tr { height: 49px; }
 		.table td { text-align: center; }
@@ -152,7 +153,7 @@
 				</table>
 
 				<div>
-					<form class="form" method="post" action="<%=src%>">
+					<form class="form" method="get" action="<%=src%>">
 		            	<div class="form-group" style="display: inline-block;">
 		                    <select id="search_type" class="form-control a_400" style="width:100px;" name="type">
 		                        <option value="writer">ÀÛ¼ºÀÚ</option>
@@ -318,6 +319,12 @@
 	window.onload = function () {
 		$("#search_type").val("${type}").attr("selected", "selected");
 		$("#filtered").val("${filter}").attr("selected", "selected");
+		$(".page-link").each(function(index, value) {
+			if (value.innerText === '${curPageNum}') {
+				$(this).addClass("active");
+				console.log(1);
+			}			
+		})
 	}
 	
 	</script>
