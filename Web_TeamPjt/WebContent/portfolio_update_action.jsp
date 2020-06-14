@@ -8,6 +8,8 @@
 <%@ page import="mypage.DBEventDAO"%>
 
 <%@ page import="java.io.PrintWriter"%>
+<%@ page
+	import="com.oreilly.servlet.MultipartRequest,com.oreilly.servlet.multipart.DefaultFileRenamePolicy,java.util.*,java.io.*"%>
 
 <%
 
@@ -56,16 +58,45 @@
 			script.println("</script>");
 
 		} 
+		String userID = "admin3";
 
+	String realFolder = "";
+	String imgpath = "";
+	int maxSize = 1024 * 1024 * 5;
+	String encType = "UTF-8";
+	String savefile = "img";
+	ServletContext scontext = getServletContext();
+	realFolder = scontext.getRealPath(savefile);
+
+	PortfolioBean port = new PortfolioBean();
+	MultipartRequest multi;
+
+	try {
+		int result = -1;
+		int result2 = -1;
+		multi = new MultipartRequest(request, realFolder, maxSize, encType, new DefaultFileRenamePolicy());
+
+		port.setBbs_title(multi.getParameter("bbs_title"));
+		port.setRegistrationDate(multi.getParameter("registrationDate"));
+		port.setCompleteDate(multi.getParameter("completeDate"));
+		port.setBbsContent(multi.getParameter("bbsContent"));
+		port.setProjectUrl(multi.getParameter("projectUrl"));
+		port.setParticipantsNumber(Integer.parseInt(multi.getParameter("participantsNumber")));
+		port.setBbs_title(multi.getParameter("bbs_title"));
+		imgpath = multi.getFilesystemName("pictsrc");
+		String imgFullPath = null;
+		if (imgpath != null) {
+			imgFullPath =  "..\\img\\" + imgpath;
+		}
 		
 
 		//글이 유효한지 판별
 
 		int bbsID = 0;
 
-		if (request.getParameter("bbsID") != null) {
+		if (multi.getParameter("bbsID") != null) {
 
-			bbsID = Integer.parseInt(request.getParameter("bbsID"));
+			bbsID = Integer.parseInt(multi.getParameter("bbsID"));
 
 		}
 
@@ -99,9 +130,7 @@
 
 		} else {
 
-			if (request.getParameter("bbsTitle") == null || request.getParameter("bbsContent") == null
-
-					|| request.getParameter("bbsTitle").equals("") || request.getParameter("bbsContent").equals("") ) {
+			if (request.getParameter("bbsTitle") == null || request.getParameter("bbsContent") == null ) {
 
 				PrintWriter script = response.getWriter();
 
@@ -117,9 +146,12 @@
 
 				DBEventDAO DAO = new DBEventDAO();
 
-				int result = DAO.update(bbsID, request.getParameter("bbsTitle"), request.getParameter("bbsContent"));
-
-				if (result == -1) {
+				int result = DAO.update(bbsID, port.getBbs_title(),port.getBbsContent(),port.getRegistrationDate(),port.getCompleteDate(),port.getParticipantsNumber(),port.getProjectUrl());
+				
+				int result2 = DAO.updatePict(bbsID, imgFullPath);
+				
+				
+				if (result == -1 | result2 == -1) {
 
 					PrintWriter script = response.getWriter();
 
@@ -137,7 +169,7 @@
 
 					script.println("<script>");
 
-					script.println("location.href='bbs.jsp'");
+					script.println("location.href='mypage.jsp'");
 
 					//script.println("history.back()");
 

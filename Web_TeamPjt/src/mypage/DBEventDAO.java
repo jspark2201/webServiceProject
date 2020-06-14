@@ -520,9 +520,9 @@ public class DBEventDAO {
 
 	// 수정 함수
 
-	public int update(int bbsID, String bbsTitle, String bbsContent) {
+	public int update(int bbsID, String bbsTitle, String bbsContent,Date registration_date,Date complete_date, int number_participants, String url) {
 
-		String SQL = "UPDATE idea SET bbsTitle = ?, bbsContent = ?, WHERE bbsID = ?";
+		String SQL = "UPDATE idea SET bbsTitle = ?, bbsContent = ?, registration_date=?,complete_date=?,number_participants=?, projectURL=? WHERE bbsID = ?";
 
 		try {
 
@@ -532,7 +532,41 @@ public class DBEventDAO {
 
 			pstmt.setString(2, bbsContent);
 
-			pstmt.setInt(3, bbsID);
+
+			pstmt.setDate(3, registration_date);
+
+			pstmt.setDate(4, complete_date);
+
+			pstmt.setInt(5, number_participants);
+			
+			pstmt.setString(6, url);
+
+			pstmt.setInt(7, bbsID);
+
+			return pstmt.executeUpdate();
+
+		} catch (Exception e) {
+
+			e.printStackTrace();
+
+		}
+
+		return -1; // 데이터베이스 오류
+
+	}
+	
+	public int updatePict(int bbsID, String src) {
+
+		String SQL = "UPDATE idea SET src=? WHERE idea_id = ?";
+
+		try {
+
+			PreparedStatement pstmt = conn.prepareStatement(SQL);
+
+			pstmt.setString(1, src);
+
+			pstmt.setInt(2, bbsID);
+
 
 			return pstmt.executeUpdate();
 
