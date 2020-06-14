@@ -147,7 +147,7 @@ public class BoardDao {
 	            connection = this.getConnection();
 	            statement = connection.prepareStatement(sql);
 	            statement.setInt(1, board.getId());
-	            statement.setString(2,"admin2");//일단 유저가 없으니 임시
+	            statement.setString(2,board.getId2());//일단 유저가 없으니 임시
 	           
 	            rowCount = statement.executeUpdate();
 	            
@@ -159,7 +159,7 @@ public class BoardDao {
 	        return rowCount;
 	    }
 	    
-	    // 테이블 : good , 기능 : 모집 완료기능  
+	    // 테이블 : idea , 기능 : 모집 완료기능  
 	    public int updateDeadline(Board board) {
 	        int rowCount = 0;
 	        Connection connection = null;
@@ -191,7 +191,7 @@ public class BoardDao {
 	            connection = this.getConnection();
 	            statement = connection.prepareStatement(sql);
 	            statement.setInt(1, board.getId());
-	            statement.setString(2,"admin3");//일단 유저가 없으니 임시
+	            statement.setString(2,board.getId2());
 	            statement.setInt(3,1);
 	            rowCount = statement.executeUpdate();
 	            
@@ -202,6 +202,54 @@ public class BoardDao {
 	        }
 	        return rowCount;
 	    }
+
+	    //신청개발자->참여 개발자
+	    public int updateParticipants(Board board) {
+	        int rowCount = 0;
+	        Connection connection = null;
+	        PreparedStatement statement = null;
+	
+	        String sql ="UPDATE participants SET type=? WHERE user_id=?";
+
+	        try {
+	            connection = this.getConnection();
+	            statement = connection.prepareStatement(sql);
+	            statement.setInt(1,2);
+	            statement.setString(2,board.getId2());
+	            
+	            rowCount = statement.executeUpdate();
+	        } catch (Exception e) {
+	            e.printStackTrace();
+	        } finally {
+	            this.close(connection, statement, null);
+	        }
+	        return rowCount;
+	    }
+	    
+	    //신청개발자거절 및 참여 중 개발자 거절
+	    public int deleteParticipants(Board board) {
+	        int rowCount = 0;
+	        Connection connection = null;
+	        PreparedStatement statement = null;
+	        
+	        String sql ="DELETE FROM participants where idea_id=? and user_id=?";
+
+	        try {
+	            connection = this.getConnection();
+	            statement = connection.prepareStatement(sql);
+	            statement.setInt(1,board.getId());
+	            statement.setString(2,board.getId2());
+	            
+	            rowCount = statement.executeUpdate();
+	        } catch (Exception e) {
+	            e.printStackTrace();
+	        } finally {
+	            this.close(connection, statement, null);
+	        }
+	        return rowCount;
+	    }
+	    
+
 	    //참가자 수 업데이트
 	    public int UpdateParticipantsNum(Board board) {
 	        int rowCount = 0;
@@ -233,7 +281,7 @@ public class BoardDao {
 	            connection = this.getConnection();
 	            statement = connection.prepareStatement(sql);
 	            statement.setString(1, board.getContent2());
-	            statement.setString(2,"admin");//일단 유저가 없으니 임시
+	            statement.setString(2,board.getId2());//일단 유저가 없으니 임시
 	            statement.setInt(3, board.getId());
 	          
 	            rowCount = statement.executeUpdate();
@@ -323,6 +371,28 @@ public class BoardDao {
 	        PreparedStatement statement = null;
 	        ResultSet resultset = null;
 	        String sql = "SELECT count(*) FROM good WHERE idea_id=?";
+	        try {
+	            connection = this.getConnection();
+	            statement = connection.prepareStatement(sql);
+	            statement.setInt(1, id);
+	            resultset = statement.executeQuery();
+	            if(resultset.next()) {
+	                rowCount = resultset.getInt(1);
+	            }
+	        } catch (Exception e) {
+	            e.printStackTrace();
+	        } finally {
+	            this.close(connection, statement, resultset);
+	        }
+	        return rowCount;
+	    }
+	    //아이디어 상태 확인
+	    public int participantsState(int id) {
+	        int rowCount = 0;
+	        Connection connection = null;
+	        PreparedStatement statement = null;
+	        ResultSet resultset = null;
+	        String sql = "SELECT state FROM idea WHERE id=?";
 	        try {
 	            connection = this.getConnection();
 	            statement = connection.prepareStatement(sql);
@@ -449,6 +519,53 @@ public class BoardDao {
 	        }
 	        return list;
 	    }
+	    
+	    // 테이블 : idea , 기능 :필터 글 가져오기
+	    public List<Board> selectFavoriteBoardListPerPage(Board board, int beginRow, int pagePerRow) {
+	    	List<Board> list = new ArrayList<Board>();
+	        Connection connection = null;
+	        PreparedStatement statement = null;
+	        ResultSet resultset = null;
+
+	        String sql = "SELECT i.id, i.title, i.writer, i.registration_date, "
+	        		+ "i.state, p.src "
+	        		+ "FROM idea i, pictures p, idea_favorite f"
+	        		+ "WHERE i.id=p.idea_id and i.id=f.idea_id and p.idea_id=f.idea_id and "
+	        		+ "( web = ? or android = ? or embeded=? or ios=? or health=? or psychology=? or game=?) "
+	        		+ "ORDER BY id DESC LIMIT ?, ?";
+	        try {
+	            connection = this.getConnection();
+	            statement = connection.prepareStatement(sql);
+	            statement.setBoolean(1,board.isWeb());
+	            statement.setBoolean(2,board.isAndroid());
+	            statement.setBoolean(3,board.isEmbeded());
+	            statement.setBoolean(4,board.isIos());
+	            statement.setBoolean(5,board.isHealth());
+	            statement.setBoolean(6,board.isPsychology());
+	            statement.setBoolean(7,board.isGame());
+	            statement.setInt(8, beginRow);
+	            statement.setInt(9, pagePerRow);
+	            resultset = statement.executeQuery();
+	            while(resultset.next()) {
+	                Board board1 = new Board();
+	                
+	                board1.setId(resultset.getInt("id"));
+	                board1.setTitle(resultset.getString("title"));
+	                board1.setWriter(resultset.getString("writer"));
+	                board1.setRegistration_date(resultset.getString("registration_date"));
+	                board1.setState(resultset.getInt("State"));
+	                board1.setSrc(resultset.getString("src"));
+	                
+	                list.add(board1);
+	            }
+	        } catch (Exception e) {
+	            e.printStackTrace();
+	        } finally {
+	            this.close(connection, statement, resultset);
+	        }
+	        return list;
+	    }
+	    
 	    
 	    // 테이블 : idea , 기능 :댓글가져오기
 	    public List<Board> selectComments(int commentId) {
@@ -659,7 +776,7 @@ public class BoardDao {
 	        try {
 	            connection = this.getConnection();
 	            statement = connection.prepareStatement(sql);
-	            statement.setString(1,"admin");//추후 수정 필요!, 사용자의 아이디값
+	            statement.setString(1,board.getWriter());
 	            statement.setString(2,board.getTitle());
 	            statement.setString(3,board.getContent());
 	            statement.setString(4,board.getRequirements());
@@ -724,7 +841,7 @@ public class BoardDao {
 	        int rowCount = 0;
 	        Connection connection = null;
 	        PreparedStatement statement = null;
-	        String sql = "UPDATE idea SET src=? WHERE idea_id=?";
+	        String sql = "UPDATE pictures SET src=? WHERE idea_id=?";
 	        try {
 	            connection = this.getConnection();
 	            statement = connection.prepareStatement(sql);
@@ -797,6 +914,7 @@ public class BoardDao {
 	        return rowCount;
 	    }
 	    
+
 	    
 	    
 	    // 테이블 : idea , 기능 : photo와 idea_favorite insert해주기 위해 idea테이블의 max값을 가져옴

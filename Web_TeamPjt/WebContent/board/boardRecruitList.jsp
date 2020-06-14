@@ -198,20 +198,26 @@ List<Board> list = boardDao.selectRecruitBoardListPerPage(beginRow, pagePerRow);
     }
 %>
     <div>
-<%
+    <%
         if(currentPage>1) {
-%>
-            <a href="<%=request.getContextPath()%>/board/boardRecruitList.jsp?currentPage=<%=currentPage-1%>">이전</a>
+%>       
+
+            <li class="page-item">
+            <a class="page-link" href="<%=request.getContextPath()%>/board/boardRecruitList.jsp?currentPage=<%=currentPage-1%>">이전</a>
+            </li>
 <%
         }
         if(currentPage < lastPage) {
 %>
- 
-            <a href="<%=request.getContextPath()%>/board/boardRecruitList.jsp?currentPage=<%=currentPage+1%>">다음</a>
+             <li class="page-item">
+            <a class="page-link" href="<%=request.getContextPath()%>/board/boardRecruitList.jsp?currentPage=<%=currentPage+1%>">다음</a>
+            </li>
+            
 <%
         }
 %>
     </div>
+
     
 	<!-- /.container -->
 	<!-- Footer -->
