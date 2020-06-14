@@ -221,7 +221,27 @@
 					<div class="col-lg-4 col-sm-6 portfolio-item"
 						style="margin-bottom: 30px;">
 						<div class="card h-100"
-							style="border-color: red; border-width: 5px;">
+							style="border-color:
+							<%int Ptype = bbsDAO.getPtype(list.get(i).getBbs_id(),userID);
+							if(list.get(i).getState()==1 &&Ptype ==0) {%>
+							#ADFF2F
+							<%}else if(list.get(i).getState()==2 &&Ptype ==0) {%>
+							#008000 
+							<%}else if(list.get(i).getState()==2 &&Ptype ==0) {%>
+							#006400 
+							<%}else if(list.get(i).getState()==1 &&Ptype ==1) {%>
+							#FFA07A 
+							<%}else if(list.get(i).getState()==1 &&Ptype ==2) {%>
+							#FF7F50 
+							<%}else if(list.get(i).getState()==2 &&Ptype ==2) {%>
+							#FFA500 
+							<%}else if(list.get(i).getState()==3 &&Ptype ==2) {%>
+							#FF8C00 
+							<%}else if(list.get(i).getState()==4) {%>
+							#A9A9A9 
+							<%}else if(list.get(i).getState()==5) {%>
+							#0000FF
+							<%} %>"; border-width: 5px;">
 							<div class="card_img">
 								<img style="width: 100%; height: 100%;" alt=""
 									src="<%=imgSRC%>">

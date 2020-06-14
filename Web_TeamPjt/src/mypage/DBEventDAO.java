@@ -569,4 +569,30 @@ public class DBEventDAO {
 		return -1; // 데이터베이스 오류
 
 	}
+	
+	public int getPtype(int bbsID, String user) {
+
+		String SQL = "SELECT type FROM participants WHERE idea_id = ? and user_id = ?";
+
+		try {
+
+			PreparedStatement pstmt = conn.prepareStatement(SQL);
+
+			pstmt.setInt(1, bbsID);
+
+			pstmt.setString(2, user);
+
+			rs = pstmt.executeQuery();
+			if (rs.next()) {
+				return rs.getInt(1);
+			}
+
+		} catch (SQLException sqex) {
+			System.out.println("SQLException: " + sqex.getMessage());
+			System.out.println("SQLState: " + sqex.getSQLState());
+		}
+
+		return -1;
+	}
+
 }
