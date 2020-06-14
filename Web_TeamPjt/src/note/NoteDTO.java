@@ -5,7 +5,16 @@ public class NoteDTO {
 	private String receiveID;
 	private String giveID;
 	private String giveEmail;
+	private String title;
 	private String comment;
+	
+	
+	public String getTitle() {
+		return title;
+	}
+	public void setTitle(String title) {
+		this.title = title;
+	}
 	public int getNoteNumber() {
 		return noteNumber;
 	}

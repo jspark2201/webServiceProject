@@ -3,6 +3,7 @@
     <%@page import="note.*" %>
     <%@page import="notification.*" %>
     <%@page import="java.util.ArrayList" %>
+    <%@taglib uri="http://java.sun.com/jstl/core" prefix="c" %>
 <!doctype html>
 <html lang="ko">
 <head>
@@ -56,7 +57,7 @@
 			</div>
 		</div>
 	</nav>
-	
+		
 	<div style="height:80px; background-color:#FFCE1E; margin-bottom:30px;	">
 	</div>
 
@@ -64,7 +65,7 @@
 	
 	<!-- Page Content -->
   <div class="container" style="padding:80px; background-color:#ffffff; border:1px solid #a6a6a6; margin-bottom:50px;">
-
+		
   
 	  <!-- Nav tabs -->
 	  <ul class="nav nav-tabs" role="tablist">
@@ -93,12 +94,13 @@
 						<tr>
 							<th>보낸 사람</th>
 							<th>이메일</th>
+							<th>제목</th>
 							<th>내용</th>
 						</tr>
 					</thead>
 					<tbody>
 					
-					<%
+<%-- 					<%
 					NoteDAO dao = new NoteDAO();
 					
 					ArrayList<NoteDTO> list = dao.noteList();
@@ -107,17 +109,31 @@
 					%>
 						<tr>
 							<td><%=dto.getGiveID() %></td>
-							<td><%=dto.getGiveEmail()  %></td>
+							<td><%=dto.getGiveEmail() %></td>
+							<td><%=dto.getTitle()  %></td>
 							<td><a data-toggle="modal" data-target="#mailModal"><%=dto.getComment() %></a></td>
 						</tr>
 					<%
 					}
+					%>  --%>
+					
+					<%
+					NoteDAO dao = new NoteDAO();
+					
+					ArrayList<NoteDTO> list = dao.noteList();
 					%>
+					
+					<c:forEach var="i" begin="1" end="10" step="1">
+						<td>${i}</td>
+					</c:forEach> 
+					
+					
+					
+					
 
 					</tbody>
 				</table>
 				<p class="p_400" style="color:#cccccc;">쪽지 내용을 클릭하시면 상세 보기가 가능합니다.</p>
-				<button type="button" onclick="location.href='/Web_TeamPjt/SendNote?action=send'">쪽지 보내기</button>
 				<ul class="pagination justify-content-center">
 			  <li class="page-item"><a class="page-link" href="#">Previous</a></li>
 			  <li class="page-item"><a class="page-link" href="#">1</a></li>
@@ -174,7 +190,7 @@
 							<td><%=dto.getGiveID() %></td>
 							<td><%=dto.getGiveEmail() %></td>
 							<td>컨택 요청이 들어왔습니다.</td>
-							<td><a href="detail.html"><%=dto.getIdeaLink() %></a></td>
+							<td><a href="../Notification?data=<%=dto.getIdeaLink() %>"><%=dto.getIdeaLink() %></a></td>
 						</tr>
 					<%
 						}	
@@ -196,8 +212,6 @@
 	  </div>
   </div>
   <!-- /.container -->
-
-
 
 	<!-- Footer -->
 	<footer class="py-5 bg-dark">
@@ -267,21 +281,22 @@
     </div>
   </div>
   
+       
     <!-- 쪽지 작성 MODAL -->
+    
     <div class="modal fade" id="response_mailModal">
     <div class="modal-dialog modal-xl">
       <div class="modal-content">
-      
-        <!-- Modal Header -->
+      	        <!-- Modal Header -->
         <div class="modal-header">
           <h4 class="modal-title">쪽지 제목</h4>
           <button type="button" class="close" data-dismiss="modal">&times;</button>
         </div>
-        
+        	
         <!-- Modal body -->
         <div class="modal-body">
         <hr>
-          	<textarea class="a_400" "id="field" placeholder="보내실 내용을 입력하여 주세요.(200자)" maxlength="200" rows="10" cols="40"></textarea>
+          	<textarea class="a_400" id="field" placeholder="보내실 내용을 입력하여 주세요.(200자)" maxlength="200" rows="10" cols="40"></textarea>
         </div>
         
         <!-- Modal footer -->
@@ -289,10 +304,11 @@
           <button type="button" class="btn btn-secondary" data-dismiss="modal"><a class="a_400">보내기</a></button>
           <button type="button" class="btn btn-secondary" data-dismiss="modal"><a class="a_400">닫기</a></button>
         </div>
-        
       </div>
     </div>
   </div>
+
+    
   
   
 

@@ -10,28 +10,26 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-@WebServlet("/SendNote")
+@WebServlet("/SandNote")
 public class SendNote extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-//		
-//		 PrintWriter writer = response.getWriter();
-//		 writer.println("sdasd");
-
-			  NoteDAO dao = new NoteDAO();
-		      String address = null;
-		      request.setCharacterEncoding("utf-8");
-		      String action = request.getParameter("action");
-		      
+		response.setContentType("text/html;charset=utf-8");
+		
+		String send = request.getParameter("send");		
+		
+		PrintWriter out = response.getWriter();
 	
-		      
-		      if(action == null || action.equals("send")) {
-		    	  	      address = "/view/detail.jsp"; 
-		      }
-		      
-		      
-		      
+		out.println("<p>"+send+"</p>");
+		
+		
+		out.close();
+		
+		
+
+
+
 		      
 //		      if (action == null || action.equals("list")) {
 //		         address = "view/index.jsp";
@@ -82,13 +80,11 @@ public class SendNote extends HttpServlet {
 //		         address = "view/mypage.jsp";
 //		      }
 		      
-		      RequestDispatcher dispatcher = request.getRequestDispatcher(address);
-		      dispatcher.forward(request, response);
-
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		doGet(request, response);
 	}
+	
 
 }

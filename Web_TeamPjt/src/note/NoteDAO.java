@@ -54,6 +54,7 @@ public class NoteDAO {
             	dto.setReceiveID(rs.getString("receiveID"));
             	dto.setGiveID(rs.getString("giveID"));
             	dto.setGiveEmail(rs.getString("giveEmail"));
+            	dto.setTitle(rs.getString("title"));
             	dto.setComment(rs.getString("comment"));
                 
                 //ArrayList에 추가
