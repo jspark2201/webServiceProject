@@ -78,7 +78,7 @@
 		}
 
 		PortfolioBean port = new DBEventDAO().getPortfolio(bbsID);
-
+		System.out.println("bbsId:"+port.getUserID());
 		if(!userID.equals(port.getUserID())) {
 
 			PrintWriter script = response.getWriter();

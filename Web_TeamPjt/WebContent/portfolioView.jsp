@@ -5,27 +5,34 @@
 
 <%@ page import="java.io.PrintWriter"%>
 
-<%@ page import="mypage.portfolio"%>
+<%@ page import="mypage.PortfolioBean"%>
 
 <%@ page import="mypage.DBEventDAO"%>
 
-<!DOCTYPE html>
-
-<html>
-
+<!doctype html>
+<html lang="ko">
 <head>
-
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-
-<!-- 뷰포트 -->
-
-<meta name="viewport" content="width=device-width" initial-scale="1">
-
-<!-- 스타일시트 참조  -->
-
-<link rel="stylesheet" href="css/bootstrap.css">
-
-<title>jsp 게시판 웹사이트</title>
+<meta charset="utf-8">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<title>IDEARIA</title>
+<%-- <%
+      String userid = null;
+	
+   if (session.getAttribute("userid") != null) {
+      userid = (String) session.getAttribute("userid");
+   }else{
+	   out.println("<script>alert('로그인하신 후 이용해주십시오.');</script>");
+	   %>
+	   <script type="text/javascript">setTimeout(response.sendRedirect("index.jsp"), 1000);</script>
+	   <%
+   }
+%> --%>
+<link rel="shortcut icon" href="../img/favicon/ecology.png">
+<link rel="stylesheet" href="../css/detail/detail1.css">
+<link rel="stylesheet" href="../css/bootstrap.min.css">
+<link rel="stylesheet" href="../css/googleFont.css">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500&display=swap" rel="stylesheet">
 
 </head>
 
@@ -61,118 +68,55 @@
 
 			script.println("alert('유효하지 않은 글 입니다.')");
 
-			script.println("location.href = 'bbs.jsp'");
+			script.println("location.href = 'mypage.jsp'");
 
 			script.println("</script>");
 
 		}
 
-		portfolio port = new DBEventDAO().getPortfolio(bbsID);
+		PortfolioBean port = new DBEventDAO().getPortfolio(bbsID);
 
 	%>
 
 
 
 
-
-	<!-- 네비게이션  -->
-
-	<nav class="navbar navbar-default">
-
-		<div class="navbar-header">
-
-			<button type="button" class="navbar-toggle collapsed"
-
-				data-toggle="collapse" data-target="bs-example-navbar-collapse-1"
-
-				aria-expaned="false">
-
-				<span class="icon-bar"></span> <span class="icon-bar"></span> <span
-
-					class="icon-bar"></span>
-
+	<!-- Navigation -->
+	<nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+		<div class="container">
+			<a class="navbar-brand" href="#" style="color:#FFCE1E;" class="a_500">WEB SERVICE PJ</a>
+			<button class="navbar-toggler" type="button" data-toggle="collapse"
+				data-target="#navbarResponsive" aria-controls="navbarResponsive"
+				aria-expanded="false" aria-label="Toggle navigation">
+				<span class="navbar-toggler-icon"></span>
 			</button>
-
-			<a class="navbar-brand" href="portfolio.jsp">JSP 게시판</a>
-
+			<div class="collapse navbar-collapse" id="navbarResponsive">
+				<ul class="navbar-nav ml-auto">
+					<li class="nav-item active">
+						<a class="nav-link a_400" href="#">랭킹 보기
+							<span class="sr-only">(current)</span>
+						</a>
+					</li>
+					<li class="nav-item active">
+						<a class="nav-link a_400" href="#">아이디어 보기
+							<span class="sr-only">(current)</span>
+						</a>
+					</li>
+					<li class="nav-item active">
+						<a class="nav-link a_400" href="#">프로젝트 시작하기
+							<span class="sr-only">(current)</span>
+						</a>
+					</li>
+					<li class="nav-item active">
+						<a class="nav-link a_400" data-toggle="modal" data-target="#guideModal">이용가이드
+						</a>
+					</li>
+					<!-- <li class="nav-item"><a class="nav-link" href="#">회원가입</a></li> -->
+					<li class="nav-item"><a class="nav-link a_400" onclick="logoutAlert()">로그아웃</a></li>
+					<li class="nav-item"><a class="nav-link a_400" href="#">마이페이지</a></li>
+				</ul>
+			</div>
 		</div>
-
-		<div class="collapse navbar-collapse"
-
-			id="#bs-example-navbar-collapse-1">
-
-			<ul class="nav navbar-nav">
-
-				<li><a href="main.jsp">메인</a></li>
-
-				<li class="active"><a href="portfolio.jsp">게시판</a></li>
-
-			</ul>
-
-
-
-
-
-			<%
-
-				//라긴안된경우
-
-				if (userID == null) {
-
-			%>
-
-			<ul class="nav navbar-nav navbar-right">
-
-				<li class="dropdown"><a href="#" class="dropdown-toggle"
-
-					data-toggle="dropdown" role="button" aria-haspopup="true"
-
-
- 
-					aria-expanded="false">접속하기<span class="caret"></span></a>
-
-					<ul class="dropdown-menu">
-
-						<li><a href="login.jsp">로그인</a></li>
-
-						<li><a href="join.jsp">회원가입</a></li>
-
-					</ul></li>
-
-			</ul>
-
-			<%
-
-				} else {
-
-			%>
-
-			<ul class="nav navbar-nav navbar-right">
-
-				<li class="dropdown"><a href="#" class="dropdown-toggle"
-
-					data-toggle="dropdown" role="button" aria-haspopup="true"
-
-
- 
-					aria-expanded="false">회원관리<span class="caret"></span></a>
-
-					<ul class="dropdown-menu">
-
-						<li><a href="logoutAction.jsp">로그아웃</a></li>
-
-					</ul></li>
-
-			</ul>
-
-			<%
-
-				}
-
-			%>
-
-		</div>
-
 	</nav>
 
 	<!-- 게시판 -->

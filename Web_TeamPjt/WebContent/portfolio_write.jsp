@@ -30,7 +30,6 @@
 
 
 
-
 	<!-- 네비게이션  -->
 
 	<nav class="navbar navbar-default">

@@ -132,7 +132,7 @@ public class DBEventDAO {
 
 	public int writeIdeaFavorite(int ideaID, boolean web, boolean android, boolean embeded, boolean ios, boolean health,
 			boolean psychology, boolean game) {
-		String SQL = "INSTER INTO idea_favorite VALUES(?,?,?,?,?,?,?,?)";
+		String SQL = "INSERT INTO idea_favorite VALUES(?,?,?,?,?,?,?,?)";
 		try {
 
 			PreparedStatement pstmt = conn.prepareStatement(SQL);

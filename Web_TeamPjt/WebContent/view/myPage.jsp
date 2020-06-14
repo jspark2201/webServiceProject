@@ -32,12 +32,12 @@
 		//로긴한사람이라면	 userID라는 변수에 해당 아이디가 담기고 그렇지 않으면 null값
 
 	String userID = "admin3";
-/*
-	if (session.getAttribute("userid") != null) {
+	/*
+		if (session.getAttribute("userid") != null) {
 
-		userID = (String) session.getAttribute("userid");
+			userID = (String) session.getAttribute("userid");
 
-	}*/
+		}*/
 
 	int pageNumber = 1; //기본 페이지 넘버
 
@@ -77,7 +77,8 @@
 					<li class="nav-item active"><a class="nav-link a_400"
 						data-toggle="modal" data-target="#guideModal">이용가이드 </a></li>
 					<!-- <li class="nav-item"><a class="nav-link" href="#">회원가입</a></li> -->
-					<li class="nav-item"><a class="nav-link a_400"
+					<li class="nav-item"><a
+						clas"C:/Users/ansdu/web_front/webServiceProject/Web_TeamPjt/WebContent/view/myPage.jsp"s="nav-link a_400"
 						onclick="logoutAlert()">로그아웃</a></li>
 					<li class="nav-item"><a class="nav-link a_400" href="#">마이페이지</a></li>
 				</ul>
@@ -204,36 +205,45 @@
 
 				<div class="row">
 					<%
-				DBEventDAO bbsDAO = new DBEventDAO();
+						DBEventDAO bbsDAO = new DBEventDAO();
+					System.out.println(userID);
+					ArrayList<PortfolioBean> list = bbsDAO.getList(userID, pageNumber);
 
-			ArrayList<PortfolioBean> list = bbsDAO.getList(userID, pageNumber);
-
-			for (int i = 0; i < list.size(); i++) {
-				System.out.println(list.get(i).getBbs_id());
-			%>
+					for (int i = 0; i < list.size(); i++) {
+						//System.out.println(list.get(i).getBbs_id());
+						String imgSRC;
+						if (bbsDAO.getPic(list.get(i).getBbs_id()) == null)
+							imgSRC = "http://placehold.it/700x400";
+						else
+							imgSRC =bbsDAO.getPic(list.get(i).getBbs_id());
+						System.out.println(imgSRC);
+					%>
 					<div class="col-lg-4 col-sm-6 portfolio-item"
 						style="margin-bottom: 30px;">
 						<div class="card h-100"
 							style="border-color: red; border-width: 5px;">
 							<div class="card_img">
 								<img style="width: 100%; height: 100%;" alt=""
-									src=<%if(bbsDAO.getPic(list.get(i).getBbs_id())==null){%>
-									"http://placehold.it/700x400"
-						<%}else{ %>
-									<%=bbsDAO.getPic(list.get(i).getBbs_id()) %> <%} %>
-									>
+									src="<%=imgSRC%>">
 							</div>
 							<div class="card-body">
 								<h4 class="card-title">
-									<a href="#" class="a_400" style="color: #FFCE1E">Project
-										One</a>
+									<a href="portfolioView.jsp?bbsID=<%=list.get(i).getBbs_id()%>" class="a_400" style="color: #FFCE1E">
+									 <%=list.get(i).getBbs_title()%>
+									</a>
 								</h4>
 								<p class="card-text">
-									<%if(list.get(i).getBbsContent().length()>30){%>
-									<%=list.get(i).getBbsContent().substring(0, 31) %>
-									<%}else{%>
+									<%
+										if (list.get(i).getBbsContent().length() > 30) {
+									%>
+									<%=list.get(i).getBbsContent().substring(0, 31)%>
+									<%
+										} else {
+									%>
 									<%=list.get(i).getBbsContent()%>
-									<%} %>
+									<%
+										}
+									%>
 									<br> 진행 기간 :
 									<%=list.get(i).getRegistrationDate()%>
 									~
@@ -241,20 +251,22 @@
 								</p>
 
 								<div>
-								<form action="portfolio_delete_action.jsp" method="post">
-								<input name="bbsID" value="<%=list.get(i).getBbs_id()%>" type="hidden"/>
-									<button type="submit" method="post" class="btn btn-outline-danger btn-sm"
-										style="position: absolute; left: 60%; top: 90%;" onclick="">
-										<a class="a_400">삭제하기</a>
-									</button>
+									<form action="portfolio_delete_action.jsp" method="post">
+										<input name="bbsID" value="<%=list.get(i).getBbs_id()%>"
+											type="hidden" />
+										<button type="submit" method="post"
+											class="btn btn-outline-danger btn-sm"
+											style="position: absolute; right: 3%; bottom: 3%;" onclick="">
+											<a class="a_400">삭제하기</a>
+										</button>
 									</form>
 								</div>
 							</div>
 						</div>
 					</div>
-			<%
-				}
-			%>
+					<%
+						}
+					%>
 
 				</div>
 
@@ -262,73 +274,73 @@
 				<div id="home" class="container tab-pane active">
 					<br>
 					<ul class="pagination justify-content-center">
-					
-<ul class="pagination justify-content-center">
-				<%
-					if (pageNumber != 1) {
-				%>
-				<li class="page-item"><a class="page-link"
-					href="myPage.jsp?pageNumber=<%=pageNumber - 1%>"
-					aria-label="Previous"> <span aria-hidden="true">&laquo;</span>
-						<span class="sr-only">이전</span>
-				</a></li>
 
-				<%
-					}
-				int totalPageNum = bbsDAO.totalPage(userID);
-				if (pageNumber - 2 > 0) {
-				%>
-				<li class="page-item"><a class="page-link"
-					href="myPage.jsp?pageNumber=<%=pageNumber - 2%>"> <%=pageNumber - 2%>
-				</a></li>
-				<li class="page-item"><a class="page-link"
-					href="myPage.jsp?pageNumber=<%=pageNumber - 1%>"> <%=pageNumber - 1%>
-				</a></li>
-				<%
-					} else if (pageNumber - 1 > 0) {
-				%>
-				<li class="page-item"><a class="page-link"
-					href="myPage.jsp?pageNumber=<%=pageNumber - 1%>"> <%=pageNumber - 1%>
-				</a></li>
-				<%
-					}
-				%>
-				<li class="page-item"><a class="page-link"
-					href="myPage.jsp?pageNumber=<%=pageNumber%>"> <%=pageNumber%>
-				</a></li>
-				<%
-				if (pageNumber + 2 <= totalPageNum) {
-				%>
-				<li class="page-item"><a class="page-link"
-					href="myPage.jsp?pageNumber=<%=pageNumber + 1%>"> <%=pageNumber + 1%>
-				</a></li>
-				<li class="page-item"><a class="page-link"
-					href="myPage.jsp?pageNumber=<%=pageNumber + 2%>"> <%=pageNumber + 2%>
-				</a></li>
+						<ul class="pagination justify-content-center">
+							<%
+								if (pageNumber != 1) {
+							%>
+							<li class="page-item"><a class="page-link"
+								href="myPage.jsp?pageNumber=<%=pageNumber - 1%>"
+								aria-label="Previous"> <span aria-hidden="true">&laquo;</span>
+									<span class="sr-only">이전</span>
+							</a></li>
+
+							<%
+								}
+							int totalPageNum = bbsDAO.totalPage(userID);
+							if (pageNumber - 2 > 0) {
+							%>
+							<li class="page-item"><a class="page-link"
+								href="myPage.jsp?pageNumber=<%=pageNumber - 2%>"> <%=pageNumber - 2%>
+							</a></li>
+							<li class="page-item"><a class="page-link"
+								href="myPage.jsp?pageNumber=<%=pageNumber - 1%>"> <%=pageNumber - 1%>
+							</a></li>
+							<%
+								} else if (pageNumber - 1 > 0) {
+							%>
+							<li class="page-item"><a class="page-link"
+								href="myPage.jsp?pageNumber=<%=pageNumber - 1%>"> <%=pageNumber - 1%>
+							</a></li>
+							<%
+								}
+							%>
+							<li class="page-item"><a class="page-link"
+								href="myPage.jsp?pageNumber=<%=pageNumber%>"> <%=pageNumber%>
+							</a></li>
+							<%
+								if (pageNumber + 2 <= totalPageNum) {
+							%>
+							<li class="page-item"><a class="page-link"
+								href="myPage.jsp?pageNumber=<%=pageNumber + 1%>"> <%=pageNumber + 1%>
+							</a></li>
+							<li class="page-item"><a class="page-link"
+								href="myPage.jsp?pageNumber=<%=pageNumber + 2%>"> <%=pageNumber + 2%>
+							</a></li>
 
 
-				<%
-					} else if (pageNumber + 1 <= totalPageNum) {
-				%>
-				<li class="page-item"><a class="page-link"
-					href="myPage.jsp?pageNumber=<%=pageNumber + 1%>"> <%=pageNumber + 1%>
-				</a></li>
+							<%
+								} else if (pageNumber + 1 <= totalPageNum) {
+							%>
+							<li class="page-item"><a class="page-link"
+								href="myPage.jsp?pageNumber=<%=pageNumber + 1%>"> <%=pageNumber + 1%>
+							</a></li>
 
-				<%
-					}
+							<%
+								}
 
-				if (bbsDAO.nextPage(userID, pageNumber)) {
-				%>
-				<li class="page-item"><a class="page-link"
-					href="myPage.jsp?pageNumber=<%=pageNumber + 1%>"
-					aria-label="Next"> <span aria-hidden="true">&raquo;</span> <span
-						class="sr-only">다음</span>
-				</a></li>
+							if (bbsDAO.nextPage(userID, pageNumber)) {
+							%>
+							<li class="page-item"><a class="page-link"
+								href="myPage.jsp?pageNumber=<%=pageNumber + 1%>"
+								aria-label="Next"> <span aria-hidden="true">&raquo;</span> <span
+									class="sr-only">다음</span>
+							</a></li>
 
-				<%
-					}
-				%>
-					</ul>
+							<%
+								}
+							%>
+						</ul>
 				</div>
 			</div>
 		</div>
@@ -419,21 +431,22 @@
 						style="background-color: #ffffff; border: 1px solid #a6a6a6; margin-bottom: 50px;">
 						<hr class="hr1" style="margin-top: 50px;">
 
-						<form>
+						<form method="post" action="portfolio_write_action.jsp"
+							name="writeport"enctype="multipart/form-data">
 							<div class="row" style="margin-top: 30px; margin-bottom: 30px;">
 								<div class="col-sm-4">
 									<a class="a_500">프로젝트 제목</a>
 								</div>
 								<div class="col-sm-8">
 									<input type="text" class="form-control" id="usr"
-										style="width: 50%">
+										placeholder="글 제목" name="bbs_title" style="width: 50%">
 								</div>
 							</div>
 							<div class="row" style="margin-top: 30px; margin-bottom: 30px;">
 								<div class="col-sm-4">
 									<a class="a_500">이미지 첨부</a> <label
 										class="btn-bs-file btn btn-lg btn-warning"> Browse <input
-										type="file" />
+										type="file" name="pictsrc" />
 								</div>
 								<div class="col-sm-8">
 									<img class="img-fluid rounded mb-4 mb-lg-0"
@@ -442,41 +455,63 @@
 							</div>
 							<div class="row" style="margin-top: 30px; margin-bottom: 30px;">
 								<div class="col-sm-4">
+									<a class="a_500">프로젝트 진행 기간</a>
+								</div>
+								<div class="col-sm-8">
+									<input type="date" class="form-control" placeholder="시작 날짜"
+										name="registrationDate"><a> ~ </a><input type="date"
+										class="form-control" placeholder="종료 날짜" name="completeDate">
+								</div>
+							</div>
+							<div class="row" style="margin-top: 30px; margin-bottom: 30px;">
+								<div class="col-sm-4">
 									<a class="a_500">프로젝트 플랫폼</a>
 								</div>
 								<div class="col-sm-8">
 									<div class="form-group ">
-										<select id="interest_1" class="form-control a_400"
-											style="width: 50%">
-											<option>WEB</option>
-											<option>안드로이드</option>
-											<option>임베디드</option>
-											<option>IOS</option>
+										<select id="interest_1" name="favorite"
+											class="form-control a_400" style="width: 50%">
+											<option value="web">WEB</option>
+											<option value="android">안드로이드</option>
+											<option value="embeded">임베디드</option>
+											<option value="ios">IOS</option>
 										</select>
 									</div>
 								</div>
 							</div>
+
 							<div class="row" style="margin-top: 30px; margin-bottom: 30px;">
 								<div class="col-sm-4">
 									<a class="a_500">흥미 분야</a>
 								</div>
 								<div class="col-sm-8">
 									<div class="form-group ">
-										<select id="interest_1" class="form-control a_400"
-											style="width: 50%">
-											<option>건강</option>
-											<option>심리학</option>
-											<option>게임</option>
+										<select id="interest_1" name="favorite"
+											class="form-control a_400" style="width: 50%">
+											<option value="health">건강</option>
+											<option value="pychology">심리학</option>
+											<option value="game">게임</option>
 										</select>
 									</div>
 								</div>
 							</div>
 							<div class="row" style="margin-top: 30px; margin-bottom: 30px;">
 								<div class="col-sm-4">
-									<a class="a_500">프로젝트 간략 소개</a>
+									<a class="a_500">프로젝트 참여자 수</a>
 								</div>
 								<div class="col-sm-8">
-									<input type="text" class="form-control" id="usr">
+									<input type="number" style="width: 50%" placeholder="참여 인원"
+										name="participantsNumber" min="1" max="10">
+								</div>
+							</div>
+							<!--  -->
+							<div class="row" style="margin-top: 30px; margin-bottom: 30px;">
+								<div class="col-sm-4">
+									<a class="a_500">프로젝트 링크</a>
+								</div>
+								<div class="col-sm-8">
+									<input type="text" class="form-control" placeholder="프로젝트 링크"
+										name="projectUrl" id="usr">
 								</div>
 							</div>
 							<div class="row" style="margin-top: 30px; margin-bottom: 30px;">
@@ -484,9 +519,9 @@
 									<a class="a_500">프로젝트 소개</a>
 								</div>
 								<div class="col-sm-8">
-									<textarea class="a_400" "id="field"
+									<textarea class="form-control" class="a_400" "id="field"
 										placeholder="소개하시려는 아이디어 프로젝트를 쉽게 풀어서 작성하여 주십시오."
-										maxlength="3000" rows="10" cols="40"></textarea>
+										name="bbsContent" maxlength="3000" rows="10" cols="40"></textarea>
 
 									<div class="message"></div>
 								</div>
@@ -495,12 +530,12 @@
 				<div class="col-sm-4"><a class="a_500">해시태그</a></div>
 				<div class="col-sm-8">.col-sm-8</div>
 			</div> -->
+							<hr class="hr1" style="margin-top: 20px; margin-bottom: 30px;">
+							<div style="text-align: center; margin-bottom: 30px;">
+								<button type="submit" class="btn btn-warning a_400" onclick="document.location.reload()">게시하기</button>
+							</div>
 						</form>
-						<hr class="hr1" style="margin-top: 20px; margin-bottom: 30px;">
-						<div style="text-align: center; margin-bottom: 30px;">
-							<button type="button" class="btn btn-warning a_400"
-								onclick="uploadAlert()">게시하기</button>
-						</div>
+
 					</div>
 				</div>
 
@@ -526,17 +561,19 @@
 
 		$(function() {
 			"use strict";
-			var maxText = $("textarea").attr("maxlength"), ourMessage = $(".message");
-			ourMessage.html('<span>' + maxText + '</span> / 3000');
-			$("textarea")
-					.keyup(
-							function() {
-								var textLength = $(this).val().length, remText = maxText
-										- textLength;
-								ourMessage.html('<span>' + remText
-										+ '</span> / 3000');
-							});
+			var maxText = $("textarea").attr("maxlength"),
+			ourMessage = $(".message");
+			ourMessage
+					.html('<span>' + maxText + '</span> / 3000');
+			$("textarea").keyup(
+					function() {
+						var textLength = $(this).val().length,
+						remText = maxText - textLength;
+						ourMessage.html('<span>' + remText
+								+ '</span> / 3000');
+					});
 		});
+		
 	</script>
 </body>
 </html>
