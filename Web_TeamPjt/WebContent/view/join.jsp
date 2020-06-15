@@ -7,8 +7,8 @@
 <title>IDEARIA</title>
 <link rel="shortcut icon" href="/Web_TeamPjt/img/favicon/ecology.png">
 
-<link href="../css/googleFont.css" rel="stylesheet">
-<link href="../css/join/join.css" rel="stylesheet">
+<link href="/Web_TeamPjt/css/googleFont.css" rel="stylesheet">
+<link href="/Web_TeamPjt/css/join/join.css" rel="stylesheet">
 <!-- Bootstrap core CSS -->
 <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 

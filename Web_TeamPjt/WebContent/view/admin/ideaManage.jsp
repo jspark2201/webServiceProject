@@ -1,0 +1,303 @@
+<%@ page language="java" contentType="text/html; charset=EUC-KR" pageEncoding="EUC-KR"%>
+<%@ page import="Idea.Idea"%>
+<%@ page import="Idea.IdeaState"%>
+<%@ page import="Idea.IdeaDAO"%>
+<%@ page import="java.util.ArrayList"%>
+<%@ page import="java.io.PrintWriter" %>
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="EUC-KR">
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+</head>
+<body>
+
+	<%
+	/*
+		// admin이 아닌 경우	
+		String sessId = (String)session.getAttribute("id");            // request에서 id 파라미터를 가져온다
+		
+		if (sessId == null || !sessId.equals("admin")) {
+			response.sendRedirect("../index.jsp");    // 로그인 페이지로 리다이렉트 한다.
+		}
+	*/
+		
+		IdeaDAO ideaDAO = new IdeaDAO();
+	
+		// 필터 조건 (default: -1)
+		int filter = -1;
+		
+		try {
+			if (request.getParameter("filter") != null) {
+				
+				filter = Integer.parseInt(request.getParameter("filter"));
+			}
+			
+			if (filter < -1 || 5 < filter) {
+				filter = -1;
+			}
+		}
+		catch (Exception e) {
+			filter = -1;
+		}
+		
+
+		// 검색 조건  (default: "writer")
+		String type = "writer";
+		
+		if (request.getParameter("type") != null)
+			type = request.getParameter("type");
+		
+		switch(type) {
+			case "writer": case "title": case "state":
+				break;
+			default:
+				type = "writer";
+		}
+	
+		
+		// 검색어
+		String search = null;
+	
+		if (request.getParameter("search") != null)
+			search = request.getParameter("search");
+		
+	
+	
+		// 페이지 넘버 (default: 1)
+		int curPageNum = 1;
+
+		if (request.getParameter("pageNum") != null)
+			curPageNum = Integer.parseInt(request.getParameter("pageNum"));
+		
+
+		int pageCount = (ideaDAO.getDBCount(type, search, filter) - 1) / 10 + 1;
+		
+		if (curPageNum < 0 || curPageNum > pageCount)
+			curPageNum = 1;
+
+		
+		// 정렬 방식 (default: "date")
+		String order = "id";
+
+		if (request.getParameter("order") != null)
+			order = request.getParameter("order");
+		
+		switch(order) {
+			case "id": case "writer": case "title":
+			case "state": case "registration_date":
+				break;
+			default:
+				order = "id";
+		}
+
+		
+		String src = "ideaManage.jsp?";
+		
+		if (search != null) {
+			if (!search.equals("")) {
+				src += "type=" + type + "&";
+				src += "search=" + search + "&";
+			}
+		}
+
+	%>
+
+
+	<!-- 네비게이션  -->
+	<nav class="navbar navbar-default">
+		<div class="navbar-header">
+			<button type="button" class="navbar-toggle collapsed"
+				data-toggle="collapse" data-target="bs-example-navbar-collapse-1"
+				aria-expaned="false">
+				<span class="icon-bar"></span> <span class="icon-bar"></span> <span
+					class="icon-bar"></span>
+			</button>
+			<a class="navbar-brand" href="index.jsp">JSP 게시판</a>
+		</div>
+		<div class="collapse navbar-collapse"
+			id="#bs-example-navbar-collapse-1">
+			<ul class="nav navbar-nav">
+				<li><a href="index.jsp">메인</a></li>
+				<li class="active"><a href="userManage.jsp">회원관리</a></li>
+				<li class="active"><a href="ideaManage.jsp">아이디어관리</a></li>
+			</ul>
+	</nav>
+
+
+	<!-- 게시판 -->
+	<div class="container">
+	
+		<div class="search_div">
+			<div class="row">
+   				<div class="col-md-4 text-left">
+					<select class="mdb-select md-form colorful-select dropdown-primary" searchable="Status filtering" name="ideaState"
+						onchange="location.href='<%=src%>filter='+(this.value);">
+						<option value="-1">전체보기</option>
+						<%
+							for (int i=0; i<6; i++) {
+								
+								if (i == filter) {
+						%>
+							<option value="<%=i%>" selected><%=IdeaState.getState(i)%></option>
+						<%
+								}
+								
+								else {
+						%>
+							<option value="<%=i%>"><%=IdeaState.getState(i)%></option>
+						<% 
+								}
+							}
+						%>
+					</select>
+					<%
+						if (filter != -1)
+							src += "filter=" + filter + "&";
+					%>
+					<button type="button" class="btn" onclick="groupDel();">삭제</button>
+   				</div>
+   				<div class="col-md-8 text-right">
+					<form class="form" method="get" action="ideaManage.jsp">
+						<input type="hidden" name="filter" value="<%=filter%>">
+						<div style="display:inline-block">
+							<select class="mdb-select md-form colorful-select dropdown-primary" searchable="Search here.." name="type">
+								<option value="writer">작성자</option>
+								<option value="title">제목</option>
+								<option value="state">상태</option>
+							</select>
+						</div>
+						<div style="display:inline-block">
+	   						<%
+								String tmp = search;
+								if (search == null)
+									tmp = "";
+							%>
+							<input type="text" class="form-control" name="search" value="<%=tmp%>"/>
+						</div>
+						<div style="display:inline-block">
+	   						<button type="submit" class="btn btn-default" id="searchBtn">Search</button>
+	   					</div>
+					</form>
+				</div>
+			</div>
+		</div>
+
+		</br>
+
+		<div class="row">
+			<table class="table table-striped"
+				style="text-align: center; border: 1px solid #dddddd">
+				<thead>
+					<tr>
+						<th style="background-color: #eeeeee; text-align: center;">
+							<a href="<%=src%>order=writer">작성자</a>
+						</th>
+						<th style="background-color: #eeeeee; text-align: center;">
+							<a href="<%=src%>order=title">제목</a>
+						</th>
+						<th style="background-color: #eeeeee; text-align: center;">
+							<a href="<%=src%>order=registration_date">등록 시간</a>
+						</th>
+						<th style="background-color: #eeeeee; text-align: center;">
+							완료 시간
+						</th>
+						<th style="background-color: #eeeeee; text-align: center;">
+							팀원 수
+						</th>
+						<th style="background-color: #eeeeee; text-align: center;">
+							<a href="<%=src%>order=state">상태</a>
+						</th>
+						<th style="background-color: #eeeeee; text-align: center;">조회/수정</th>
+						<th style="background-color: #eeeeee; text-align: center;">비고</th>
+					</tr>
+				</thead>
+				<tbody>
+					<%
+						ArrayList<Idea> list = ideaDAO.getDBList(type, search, filter, order, curPageNum);
+					
+						for (int i = 0; i < list.size(); i++) {
+							if (list.get(i) != null) {
+					%>
+					<tr>
+						<td><%=list.get(i).getWriter()%></td>
+						<td><%=list.get(i).getTitle()%></td>
+						<td><%=list.get(i).getRegistration_date()%></td>
+						<td><%=list.get(i).getComplete_date()%></td>
+						<td><%=list.get(i).getNumber_participants()%></td>
+						<td><%=IdeaState.getState(list.get(i).getStateIdx())%></td>
+						<td><a href="ideaUpdate.jsp?id=<%=list.get(i).getId()%>">조회/수정</a></td>
+						<td><input type="checkbox" id="<%=list.get(i).getId()%>"></td>
+						
+					</tr>
+					<%
+							}
+						}
+					%>
+
+				</tbody>
+			</table>
+			
+			<div class="row">
+				<%
+					// 페이지 넘버링
+				
+					int pageNum = 0;
+				
+					src += "pageNum=";
+					
+				%>
+					<div class="col-md-4 text-right">
+				<%
+					if (curPageNum != 1) {
+					%>
+						<a href="<%=src + (curPageNum-1)%>" class="btn btn-success btn-arrow-left">이전</a>
+					<%
+					}
+				%>
+					</div>
+					<div class="col-md-4 text-center">
+				<%	
+					for (int i=0; i<5; i++)
+					{
+						pageNum = curPageNum + i -2;						
+						if (0 < pageNum && pageNum <= pageCount)
+						{
+					%>
+					<a href="<%=src + pageNum%>" class="btn btn-success btn-arrow-left"><%=pageNum%></a>
+					<%
+						}						
+					}
+					%>
+					</div>
+					<div class="col-md-4 text-left">
+					<%
+					if (curPageNum != pageCount) {
+					%>
+						<a href="<%=src + (curPageNum+1)%>" class="btn btn-success btn-arrow-left">다음</a>
+					</div>
+					<%
+						}
+					%>
+			</div>	
+		</div>
+	</div>
+
+
+
+
+	<!-- 애니매이션 담당 JQUERY -->
+	<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+	<!-- 부트스트랩 JS  -->
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
+
+	<script>
+	
+
+
+	
+	</script>
+
+</body>
+</html>
