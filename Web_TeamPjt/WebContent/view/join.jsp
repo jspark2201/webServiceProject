@@ -137,22 +137,6 @@
 								class="btn btn-primary btn-block btn-lg" tabindex="7">
 						</div>
 					</div>
-				</form>
-				
-							<form id="new-password" class="visible">
-				            <label for="password">Choose a new password</label>
-				            <input placeholder="Enter your password" type="password" id="password" name="password">
-				            <input type="submit" id="password-submit" value="Next">
-				            <br class="clear" />
-				            <ul>
-				              <li id="eight-plus" class="complete">At least 8 characters long.</li>
-				              <li id="uppercase" class="complete">Contains uppercase letters.</li>
-				              <li id="lowercase" class="complete">Contains lowercase letters.</li>
-				              <li id="numbers" class="complete">Contains numbers.</li>
-				              <li id="punctuation" class="complete">Contains punctuation.</li>
-				            </ul>
-				          </form>
-				          
 			</div>
 		</div>
 		</div>

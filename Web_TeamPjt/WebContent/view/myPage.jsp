@@ -1,11 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<<<<<<< HEAD
-    <%@page import="note.*" %>
-    <%@page import="notification.*" %>
-    <%@page import="java.util.ArrayList" %>
-=======
->>>>>>> front
 <!doctype html>
 <html lang="ko">
 <head>
@@ -15,16 +9,10 @@
 <title>IDEARIA</title>
 
 <link rel="shortcut icon" href="../img/favicon/ecology.png">
-<<<<<<< HEAD
-<link rel="stylesheet" href="../css/myPage/myPage1.css">
-<link rel="stylesheet" href="../css/bootstrap.min.css">
-<link rel="stylesheet" href="../css/googleFont.css">
-=======
 <link rel="stylesheet" href="../css/myPage/myPage.css">
 <link rel="stylesheet" href="../css/bootstrap.min.css">
 <link rel="stylesheet" href="../css/googleFont.css">
 <link rel="stylesheet" href="../css/card.css">
->>>>>>> front
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500&display=swap" rel="stylesheet">
 
 </head>
@@ -60,11 +48,7 @@
 						</a>
 					</li>
 					<!-- <li class="nav-item"><a class="nav-link" href="#">회원가입</a></li> -->
-<<<<<<< HEAD
-					<li class="nav-item"><a class="nav-link a_400" href="#">로그아웃</a></li>
-=======
 					<li class="nav-item"><a class="nav-link a_400" onclick="logoutAlert()">로그아웃</a></li>
->>>>>>> front
 					<li class="nav-item"><a class="nav-link a_400" href="#">마이페이지</a></li>
 				</ul>
 			</div>
@@ -77,11 +61,7 @@
 
 	
 	<!-- Page Content -->
-<<<<<<< HEAD
-  <div class="container" style="padding:80px; background-color:#ffffff; border:1px solid #a6a6a6; margin-bottom:50px;">
-=======
   <div class="container" style="min-height:1000px; padding:80px; background-color:#ffffff; border:1px solid #a6a6a6; margin-bottom:50px;">
->>>>>>> front
 
   
 	  <!-- Nav tabs -->
@@ -96,19 +76,8 @@
 	      <a class="nav-link a_500" style="color:#FFCE1E;" data-toggle="tab" href="#menu2">아이디어</a>
 	    </li>
 	    <li class="nav-item">
-<<<<<<< HEAD
-	      <a class="nav-link a_500" style="color:#FFCE1E;" data-toggle="tab" href="#menu3">임시저장</a>
-	    </li>
-	    <li class="nav-item">
-	      <a class="nav-link a_500" style="color:#FFCE1E;" data-toggle="tab" href="#menu4">알림</a>
-	    </li>
-<!-- 	    <li class="nav-item">
-	      <a class="nav-link a_500" style="color:#FFCE1E;" data-toggle="tab" href="#menu4">알림</a>
-	    </li> -->
-=======
 	      <a class="nav-link a_500" style="color:#FFCE1E;" data-toggle="tab" href="#menu3">포트폴리오</a>
 	    </li>
->>>>>>> front
 	  </ul>
 	
 	  <!-- Tab panes -->
@@ -117,41 +86,13 @@
 				<table class="table">
 					<thead>
 						<tr>
-<<<<<<< HEAD
-							<th>보낸 사람</th>
-							<th>이메일</th>
-=======
 							<th></th>
 							<th>이름</th>
 							<th>Email</th>
->>>>>>> front
 							<th>내용</th>
 						</tr>
 					</thead>
 					<tbody>
-<<<<<<< HEAD
-					
-					<%
-					NoteDAO dao = new NoteDAO();
-					
-					ArrayList<NoteDTO> list = dao.noteList();
-					for(NoteDTO dto:list) {
-					
-					%>
-						<tr>
-							<td><%=dto.getGiveID() %></td>
-							<td><%=dto.getGiveEmail()  %></td>
-							<td><a data-toggle="modal" data-target="#mailModal"><%=dto.getComment() %></a></td>
-						</tr>
-					<%
-					}
-					%>
-
-					</tbody>
-				</table>
-				<p class="p_400" style="color:#cccccc;">쪽지 내용을 클릭하시면 상세 보기가 가능합니다.</p>
-				<button type="button" onclick="location='WriteNote.jsp'">쪽지 보내기</button>
-=======
 						<tr>
 							<td>1</td>
 							<td>Kent</td>
@@ -192,7 +133,6 @@
 					</tbody>
 				</table>
 				<p class="p_400" style="color:#cccccc;">쪽지 내용을 클릭하시면 상세 보기가 가능합니다.</p>
->>>>>>> front
 				<ul class="pagination justify-content-center">
 			  <li class="page-item"><a class="page-link" href="#">Previous</a></li>
 			  <li class="page-item"><a class="page-link" href="#">1</a></li>
@@ -202,12 +142,6 @@
 			</ul>
 	    </div>
 	    <div id="menu1" class="container tab-pane fade"><br>
-<<<<<<< HEAD
-	      <h3>Menu 1</h3>
-	      <p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-	    </div>
-	    <div id="menu2" class="container tab-pane fade"><br>
-=======
 	      <p class="p_400" style="color:#cccccc;">개인정보 조회 및 수정은 인증이 필요합니다.</p>
 	      <button type="button" class="btn btn-outline-dark" style="margin-right:20px;">개인정보 조회</button>
 	      <button type="button" class="btn btn-outline-dark">개인정보 수정</button>
@@ -332,7 +266,6 @@
 	    	
 	    	
 	    	
->>>>>>> front
 		    <div id="home" class="container tab-pane active" ><br>
 			    <ul class="pagination justify-content-center">
 				  <li class="page-item"><a class="page-link" href="#">Previous</a></li>
@@ -343,50 +276,6 @@
 				</ul>
 		    </div>
 	    </div>
-<<<<<<< HEAD
-	    <div id="menu3" class="container tab-pane fade"><br>
-		    <div id="home" class="container tab-pane active" ><br>
-			    <ul class="pagination justify-content-center">
-				  <li class="page-item"><a class="page-link" href="#">Previous</a></li>
-				  <li class="page-item"><a class="page-link" href="#">1</a></li>
-				  <li class="page-item"><a class="page-link" href="#">2</a></li>
-				  <li class="page-item"><a class="page-link" href="#">3</a></li>
-				  <li class="page-item"><a class="page-link" href="#">Next</a></li>
-				</ul>
-		    </div>
-	    </div>
-	    <div id="menu4" class="container tab-pane fade"><br>
-	    <table class="table">
-					<thead>
-						<tr>
-
-							<th>보낸 사람</th>
-							<th>이메일</th>
-							<th>내용</th>
-							<th>아이디어 링크</th>
-						</tr>
-					</thead>
-					<tbody>
-					<%
-						NotificationDAO dao2 = new NotificationDAO();
-					
-						ArrayList<NotificationDTO> list2 = dao2.notificationList();
-						for(NotificationDTO dto:list2) {
-					%>
-						<tr>
-							<td><%=dto.getGiveID() %></td>
-							<td><%=dto.getGiveEmail() %></td>
-							<td>컨택 요청이 들어왔습니다.</td>
-							<td><a href="detail.html"><%=dto.getIdeaLink() %></a></td>
-						</tr>
-					<%
-						}	
-					%>
-
-					</tbody>
-				</table>
-	    
-=======
 	    <div id="menu3" class="container tab-pane fade">
 	    	<p class="p_400" style="color:#cccccc;">외부 홈페이지의 포트폴리오 업로드가 가능합니다.</p>
 	      	<button type="button" class="btn btn-outline-dark" data-toggle="modal" data-target="#portfolioModal">
@@ -511,7 +400,6 @@
 		</div>
 		    
 		    <hr>
->>>>>>> front
 		    <div id="home" class="container tab-pane active" ><br>
 			    <ul class="pagination justify-content-center">
 				  <li class="page-item"><a class="page-link" href="#">Previous</a></li>
@@ -568,9 +456,6 @@
     </div>
   </div>
   
-<<<<<<< HEAD
-  <!-- 쪽지 MODAL -->
-=======
   <!-- 도움말 ( 색깔 설명 ) MODAL -->
 	<div class="modal fade" id="infoModal">
 		<div class="modal-dialog modal-sm">
@@ -594,37 +479,25 @@
 	</div>
 
 	<!-- 쪽지 MODAL -->
->>>>>>> front
   <div class="modal fade" id="mailModal">
     <div class="modal-dialog modal-xl">
       <div class="modal-content">
       
         <!-- Modal Header -->
         <div class="modal-header">
-<<<<<<< HEAD
-          <h4 class="modal-title">Modal Heading</h4>
-=======
           <h4 class="modal-title">쪽지 제목</h4>
->>>>>>> front
           <button type="button" class="close" data-dismiss="modal">&times;</button>
         </div>
         
         <!-- Modal body -->
         <div class="modal-body">
-<<<<<<< HEAD
-          Modal body..
-=======
         <p class="a_500">작성자 : </p>
         <hr>
           	<p class="a_400">쪽지 내용..</p>
->>>>>>> front
         </div>
         
         <!-- Modal footer -->
         <div class="modal-footer">
-<<<<<<< HEAD
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-=======
           <button type="button" class="btn btn-secondary" data-dismiss="modal" data-toggle="modal" data-target="#response_mailModal"><a class="a_400">답장하기</a></button>
           <button type="button" class="btn btn-secondary" data-dismiss="modal"><a class="a_400">닫기</a></button>
         </div>
@@ -654,19 +527,12 @@
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-dismiss="modal"><a class="a_400">보내기</a></button>
           <button type="button" class="btn btn-secondary" data-dismiss="modal"><a class="a_400">닫기</a></button>
->>>>>>> front
         </div>
         
       </div>
     </div>
   </div>
 
-<<<<<<< HEAD
-	<!-- Bootstrap core JavaScript -->
-	<script src="../vendor/jquery/jquery.min.js"></script>
-	<script src="../vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-
-=======
 	<!-- 포트폴리오 추가 모달 -->
 	<div class="modal fade" id="portfolioModal">
     <div class="modal-dialog modal-dialog-scrollable" style="max-width:1024px;">
@@ -810,7 +676,6 @@
 					});
 		});
 	</script>
->>>>>>> front
 </body>
 </html>
 

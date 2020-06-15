@@ -86,6 +86,7 @@
     <div class="row">
 		<div class="row a_400" style="font-size:2rem; margin:30px; ">
 			프로젝트 제목
+			<a style="font-size:1rem;">안드로이드/건강</a>
 		</div>
 		
   	
@@ -98,7 +99,23 @@
         <hr class="hr1">
 
         <!-- Date/Time -->
-        <p>Posted on January 1, 2017 at 12:00 PM</p>
+        <div class="row a_400" style="font-size:1.5rem; margin:30px; ">
+			프로젝트 기간
+		</div>
+        <p style="text-align:center;">Posted on January 1, 2017 at 12:00 PM</p>
+
+        
+		<!-- 프로젝트 참여인원 -->
+		<div class="row a_400" style="font-size:1.5rem; margin:30px; ">
+			프로젝트 참여인원
+		</div>
+        <p style="text-align:center;" class="a_400;">4명</p>
+        <hr class="hr1">
+		<div class="row a_400" style="font-size:1.5rem; margin:30px; ">
+			프로젝트 URL
+		</div>
+        <!-- 프로젝트 URL -->
+        <a href="http://naver.com" style="text-align:center;">URL</a>
 
         <hr class="hr1">
 		
