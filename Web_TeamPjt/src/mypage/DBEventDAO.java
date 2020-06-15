@@ -179,7 +179,7 @@ public class DBEventDAO {
 	}
 
 	public Vector getFavorite(int ideaID) {
-		String SQL = "SELECT * FROM idea_favorite WHERE idea_id '" + ideaID + "'";
+		String SQL = "SELECT * FROM idea_favorite WHERE idea_id ='" + ideaID + "'";
 		Vector result = new Vector();
 		try {
 
