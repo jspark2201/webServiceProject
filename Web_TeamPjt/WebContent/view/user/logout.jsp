@@ -11,7 +11,7 @@
 		session.invalidate();
 	%>
 	<script>
-		location.href='/Web_TeamPjt/view/index.jsp';
+		location.href='/Web_TeamPjt/';
 	</script>
 </body>
 </html>

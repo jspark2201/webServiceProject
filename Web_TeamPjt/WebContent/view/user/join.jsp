@@ -31,7 +31,7 @@
 	<nav
 		class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark fixed-top">
 		<div class="container">
-			<a class="navbar-brand" href="index.html" style="color: #FFCE1E;"
+			<a class="navbar-brand" href="/Web_TeamPjt/service" style="color: #FFCE1E;"
 				class="a_500">WEB SERVICE PJ</a>
 			<button class="navbar-toggler navbar-toggler-right" type="button"
 				data-toggle="collapse" data-target="#navbarResponsive"
@@ -55,7 +55,7 @@
 		<div class="row">
 			<div
 				class="col-xs-12 col-sm-8 col-md-6 col-sm-offset-2 col-md-offset-3">
-				<form role="form" method="post" action="../Login">
+				<form role="form" method="post" action="/Web_TeamPjt/user/register2">
 					<h2>
 						Please Sign Up <small>It's free and always will be.</small>
 					</h2>

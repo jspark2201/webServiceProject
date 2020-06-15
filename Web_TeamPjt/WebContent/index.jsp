@@ -7,7 +7,10 @@
 <title>Insert title here</title>
 </head>
 <body>
-
-	<p>안녕하세요</p>
+<script>
+	window.onload = function() {
+		location.href="/Web_TeamPjt/service";
+	};
+</script>
 </body>
 </html>

@@ -37,7 +37,7 @@
 	<!-- Navigation -->
 	<nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
 		<div class="container">
-			<a class="navbar-brand" href="#" style="color:#FFCE1E;" class="a_500">WEB SERVICE PJ</a>
+			<a class="navbar-brand" href="/Web_TeamPjt/service" style="color:#FFCE1E;" class="a_500">WEB SERVICE PJ</a>
 			<button class="navbar-toggler" type="button" data-toggle="collapse"
 				data-target="#navbarResponsive" aria-controls="navbarResponsive"
 				aria-expanded="false" aria-label="Toggle navigation">
@@ -65,8 +65,8 @@
 						</a>
 					</li>
 					<!-- <li class="nav-item"><a class="nav-link" href="#">회원가입</a></li> -->
-					<li class="nav-item"><a class="nav-link a_400" href="#">로그아웃</a></li>
-					<li class="nav-item"><a class="nav-link a_400" href="#">마이페이지</a></li>
+					<li class="nav-item"><a class="nav-link a_400" href="/Web_TeamPjt/user/logout">로그아웃</a></li>
+					<li class="nav-item"><a class="nav-link a_400" href="/Web_TeamPjt/mypage">마이페이지</a></li>
 				</ul>
 			</div>
 		</div>
