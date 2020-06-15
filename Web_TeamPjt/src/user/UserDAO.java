@@ -25,15 +25,17 @@ public class UserDAO  {
 		}
 	}
 	public int addid(UserBean user) { // 회원가입
-		String sql="insert into user values('"
+		String sql="insert into user(id,pwd,nickname,email,number) values('"
 				+ user.getId()+"','"
 				+ user.getPwd()+"','"
 				+ user.getNickname()+"','"
 				+ user.getEmail()+"','"
 				+ user.getNumber()+"')";
+		String sql2="insert into user_favorite(user_id,"+user.getInterest()+","+user.getInterest1()+") values('"+user.getId()+"','1','1')";
 		try {
 			connect();
 			stmt.executeUpdate(sql);
+			stmt.executeUpdate(sql2);
 			disconnect();
 			return 1;
 		}catch(Exception e) {
@@ -80,7 +82,7 @@ public class UserDAO  {
 		return list;
 	}
 	public UserBean getEvent(String id) {
-		String sql ="select id,pwd,nickname from user where="+"'"+id+"'";
+		String sql ="select id,pwd,nickname,email,number from user where id="+"'"+id+"'";
 		UserBean event = new UserBean();
 		try {
 			connect();
@@ -90,7 +92,7 @@ public class UserDAO  {
 			event.setPwd(rs.getString("pwd"));
 			event.setNickname(rs.getString("nickname"));
 			event.setEmail(rs.getString("email"));
-			event.setNumber(rs.getNString("number"));
+			event.setNumber(rs.getString("number"));
 			rs.close();
 			disconnect();
 		}catch(Exception e) {

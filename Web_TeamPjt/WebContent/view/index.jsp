@@ -7,10 +7,10 @@
 <meta name="viewport"
 	content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <title>IDEARIA</title>
-<link rel="shortcut icon" href="../img/favicon/ecology.png">
-<link rel="stylesheet" href="../css/index/index.css">
-<link rel="stylesheet" href="../css/bootstrap.min.css">
-<link href="../css/googleFont.css" rel="stylesheet">
+<link rel="shortcut icon" href="/Web_TeamPjt/img/favicon/ecology.png">
+<link rel="stylesheet" href="/Web_TeamPjt/css/index/index.css">
+<link rel="stylesheet" href="/Web_TeamPjt/css/bootstrap.min.css">
+<link href="/css/googleFont.css" rel="stylesheet">
 <link
 	href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500&display=swap"
 	rel="stylesheet">
@@ -38,9 +38,10 @@
 					<li class="nav-item active"><a class="nav-link a_400"
 						data-toggle="modal" data-target="#aboutModal">About</a></li>
 					<li class="nav-item"><a class="nav-link a_400"
-						href='./join.jsp'>회원가입</a></li>
+						href='/Web_TeamPjt/view/join.jsp'>회원가입</a></li>
 					<li class="nav-item"><a class="nav-link a_400"
 						data-toggle="modal" data-target="#loginModal">로그인</a></li>
+						
 				</ul>
 			</div>
 		</div>
@@ -54,7 +55,7 @@
 		</ul>
 		<div class="carousel-inner">
 			<div class="carousel-item active">
-				<img class="img1" src="../img/index/index.jpg" alt="Los Angeles"
+				<img class="img1" src="/Web_TeamPjt/img/index/index.jpg" alt="Los Angeles"
 					width="100%" height="100%">
 				<div class="carousel-caption">
 					<p
@@ -64,7 +65,7 @@
 				</div>
 			</div>
 			<div class="carousel-item">
-				<img class="img1" src="../img/index/index2.jpg" alt="Chicago"
+				<img class="img1" src="/Web_TeamPjt/img/index/index2.jpg" alt="Chicago"
 					width="100%" height="100%">
 				<div class="carousel-caption">
 					<p
@@ -74,7 +75,7 @@
 				</div>
 			</div>
 			<div class="carousel-item">
-				<img class="img1" src="../img/index/index3.jpg" alt="New York"
+				<img class="img1" src="/Web_TeamPjt/img/index/index3.jpg" alt="New York"
 					width="100%" height="100%">
 				<div class="carousel-caption">
 					<p
@@ -104,7 +105,7 @@
 						<div class="row" style="margin-top: 20px">
 							<div
 								class="col-xs-12 col-sm-8 col-md-6 col-sm-offset-2 col-md-offset-3">
-								<form role="form" method="post" action="../Login">
+								<form role="form" method="post" action="/Web_TeamPjt/Login">
 									<fieldset>
 										<h2>Please Sign In</h2>
 										<hr class="colorgraph">
@@ -116,7 +117,7 @@
 											<input type="password" name="pwd"
 												class="form-control input-lg" placeholder="Password">
 										</div>
-										<img class="question_img" src="../img/login/question.png"
+										<img class="question_img" src="/Web_TeamPjt/img/login/question.png"
 											alt=""> <a href="#" data-toggle="modal"
 											data-target="#myModal">Forgot Password?</a>
 										<hr class="colorgraph">
@@ -193,8 +194,8 @@
 
 
 	<!-- Bootstrap core JavaScript -->
-	<script src="../vendor/jquery/jquery.min.js"></script>
-	<script src="../vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+	<script src="/Web_TeamPjt/vendor/jquery/jquery.min.js"></script>
+	<script src="/Web_TeamPjt/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
 	<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
 		integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"

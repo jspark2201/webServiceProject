@@ -6,6 +6,8 @@ public class UserBean {
 	private String nickname;
 	private String email;
 	private String number;
+	private String interest;
+	private String interest1;
 	public String getId() {
 		return id;
 	}
@@ -17,6 +19,18 @@ public class UserBean {
 	}
 	public void setPwd(String pwd) {
 		this.pwd = pwd;
+	}
+	public String getInterest() {
+		return interest;
+	}
+	public void setInterest(String interest) {
+		this.interest = interest;
+	}
+	public String getInterest1() {
+		return interest1;
+	}
+	public void setInterest1(String interest1) {
+		this.interest1 = interest1;
 	}
 	public String getNickname() {
 		return nickname;

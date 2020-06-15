@@ -25,9 +25,8 @@ public class Login extends HttpServlet {
 		} else if (action.equals("view")) {
 			//System.out.println(request.getParameter("id"));
 			UserBean event = dao.getEvent(request.getParameter("id"));
-			System.out.println("서블릿에서 아이디"+request.getParameter("id"));
 			request.setAttribute("event", event);
-			address = "view/view.jsp";
+			address = "view/viewview.jsp";
 		} else if (action.equals("add")) {
 			UserBean event = new UserBean();
 			event.setId((request.getParameter("id")));
@@ -35,7 +34,9 @@ public class Login extends HttpServlet {
 			event.setNickname(request.getParameter("nickname"));
 			event.setEmail(request.getParameter("email"));
 			event.setNumber(request.getParameter("number"));
-
+			event.setInterest(request.getParameter("interest"));
+			event.setInterest1(request.getParameter("interest1"));
+			
 			if (event.getId() == "" || event.getPwd() == "" || event.getNickname() == "" || event.getEmail() == ""
 					|| event.getNumber() == "") {
 				address = "view/joinAction.jsp";
@@ -43,6 +44,8 @@ public class Login extends HttpServlet {
 			} else {
 				if (dao.addid(event) == 1) {
 					request.setAttribute("event", event);
+					HttpSession session = request.getSession();
+					session.setAttribute("userid", event.getId());
 					address = "view/main.jsp";
 				} else {
 					address = "view/joinAction2.jsp";
@@ -68,8 +71,11 @@ public class Login extends HttpServlet {
 			address = "view/logout.jsp";
 		}else if (action.equals("mypage")) {
 			address = "view/mypage.jsp";
+		}else if (action.equals("modify")) {
+			address = "view/update.jsp";
 		}
-		response.sendRedirect(address);
+		RequestDispatcher dispatcher = request.getRequestDispatcher(address);
+		dispatcher.forward(request, response);
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)

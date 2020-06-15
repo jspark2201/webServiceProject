@@ -8,10 +8,10 @@
 	content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <title>IDEARIA</title>
 
-<link rel="shortcut icon" href="../img/favicon/ecology.png">
-<link rel="stylesheet" href="../css/myPage/myPage1.css">
-<link rel="stylesheet" href="../css/bootstrap.min.css">
-<link rel="stylesheet" href="../css/googleFont.css">
+<link rel="shortcut icon" href="/Web_TeamPjt/img/favicon/ecology.png">
+<link rel="stylesheet" href="/Web_TeamPjt/css/myPage/myPage1.css">
+<link rel="stylesheet" href="/Web_TeamPjt/css/bootstrap.min.css">
+<link rel="stylesheet" href="/Web_TeamPjt/css/googleFont.css">
 <link
 	href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500&display=swap"
 	rel="stylesheet">
@@ -49,9 +49,9 @@
 						data-toggle="modal" data-target="#guideModal">이용가이드 </a></li>
 					<!-- <li class="nav-item"><a class="nav-link" href="#">회원가입</a></li> -->
 					<li class="nav-item"><a class="nav-link a_400"
-						href="../Login?action=logout">로그아웃</a></li>
+						href='/Web_TeamPjt/view/logout.jsp'>로그아웃</a></li>
 					<li class="nav-item"><a class="nav-link a_400"
-						href="../Login?action=mypage">마이페이지</a></li>
+						href='/Web_TeamPjt/view/mypage.jsp'>마이페이지</a></li>
 				</ul>
 			</div>
 		</div>
@@ -152,8 +152,9 @@
 				<button type="button" class="btn btn-outline-dark"
 					onclick="location.href='../Login?action=view&id=<%=userid %>'"
 					style="margin-right: 20px;">개인정보 조회</button>
-				<button type="button" class="btn btn-outline-dark">개인정보 수정</button>
-			</div>
+				<button type="button" class="btn btn-outline-dark"
+					onclick="location.href='../Login?action=modify'"
+					style="margin-right: 20px;">개인정보 수정</button></div>
 			<div id="menu2" class="container tab-pane fade">
 				<br>
 				<div id="home" class="container tab-pane active">
@@ -263,8 +264,8 @@
 	</div>
 
 	<!-- Bootstrap core JavaScript -->
-	<script src="../vendor/jquery/jquery.min.js"></script>
-	<script src="../vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+	<script src="/Web_TeamPjt/vendor/jquery/jquery.min.js"></script>
+	<script src="/Web_TeamPjt/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
 </body>
 </html>

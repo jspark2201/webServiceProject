@@ -1,4 +1,4 @@
-v <%@ page language="java" contentType="text/html; charset=UTF-8"
+<%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <jsp:useBean id="event" class="user.UserBean" scope="request" />
@@ -37,6 +37,6 @@ v <%@ page language="java" contentType="text/html; charset=UTF-8"
 		</td>
 	</tr>
 	</table>
-	<br><a href="../Login?action=mypage">마이페이지로 돌아가기</a>
+	<br><a href="/teamproject/Login?action=list">메인페이지로 돌아가기</a>
 </body>
 </html>

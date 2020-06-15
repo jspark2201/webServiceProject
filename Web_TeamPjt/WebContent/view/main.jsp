@@ -8,10 +8,10 @@
 	content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <title>IDEARIA</title>
 
-<link rel="shortcut icon" href="../img/favicon/ecology.png">
-<link rel="stylesheet" href="../css/main/main.css">
-<link rel="stylesheet" href="../css/bootstrap.min.css">
-<link rel="stylesheet" href="../css/googleFont.css">
+<link rel="shortcut icon" href="/Web_TeamPjt/view/mypage.jsp/img/favicon/ecology.png">
+<link rel="stylesheet" href="/Web_TeamPjt/css/main/main.css">
+<link rel="stylesheet" href="/Web_TeamPjt/css/bootstrap.min.css">
+<link rel="stylesheet" href="/Web_TeamPjt/css/googleFont.css">
 <link
 	href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500&display=swap"
 	rel="stylesheet">
@@ -43,18 +43,18 @@
 							시작하기 <span class="sr-only">(current)</span>
 					</a></li>
 					<li class="nav-item active"><a class="nav-link a_400"
-						data-toggle="modal" data-target="#guideModal">이용가이드 <%= userid %></a></li>
+						data-toggle="modal" data-target="#guideModal">이용가이드 </a></li>
 					<!-- <li class="nav-item"><a class="nav-link" href="#">회원가입</a></li> -->
 					<li class="nav-item"><a class="nav-link a_400"
-						href="../Login?action=logout">로그아웃</a></li>
+						href='/Web_TeamPjt/view/logout.jsp'>로그아웃</a></li>
 					<li class="nav-item"><a class="nav-link a_400"
-						href="mypage.jsp">마이페이지</a></li>
+						href='/Web_TeamPjt/view/mypage.jsp'>마이페이지</a></li>
 				</ul>
 			</div>
 		</div>
 	</nav>
 
-	<div style="height: 100px; background-color: #FFCE1E;"></div>
+0
 	<div style="height: 5px; background-color: #b0aea9;"></div>
 
 	<!-- Carousel -->
@@ -69,7 +69,7 @@
 			<!-- Wrapper for carousel items -->
 			<div class="carousel-inner">
 				<div class="carousel-item active">
-					<img src="../img/main/main_1.jpg" alt="First Slide"
+					<img src="/Web_TeamPjt/img/main/main_1.jpg" alt="First Slide"
 						style="height: 500px; width: 100%;">
 					<div class="carousel-caption">
 						<p class="a_500"
@@ -81,11 +81,11 @@
 					</div>
 				</div>
 				<div class="carousel-item">
-					<img src="../img/main/main_2.jpg" alt="Second Slide"
+					<img src="/Web_TeamPjt/img/main/main_2.jpg" alt="Second Slide"
 						style="height: 500px; width: 100%;">
 				</div>
 				<div class="carousel-item">
-					<img src="../img/main/main_3.jpg" alt="Third Slide"
+					<img src="/Web_TeamPjt/img/main/main_3.jpg" alt="Third Slide"
 						style="height: 500px; width: 100%;">
 					<div class="carousel-caption">
 						<p class="a_500"
@@ -113,7 +113,7 @@
 	<div class="container">
 		<div style="width: 100%; padding: 30px; margin: 30px;">
 			<div class="rank_div">
-				<img class="rank_img" alt="alt" src="../img/main/crown.png">
+				<img class="rank_img" alt="alt" src="/Web_TeamPjt/img/main/crown.png">
 				<p class="rank_a a_500">실시간 랭킹</p>
 			</div>
 
@@ -149,7 +149,7 @@
 			<hr>
 
 			<div class="new_div">
-				<img class="new_img" alt="alt" src="../img/main/new.png">
+				<img class="new_img" alt="alt" src="/Web_TeamPjt/img/main/new.png">
 				<p class="new_p a_500">새 게시물</p>
 			</div>
 
@@ -245,8 +245,8 @@
 	</div>
 
 	<!-- Bootstrap core JavaScript -->
-	<script src="../vendor/jquery/jquery.min.js"></script>
-	<script src="../vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+	<script src="/Web_TeamPjt/vendor/jquery/jquery.min.js"></script>
+	<script src="/Web_TeamPjt/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
 	<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
 		integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
