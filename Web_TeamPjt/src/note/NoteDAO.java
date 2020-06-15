@@ -37,23 +37,19 @@ public class NoteDAO {
  
         try {
             conn = dbConn(); // db연결 키
-            String sql = "select * from NOTE";
+            String sql = "select * from NOTE where receiveID='jspark'";
             pstmt = conn.prepareStatement(sql); // sql을 실행시키는 객체 만들어짐
             rs = pstmt.executeQuery(); // 실행 후 결과 값이 rs에 넘어옴
  
             while (rs.next()) {                    //결과셋.next(); 다음 레코드가 있으면 true
  
             	NoteDTO dto = new NoteDTO();
-//                dto.setId(rs.getInt("id"));
-//                dto.setTitle(rs.getString("title"));
-//                dto.setAuthor(rs.getString("author"));
-//                dto.setPrice(rs.getInt("price"));
-//                dto.setQty(rs.getInt("qty"));
-            	
+
             	dto.setNoteNumber(rs.getInt("noteNumber"));
             	dto.setReceiveID(rs.getString("receiveID"));
             	dto.setGiveID(rs.getString("giveID"));
             	dto.setGiveEmail(rs.getString("giveEmail"));
+            	dto.setTitle(rs.getString("title"));
             	dto.setComment(rs.getString("comment"));
                 
                 //ArrayList에 추가
@@ -89,8 +85,52 @@ public class NoteDAO {
             
         }
         return list;
-
-		
+	}
+	
+	public int getNext() {
+		Connection conn = null; // DB접속 객체
+        PreparedStatement pstmt = null; // SQL실행객체
+        ResultSet rs = null; // 결과셋 처리 객체
+        
+		try {
+            conn = dbConn(); // db연결 키
+            String sql = "select noteNumber from NOTE order by noteNumber DESC";
+            pstmt = conn.prepareStatement(sql); // sql을 실행시키는 객체 만들어짐
+            rs = pstmt.executeQuery(); // 실행 후 결과 값이 rs에 넘어옴
+            
+            if(rs.next()) {
+            	return rs.getInt(1) + 1;
+            }
+            return 1;
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
+		return -1;
+	}
+	
+	
+	public int sendNote(String receiveID, String giveID, String giveEmail, String title, String comment) {
+		Connection conn = null; // DB접속 객체
+        PreparedStatement pstmt = null; // SQL실행객체
+        ResultSet rs = null; // 결과셋 처리 객체
+        
+        try {
+        	conn = dbConn(); // db연결 키
+            String sql = "insert into Note values (?,?,?,?,?,?)";
+            pstmt = conn.prepareStatement(sql); // sql을 실행시키는 객체 만들어짐
+            pstmt.setInt(1, getNext());
+            pstmt.setString(2, receiveID);
+            pstmt.setString(3, giveID);
+            pstmt.setString(4, giveEmail);
+            pstmt.setString(5, title);
+            pstmt.setString(6, comment);
+        	return pstmt.executeUpdate();
+        	
+        } catch(Exception e) {	
+        	e.printStackTrace();
+        }
+        
+        return -1;
 	}
 
 	

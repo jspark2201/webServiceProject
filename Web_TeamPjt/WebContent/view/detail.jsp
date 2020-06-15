@@ -22,10 +22,10 @@
    }
 %> --%>
 
-<link rel="shortcut icon" href="../img/favicon/ecology.png">
-<link rel="stylesheet" href="../css/detail/detail1.css">
-<link rel="stylesheet" href="../css/bootstrap.min.css">
-<link rel="stylesheet" href="../css/googleFont.css">
+<link rel="shortcut icon" href="/Web_TeamPjt/img/favicon/ecology.png">
+<link rel="stylesheet" href="/Web_TeamPjt/css/detail/detail1.css">
+<link rel="stylesheet" href="/Web_TeamPjt/css/bootstrap.min.css">
+<link rel="stylesheet" href="/Web_TeamPjt/css/googleFont.css">
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500&display=swap" rel="stylesheet">
 
 </head>
@@ -297,11 +297,11 @@
   
 
 	<!-- Bootstrap core JavaScript -->
-	<script src="../vendor/jquery/jquery.min.js"></script>
-	<script src="../vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+	<script src="/Web_TeamPjt/vendor/jquery/jquery.min.js"></script>
+	<script src="/Web_TeamPjt/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
-	<script type="text/javascript" src="../js/alertScript.js" ></script>
-	<script type="text/javascript" src="../js/detail/detail.js" ></script>
+	<script type="text/javascript" src="/Web_TeamPjt/js/alertScript.js" ></script>
+	<script type="text/javascript" src="/Web_TeamPjt/js/detail/detail.js" ></script>
 	
 </body>
 	<script>

@@ -7,9 +7,10 @@
 <title>IDEARIA</title>
 
 <link rel="shortcut icon" href="../img/favicon/ecology.png">
-<link rel="stylesheet" href="../css/myPage/myPage1.css">
+<link rel="stylesheet" href="../css/myPage/myPage.css">
 <link rel="stylesheet" href="../css/bootstrap.min.css">
 <link rel="stylesheet" href="../css/googleFont.css">
+<link rel="stylesheet" href="../css/card.css">
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500&display=swap" rel="stylesheet">
 
 </head>
@@ -45,7 +46,7 @@
 						</a>
 					</li>
 					<!-- <li class="nav-item"><a class="nav-link" href="#">회원가입</a></li> -->
-					<li class="nav-item"><a class="nav-link a_400" href="#">로그아웃</a></li>
+					<li class="nav-item"><a class="nav-link a_400" onclick="logoutAlert()">로그아웃</a></li>
 					<li class="nav-item"><a class="nav-link a_400" href="#">마이페이지</a></li>
 				</ul>
 			</div>
@@ -58,7 +59,7 @@
 
 	
 	<!-- Page Content -->
-  <div class="container" style="padding:80px; background-color:#ffffff; border:1px solid #a6a6a6; margin-bottom:50px;">
+  <div class="container" style="min-height:1000px; padding:80px; background-color:#ffffff; border:1px solid #a6a6a6; margin-bottom:50px;">
 
   
 	  <!-- Nav tabs -->
@@ -73,10 +74,7 @@
 	      <a class="nav-link a_500" style="color:#FFCE1E;" data-toggle="tab" href="#menu2">아이디어</a>
 	    </li>
 	    <li class="nav-item">
-	      <a class="nav-link a_500" style="color:#FFCE1E;" data-toggle="tab" href="#menu3">임시저장</a>
-	    </li>
-	    <li class="nav-item">
-	      <a class="nav-link a_500" style="color:#FFCE1E;" data-toggle="tab" href="#menu4">알림</a>
+	      <a class="nav-link a_500" style="color:#FFCE1E;" data-toggle="tab" href="#menu3">포트폴리오</a>
 	    </li>
 	  </ul>
 	
@@ -142,9 +140,11 @@
 			</ul>
 	    </div>
 	    <div id="menu1" class="container tab-pane fade"><br>
-	      <h3>Menu 1</h3>
-	      <p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+	      <p class="p_400" style="color:#cccccc;">개인정보 조회 및 수정은 인증이 필요합니다.</p>
+	      <button type="button" class="btn btn-outline-dark" style="margin-right:20px;">개인정보 조회</button>
+	      <button type="button" class="btn btn-outline-dark">개인정보 수정</button>
 	    </div>
+	    <hr>
 	    <div id="menu2" class="container tab-pane fade"><br>
 		    <div id="home" class="container tab-pane active" ><br>
 			    <ul class="pagination justify-content-center">
@@ -156,7 +156,130 @@
 				</ul>
 		    </div>
 	    </div>
-	    <div id="menu3" class="container tab-pane fade"><br>
+	    <div id="menu3" class="container tab-pane fade">
+	    	<p class="p_400" style="color:#cccccc;">외부 홈페이지의 포트폴리오 업로드가 가능합니다.</p>
+	      	<button type="button" class="btn btn-outline-dark" data-toggle="modal" data-target="#portfolioModal">
+	      		<a class="a_400">추가하기</a>
+	      	</button>
+		    <hr>
+		    
+		    <div class="row">
+			<div class="col-lg-4 col-sm-6 portfolio-item" style="margin-bottom:30px;">
+				<div class="card h-100" style="border-color:red; border-width:5px;">
+					<div class="card_img">
+						<img style="width:100%; height:100%;" alt="" src="../img/main/main_2.jpg">
+					</div>
+					<div class="card-body">
+						<h4 class="card-title">
+							<a href="#" class="a_400" style="color:#FFCE1E">Project One</a>
+						</h4>
+						<p class="card-text">Lorem ipsum dolor sit amet, consectetur
+							adipisicing elit. Amet numquam aspernatur eum quasi sapiente
+							nesciunt? Voluptatibus sit, repellat sequi itaque deserunt,
+							dolores in, nesciunt, illum tempora ex quae? Nihil, dolorem!</p>
+							<div><button type="button" class="btn btn-outline-danger btn-sm" style="position: absolute; left: 60%; top: 90%;" onclick="">
+							<a class="a_400">삭제하기</a>
+						</button></div>
+					</div>
+				</div>
+			</div>
+			<div class="col-lg-4 col-sm-6 portfolio-item" style="margin-bottom:30px">
+				<div class="card h-100" style="border-color:green; border-width:5px;">
+					<div class="card_img">
+						<img style="width:100%; height:100%;" alt="" src="../img/main/main_2.jpg">
+					</div>
+					<div class="card-body">
+						<h4 class="card-title">
+							<a href="#" class="a_400" style="color:#FFCE1E">Project Two</a>
+						</h4>
+						<p class="card-text">Lorem ipsum dolor sit amet, consectetur
+							adipiscing elit. Nam viverra euismod odio, gravida pellentesque
+							urna varius vitae.</p>
+						<button type="button" class="btn btn-outline-danger btn-sm" style="position: absolute; left: 60%; top: 90%;"onclick="">
+							<a class="a_400">삭제하기</a>
+						</button>
+					</div>
+				</div>
+			</div>
+			<div class="col-lg-4 col-sm-6 portfolio-item" style="margin-bottom:30px">
+				<div class="card h-100" style="border-color:blue; border-width:5px;">
+					<div class="card_img">
+						<img style="width:100%; height:100%;" alt="" src="../img/main/main_2.jpg">
+					</div>
+					<div class="card-body">
+						<h4 class="card-title">
+							<a href="#" class="a_400" style="color:#FFCE1E">Project Three</a>
+						</h4>
+						<p class="card-text">Lorem ipsum dolor sit amet, consectetur
+							adipisicing elit. Quos quisquam, error quod sed cumque, odio
+							distinctio velit nostrum temporibus necessitatibus et facere
+							atque iure perspiciatis mollitia recusandae vero vel quam!</p>
+							
+						<button type="button" class="btn btn-outline-danger btn-sm" style="position: absolute; left: 60%; top: 90%;"onclick="">
+							<a class="a_400">삭제하기</a>
+						</button>
+					</div>
+				</div>
+			</div>
+			<div class="col-lg-4 col-sm-6 portfolio-item" style="margin-bottom:30px">
+				<div class="card h-100" style="border-color:#5e3b4b; border-width:5px;">
+					<div class="card_img">
+						<img style="width:100%; height:100%;" alt="" src="../img/main/main_2.jpg">
+					</div>
+					<div class="card-body">
+						<h4 class="card-title">
+							<a href="#" class="a_400" style="color:#FFCE1E">Project Four</a>
+						</h4>
+						<p class="card-text">Lorem ipsum dolor sit amet, consectetur
+							adipiscing elit. Nam viverra euismod odio, gravida pellentesque
+							urna varius vitae.</p>
+						<button type="button" class="btn btn-outline-danger btn-sm" style="position: absolute; left: 60%; top: 90%;"onclick="">
+							<a class="a_400">삭제하기</a>
+						</button>
+					</div>
+				</div>
+			</div>
+			<div class="col-lg-4 col-sm-6 portfolio-item" style="margin-bottom:30px">
+				<div class="card h-100" style="border-color:#e600e6; border-width:5px;">
+					<div class="card_img">
+						<img style="width:100%; height:100%;" alt="" src="../img/main/main_2.jpg">
+					</div>
+					<div class="card-body">
+						<h4 class="card-title">
+							<a href="#" class="a_400" style="color:#FFCE1E">Project Five</a>
+						</h4>
+						<p class="card-text">Lorem ipsum dolor sit amet, consectetur
+							adipiscing elit. Nam viverra euismod odio, gravida pellentesque
+							urna varius vitae.</p>
+						<button type="button" class="btn btn-outline-danger btn-sm" style="position: absolute; left: 60%; top: 90%;" onclick="">
+							<a class="a_400">삭제하기</a>
+						</button>
+					</div>
+				</div>
+			</div>
+			<div class="col-lg-4 col-sm-6 portfolio-item" style="margin-bottom:30px">
+				<div class="card h-100" style="border-color:#e2d0d8; border-width:5px;">
+					
+					<div class="card_img">
+						<img style="width:100%; height:100%;" alt="" src="../img/main/main_1.jpg">
+					</div>
+					<div class="card-body">
+						<h4 class="card-title">
+							<a href="#" class="a_400" style="color:#FFCE1E">Project Six</a>
+						</h4>
+						<p class="card-text">Lorem ipsum dolor sit amet, consectetur
+							adipisicing elit. Itaque earum nostrum suscipit ducimus nihil
+							provident, perferendis rem illo, voluptate atque, sit eius in
+							voluptates, nemo repellat fugiat excepturi! Nemo, esse.</p>
+						<button type="button" class="btn btn-outline-danger btn-sm" style="position: absolute; left: 60%; top: 90%;" onclick="">
+							<a class="a_400" style="margin-bottom:5px;">삭제하기</a>
+						</button>
+					</div>
+				</div>
+			</div>
+		</div>
+		    
+		    <hr>
 		    <div id="home" class="container tab-pane active" ><br>
 			    <ul class="pagination justify-content-center">
 				  <li class="page-item"><a class="page-link" href="#">Previous</a></li>
@@ -305,10 +428,132 @@
     </div>
   </div>
 
+	<!-- 포트폴리오 추가 모달 -->
+	<div class="modal fade" id="portfolioModal">
+    <div class="modal-dialog modal-dialog-scrollable" style="max-width:1024px;">
+      <div class="modal-content">
+      
+        <!-- Modal Header -->
+        <div class="modal-header">
+          <h4 class="modal-title a_400">포트폴리오 추가</h4>
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+        </div>
+        
+        <!-- Modal body -->
+        <div class="modal-body">
+          <!-- CONTAINER -->
+	<div class="container" style="background-color:#ffffff; border:1px solid #a6a6a6; margin-bottom:50px;">
+		<hr class="hr1" style="margin-top:50px;">
+		
+		<form>
+			<div class="row" style="margin-top:30px;margin-bottom:30px;">
+				<div class="col-sm-4"><a class="a_500">프로젝트 제목</a></div>
+				<div class="col-sm-8">
+					<input type="text" class="form-control" id="usr" style="width:50%">
+				</div>
+			</div>
+			<div class="row" style="margin-top:30px;margin-bottom:30px;">
+				<div class="col-sm-4">
+					<a class="a_500">이미지 첨부</a> 
+					<label class="btn-bs-file btn btn-lg btn-warning"> 
+						Browse 
+					<input type="file" />
+				</div>
+				<div class="col-sm-8">
+					<img class="img-fluid rounded mb-4 mb-lg-0"
+					src="http://placehold.it/400x400" alt="">
+				</div>
+			</div>
+			<div class="row" style="margin-top:30px;margin-bottom:30px;">
+				<div class="col-sm-4">
+					<a class="a_500">프로젝트 플랫폼</a> 
+				</div>
+				<div class="col-sm-8">
+					<div class="form-group ">
+						<select id="interest_1" class="form-control a_400" style="width:50%">
+							<option>WEB</option>
+							<option>안드로이드</option>
+							<option>임베디드</option>
+							<option>IOS</option>
+						</select>
+					</div>
+				</div>
+			</div>
+			<div class="row" style="margin-top:30px;margin-bottom:30px;">
+				<div class="col-sm-4">
+					<a class="a_500">흥미 분야</a> 
+				</div>
+				<div class="col-sm-8">
+					<div class="form-group ">
+						<select id="interest_1" class="form-control a_400" style="width:50%">
+							<option>건강</option>
+							<option>심리학</option>
+							<option>게임</option>
+						</select>
+					</div>
+				</div>
+			</div>
+			<div class="row" style="margin-top:30px;margin-bottom:30px;">
+				<div class="col-sm-4"><a class="a_500">프로젝트 간략 소개</a></div>
+				<div class="col-sm-8">
+					<input type="text" class="form-control" id="usr">
+				</div>
+			</div>
+			<div class="row" style="margin-top:30px;margin-bottom:30px;">
+				<div class="col-sm-4"><a class="a_500">프로젝트 소개</a></div>
+				<div class="col-sm-8">
+					 <textarea class="a_400" "id="field" placeholder="소개하시려는 아이디어 프로젝트를 쉽게 풀어서 작성하여 주십시오." maxlength="3000" rows="10" cols="40"></textarea>
+    
+    <div class="message"></div>
+				</div>
+			</div>
+			<!-- <div class="row margin30">
+				<div class="col-sm-4"><a class="a_500">해시태그</a></div>
+				<div class="col-sm-8">.col-sm-8</div>
+			</div> -->
+		</form>
+		<hr class="hr1" style="margin-top:20px;margin-bottom:30px;">
+		<div style="text-align:center; margin-bottom:30px;">
+			<button type="button" class="btn btn-warning a_400" onclick="uploadAlert()">게시하기</button>
+		</div>
+	</div>
+        </div>
+        
+        <!-- Modal footer -->
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+	
+	
 	<!-- Bootstrap core JavaScript -->
 	<script src="../vendor/jquery/jquery.min.js"></script>
 	<script src="../vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
+	<script type="text/javascript" src="../js/alertScript.js" ></script>
+	<script src="../js/myPage/myPage.js"></script>
 
+	<script type="text/javascript">
+	/*global $, console*/
+	
+	
+		$(function() {
+			"use strict";
+			var maxText = $("textarea").attr("maxlength"),
+			ourMessage = $(".message");
+			ourMessage
+					.html('<span>' + maxText + '</span> / 3000');
+			$("textarea").keyup(
+					function() {
+						var textLength = $(this).val().length,
+						remText = maxText - textLength;
+						ourMessage.html('<span>' + remText
+								+ '</span> / 3000');
+					});
+		});
+	</script>
 </body>
 </html>
 

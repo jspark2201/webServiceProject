@@ -5,18 +5,21 @@
 <head>
 <meta charset="UTF-8">
 <title>IDEARIA</title>
-<link rel="shortcut icon" href="../img/favicon/ecology.png">
+<link rel="shortcut icon" href="/Web_TeamPjt/img/favicon/ecology.png">
 
-<link href="../css/googleFont.css" rel="stylesheet">
-<link href="../css/login/login.css" rel="stylesheet">
+<link href="/Web_TeamPjt/css/googleFont.css" rel="stylesheet">
+<link href="/Web_TeamPjt/css/login/login.css" rel="stylesheet">
 <!-- Bootstrap core CSS -->
 <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 
 <!-- Custom styles for this template -->
-<link href="../css/bootstrap.min.css" rel="stylesheet">
+<link href="/Web_TeamPjt/css/bootstrap.min.css" rel="stylesheet">
 
 </head>
 <body>
+
+
+
 	<div class="jumbotron jumbotron-fluid">
 		<div class="container">
 			<!-- <h1>Bootstrap Tutorial</h1>
@@ -94,8 +97,8 @@
 						<h2>Please Sign In</h2>
 						<hr class="colorgraph">
 						<div class="form-group">
-							<input type="email" name="email" id="email"
-								class="form-control input-lg" placeholder="Email Address">
+							<input type="text" name="id" 
+								class="form-control input-lg" placeholder="id">
 						</div>
 						<div class="form-group">
 							<input type="password" name="password" id="password"
@@ -181,8 +184,8 @@
 	  
 
 	<!-- Bootstrap core JavaScript -->
-	<script src="vendor/jquery/jquery.min.js"></script>
-	<script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+	<script src="/Web_TeamPjtvendor/jquery/jquery.min.js"></script>
+	<script src="/Web_TeamPjtvendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 	
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>

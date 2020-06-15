@@ -2,6 +2,7 @@ package Admin;
 
 import User.*;
 import Idea.*;
+import Admin.*;
 
 import java.io.IOException;
 
