@@ -102,6 +102,7 @@
 	boardDao.insertPicturesBoard(board);//사진 테이블 추가
 	boardDao.insertTypeBoard(board);//타입 추가
 
+
 	response.sendRedirect(request.getContextPath() + "/board/boardList.jsp");
 	%>
 </body>
