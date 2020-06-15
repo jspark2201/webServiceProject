@@ -29,15 +29,12 @@
 	} else {
 		int boardNo = Integer.parseInt(request.getParameter("boardNo"));
 		BoardDao boardDao = new BoardDao();
-		System.out.println("view" + boardNo);
+		//System.out.println("view" + boardNo);
 		Board board = boardDao.selectBoardByKey(boardNo);//아이디어
 		List<Board> mlist = boardDao.selectComments(boardNo);//댓글 리스트
 		int cnt = mlist.size();//댓글 수
 		String id = (String) session.getAttribute("userID");//사용자 세션
 
-		if (id == null) {
-			id = "admin";
-		}
 
 		int goodCount = boardDao.goodCount(boardNo);//좋아요 수
 		int participantsState = boardDao.participantsState(boardNo);//아이디어의 상태(모집 중, 모집 완료)
