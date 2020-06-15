@@ -25,9 +25,7 @@ public class IdeaDAO {
 		// 1. Driver �ε�
 		try {
 			Properties properties = new Properties();
-			Reader reader;
-			reader = new FileReader("db.properties");
-			properties.load(reader);
+			properties.load((getClass().getResourceAsStream("../config/db.properties")));
 
 			jdbc_driver = properties.getProperty("jdbc_driver");
 			jdbc_url = properties.getProperty("jdbc_url");

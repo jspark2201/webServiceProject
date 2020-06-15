@@ -1144,9 +1144,8 @@ public class BoardDao {
 	        Connection connection = null;
 	        try {
 				Properties properties = new Properties();
-				Reader reader;
-				reader = new FileReader("db.properties");
-				properties.load(reader);
+				properties.load((getClass().getResourceAsStream("../config/db.properties")));
+
 
 				jdbc_driver = properties.getProperty("jdbc_driver");
 				jdbc_url = properties.getProperty("jdbc_url");
