@@ -8,6 +8,10 @@
 
 <%@ page import="mypage.DBEventDAO"%>
 <%@ page import="java.util.ArrayList"%>
+<%@page import="note.*" %>
+<%@page import="notification.*" %>
+<%@page import="java.util.ArrayList" %>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!doctype html>
 <html lang="ko">
 <head>
@@ -15,7 +19,7 @@
 <meta name="viewport"
 	content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <title>IDEARIA</title>
-
+<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
 <link rel="shortcut icon" href="../img/favicon/ecology.png">
 <link rel="stylesheet" href="../css/myPage/myPage.css">
 <link rel="stylesheet" href="../css/bootstrap.min.css">
@@ -24,7 +28,28 @@
 <link
 	href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500&display=swap"
 	rel="stylesheet">
+<script type="text/javascript" src="https://code.jquery.com/jquery-3.2.0.min.js" ></script>
+<script type="text/javascript">
+/* $(function(){
+  $('#noteModalTitle').text('이름을 입력하세요');
+}); */
+var title2;
+var receiveID;
 
+function sendTitle(title, giveID, comment) {
+	$('#noteModalTitle').text(title);
+	$('#noteModalWriter').text(giveID);
+	$('#noteModalContent').text(comment);
+	title2 = title;
+	receiveID = giveID;
+}
+
+function writeTitle() {	//모달창에서 보내기를 눌렀을 
+	$('#reSendTitle').val("re:"+title2);
+	$('#writeModalTitle').text("re:"+title2);
+	$('#receiveID').val(receiveID);
+}
+</script>
 </head>
 <body>
 
@@ -116,50 +141,29 @@
 				<table class="table">
 					<thead>
 						<tr>
-							<th></th>
-							<th>이름</th>
-							<th>Email</th>
+							<th>보낸 사람</th>
+							<th>이메일</th>
+							<th>제목</th>
 							<th>내용</th>
 						</tr>
 					</thead>
 					<tbody>
+						<%
+					NoteDAO dao = new NoteDAO();
+					ArrayList<NoteDTO> list3 = dao.noteList();
+					request.setAttribute("list3", list3);
+					%>
+					
+					<c:forEach var="n" items="${list3}">
 						<tr>
-							<td>1</td>
-							<td>Kent</td>
-							<td>clarkkent@mail.com</td>
-							<td><a data-toggle="modal" data-target="#mailModal">a</a></td>
+							<td ><a name="giveID">${n.giveID}</a></td>
+							<td><a name="giveEmail">${n.giveEmail}</a></td>
+							<td>${n.title} </td>
+							<td><a id="noteContent" data-toggle="modal" data-target="#mailModal" onclick="sendTitle('${n.title}', '${n.giveID}', '${n.comment}')">${n.comment}</a></td>
 						</tr>
-						<tr>
-							<td>2</td>
-
-							<td>Carter</td>
-							<td>johncarter@mail.com</td>
-							<td><a data-toggle="modal" data-target="#mailModal">b</a></td>
-						</tr>
-						<tr>
-							<td>3</td>
-							<td>Parker</td>
-							<td>peterparker@mail.com</td>
-							<td><a data-toggle="modal" data-target="#mailModal">c</a></td>
-						</tr>
-						<tr>
-							<td>4</td>
-							<td>Parker</td>
-							<td>peterparker@mail.com</td>
-							<td><a data-toggle="modal" data-target="#mailModal">d</a></td>
-						</tr>
-						<tr>
-							<td>5</td>
-							<td>Parker</td>
-							<td>peterparker@mail.com</td>
-							<td><a data-toggle="modal" data-target="#mailModal">e</a></td>
-						</tr>
-						<tr>
-							<td>6</td>
-							<td>Parker</td>
-							<td>peterparker@mail.com</td>
-							<td><a data-toggle="modal" data-target="#mailModal">f</a></td>
-						</tr>
+					</c:forEach>
+						
+						
 					</tbody>
 				</table>
 				<p class="p_400" style="color: #cccccc;">쪽지 내용을 클릭하시면 상세 보기가
@@ -384,6 +388,51 @@
 						</ul>
 				</div>
 			</div>
+			<div id="menu4" class="container tab-pane fade"><br>
+	    <table class="table">
+					<thead>
+						<tr>
+
+							<th>보낸 사람</th>
+							<th>이메일</th>
+							<th>내용</th>
+							<th>아이디어 제목</th>
+							<th>아이디어 링크</th>
+						</tr>
+					</thead>
+					<tbody>
+					<%
+						NotificationDAO dao2 = new NotificationDAO();
+					
+						ArrayList<NotificationDTO> list2 = dao2.notificationList();
+						for(NotificationDTO dto:list2) {
+					%>
+						<tr>
+							<td><%=dto.getGiveID() %></td>
+							<td><%=dto.getGiveEmail() %></td>
+							<td>컨택 요청이 들어왔습니다.</td>
+							<td><%=dto.getIdeaTitle() %></td>
+							<%-- <td><a href="../Notification?data=<%=dto.getIdeaLink() %>"><%=dto.getIdeaLink() %></a></td> --%>
+							<td><a href=""><%=dto.getIdeaLink() %></a></td>
+						</tr>
+					<%
+						}	
+					%>
+
+					</tbody>
+				</table>
+	    
+		    <div id="home" class="container tab-pane active" ><br>
+			    <ul class="pagination justify-content-center">
+				  <li class="page-item"><a class="page-link" href="#">Previous</a></li>
+				  <li class="page-item"><a class="page-link" href="#">1</a></li>
+				  <li class="page-item"><a class="page-link" href="#">2</a></li>
+				  <li class="page-item"><a class="page-link" href="#">3</a></li>
+				  <li class="page-item"><a class="page-link" href="#">Next</a></li>
+				</ul>
+		    </div>
+	    </div>
+			
 		</div>
 	</div>
 	<!-- /.container -->
