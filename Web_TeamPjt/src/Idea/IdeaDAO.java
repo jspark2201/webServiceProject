@@ -145,7 +145,87 @@ public class IdeaDAO {
 		return idea;
 	}
 	
+	public ArrayList getDBTopList() {
+		connect();
+		
+		String sql = "SELECT idea.id as id, writer, title, state, good_cnt, src AS image_src from idea" + 
+				"    JOIN (select idea_id, COUNT(*) AS good_cnt from good" + 
+				"          where registration_date > last_day(now() - interval 1 month)" + 
+				"			 and registration_date <= last_day(now())" + 
+				"          group by idea_id ORDER BY COUNT(*) desc) as tmp ON idea.id = tmp.idea_id" + 
+				"    LEFT JOIN pictures ON idea.id = pictures.idea_id" +
+				"    WHERE state < 3" +
+				"    limit 5;";
+		
+		ArrayList<Idea> ideas = new ArrayList<Idea>();
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			ResultSet rs = pstmt.executeQuery();
+
+			while(rs.next()) {
+				Idea idea = new Idea();
+
+				idea.setId(rs.getInt("id"));
+				idea.setWriter(rs.getString("writer"));
+				idea.setTitle(rs.getString("title"));
+				idea.setStateIdx(rs.getInt("state"));
+				idea.setGoodCount(rs.getInt("good_cnt"));
+				idea.setImageSrc(rs.getString("image_src"));
+				
+				ideas.add(idea);
+			}
+			rs.close();
+			
+		}
+		catch(SQLException e) {
+			System.out.println("getDBTopList 실패");
+		}
+		finally {
+			disconnect();
+		}
 	
+		
+		return ideas;
+	}
+	
+	public ArrayList getDBList()
+	{
+		connect();
+		
+		String sql = "SELECT idea.id, title, content, src AS image_src from idea" + 
+				"    LEFT JOIN pictures ON idea.id = pictures.idea_id" + 
+				"    WHERE state = 0" +
+				"    ORDER BY registration_date DESC" + 
+				"    LIMIT 3;";
+		
+		ArrayList<Idea> ideas = new ArrayList<Idea>();
+
+		try {
+			pstmt = conn.prepareStatement(sql);
+
+			ResultSet rs = pstmt.executeQuery();
+	
+			while(rs.next()) {
+				Idea idea = new Idea();
+	
+				idea.setId(rs.getInt("id"));
+				idea.setTitle(rs.getString("title"));
+				idea.setContent(rs.getString("content"));
+				idea.setImageSrc(rs.getString("image_src"));				
+				ideas.add(idea);
+			}
+			rs.close();
+		}
+		catch(SQLException e) {
+			System.out.println("getDBList 실패");
+		}
+		finally {
+			disconnect();
+		}
+
+	return ideas;
+	}
 	
 
 	public ArrayList getDBList (String type, String search, int filter, String order, int pageN)

@@ -11,7 +11,8 @@ public class Idea {
 	private int number_participants;
 	private String url;
 	private int stateIdx;
-	private String state;
+	private int goodCount;
+	private String imageSrc;
 	
 	public int getId() {
 		return id;
@@ -76,6 +77,22 @@ public class Idea {
 	
 	public String getState() {
 		return IdeaState.getState(this.stateIdx);
+	}
+	public int getGoodCount() {
+		return goodCount;
+	}
+	public void setGoodCount(int goodCount) {
+		this.goodCount = goodCount;
+	}
+	public String getImageSrc() {
+		return imageSrc;
+	}
+	public void setImageSrc(String imageSrc) {
+		
+		if (imageSrc != null)
+			this.imageSrc = imageSrc;
+		else
+			this.imageSrc = "../img/main/main_1.jpg";
 	}
 
 	
