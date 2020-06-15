@@ -239,16 +239,16 @@ public class DBEventDAO {
 		return -1; // 데이터베이스 오류
 	}
 
-	public String getPict(String bbsID) {
-		String SQL = "SELECT src FROM pictures WHERE idea_id  = '" + bbsID + "'";
+	public String getPict(int bbsID) {
+		String SQL = "SELECT * FROM pictures WHERE idea_id  = '" + bbsID + "'";
 
 		try {
 
 			ResultSet rset = stmt.executeQuery(SQL);
-
-			if (rs.next()) {
-				return rset.getString(1);
-			}
+			System.out.println("test : "+rset.getString(1));
+			
+				return rset.getString(2);
+			
 		} catch (SQLException sqex) {
 			System.out.println("SQLException: " + sqex.getMessage());
 			System.out.println("SQLState: " + sqex.getSQLState());
@@ -256,6 +256,7 @@ public class DBEventDAO {
 		}
 		return null;
 	}
+	
 
 	public int getPortfolilID(String userID, String registration_date, String complete_date) {
 
@@ -595,6 +596,47 @@ public class DBEventDAO {
 		} catch (Exception e) {
 
 			e.printStackTrace();
+
+		}
+
+		return -1; // 데이터베이스 오류
+
+	}
+	
+	public int updateIdeaFavorite(int ideaID, boolean web, boolean android, boolean embeded, boolean ios, boolean health,
+			boolean psychology, boolean game){
+
+		String SQL = "UPDATE idea_favorite SET web=?, android=?,embeded=?,ios=?,health=?,psychology=?,game=? WHERE bbsID = ?";
+		
+		try {
+
+			PreparedStatement pstmt = conn.prepareStatement(SQL);
+
+			if (ideaID == -1)
+				return -1;
+
+			pstmt.setInt(1, ideaID);
+
+			pstmt.setBoolean(2, web);
+
+			pstmt.setBoolean(3, android);
+
+			pstmt.setBoolean(4, embeded);
+
+			pstmt.setBoolean(5, ios);
+
+			pstmt.setBoolean(6, health);
+
+			pstmt.setBoolean(7, psychology);
+
+			pstmt.setBoolean(8, game);
+
+			System.out.print("success");
+			return pstmt.executeUpdate();
+
+		} catch (SQLException sqex) {
+			System.out.println("SQLException: " + sqex.getMessage());
+			System.out.println("SQLState: " + sqex.getSQLState());
 
 		}
 

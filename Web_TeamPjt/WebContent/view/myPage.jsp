@@ -216,7 +216,7 @@
 							imgSRC = "http://placehold.it/700x400";
 						else
 							imgSRC =bbsDAO.getPic(list.get(i).getBbs_id());
-						System.out.println(imgSRC);
+						
 					%>
 					<div class="col-lg-4 col-sm-6 portfolio-item"
 						style="margin-bottom: 30px;">
@@ -276,7 +276,7 @@
 										if (list.get(i).getBbsContent().length() > 30) {
 									%>
 									
-									<%//=list.get(i).getBbsContent().substring(0, 31)%>
+									<!-- <%//=list.get(i).getBbsContent().substring(0, 31)%>-->
 									<%
 										} else {
 									%>
@@ -530,7 +530,7 @@
 										<select id="interest_1" name="favorite"
 											class="form-control a_400" style="width: 50%">
 											<option value="health">건강</option>
-											<option value="pychology">심리학</option>
+											<option value="psychology">심리학</option>
 											<option value="game">게임</option>
 										</select>
 									</div>

@@ -125,12 +125,11 @@
 		port.setPictsrc(imgFullPath);
 
 		result2 = DAO.writePict(port.getPictsrc(), portID);
-			}
-			else
-				result2 = 1;
+			} else
+		result2 = 1;
 			String[] favorite = multi.getParameterValues("favorite");
 			for (int i = 0; i < favorite.length; i++) {
-
+		System.out.println(i+"번쨰 반복");
 		if (favorite[i].equals("web"))
 			web = true;
 		else if (favorite[i].equals("android"))

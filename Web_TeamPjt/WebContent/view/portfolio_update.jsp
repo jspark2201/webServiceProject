@@ -84,7 +84,9 @@
 		}
 		DBEventDAO DAO = DBEventDAO.getInstance();
 		PortfolioBean port = DAO.getPortfolio(bbsID);
-
+		
+		String picsrc = DAO.getPict(bbsID);
+		System.out.println("테스트 : " +picsrc);
 		if (!userID.equals(port.getUserID())) {
 
 			PrintWriter script = response.getWriter();
@@ -170,9 +172,10 @@
 						type="file" name="pictsrc" id="pictsrc" />
 				</div>
 				<div class="col-sm-8">
+				
 					<img class="img-fluid rounded mb-4 mb-lg-0" id='preview'
 						style="height: 100%; width: 400px;"
-						src="http://placehold.it/400x400" alt="">
+						src="<%if(picsrc==null) {%>http://placehold.it/400x400<%}else{ %> <%=picsrc %><%} %>" alt="">
 				</div>
 			</div>
 
@@ -398,7 +401,8 @@
               reader.readAsDataURL(get_file[0]);
               console.log(2);
            }else{
-        	   reader.readAsDataURL("http://placehold.it/400x400");
+        	   
+        	   reader.readAsDataURL("<%if(picsrc==null) {%>http://placehold.it/400x400<%}else{ %> <%=picsrc %><%} %>");
            }
 			
         })

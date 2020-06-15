@@ -145,10 +145,30 @@
 
 			port.setPictsrc(imgFullPath);
 
-			result2 = DAO.writePict(port.getPictsrc(), bbsID);
+			result2 = DAO.updatePict(bbsID, port.getPictsrc() );
 		} else
 			result2 = 1;
+		boolean web = false, android = false, embeded = false, ios = false, health = false, psychology = false,
+				game = false;
+		String[] favorite = multi.getParameterValues("favorite");
+		for (int i = 0; i < favorite.length; i++) {
 
+			if (favorite[i].equals("web"))
+				web = true;
+			else if (favorite[i].equals("android"))
+				android = true;
+			else if (favorite[i].equals("embeded"))
+				embeded = true;
+			else if (favorite[i].equals("ios"))
+				ios = true;
+			else if (favorite[i].equals("health"))
+				health = true;
+			else if (favorite[i].equals("psychology"))
+				psychology = true;
+			else if (favorite[i].equals("game"))
+				game = true;
+		}
+		DAO.updateIdeaFavorite(bbsID, web, android, embeded, ios, health, psychology, game);
 		if (result == -1 | result2 == -1) {
 
 			PrintWriter script = response.getWriter();
