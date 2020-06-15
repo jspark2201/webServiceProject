@@ -74,7 +74,7 @@
 		imgpath = multi.getFilesystemName("pictsrc");
 		String imgFullPath = null;
 		if (imgpath != null) {
-			imgFullPath = "..\\img\\" + imgpath;
+			imgFullPath = "\\Web_TeamPjt\\img\\" + imgpath;
 		}
 
 		
@@ -92,7 +92,7 @@
 		
 			script.println("alert('로그인을 하세요.')");
 		
-			script.println("location.href = '/Web_TeamPjt/Login/'");
+			script.println("location.href = '/Web_TeamPjt/'");
 		
 			script.println("</script>");
 		}
@@ -165,7 +165,7 @@
 
 		script.println("alert('글쓰기 성공')");
 
-		script.println("location.href='/Web_TeamPjt/mypage/'");
+		script.println("location.href='/Web_TeamPjt/mypage'");
 
 		script.println("</script>");
 

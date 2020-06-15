@@ -264,9 +264,9 @@ if (list.get(i).getState() == 1 && Ptype == 0) {
 								<%
 									String link;
 								if (list.get(i).getState() == 5) {
-									link = "/Web_TeamPjt/mypage/portfolio/view?bbsID=" + list.get(i).getBbs_id();
+									link = "/Web_TeamPjt/mypage/portfolio_view?bbsID=" + list.get(i).getBbs_id();
 								} else {
-									link = "/Web_TeamPjt/board/boardView.jsp?boardNo=" + list.get(i).getBbs_id();
+									link = "/Web_TeamPjt/mypage/portfolio_view?boardNo=" + list.get(i).getBbs_id();
 								}
 								%>
 								<a href="<%=link%>"> <img style="width: 100%; height: 100%;"
@@ -298,7 +298,7 @@ if (list.get(i).getState() == 1 && Ptype == 0) {
 								</p>
 
 								<div>
-									<form action="portfolio_delete_action.jsp" method="post">
+									<form action="/Web_TeamPjt/mypage/portfolio_delete" method="post">
 										<input name="bbsID" value="<%=list.get(i).getBbs_id()%>"
 											type="hidden" /> <a class="a_400"><%=state%></a>
 										<button type="submit" method="post"
@@ -573,7 +573,7 @@ if (list.get(i).getState() == 1 && Ptype == 0) {
 						style="background-color: #ffffff; border: 1px solid #a6a6a6; margin-bottom: 50px;">
 						<hr class="hr1" style="margin-top: 50px;">
 
-						<form method="post" action="portfolio_write_action.jsp"
+						<form method="post" action="/Web_TeamPjt/mypage/portfolio_write"
 							name="writeport" enctype="multipart/form-data">
 							<div class="row" style="margin-top: 30px; margin-bottom: 30px;">
 								<div class="col-sm-4">

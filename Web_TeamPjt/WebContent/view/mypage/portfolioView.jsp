@@ -27,10 +27,10 @@
 	   <%
    }
 %> --%>
-<link rel="shortcut icon" href="../img/favicon/ecology.png">
-<link rel="stylesheet" href="../css/detail/detail1.css">
-<link rel="stylesheet" href="../css/bootstrap.min.css">
-<link rel="stylesheet" href="../css/googleFont.css">
+<link rel="shortcut icon" href="/Web_TeamPjt/img/favicon/ecology.png">
+<link rel="stylesheet" href="/Web_TeamPjt/css/detail/detail1.css">
+<link rel="stylesheet" href="/Web_TeamPjt/css/bootstrap.min.css">
+<link rel="stylesheet" href="/Web_TeamPjt/css/googleFont.css">
 <link
 	href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500&display=swap"
 	rel="stylesheet">
@@ -194,9 +194,9 @@
 
 		
 		<div class="row">
-			<button type="button" class="btn btn-outline-warning" onclick="location.href='/Web_TeamPjt/mypage/portfolio/update/?bbsID=<%= bbsID %>'">글수정</button>
+			<button type="button" class="btn btn-outline-warning" onclick="location.href='/Web_TeamPjt/mypage/portfolio_update/?bbsID=<%= bbsID %>'">글수정</button>
 					</button>
-			<form action="portfolio_delete_action.jsp"  method="post">
+			<form action="/Web_TeamPjt/mypage/portfolio_delete"  method="post">
 				<input name="bbsID" value="<%= bbsID %>" type="hidden" />
 				<button type="submit" method="post" class="btn btn-outline-danger" onclick="">
 					<a class="a_400">삭제하기</a>
@@ -290,11 +290,11 @@
 									<a class="a_400">ks1466@naver.com</a>
 								</div>
 								<div class="col-sm-3">
-									<img src="../img/detail/check.png" alt="추가하기"
+									<img src="/Web_TeamPjt/img/detail/check.png" alt="추가하기"
 										onclick="alert('이전');" />
 								</div>
 								<div class="col-sm-3">
-									<img src="../img/detail/cross.png" alt="삭제하기"
+									<img src="/Web_TeamPjt/img/detail/cross.png" alt="삭제하기"
 										onclick="alert('이전');" />
 								</div>
 							</div>
@@ -310,11 +310,11 @@
 									<a class="a_400">ks1466@naver.com</a>
 								</div>
 								<div class="col-sm-3">
-									<img src="../img/detail/check.png" alt="추가하기"
+									<img src="/Web_TeamPjt/img/detail/check.png" alt="추가하기"
 										onclick="alert('이전');" />
 								</div>
 								<div class="col-sm-3">
-									<img src="../img/detail/cross.png" alt="삭제하기"
+									<img src="/Web_TeamPjt/img/detail/cross.png" alt="삭제하기"
 										onclick="alert('이전');" />
 								</div>
 							</div>
@@ -334,11 +334,11 @@
 
 
 	<!-- Bootstrap core JavaScript -->
-	<script src="../vendor/jquery/jquery.min.js"></script>
-	<script src="../vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+	<script src="/Web_TeamPjt/vendor/jquery/jquery.min.js"></script>
+	<script src="/Web_TeamPjt/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
-	<script type="text/javascript" src="../js/alertScript.js"></script>
-	<script type="text/javascript" src="../js/detail/detail.js"></script>
+	<script type="text/javascript" src="/Web_TeamPjt/js/alertScript.js"></script>
+	<script type="text/javascript" src="/Web_TeamPjt/js/detail/detail.js"></script>
 
 </body>
 </html>

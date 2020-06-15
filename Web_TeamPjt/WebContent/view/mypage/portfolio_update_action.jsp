@@ -49,7 +49,7 @@
 
 		script.println("alert('로그인을 하세요.')");
 
-		script.println("location.href = '/Web_TeamPjt/Login/'");
+		script.println("location.href = '/Web_TeamPjt/'");
 
 		script.println("</script>");
 
@@ -81,7 +81,7 @@
 		imgpath = multi.getFilesystemName("pictsrc");
 		String imgFullPath = null;
 		if (imgpath != null) {
-			imgFullPath = "..\\img\\" + imgpath;
+			imgFullPath = "\\Web_TeamPjt\\img\\" + imgpath;
 		}
 
 		//글이 유효한지 판별
