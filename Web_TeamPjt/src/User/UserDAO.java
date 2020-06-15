@@ -63,7 +63,7 @@ public class UserDAO
       try {
          pstmt = conn.prepareStatement(sql);
          pstmt.setString(1, user.getId());
-         pstmt.setString(2, user.getPwd());   // TODO: 鍮꾨쾲 �븫�샇�솕!!
+         pstmt.setString(2, user.getPwd());   // TODO: 
          pstmt.setString(3, user.getNickname());
          pstmt.setString(4, user.getEmail());
          pstmt.setString(5, user.getNumber());
@@ -74,7 +74,7 @@ public class UserDAO
          pstmt.executeUpdate();
       }
       catch(SQLException e) {
-         System.out.println("insertDB �뿉�윭");
+         System.out.println("insertDB 에러");
          return false;
       }
       finally {
