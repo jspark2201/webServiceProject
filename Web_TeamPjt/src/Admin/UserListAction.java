@@ -14,16 +14,16 @@ import Idea.*;
 
 public class UserListAction implements Action {
 
-	private String type = "id";		// °Ë»ö ±âÁØ
-	private String search = "";	// °Ë»ö¾î
-	private String order = "date";	// Á¤·Ä ±âÁØ
+	private String type = "id";		// ï¿½Ë»ï¿½ ï¿½ï¿½ï¿½ï¿½
+	private String search = "";	// ï¿½Ë»ï¿½ï¿½ï¿½
+	private String order = "date";	// ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 	private int curPageNum = 1;
 	
 	public void execute(HttpServletRequest request, HttpServletResponse response) {
 		
 		UserDAO userDAO = new UserDAO();
 
-		/***** Parameter °ª °¡Á®¿À±â */
+		/***** Parameter ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ */
 		if (request.getParameter("type") != null)
 			type = request.getParameter("type");
 
@@ -37,9 +37,9 @@ public class UserListAction implements Action {
 			curPageNum = Integer.parseInt(request.getParameter("pageNum"));
 
 		
-		/***** Parameter °ª °ËÁõ */
+		/***** Parameter ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ */
 		
-		// type °ª °ËÁõ
+		// type ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 		switch(type) {
 			case "id": case "nickname": case "email":
 				break;
@@ -47,11 +47,11 @@ public class UserListAction implements Action {
 				type = "id";
 		}
 		
-		// search °ª °ËÁõ
+		// search ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 		if (search.trim().equals(""))
 			search = null;
 		
-		// order °ª °ËÁõ
+		// order ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 		switch(order) {
 			case "id": case "nickname":
 			case "email": case "date":
@@ -60,7 +60,7 @@ public class UserListAction implements Action {
 				order = "date";
 		}
 
-		// curPageNum °ª °ËÁõ
+		// curPageNum ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 		int pageCount = (userDAO.getDBCount(type, search) - 1) / 10 + 1;
 		
 		if (curPageNum < 0)
@@ -69,14 +69,14 @@ public class UserListAction implements Action {
 			curPageNum = pageCount;
 
 		
-		/***** request º¸³»±â */
-		ArrayList<User> userList = userDAO.getDBList(type, search, order, curPageNum);
+		/***** request ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ */
+		ArrayList<UserDTO> userList = userDAO.getDBList(type, search, order, curPageNum);
 		
 		
-		request.setAttribute("PageCount", pageCount);	// ÆäÀÌÁö ¼ö
-		request.setAttribute("UserList", userList);		// »ç¿ëÀÚ ¸®½ºÆ®
+		request.setAttribute("PageCount", pageCount);	// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½
+		request.setAttribute("UserList", userList);		// ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Æ®
 
-		// ÀÔ·Â¹ÞÀº Parameter ¹ÝÈ¯
+		// ï¿½Ô·Â¹ï¿½ï¿½ï¿½ Parameter ï¿½ï¿½È¯
 		request.setAttribute("type", this.type);
 		request.setAttribute("search", this.search);
 		request.setAttribute("order", this.order);

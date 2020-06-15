@@ -8,10 +8,10 @@
 	content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <title>IDEARIA</title>
 
-<link rel="shortcut icon" href="../img/favicon/ecology.png">
-<link rel="stylesheet" href="../css/main/main.css">
-<link rel="stylesheet" href="../css/bootstrap.min.css">
-<link rel="stylesheet" href="../css/googleFont.css">
+<link rel="shortcut icon" href="/Web_TeamPjt/img/favicon/ecology.png">
+<link rel="stylesheet" href="/Web_TeamPjt/css/main/main.css">
+<link rel="stylesheet" href="/Web_TeamPjt/css/bootstrap.min.css">
+<link rel="stylesheet" href="/Web_TeamPjt/css/googleFont.css">
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500&display=swap" rel="stylesheet">
 
 </head>
@@ -43,7 +43,7 @@
 					</li>
 					<!-- <li class="nav-item"><a class="nav-link" href="#">회원가입</a></li> -->
 					<li class="nav-item"><a class="nav-link a_400" onclick="logoutAlert()">로그아웃</a></li>
-					<li class="nav-item"><a class="nav-link a_400" href="#">마이페이지</a></li>
+					<li class="nav-item"><a class="nav-link a_400" href="/Web_TeamPjt/mypage.do">마이페이지</a></li>
 				</ul>
 			</div>
 		</div>
@@ -66,17 +66,17 @@
         <!-- Wrapper for carousel items -->
         <div class="carousel-inner">
             <div class="carousel-item active">
-                <img src="../img/main/main_1.jpg" alt="First Slide" style="height:500px; width:100%;">
+                <img src="/Web_TeamPjt/img/main/main_1.jpg" alt="First Slide" style="height:500px; width:100%;">
             	<div class="carousel-caption">
 			        <p class="a_500" style="font-size:4rem; color:#ffffff; float:left;">아이디어 랭킹전</p>
 			        <p class="a_500" style="font-size:2rem; color:#ffffff; float:left;">아이디어내고 해외여행가자!</p>
 			    </div>   
             </div>
             <div class="carousel-item">
-                <img src="../img/main/main_2.jpg" alt="Second Slide" style="height:500px; width:100%;">
+                <img src="/Web_TeamPjt/img/main/main_2.jpg" alt="Second Slide" style="height:500px; width:100%;">
             </div>
             <div class="carousel-item">
-                <img src="../img/main/main_3.jpg" alt="Third Slide" style="height:500px; width:100%;">
+                <img src="/Web_TeamPjt/img/main/main_3.jpg" alt="Third Slide" style="height:500px; width:100%;">
             	<div class="carousel-caption">
 			        <p class="a_500" style="font-size:4rem; color:#5353c6; float:right;">아이디어 전시회</p>
 			        <p class="a_500" style="font-size:2rem; color:#6666cc; float:right;">06.20~6.24 지상최대 아이디어 전시회 </p>
@@ -100,44 +100,67 @@
 	<!-- Page Content -->
 	<div class="container">
 		<div style="width:100%; padding:30px; margin:30px;">
-		<div class="rank_div">
-			<img class="rank_img" alt="alt" src="../img/main/crown.png">
+		<div style="width:100%; min-height:500px;">
+			<div class="rank_div">
+			<img class="rank_img" alt="alt" src="/Web_TeamPjt/img/main/crown.png">
 			<p class="rank_a a_500">실시간 랭킹</p>
 		</div>
 
 		<!-- Heading Row -->
 		<div class="row align-items-center my-5">
-			<div class="col-lg-7">
-				<img class="img-fluid rounded mb-4 mb-lg-0"
-					src="http://placehold.it/900x400" alt="">
-			</div>
-			<!-- /.col-lg-8 -->
-			<div class="col-lg-5 a_500">
+			<div style="width:900px;"class="col-lg-7">
+				<!--  -->
+				<div class="a_500">
 				<h1 class="font-weight-light a_400">Business Name or Tagline</h1>
 				<p>This is a template that is great for small businesses. It
 					doesn't have too much fancy flare to it, but it makes a great use
 					of the standard Bootstrap core components. Feel free to use this
 					template for any project you want!</p>
-				<a class="btn btn-primary" href="#">Call to Action!</a>
+				<a class="btn btn-primary btn-warning" href="#">Call to Action!</a>
+			</div>
+			</div>
+			<!-- /.col-lg-8 -->
+			<div class="col-lg-5 a_500">
+				<table class="table table-hover">
+    <thead>
+      <tr>
+        <th>Firstname</th>
+        <th>Lastname</th>
+        <th>Email</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>John</td>
+        <td>Doe</td>
+        <td>john@example.com</td>
+      </tr>
+      <tr>
+        <td>Mary</td>
+        <td>Moe</td>
+        <td>mary@example.com</td>
+      </tr>
+      <tr>
+        <td>July</td>
+        <td>Dooley</td>
+        <td>july@example.com</td>
+      </tr>
+    </tbody>
+  </table>
 			</div>
 			<!-- /.col-md-4 -->
 		</div>
 		<!-- /.row -->
-
-		<!-- Call to Action Well -->
-		<div class="card text-white bg-secondary my-5 py-4 text-center">
-			<div class="card-body">
-				<p class="text-white m-0 a_400">This call to action card is a great
-					place to showcase some important information or display a clever
-					tagline!</p>
-			</div>
 		</div>
+		
+
+		
 		
 		
 		<hr>
 		
 		<div class="new_div">
-			<img class="new_img" alt="alt" src="../img/main/new.png">
+			<img class="new_img" alt="alt" src="/Web_TeamPjt/img/main/new.png">
 			<p class="new_p a_500">새 게시물</p>
 		</div>
 		
@@ -152,7 +175,7 @@
 							molestias corporis quod, ea minima accusamus.</p>
 					</div>
 					<div class="card-footer">
-						<a href="#" class="btn btn-primary btn-sm a_500">More Info</a>
+						<a href="#" class="btn btn-warning btn-sm a_500">More Info</a>
 					</div>
 				</div>
 			</div>
@@ -167,7 +190,7 @@
 							voluptates quos eligendi labore.</p>
 					</div>
 					<div class="card-footer">
-						<a href="#" class="btn btn-primary btn-sm a_500">More Info</a>
+						<a href="#" class="btn btn-warning btn-sm a_500">More Info</a>
 					</div>
 				</div>
 			</div>
@@ -181,7 +204,7 @@
 							molestias corporis quod, ea minima accusamus.</p>
 					</div>
 					<div class="card-footer">
-						<a href="#" class="btn btn-primary btn-sm a_500">More Info</a>
+						<a href="#" class="btn btn-warning btn-sm a_500">More Info</a>
 					</div>
 				</div>
 			</div>
@@ -234,8 +257,8 @@
   </div>
 
 	<!-- Bootstrap core JavaScript -->
-	<script src="../vendor/jquery/jquery.min.js"></script>
-	<script src="../vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+	<script src="/Web_TeamPjt/vendor/jquery/jquery.min.js"></script>
+	<script src="/Web_TeamPjt/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
 	<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
 		integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
@@ -244,7 +267,7 @@
 		src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
 		integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
 		crossorigin="anonymous"></script>
-	<script type="text/javascript" src="../js/alertScript.js" ></script>
+	<script type="text/javascript" src="/Web_TeamPjt/js/alertScript.js" ></script>
 	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
 </body>
 </html>

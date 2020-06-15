@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=EUC-KR" pageEncoding="EUC-KR"%>
-<%@ page import="User.User"%>
+<%@ page import="User.UserDTO"%>
 <%@ page import="User.UserDAO"%>
 <%@ page import="java.util.ArrayList"%>
 

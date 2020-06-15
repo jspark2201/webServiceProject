@@ -8,6 +8,18 @@ public class UserDAO
 	private Connection conn = null;
 	private PreparedStatement pstmt = null;
 	
+	private static UserDAO userDAO = new UserDAO();
+	
+
+	public static UserDAO getInstance() {
+		return userDAO;
+	}
+	
+	public UserDAO() {
+		System.out.println("userDao 객체 생성");
+		
+	}
+	
 	private void connect()
 	{
 		// 1. Driver 링크
@@ -21,7 +33,7 @@ public class UserDAO
 		
 		// 2. DB 연결
 		try {
-			conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/developers", "root", "qwe123!@#");
+			conn = DriverManager.getConnection("jdbc:mariadb://localhost:3306/developers", "root", "smdtlr12");
 
 		}
 		catch (Exception e) {
@@ -51,7 +63,33 @@ public class UserDAO
 		}
 	}
 
-	public boolean insertDB(User user)
+	
+//	로그인 인증 쿼리
+	public boolean authenticate(UserDTO user) {
+		System.out.println("dao : "+user.getPwd());
+		String sql="select pwd from user where id="+"'"+user.getId()+"'";
+
+		try {
+			connect();
+			pstmt = conn.prepareStatement(sql);
+			ResultSet rs = pstmt.executeQuery();
+			
+			if(rs.next()) {
+				if(rs.getString("pwd").equals(user.getPwd())) {
+					return true;
+				}
+				else {
+					return false; 
+				}
+			}
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+		// TODO Auto-generated method stub
+		return false;
+	}
+	
+	public boolean insertDB(UserDTO user)
 	{
 		connect();
 		
@@ -78,7 +116,7 @@ public class UserDAO
 	}
 
 	
-	public boolean updateDB(User user)
+	public boolean updateDB(UserDTO user)
 	{
 		connect();
 		
@@ -142,12 +180,13 @@ public class UserDAO
 	}
 	
 	
-	public User getDB(String id)
+//	유저 정보 불러오기 쿼리
+	public UserDTO getDB(String id)
 	{
 		connect();
 		
 		String sql = "select * from user where id=?";
-		User user = new User();
+		UserDTO user = new UserDTO();
 		
 		try {
 			pstmt = conn.prepareStatement(sql);
@@ -200,7 +239,7 @@ public class UserDAO
 		sql += " order by " + order;
 		sql += " limit ?,?";
 		
-		ArrayList<User> users = new ArrayList<User>();
+		ArrayList<UserDTO> users = new ArrayList<UserDTO>();
 
 		try {
 			pstmt = conn.prepareStatement(sql);
@@ -218,7 +257,7 @@ public class UserDAO
 			ResultSet rs = pstmt.executeQuery();
 
 			while(rs.next()) {
-				User user = new User();
+				UserDTO user = new UserDTO();
 
 				user.setId(rs.getString("id"));
 				user.setNickname(rs.getString("nickname"));

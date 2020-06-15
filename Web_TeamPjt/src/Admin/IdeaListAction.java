@@ -15,16 +15,16 @@ import Idea.*;
 public class IdeaListAction implements Action {
 
 	private int filter = -1;
-	private String type = "writer";		// °Ë»ö ±âÁØ
-	private String search = "";	// °Ë»ö¾î
-	private String order = "registration_date";	// Á¤·Ä ±âÁØ
+	private String type = "writer";		// ï¿½Ë»ï¿½ ï¿½ï¿½ï¿½ï¿½
+	private String search = "";	// ï¿½Ë»ï¿½ï¿½ï¿½
+	private String order = "registration_date";	// ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 	private int curPageNum = 1;
 	
 	public void execute(HttpServletRequest request, HttpServletResponse response) {
 				
 		IdeaDAO ideaDAO = new IdeaDAO();
 
-		/***** Parameter °ª °¡Á®¿À±â */
+		/***** Parameter ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ */
 		try {
 			if (request.getParameter("filter") != null)
 				filter = Integer.parseInt(request.getParameter("filter"));
@@ -49,13 +49,13 @@ public class IdeaListAction implements Action {
 		}
 
 		
-		/***** Parameter °ª °ËÁõ */
+		/***** Parameter ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ */
 		
-		// filter °ª °ËÁõ
+		// filter ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 		if (filter < -1 || 5 < filter)
 			filter = -1;
 		
-		// type °ª °ËÁõ
+		// type ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 		switch(type) {
 			case "writer": case "title": case "state":
 				break;
@@ -63,11 +63,11 @@ public class IdeaListAction implements Action {
 				type = "writer";
 		}
 		
-		// search °ª °ËÁõ
+		// search ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 		if (search.trim().equals(""))
 			search = null;
 		
-		// order °ª °ËÁõ
+		// order ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 		switch(order) {
 			case "id": case "registration_date":
 			case "writer": case "title": case "state":
@@ -76,7 +76,7 @@ public class IdeaListAction implements Action {
 				order = "registration_date";
 		}
 
-		// curPageNum °ª °ËÁõ
+		// curPageNum ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 		int pageCount = (ideaDAO.getDBCount(type, search, filter) - 1) / 10 + 1;
 		
 		if (curPageNum < 0)
@@ -85,13 +85,13 @@ public class IdeaListAction implements Action {
 			curPageNum = pageCount;
 
 		
-		/***** request º¸³»±â */
-		ArrayList<User> ideaList = ideaDAO.getDBList(type, search, filter, order, curPageNum);
+		/***** request ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ */
+		ArrayList<UserDTO> ideaList = ideaDAO.getDBList(type, search, filter, order, curPageNum);
 		
-		request.setAttribute("PageCount", pageCount);	// ÆäÀÌÁö ¼ö
-		request.setAttribute("IdeaList", ideaList);		// »ç¿ëÀÚ ¸®½ºÆ®
+		request.setAttribute("PageCount", pageCount);	// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½
+		request.setAttribute("IdeaList", ideaList);		// ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Æ®
 
-		// ÀÔ·Â¹ÞÀº Parameter ¹ÝÈ¯
+		// ï¿½Ô·Â¹ï¿½ï¿½ï¿½ Parameter ï¿½ï¿½È¯
 		request.setAttribute("filter", this.filter);
 		request.setAttribute("type", this.type);
 		request.setAttribute("search", this.search);
