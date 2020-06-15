@@ -10,22 +10,22 @@ public class UserDAO
    
    private void connect()
    {
-      // 1. Driver 링크
+      // 1. Driver 留곹겕
       try {
          Class.forName("org.mariadb.jdbc.Driver");
       }
       catch (Exception e) {
-         System.out.println("DB 링크 실패");
+         System.out.println("DB 留곹겕 �떎�뙣");
          return;
       }
       
-      // 2. DB 연결
+      // 2. DB �뿰寃�
       try {
-         conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/developers", "root", "1234");
+         conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/developers", "root", "qwe123!@#");
 
       }
       catch (Exception e) {
-         System.out.println("DB 연결 실패 : " + e);
+         System.out.println("DB �뿰寃� �떎�뙣 : " + e);
       }
    }
    
@@ -36,7 +36,7 @@ public class UserDAO
             pstmt.close();
          }
          catch(SQLException e) {
-            System.out.println("DB 연결 해제 실패1 : " + e);
+            System.out.println("DB �뿰寃� �빐�젣 �떎�뙣1 : " + e);
          }
       
       }
@@ -46,7 +46,7 @@ public class UserDAO
             conn.close();
          }
          catch (SQLException e) {
-            System.out.println("DB 연결 해제 실패2 : " + e);
+            System.out.println("DB �뿰寃� �빐�젣 �떎�뙣2 : " + e);
          }
       }
    }
@@ -63,7 +63,7 @@ public class UserDAO
       try {
          pstmt = conn.prepareStatement(sql);
          pstmt.setString(1, user.getId());
-         pstmt.setString(2, user.getPwd());   // TODO: 비번 암호화!!
+         pstmt.setString(2, user.getPwd());   // TODO: 鍮꾨쾲 �븫�샇�솕!!
          pstmt.setString(3, user.getNickname());
          pstmt.setString(4, user.getEmail());
          pstmt.setString(5, user.getNumber());
@@ -74,7 +74,7 @@ public class UserDAO
          pstmt.executeUpdate();
       }
       catch(SQLException e) {
-         System.out.println("insertDB 에러");
+         System.out.println("insertDB �뿉�윭");
          return false;
       }
       finally {
@@ -124,7 +124,7 @@ public class UserDAO
          pstmt.executeUpdate();
       }
       catch(SQLException e) {
-         System.out.println("updateDB 에러");
+         System.out.println("updateDB �뿉�윭");
          return false;
       }
       finally {
@@ -148,7 +148,7 @@ public class UserDAO
          pstmt.executeUpdate();
       }
       catch(SQLException e) {
-         System.out.println("deleteDB 에러");
+         System.out.println("deleteDB �뿉�윭");
          return false;
       }
       finally {
@@ -202,7 +202,7 @@ public class UserDAO
          rs.close();
       }
       catch(SQLException e) {
-         System.out.println("getDB 에러");
+         System.out.println("getDB �뿉�윭");
       }
       finally {
          disconnect();
@@ -269,7 +269,7 @@ public class UserDAO
          rs.close();
       }
       catch(SQLException e) {
-         System.out.println("getDBList 에러");
+         System.out.println("getDBList �뿉�윭");
       }
       finally {
          disconnect();
@@ -313,7 +313,7 @@ public class UserDAO
          count = rs.getInt("cnt");
       }
       catch(SQLException e) {
-         System.out.println("getDBCount 에러");
+         System.out.println("getDBCount �뿉�윭");
          return -1;
       }
       
@@ -327,15 +327,15 @@ public class UserDAO
       String sql = "select count(*) as cnt from user";
       
       switch(type) {
-      // 누적 가입자 수
+      // �늻�쟻 媛��엯�옄 �닔
       case 0:
          break;
-      // 이번 주 가입자 수
+      // �씠踰� 二� 媛��엯�옄 �닔
       case 1:
          sql += " where date > last_day(now() - interval 1 month)";
          sql += " and date <= last_day(now())";
          break;
-      // 이번 달 가입자 수
+      // �씠踰� �떖 媛��엯�옄 �닔
       case 2:
          sql += " WHERE YEARWEEK(date) = YEARWEEK(now())";
          break;
@@ -352,7 +352,7 @@ public class UserDAO
          count = rs.getInt("cnt");
       }
       catch(SQLException e) {
-         System.out.println("getDBCount 에러");
+         System.out.println("getDBCount �뿉�윭");
          return -1;
       }
       

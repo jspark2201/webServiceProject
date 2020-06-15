@@ -127,7 +127,7 @@
 					<div class="col-md-7 mb-5">
 						<div class="card h-100">
 							<div class="card_img">
-								<img style="width: 100%; height: 100%;" alt="" src="<%=ideas.get(0).getImageSrc()%>">
+								<img style="width: 100%; height: 100%;" alt="" src="<%=ideas.get(0).getImageSrc()%>"/>
 							</div>
 							<div class="card-body">
 								<h4 class="card-title">
