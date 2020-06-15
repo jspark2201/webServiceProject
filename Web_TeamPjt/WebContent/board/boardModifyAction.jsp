@@ -35,25 +35,25 @@
 		String[] platform = multi.getParameterValues("interest_1");
 		if (platform.length == 1) {
 			if (platform[0].equals("web")) {
-				board.setWeb(true);
-				board.setAndroid(false);
-				board.setEmbeded(false);
-				board.setIos(false);
+		board.setWeb(true);
+		board.setAndroid(false);
+		board.setEmbeded(false);
+		board.setIos(false);
 			} else if (platform[0].equals("android")) {
-				board.setWeb(false);
-				board.setAndroid(true);
-				board.setEmbeded(false);
-				board.setIos(false);
+		board.setWeb(false);
+		board.setAndroid(true);
+		board.setEmbeded(false);
+		board.setIos(false);
 			} else if (platform[0].equals("embeded")) {
-				board.setWeb(false);
-				board.setAndroid(false);
-				board.setEmbeded(true);
-				board.setIos(false);
+		board.setWeb(false);
+		board.setAndroid(false);
+		board.setEmbeded(true);
+		board.setIos(false);
 			} else {
-				board.setWeb(false);
-				board.setAndroid(false);
-				board.setEmbeded(false);
-				board.setIos(true);
+		board.setWeb(false);
+		board.setAndroid(false);
+		board.setEmbeded(false);
+		board.setIos(true);
 			}
 
 		}
@@ -61,17 +61,17 @@
 		String[] genre = multi.getParameterValues("interest_2");
 		if (genre.length == 1) {
 			if (genre[0].equals("health")) {
-				board.setHealth(true);
-				board.setPsychology(false);
-				board.setGame(false);
+		board.setHealth(true);
+		board.setPsychology(false);
+		board.setGame(false);
 			} else if (genre[0].equals("psychology")) {
-				board.setHealth(false);
-				board.setPsychology(true);
-				board.setGame(false);
+		board.setHealth(false);
+		board.setPsychology(true);
+		board.setGame(false);
 			} else if (genre[0].equals("game")) {
-				board.setHealth(false);
-				board.setPsychology(false);
-				board.setGame(true);
+		board.setHealth(false);
+		board.setPsychology(false);
+		board.setGame(true);
 			}
 		}
 

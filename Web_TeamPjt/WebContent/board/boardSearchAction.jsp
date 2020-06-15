@@ -16,7 +16,7 @@
 		response.sendRedirect(request.getContextPath() + "/board/boardList.jsp");
 	} else {
 		String Search = request.getParameter("search");
-		System.out.println("검색어 :" + Search);
+		//System.out.println("검색어 :" + Search);
 
 		Board board = new Board();
 		board.setSearch(Search);

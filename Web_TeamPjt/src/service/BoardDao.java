@@ -11,9 +11,9 @@ import java.util.List;
 
 public class BoardDao {
 	  private final String driverClassName = "org.mariadb.jdbc.Driver";
-	    private final String url = "jdbc:mariadb://localhost:3306/developers";
+	    private final String url = "jdbc:mariadb://localhost:3308/developers";
 	    private final String username = "root";
-	    private final String password = "qwe123!@#";
+	    private final String password = "3819";
 	    
 	    // �뀒�씠釉� : idea , 湲곕뒫 : �뜲�씠�꽣 �궘�젣 
 	    public int deleteBoard(Board board) {
@@ -243,7 +243,28 @@ public class BoardDao {
 	        return rowCount;
 	    }
 	    
-
+	    public int InsertideaParticipants(Board board) {
+	        int rowCount = 0;
+	        Connection connection = null;
+	        PreparedStatement statement = null;
+	        String sql = "INSERT INTO participants(idea_id, user_id, type, Participate_date)"
+	        		+ " VALUES(?, ?, ?, now())";
+	    
+	        try {
+	            connection = this.getConnection();
+	            statement = connection.prepareStatement(sql);
+	            statement.setInt(1, board.getId());
+	            statement.setString(2,board.getId2());
+	            statement.setInt(3,1);
+	            rowCount = statement.executeUpdate();
+	            
+	        } catch (Exception e) {
+	            e.printStackTrace();
+	        } finally {
+	            this.close(connection, statement, null);
+	        }
+	        return rowCount;
+	    }
 	    
 
 	    //�떊泥�媛쒕컻�옄->李몄뿬 媛쒕컻�옄
@@ -477,42 +498,68 @@ public class BoardDao {
 	        return rowCount;
 	    }
 	    
-	    // �뀒�씠釉� :idea , 湲곕뒫 : �븳 �럹�씠吏��쓽 �뜲�씠�꽣 �벑濡앹씪�닚�쑝濡� 媛��졇�삤湲� 
-	    public List<Board> selectBoardListPerPage(int beginRow, int pagePerRow) {
-	        List<Board> list = new ArrayList<Board>();
-	        Connection connection = null;
-	        PreparedStatement statement = null;
-	        ResultSet resultset = null;
-	        
-	        String sql =  "SELECT i.id, i.title, i.writer, i.registration_date, p.src "
-	                 + "FROM idea i, pictures p  "
-	                 + "WHERE i.id=p.idea_id "
-	                 + "ORDER BY id DESC LIMIT ?, ?";
-	        try {
-	            connection = this.getConnection();
-	            statement = connection.prepareStatement(sql);
-	            statement.setInt(1, beginRow);
-	            statement.setInt(2, pagePerRow);
-	            resultset = statement.executeQuery();
-	            while(resultset.next()) {
-	                Board board = new Board();
-	                board.setId(resultset.getInt(1));
-	                board.setTitle(resultset.getString(2));
-	                board.setWriter(resultset.getString(3));
-	                board.setRegistration_date(resultset.getString(4));
-	                board.setSrc(resultset.getString(5));	
-	                
-	                
-	                list.add(board);
-	            }
-	        } catch (Exception e) {
-	            e.printStackTrace();
-	        } finally {
-	            this.close(connection, statement, resultset);
-	        }
-	        return list;
-	    }
+	       public List<Board> selectBoardListPerPage(int beginRow, int pagePerRow) {
+	           List<Board> list = new ArrayList<Board>();
+	           Connection connection = null;
+	           PreparedStatement statement = null;
+	           ResultSet resultset = null;
+	           
+	           String sql =  "SELECT i.id, i.title, i.writer, i.registration_date, p.src "
+	                    + "FROM idea i, pictures p  "
+	                    + "WHERE i.id=p.idea_id "
+	                    + "ORDER BY id DESC LIMIT ?, ?";
+	           try {
+	               connection = this.getConnection();
+	               statement = connection.prepareStatement(sql);
+	               statement.setInt(1, beginRow);
+	               statement.setInt(2, pagePerRow);
+	               resultset = statement.executeQuery();
+	               while(resultset.next()) {
+	                   Board board = new Board();
+	                   int id =resultset.getInt(1);
+	                   board.setId(id);
+	                   board.setTitle(resultset.getString(2));
+	                   board.setWriter(resultset.getString(3));
+	                   board.setRegistration_date(resultset.getString(4));
+	                   board.setSrc(resultset.getString(5));   
+	                   board.setRow(goodCount(id));
+	                   board.setSrc(getPic(id));
+	                   list.add(board);
+	               }
+	           } catch (Exception e) {
+	               e.printStackTrace();
+	           } finally {
+	               this.close(connection, statement, resultset);
+	           }
+	           return list;
+	       }   
 	    
+	       public String getPic(int idea_id) {
+
+	           String SQL = "SELECT src FROM pictures WHERE idea_id = ?";
+	           Connection connection = null;
+	           PreparedStatement statement = null;
+	           ResultSet resultset = null;
+	           try {
+	              connection = this.getConnection();
+	              statement = connection.prepareStatement(SQL);
+
+	              statement.setInt(1, idea_id);
+
+	              resultset = statement.executeQuery();
+	              if (resultset.next()) {
+	                 return resultset.getString(1);
+	              }
+
+	           } catch (SQLException sqex) {
+	              System.out.println("SQLException: " + sqex.getMessage());
+	              System.out.println("SQLState: " + sqex.getSQLState());
+	           }
+
+	           return null;
+	        } 
+	       
+	       
 	    // �뀒�씠釉� :idea , 湲곕뒫 : �븳 �럹�씠吏��쓽 �뜲�씠�꽣 醫뗭븘�슂�닚�쑝濡� 媛��졇�삤湲� (誘몄셿)
 	    public List<Board> selectGoodBoardListPerPage(int beginRow, int pagePerRow) {
 	        List<Board> list = new ArrayList<Board>();
@@ -970,6 +1017,30 @@ public class BoardDao {
 	        }
 	        return rowCount;
 	    }
+	    
+	    //아이디어 제공자 참가자로
+	    public int insertideaParticipants(Board board) {
+	        int rowCount = 0;
+	        Connection connection = null;
+	        PreparedStatement statement = null;
+	        String sql = "INSERT INTO participants(idea_id, user_id, type, Participate_date)"
+	        		+ " values(?, ?, ?, now())";
+	        try {
+	            connection = this.getConnection();
+	            statement = connection.prepareStatement(sql);
+	            statement.setInt(1,board.getRow());
+	            statement.setString(2,board.getWriter());
+	            statement.setInt(3,0);
+
+	            rowCount = statement.executeUpdate();
+	        } catch (Exception e) {
+	            e.printStackTrace();
+	        } finally {
+	            this.close(connection, statement, null);
+	        }
+	        return rowCount;
+	    }
+	    
 	    
 	    //�븘�씠�뵒�뼱 �닔�젙�떆 �옣瑜� �뵆�옯�뤌 �닔�젙
 	    public int updateTypeBoard(Board board) {

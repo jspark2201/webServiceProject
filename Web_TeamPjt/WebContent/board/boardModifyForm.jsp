@@ -30,10 +30,10 @@
 
 		BoardDao boardDao = new BoardDao();
 
-		System.out.println("modify form" + boardNo);
-		Board board = boardDao.selectBoardByKey(boardNo);
+		Board board = boardDao.selectBoardByKey(boardNo);//기존의 아이디어 내용을 가져옴
 		board.setId(boardNo);
-		List<Board> mlist = boardDao.selectComments(boardNo);
+		
+		List<Board> mlist = boardDao.selectComments(boardNo);//댓글
 		int cnt = mlist.size();
 	%>
 
@@ -111,7 +111,7 @@
 					</div>
 				</div>
 			</div>
-			
+
 			<div class="row margin15">
 				<div class="col-sm-4">
 					<a class="a_500">프로젝트 플랫폼</a>
@@ -177,7 +177,6 @@
 			</div>
 		</FORM>
 		<script>
-		
 			var upload = document.querySelector('#filename1');
 			var preview = document.querySelector('#preview');
 			upload.addEventListener('change', function(e) {
@@ -213,6 +212,6 @@
 		<%
 			}
 		%>
-
+	
 </body>
 </html>

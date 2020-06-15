@@ -15,8 +15,7 @@
 	} else {
 		String participantsId = request.getParameter("participantsId");
 		int boardNo = Integer.parseInt(request.getParameter("boardNo"));
-		System.out.println("participantsId :" + participantsId);
-		System.out.println("boardNo :" + boardNo);
+		
 		Board board = new Board();
 		BoardDao boardDao = new BoardDao();
 

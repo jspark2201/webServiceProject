@@ -11,18 +11,20 @@
 </head>
 <body>
 	<%
-		if (request.getParameter("boardNo") == null || request.getParameter("comment") == null) {
-		response.sendRedirect(request.getContextPath() + "/board/boardList.jsp");
-	} else {
 		int boardNo = Integer.parseInt(request.getParameter("boardNo"));//아이디어 테이블 기본키
+		String id = (String)session.getAttribute("userID");//사용자 세션
+		if (request.getParameter("boardNo") == null || request.getParameter("comment") == null || id==null) {
+		response.sendRedirect(request.getContextPath() + "/board/boardList.jsp?boardNo=" + boardNo);
+	} else {
+		boardNo = Integer.parseInt(request.getParameter("boardNo"));//아이디어 테이블 기본키
 		String comment = request.getParameter("comment");
-		//String id = (String)session.getAttribute("id");//사용자 세션
-		String userID = "admin";
+
+		
 		
 		Board board = new Board();
 		board.setId(boardNo);
 		board.setContent2(comment);
-		board.setId2(userID);
+		board.setId2(id);
 
 		BoardDao boardDao = new BoardDao();
 

@@ -15,12 +15,11 @@
 		response.sendRedirect(request.getContextPath() + "/board/boardList.jsp");
 	} else {
 		int Id = Integer.parseInt(request.getParameter("boardNo"));
-		System.out.println("boardNo :" + Id);
-		//String id = (String)session.getAttribute("id");//사용자 세션
-		String userID = "admin";
+		//System.out.println("boardNo :" + Id);
+		String id = (String) session.getAttribute("userID");//사용자 세션
 		Board board = new Board();
 		board.setId(Id);
-		board.setId2(userID);
+		board.setId2(id);
 
 		BoardDao boardDao = new BoardDao();
 		int n = boardDao.participantsCount(Id);//참가자 수

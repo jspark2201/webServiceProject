@@ -35,10 +35,12 @@
 			</button>
 			<div class="collapse navbar-collapse" id="navbarResponsive">
 				<ul class="navbar-nav ml-auto">
-					<li class="nav-item active"><a class="nav-link a_400" href="#">아이디어
+					<li class="nav-item active"><a class="nav-link a_400"
+						href="<%=request.getContextPath()%>/board/boardList.jsp">아이디어
 							보기 <span class="sr-only">(current)</span>
 					</a></li>
-					<li class="nav-item active"><a class="nav-link a_400" href="#">프로젝트
+					<li class="nav-item active"><a class="nav-link a_400"
+						href="<%=request.getContextPath()%>/board/boardAddForm.jsp">프로젝트
 							시작하기 <span class="sr-only">(current)</span>
 					</a></li>
 					<li class="nav-item active"><a class="nav-link a_400"
@@ -46,7 +48,8 @@
 					<!-- <li class="nav-item"><a class="nav-link" href="#">회원가입</a></li> -->
 					<li class="nav-item"><a class="nav-link a_400"
 						onclick="logoutAlert()">로그아웃</a></li>
-					<li class="nav-item"><a class="nav-link a_400" href="#">마이페이지</a></li>
+					<li class="nav-item"><a class="nav-link a_400"
+						href="<%=request.getContextPath()%>/view/myPage.jsp">마이페이지</a></li>
 				</ul>
 			</div>
 		</div>

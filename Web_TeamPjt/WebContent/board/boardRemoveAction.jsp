@@ -15,7 +15,7 @@
 		response.sendRedirect(request.getContextPath() + "/board/boardList.jsp");
 	} else {
 		int Id = Integer.parseInt(request.getParameter("boardNo"));
-		System.out.println("boardNo :" + Id);
+
 		Board board = new Board();
 		board.setId(Id);
 

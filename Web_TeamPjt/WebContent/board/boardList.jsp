@@ -35,10 +35,12 @@
 			</button>
 			<div class="collapse navbar-collapse" id="navbarResponsive">
 				<ul class="navbar-nav ml-auto">
-					<li class="nav-item active"><a class="nav-link a_400" href="#">아이디어
+					<li class="nav-item active"><a class="nav-link a_400"
+						href="<%=request.getContextPath()%>/board/boardList.jsp">아이디어
 							보기 <span class="sr-only">(current)</span>
 					</a></li>
-					<li class="nav-item active"><a class="nav-link a_400" href="#">프로젝트
+					<li class="nav-item active"><a class="nav-link a_400"
+						href="<%=request.getContextPath()%>/board/boardAddForm.jsp">프로젝트
 							시작하기 <span class="sr-only">(current)</span>
 					</a></li>
 					<li class="nav-item active"><a class="nav-link a_400"
@@ -46,7 +48,8 @@
 					<!-- <li class="nav-item"><a class="nav-link" href="#">회원가입</a></li> -->
 					<li class="nav-item"><a class="nav-link a_400"
 						onclick="logoutAlert()">로그아웃</a></li>
-					<li class="nav-item"><a class="nav-link a_400" href="#">마이페이지</a></li>
+					<li class="nav-item"><a class="nav-link a_400"
+						href="<%=request.getContextPath()%>/view/myPage.jsp">마이페이지</a></li>
 				</ul>
 			</div>
 		</div>
@@ -109,16 +112,16 @@
 	</div>
 
 	<%
-int currentPage = 1;
-if(request.getParameter("currentPage") != null) {
-    currentPage = Integer.parseInt(request.getParameter("currentPage"));
-}
-BoardDao boardDao = new BoardDao();
-int totalRowCount = boardDao.selectTotalBoardCount();
-int pagePerRow = 9; 
-int beginRow = (currentPage-1)*pagePerRow;
-List<Board> list = boardDao.selectBoardListPerPage(beginRow, pagePerRow);
-%>
+		int currentPage = 1;
+	if (request.getParameter("currentPage") != null) {
+		currentPage = Integer.parseInt(request.getParameter("currentPage"));
+	}
+	BoardDao boardDao = new BoardDao();
+	int totalRowCount = boardDao.selectTotalBoardCount();
+	int pagePerRow = 9;
+	int beginRow = (currentPage - 1) * pagePerRow;
+	List<Board> list = boardDao.selectBoardListPerPage(beginRow, pagePerRow);
+	%>
 
 	<!-- 필터링 박스  -->
 	<div class="row">
@@ -189,7 +192,7 @@ List<Board> list = boardDao.selectBoardListPerPage(beginRow, pagePerRow);
 
 	<div class="row">
 		<%
-            for(Board b : list) {
+			for (Board b : list) {
 		%>
 		<div class="col-lg-4 col-sm-6 portfolio-item"
 			style="margin-bottom: 30px">
@@ -202,17 +205,30 @@ List<Board> list = boardDao.selectBoardListPerPage(beginRow, pagePerRow);
 						<a class="a_400" style="color: #FFCE1E"
 							href="<%=request.getContextPath()%>/board/boardView.jsp?boardNo=<%=b.getId()%>"><%=b.getTitle()%></a>
 					</h4>
-					<p class="card-text"><%=b.getWriter()%>
-					</p>
-					<p class="card-text"><%=b.getRegistration_date()%>
-					
-					</p>
+					<p class="card-text"><%=b.getWriter()%></p>
+					<%
+						if (b.getRow() == 0) {
+					%>
+					<p class="card-text">
+						<img id="image" alt="" src="../img/heart2.png" width="50"
+							height="50" style="margin-bottom: 5px;">
+						<%=b.getRow()%></p>
+					<%
+						} else {
+					%>
+					<p class="card-text">
+						<img id="image" alt="" src="../img/heart.png" width="50"
+							height="50" style="margin-bottom: 5px;">
+						<%=b.getRow()%></p>
+					<%
+						}
+					%>
 				</div>
 			</div>
 		</div>
-		<%        
-            }
-%>
+		<%
+			}
+		%>
 	</div>
 
 	<form action="<%=request.getContextPath()%>/board/boardAddForm.jsp"
@@ -221,30 +237,28 @@ List<Board> list = boardDao.selectBoardListPerPage(beginRow, pagePerRow);
 	</form>
 
 	<%
-    int lastPage = totalRowCount/pagePerRow;
-    if(totalRowCount%pagePerRow != 0) {
-        lastPage++;
-    }
-%>
+		int lastPage = totalRowCount / pagePerRow;
+	if (totalRowCount % pagePerRow != 0) {
+		lastPage++;
+	}
+	%>
 	<div>
 		<%
-        if(currentPage>1) {
-%>
-
-		<li class="page-item"><a class="page-link"
-			href="<%=request.getContextPath()%>/board/boardList.jsp?currentPage=<%=currentPage-1%>">이전</a>
-		</li>
+			if (currentPage > 1) {
+		%>
+		<a class="btn btn-outline-warning"
+			href="<%=request.getContextPath()%>/board/boardList.jsp?currentPage=<%=currentPage - 1%>">이전</a>
 		<%
-        }
-        if(currentPage < lastPage) {
-%>
-		<li class="page-item"><a class="page-link"
-			href="<%=request.getContextPath()%>/board/boardList.jsp?currentPage=<%=currentPage+1%>">다음</a>
-		</li>
+			}
+		if (currentPage < lastPage) {
+		%>
+		<a class="btn btn-outline-warning"
+			href="<%=request.getContextPath()%>/board/boardList.jsp?currentPage=<%=currentPage + 1%>">다음</a>
+
 
 		<%
-        }
-%>
+			}
+		%>
 	</div>
 
 	<!-- /.container -->

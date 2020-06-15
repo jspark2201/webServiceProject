@@ -16,8 +16,7 @@
 
 	<%
 		Board board = new Board();
-	//String id = (String)session.getAttribute("id");//사용자 세션
-	String id = "admin";
+	String id = (String)session.getAttribute("userID");//사용자 세션
 	String realFolder = "";
 	String filename1 = "";
 	int maxSize = 1024 * 1024 * 5;
@@ -101,7 +100,7 @@
 	board.setRow(rowCount);
 	boardDao.insertPicturesBoard(board);//사진 테이블 추가
 	boardDao.insertTypeBoard(board);//타입 추가
-
+	boardDao.insertideaParticipants(board);//아이디어 제공자 참가자로 삽입
 
 	response.sendRedirect(request.getContextPath() + "/board/boardList.jsp");
 	%>

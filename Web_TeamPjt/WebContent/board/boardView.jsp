@@ -33,8 +33,12 @@
 		Board board = boardDao.selectBoardByKey(boardNo);//아이디어
 		List<Board> mlist = boardDao.selectComments(boardNo);//댓글 리스트
 		int cnt = mlist.size();//댓글 수
-		String id = "admin";
-		//String id = (String)session.getAttribute("id");//사용자 세션
+		String id = (String) session.getAttribute("userID");//사용자 세션
+
+		if (id == null) {
+			id = "admin";
+		}
+
 		int goodCount = boardDao.goodCount(boardNo);//좋아요 수
 		int participantsState = boardDao.participantsState(boardNo);//아이디어의 상태(모집 중, 모집 완료)
 		int participantsCount = boardDao.participantsCount(boardNo);//참여자 수
@@ -42,9 +46,7 @@
 		List<Board> clist = boardDao.SelectParticipantsBoard(boardNo);//참여중 개발자
 		List<Board> tlist = boardDao.SelectTempParticipantsBoard(boardNo);//신청한 참여자
 		String[] platform = new String[4];
-		int goodState = boardDao.goodState(boardNo, id);
-		System.out.print("좋아요 상태: "+goodState);
-		//나의 좋아요 상태 
+		int goodState = boardDao.goodState(boardNo, id);//사용자의 종아요 상태
 
 		if (board.isWeb()) {//
 			platform[0] = "WEB";
@@ -99,10 +101,12 @@
 					<li class="nav-item active"><a class="nav-link a_400" href="#">랭킹
 							보기 <span class="sr-only">(current)</span>
 					</a></li>
-					<li class="nav-item active"><a class="nav-link a_400" href="#">아이디어
+					<li class="nav-item active"><a class="nav-link a_400"
+						href="<%=request.getContextPath()%>/board/boardList.jsp">아이디어
 							보기 <span class="sr-only">(current)</span>
 					</a></li>
-					<li class="nav-item active"><a class="nav-link a_400" href="#">프로젝트
+					<li class="nav-item active"><a class="nav-link a_400"
+						href="<%=request.getContextPath()%>/board/boardAddForm.jsp">프로젝트
 							시작하기 <span class="sr-only">(current)</span>
 					</a></li>
 					<li class="nav-item active"><a class="nav-link a_400"
@@ -110,7 +114,8 @@
 					<!-- <li class="nav-item"><a class="nav-link" href="#">회원가입</a></li> -->
 					<li class="nav-item"><a class="nav-link a_400"
 						onclick="logoutAlert()">로그아웃</a></li>
-					<li class="nav-item"><a class="nav-link a_400" href="#">마이페이지</a></li>
+					<li class="nav-item"><a class="nav-link a_400"
+						href="<%=request.getContextPath()%>/view/myPage.jsp">마이페이지</a></li>
 				</ul>
 			</div>
 		</div>
@@ -128,36 +133,36 @@
 	<div class="container"
 		style="padding: 100px; background-color: #ffffff; border: 1px solid #a6a6a6; margin-bottom: 50px;">
 		<%
-			if (id.equals("admin")) {//세션 추가
+			if (id.equals(board.getWriter()) || id.equals("admin")) {//세션 추가
 		%>
-	<div class="row" >
-		<form 
-			action="<%=request.getContextPath()%>/board/boardDeadlineAction.jsp"
-			method="post">
-			<button type="submit" class="btn btn-primary" onclick="finAlert()"
-				style="margin-left: 80%;" id="finBtn">
-				<input name="boardNo" value="<%=request.getParameter("boardNo")%>"
-					type="hidden" /> <a class="a_400">모집완료</a><img alt=""
-					src="../img/detail/finish.png"
-					style="margin-left: 5px; margin-bottom: 5px; height: 15px; width: 15px;">
-			</button>
-		</form>
-	
-	
-		<form
-			action="<%=request.getContextPath()%>/board/boardCompleteAction.jsp"
-			method="post">
-			<button type="submit" class="btn btn-primary" onclick="finAlert()"
-				style="margin-left: 80%;" id="finBtn">
-				<input name="boardNo" value="<%=request.getParameter("boardNo")%>"
-					type="hidden" /> <a class="a_400">개발완료</a><img alt=""
-					src="../img/detail/finish.png"
-					style="margin-left: 5px; margin-bottom: 5px; height: 15px; width: 15px;">
-			</button>
-		</form>
-	</div>
-		
-		
+		<div class="row">
+			<form
+				action="<%=request.getContextPath()%>/board/boardDeadlineAction.jsp"
+				method="post">
+				<button type="submit" class="btn btn-primary" onclick="finAlert()"
+					style="margin-left: 80%;" id="finBtn">
+					<input name="boardNo" value="<%=request.getParameter("boardNo")%>"
+						type="hidden" /> <a class="a_400">모집완료</a><img alt=""
+						src="../img/detail/finish.png"
+						style="margin-left: 5px; margin-bottom: 5px; height: 15px; width: 15px;">
+				</button>
+			</form>
+
+
+			<form
+				action="<%=request.getContextPath()%>/board/boardCompleteAction.jsp"
+				method="post">
+				<button type="submit" class="btn btn-primary" onclick="finAlert()"
+					style="margin-left: 80%;" id="finBtn">
+					<input name="boardNo" value="<%=request.getParameter("boardNo")%>"
+						type="hidden" /> <a class="a_400">개발완료</a><img alt=""
+						src="../img/detail/finish.png"
+						style="margin-left: 5px; margin-bottom: 5px; height: 15px; width: 15px;">
+				</button>
+			</form>
+		</div>
+
+
 		<%
 			}
 		%>
@@ -173,12 +178,21 @@
 					<input name="boardNo" value="<%=request.getParameter("boardNo")%>"
 						type="hidden" />
 
-					<button type="submit" class="btn btn-outline-danger" id="likeBtn" onclick="changeImage();">
-					<%if(goodState==1){ %>
-					<img id="image" alt="" src="../img/heart.png"style="margin-bottom: 5px;">
-					<% } else{%>
-						<img id="image" alt="" src="../img/heart2.png"style="margin-bottom: 5px;">
-						<%} %>
+					<button type="submit" class="btn btn-outline-danger" id="likeBtn"
+						onclick="changeImage();">
+						<%
+							if (goodState == 1) {
+						%>
+						<img id="image" alt="" src="../img/heart.png" width="50"
+							height="50" style="margin-bottom: 5px;">
+						<%
+							} else {
+						%>
+						<img id="image" alt="" src="../img/heart2.png" width="50"
+							height="50" style="margin-bottom: 5px;">
+						<%
+							}
+						%>
 					</button>
 				</form>
 
@@ -197,7 +211,10 @@
 				<hr class="hr1">
 
 				<!-- Date/Time -->
-				<p>Posted on <%=board.getRegistration_date()%> <%=board.getWriter()%></p>
+				<p>
+					Posted on
+					<%=board.getRegistration_date()%>
+					<%=board.getWriter()%></p>
 
 				<hr class="hr1">
 				<%=platform[0]%>
@@ -223,7 +240,7 @@
 				</blockquote>
 
 				<%
-					if (id.equals("admin")) {//세션 추가
+					if (id.equals(board.getWriter()) || id.equals("admin")) {//세션 추가
 				%>
 				<button type="submit" class="btn btn-outline-dark"
 					data-toggle="modal" data-target="#memberModal">
@@ -276,7 +293,7 @@
 						<%=comment.getContent2()%>
 					</div>
 					<%
-						if (id.equals("admin")) {//세션 추가
+						if (id.equals("admin") || id.equals(board.getWriter()) || id.equals(comment.getWriter())) {//세션 추가
 					%>
 					<form
 						action="<%=request.getContextPath()%>/board/boardCommentDeleteAction.jsp"
@@ -289,47 +306,50 @@
 						<button type="submit" class="btn btn-primary" value="댓글삭제">댓글
 							삭제</button>
 					</form>
+					<%
+						}
+					%>
 				</div>
 				<%
 					}
 				%>
-				<%
-					}
-				%>
+
 			</div>
 		</div>
 	</div>
 	<!-- /.row -->
 
 	<%
-		if (id.equals("admin")) {//세션 추가
+		if (id.equals("admin") || id.equals(board.getWriter())) {//세션 추가
 	%>
 	<div class="row">
 		<form action="<%=request.getContextPath()%>/board/boardModifyForm.jsp"
-		method="post">
-		<input name="boardNo" value="<%=request.getParameter("boardNo")%>"
-			type="hidden" />
-		<button class="btn btn-outline-warning" onclick="" type="submit">글
-			수정</button>
-	</form>
+			method="post">
+			<input name="boardNo" value="<%=request.getParameter("boardNo")%>"
+				type="hidden" />
+			<button class="btn btn-outline-warning" onclick="" type="submit">글
+				수정</button>
+		</form>
 
-	<form
-		action="<%=request.getContextPath()%>/board/boardRemoveAction.jsp"
-		method="post">
-		<input name="boardNo" value="<%=request.getParameter("boardNo")%>"
-			type="hidden" />
-		<button onclick="deleteAlert()" type="submit"
-			class="btn btn-outline-danger">글 삭제</button>
-	</form>
-		
+		<form
+			action="<%=request.getContextPath()%>/board/boardRemoveAction.jsp"
+			method="post">
+			<input name="boardNo" value="<%=request.getParameter("boardNo")%>"
+				type="hidden" />
+			<button onclick="deleteAlert()" type="submit"
+				class="btn btn-outline-danger">글 삭제</button>
+		</form>
+
 	</div>
-		<%
-		}
-	%>
-	<!-- /.container -->
 	<%
 		}
 	%>
+
+	<%
+		}
+	%>
+	<!-- /.container -->
+
 	<!-- Footer -->
 	<footer class="py-5 bg-dark">
 		<div class="container">
@@ -464,6 +484,7 @@
 									<a class="a_400"><%=participant.getRegistration_date()%></a>
 								</div>
 								<div class="col-sm-3">
+
 									<form
 										action="<%=request.getContextPath()%>/board/RejectAction.jsp"
 										method="post">
@@ -510,12 +531,11 @@
 			$('.toast').toast('show');
 		});
 	});
-	
-	function changeImage()
-	{
-	var img = document.getElementById("image");
-	img.src="../img/heart.png";
-	return false;
+
+	function changeImage() {
+		var img = document.getElementById("image");
+		img.src = "../img/heart.png";
+		return false;
 	}
 </script>
 </body>
