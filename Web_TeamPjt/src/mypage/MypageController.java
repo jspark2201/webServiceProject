@@ -44,7 +44,8 @@ public class MypageController extends HttpServlet {
 		
 		else if(com.contentEquals("/mypage/portfolio/view"))
 			viewPage = "/view/mypage/portfolioView.jsp";
-		
+		else if(com.contentEquals("/mypage/portfolio/update"))
+			viewPage = "/view/mypage/portfolio_update.jsp";
 		RequestDispatcher dispatcher = request.getRequestDispatcher(viewPage);
 		dispatcher.forward(request, response);
 	}

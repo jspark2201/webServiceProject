@@ -92,7 +92,7 @@
 		
 			script.println("alert('로그인을 하세요.')");
 		
-			script.println("location.href = 'login.jsp'");
+			script.println("location.href = '/Web_TeamPjt/Login/'");
 		
 			script.println("</script>");
 		}
@@ -165,7 +165,7 @@
 
 		script.println("alert('글쓰기 성공')");
 
-		script.println("location.href='myPage.jsp'");
+		script.println("location.href='/Web_TeamPjt/mypage/'");
 
 		script.println("</script>");
 
