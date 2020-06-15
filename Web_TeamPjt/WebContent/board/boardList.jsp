@@ -205,6 +205,7 @@ List<Board> list = boardDao.selectBoardListPerPage(beginRow, pagePerRow);
 					<p class="card-text"><%=b.getWriter()%>
 					</p>
 					<p class="card-text"><%=b.getRegistration_date()%>
+					
 					</p>
 				</div>
 			</div>

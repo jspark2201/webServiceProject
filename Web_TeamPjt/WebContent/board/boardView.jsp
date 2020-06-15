@@ -42,6 +42,9 @@
 		List<Board> clist = boardDao.SelectParticipantsBoard(boardNo);//참여중 개발자
 		List<Board> tlist = boardDao.SelectTempParticipantsBoard(boardNo);//신청한 참여자
 		String[] platform = new String[4];
+		int goodState = boardDao.goodState(boardNo, id);
+		System.out.print("좋아요 상태: "+goodState);
+		//나의 좋아요 상태 
 
 		if (board.isWeb()) {//
 			platform[0] = "WEB";
@@ -127,7 +130,8 @@
 		<%
 			if (id.equals("admin")) {//세션 추가
 		%>
-		<form
+	<div class="row" >
+		<form 
 			action="<%=request.getContextPath()%>/board/boardDeadlineAction.jsp"
 			method="post">
 			<button type="submit" class="btn btn-primary" onclick="finAlert()"
@@ -138,6 +142,22 @@
 					style="margin-left: 5px; margin-bottom: 5px; height: 15px; width: 15px;">
 			</button>
 		</form>
+	
+	
+		<form
+			action="<%=request.getContextPath()%>/board/boardCompleteAction.jsp"
+			method="post">
+			<button type="submit" class="btn btn-primary" onclick="finAlert()"
+				style="margin-left: 80%;" id="finBtn">
+				<input name="boardNo" value="<%=request.getParameter("boardNo")%>"
+					type="hidden" /> <a class="a_400">개발완료</a><img alt=""
+					src="../img/detail/finish.png"
+					style="margin-left: 5px; margin-bottom: 5px; height: 15px; width: 15px;">
+			</button>
+		</form>
+	</div>
+		
+		
 		<%
 			}
 		%>
@@ -152,12 +172,16 @@
 					method="post">
 					<input name="boardNo" value="<%=request.getParameter("boardNo")%>"
 						type="hidden" />
-					<button type="submit" class="btn btn-outline-danger" id="likeBtn">
-						 <img alt="" src="../img/heart2.png"style="margin-bottom: 5px;">
+
+					<button type="submit" class="btn btn-outline-danger" id="likeBtn" onclick="changeImage();">
+					<%if(goodState==1){ %>
+					<img id="image" alt="" src="../img/heart.png"style="margin-bottom: 5px;">
+					<% } else{%>
+						<img id="image" alt="" src="../img/heart2.png"style="margin-bottom: 5px;">
+						<%} %>
 					</button>
 				</form>
-				<img alt="" src="../img/heart.png"
-					style="height: 32px; width: 32px; margin-bottom: 10px;">
+
 			</div>
 			<div class="row a_400" style="font-size: 2rem; margin: 30px;">
 				<%=board.getTitle()%>
@@ -280,7 +304,8 @@
 	<%
 		if (id.equals("admin")) {//세션 추가
 	%>
-	<form action="<%=request.getContextPath()%>/board/boardModifyForm.jsp"
+	<div class="row">
+		<form action="<%=request.getContextPath()%>/board/boardModifyForm.jsp"
 		method="post">
 		<input name="boardNo" value="<%=request.getParameter("boardNo")%>"
 			type="hidden" />
@@ -296,7 +321,9 @@
 		<button onclick="deleteAlert()" type="submit"
 			class="btn btn-outline-danger">글 삭제</button>
 	</form>
-	<%
+		
+	</div>
+		<%
 		}
 	%>
 	<!-- /.container -->
@@ -483,6 +510,13 @@
 			$('.toast').toast('show');
 		});
 	});
+	
+	function changeImage()
+	{
+	var img = document.getElementById("image");
+	img.src="../img/heart.png";
+	return false;
+	}
 </script>
 </body>
 </html>

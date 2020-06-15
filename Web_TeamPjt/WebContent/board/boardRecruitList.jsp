@@ -134,28 +134,35 @@ List<Board> list = boardDao.selectRecruitBoardListPerPage(beginRow, pagePerRow);
 			<div class="card acik-renk-form">
 				<div class="card-body">
 					<p class="font-weight-light text-dark">흥미분야</p>
-					<div class="row">
-						<div class="col-md-4">
-							<div class="form-group ">
-								<select id="interest_1" class="form-control a_400">
-									<option>WEB</option>
-									<option>안드로이드</option>
-									<option>임베디드</option>
-									<option>IOS</option>
-								</select>
+					<form name='interest' method='post'
+						action="<%=request.getContextPath()%>/board/boardInterestList.jsp">
+						<div class="row">
+							<div class="col-md-4">
+								<div class="form-group ">
+									<select id="interest_1" name="interest_1"
+										class="form-control a_400">
+										<option value="web">WEB</option>
+										<option value="android">안드로이드</option>
+										<option value="embeded">임베디드</option>
+										<option value="ios">IOS</option>
+									</select>
+								</div>
+							</div>
+							<div class="col-md-4">
+								<div class="form-group ">
+									<select id="interest_2" name="interest_2"
+										class="form-control a_400">
+										<option value="health">건강</option>
+										<option value="psychology">심리학</option>
+										<option value="game">게임</option>
+									</select>
+								</div>
+							</div>
+							<div class="col-md-4">
+								<button type="submit" class="btn btn-warning  pl-5 pr-5 a_500">검색</button>
 							</div>
 						</div>
-						<div class="col-md-4">
-							<div class="form-group ">
-								<select id="interest_2" class="form-control a_400">
-									<option>건강</option>
-									<option>심리학</option>
-									<option>안드로이드</option>
-									<option>게임</option>
-								</select>
-							</div>
-						</div>
-					</div>
+					</form>
 
 					<p class="font-weight-light text-dark">검색</p>
 					<FORM name='search' method='post'
