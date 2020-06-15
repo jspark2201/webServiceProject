@@ -5,24 +5,34 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
+import java.io.Reader;
+import java.util.Properties;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
+import java.io.IOException;
 
 public class NoteDAO {
-	
+	private String jdbc_driver;
+	private String jdbc_url;
+	private String id;
+	private String pwd;
 	public Connection dbConn() {
         Connection conn = null; // db�젒�냽 媛앹껜
         try {
-            // mysql jdbc driver 濡쒕뵫
-//            Class.forName("com.mysql.jdbc.Driver");
-        	Class.forName("org.mariadb.jdbc.Driver");
+			Properties properties = new Properties();
+			properties.load((getClass().getResourceAsStream("../config/db.properties")));
+
+			jdbc_driver = properties.getProperty("jdbc_driver");
+			jdbc_url = properties.getProperty("jdbc_url");
+			id = properties.getProperty("id");
+			pwd = properties.getProperty("pwd");
+            // mysql jdbc driver 로딩
+            Class.forName(jdbc_driver);
  
-            // db�뿰寃� 臾몄옄�뿴 but �씠諛⑸쾿�� 蹂댁븞�뿉 痍⑥빟�븯�떎. ..
-//            String url = "jdbc:mysql://localhost:3306/TUTORIAL";
-//            String id = "root"; // mysql �젒�냽�븘�씠�뵒
-//            String pwd = "31362201"; // mysql �젒�냽 鍮꾨쾲
-            // db �젒�냽
-//            conn = DriverManager.getConnection(url, id, pwd);
-        	conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/developers", "root", "qwe123!@#");
-            System.out.println("db�젒�냽 �꽦怨�");
+            // db 접속
+            conn = DriverManager.getConnection(jdbc_url, id, pwd);
+            System.out.println("db접속 성공");
         } catch (Exception e) {
             // db愿��젴�옉�뾽�� 諛섎뱶�떆 �씡�뀎�뀡 泥섎━
             System.out.println("db�젒�냽 �떎�뙣");

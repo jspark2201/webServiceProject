@@ -1,32 +1,44 @@
 package Idea;
 
+import java.io.FileReader;
+import java.io.Reader;
 import java.sql.*;
 import java.util.ArrayList;
-
+import java.util.Properties;
+import java.io.Reader;
+import java.util.Properties;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
+import java.io.IOException;
 
 public class IdeaDAO {
 
 	private Connection conn = null;
 	private PreparedStatement pstmt = null;
-	
+	private String jdbc_driver;
+	private String jdbc_url;
+	private String id;
+	private String pwd;
 	private void connect()
 	{
-		// 1. Driver ·Îµù
+		// 1. Driver ï¿½Îµï¿½
 		try {
-			Class.forName("org.mariadb.jdbc.Driver");
-		}
-		catch (Exception e) {
-			System.out.println("·Îµù ½ÇÆÐ");
-			return;
-		}
+			Properties properties = new Properties();
+			properties.load((getClass().getResourceAsStream("../config/db.properties")));
+
+			jdbc_driver = properties.getProperty("jdbc_driver");
+			jdbc_url = properties.getProperty("jdbc_url");
+			id = properties.getProperty("id");
+			pwd = properties.getProperty("pwd");
+			
+			Class.forName(jdbc_driver);
 		
-		// 2. DB¿Í ¿¬°á
-		try {
-			conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/developers", "root", "qwe123!@#");
+			conn = DriverManager.getConnection(jdbc_url, id, pwd);
 
 		}
 		catch (Exception e) {
-			System.out.println("¿¬°á ½ÇÆÐ : " + e);
+			System.out.println("ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ : " + e);
 		}
 	}
 	
@@ -37,7 +49,7 @@ public class IdeaDAO {
 				pstmt.close();
 			}
 			catch(SQLException e) {
-				System.out.println("?? ½ÇÆÐ : " + e);
+				System.out.println("?? ï¿½ï¿½ï¿½ï¿½ : " + e);
 			}
 		
 		}
@@ -47,7 +59,7 @@ public class IdeaDAO {
 				conn.close();
 			}
 			catch (SQLException e) {
-				System.out.println("¿¬°á Á¾·á ½ÇÆÐ : " + e);
+				System.out.println("ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ : " + e);
 			}
 		}
 	}
@@ -59,7 +71,7 @@ public class IdeaDAO {
 		
 		String sql;
 		
-		try { // »óÅÂ¿¡ µû¶ó sqlÀÌ ´Þ¶óÁú °Í.
+		try { // ï¿½ï¿½ï¿½Â¿ï¿½ ï¿½ï¿½ï¿½ï¿½ sqlï¿½ï¿½ ï¿½Þ¶ï¿½ï¿½ï¿½ ï¿½ï¿½.
 			sql = "update idea set title=?, content=?, requirements=?,"
 					+" number_participants=?, url=?, state=? where id=?";
 			pstmt = conn.prepareStatement(sql);
@@ -73,7 +85,7 @@ public class IdeaDAO {
 			pstmt.executeUpdate();
 		}
 		catch(SQLException e) {
-			System.out.println("updateDB ½ÇÆÐ");
+			System.out.println("updateDB ï¿½ï¿½ï¿½ï¿½");
 			return false;
 		}
 		finally {
@@ -97,7 +109,7 @@ public class IdeaDAO {
 			pstmt.executeUpdate();
 		}
 		catch(SQLException e) {
-			System.out.println("deleteDB ½ÇÆÐ");
+			System.out.println("deleteDB ï¿½ï¿½ï¿½ï¿½");
 			return false;
 		}
 		finally {
@@ -136,7 +148,7 @@ public class IdeaDAO {
 			rs.close();
 		}
 		catch(SQLException e) {
-			System.out.println("getDB ½ÇÆÐ");
+			System.out.println("getDB ï¿½ï¿½ï¿½ï¿½");
 		}
 		finally {
 			disconnect();
@@ -179,7 +191,7 @@ public class IdeaDAO {
 			
 		}
 		catch(SQLException e) {
-			System.out.println("getDBTopList ½ÇÆÐ");
+			System.out.println("getDBTopList ï¿½ï¿½ï¿½ï¿½");
 		}
 		finally {
 			disconnect();
@@ -218,7 +230,7 @@ public class IdeaDAO {
 			rs.close();
 		}
 		catch(SQLException e) {
-			System.out.println("getDBList ½ÇÆÐ");
+			System.out.println("getDBList ï¿½ï¿½ï¿½ï¿½");
 		}
 		finally {
 			disconnect();
@@ -304,7 +316,7 @@ public class IdeaDAO {
 			rs.close();
 		}
 		catch(SQLException e) {
-			System.out.println("getDBList ½ÇÆÐ");
+			System.out.println("getDBList ï¿½ï¿½ï¿½ï¿½");
 		}
 		finally {
 			disconnect();
@@ -360,7 +372,7 @@ public class IdeaDAO {
 			count = rs.getInt("cnt");
 		}
 		catch(SQLException e) {
-			System.out.println("getDBCount ½ÇÆÐ");
+			System.out.println("getDBCount ï¿½ï¿½ï¿½ï¿½");
 			return -1;
 		}
 		
@@ -388,7 +400,7 @@ public class IdeaDAO {
 			count = rs.getInt("cnt");
 		}
 		catch(SQLException e) {
-			System.out.println("getDBCount ½ÇÆÐ");
+			System.out.println("getDBCount ï¿½ï¿½ï¿½ï¿½");
 			return -1;
 		}
 		

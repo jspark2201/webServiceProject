@@ -9,16 +9,22 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Vector;
 import java.sql.Date;
+import java.io.Reader;
+import java.util.Properties;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
+import java.io.IOException;
 
 public class DBEventDAO {
-	private String jdbc_driver = "org.mariadb.jdbc.Driver";
-	private String jdbc_url = "jdbc:mariadb://localhost:3306/developers";
-	private String id = "root";
-	private String pwd = "qwe123!@#";
+
 	Connection conn = null;
 	Statement stmt = null;
 	private ResultSet rs;
-
+	private String jdbc_driver;
+	private String jdbc_url;
+	private String id;
+	private String pwd;
 	private static DBEventDAO uniqueInstance;
 
 	public static DBEventDAO getInstance() {
@@ -29,7 +35,16 @@ public class DBEventDAO {
 	}
 
 	public DBEventDAO() {
+
 		try {
+			Properties properties = new Properties();
+			properties.load((getClass().getResourceAsStream("../config/db.properties")));
+
+			jdbc_driver = properties.getProperty("jdbc_driver");
+			jdbc_url = properties.getProperty("jdbc_url");
+			id = properties.getProperty("id");
+			pwd = properties.getProperty("pwd");
+
 			Class.forName(jdbc_driver);
 			conn = DriverManager.getConnection(jdbc_url, id, pwd);
 			stmt = conn.createStatement();
@@ -39,6 +54,10 @@ public class DBEventDAO {
 			System.out.println("SQLState: " + sqex.getSQLState());
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
+		} catch (IOException ie) {
+			System.out.println(ie.getMessage());
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
 		}
 	}
 
