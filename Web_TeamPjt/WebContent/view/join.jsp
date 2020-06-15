@@ -96,10 +96,10 @@
             <div class="col-sm-8">
                <div class="form-group ">
                   <select name="interest" class="form-control a_400" style="width:50%">
-                     <option value=web>WEB</option>
-                     <option value=android>안드로이드</option>
-                     <option value=embebed>임베디드</option>
-                     <option value=ios>IOS</option>
+                     <option value='web'>WEB</option>
+                     <option value='android'>안드로이드</option>
+                     <option value='embebed'>임베디드</option>
+                     <option value='ios'>IOS</option>
                   </select>
                </div>
             </div>
@@ -113,9 +113,9 @@
                <div class="form-group ">
                   <select name="interest1" class="form-control a_400"
                    style="width:50%">
-                     <option value=health>건강</option>
-                     <option value=psychology>심리학</option>
-                     <option value=game>게임</option>
+                     <option value='health'>건강</option>
+                     <option value='psychology'>심리학</option>
+                     <option value='game'>게임</option>
                   </select>
                   
                </div>

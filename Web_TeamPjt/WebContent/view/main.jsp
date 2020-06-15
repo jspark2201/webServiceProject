@@ -46,7 +46,7 @@
 						data-toggle="modal" data-target="#guideModal">이용가이드 </a></li>
 					<!-- <li class="nav-item"><a class="nav-link" href="#">회원가입</a></li> -->
 					<li class="nav-item"><a class="nav-link a_400"
-						href='/Web_TeamPjt/view/logout.jsp'>로그아웃</a></li>
+						href='/Web_TeamPjt/Login?action=logout'>로그아웃</a></li>
 					<li class="nav-item"><a class="nav-link a_400"
 						href='/Web_TeamPjt/view/mypage.jsp'>마이페이지</a></li>
 				</ul>

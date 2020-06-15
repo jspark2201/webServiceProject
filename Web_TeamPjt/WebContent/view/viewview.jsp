@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
-<jsp:useBean id="event" class="user.UserBean" scope="request" />
+<jsp:useBean id="event" class="User.User" scope="request" />
 
 <html>
 <head>
@@ -9,7 +9,7 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<h2>이벤트 내용</h2>
+	<h2>개인정보조회</h2>
 	<table border=1>
 	<tr>
 		<td>아이디</td>
@@ -34,6 +34,16 @@
 	<tr>
 		<td>전화번호</td>
 		<td><jsp:getProperty name="event" property="number" /> 
+		</td>
+	</tr>
+	<tr>
+		<td>플랫폼</td>
+		<td><jsp:getProperty name="event" property="platform" /> 
+		</td>
+	</tr>
+	<tr>
+		<td>흥미분야</td>
+		<td><jsp:getProperty name="event" property="genre" /> 
 		</td>
 	</tr>
 	</table>

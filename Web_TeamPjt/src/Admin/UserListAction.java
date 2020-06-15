@@ -1,87 +1,71 @@
-package Admin;
-
-import java.io.IOException;
-import java.util.ArrayList;
-
-import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
-import User.*;
-import Idea.*;
-
-public class UserListAction implements Action {
-
-	private String type = "id";		// °Ë»ö ±âÁØ
-	private String search = "";	// °Ë»ö¾î
-	private String order = "date";	// Á¤·Ä ±âÁØ
-	private int curPageNum = 1;
-	
-	public void execute(HttpServletRequest request, HttpServletResponse response) {
-				
-		UserDAO userDAO = new UserDAO();
-
-		/***** Parameter °ª °¡Á®¿À±â */
-		if (request.getParameter("type") != null)
-			type = request.getParameter("type");
-
-		if (request.getParameter("search") != null)
-			search = request.getParameter("search");
-		
-		if (request.getParameter("order") != null)
-			order = request.getParameter("order");
-
-		if (request.getParameter("pageNum") != null)
-			curPageNum = Integer.parseInt(request.getParameter("pageNum"));
-
-		
-		/***** Parameter °ª °ËÁõ */
-		
-		// type °ª °ËÁõ
-		switch(type) {
-			case "id": case "nickname": case "email":
-				break;
-			default:
-				type = "id";
-		}
-		
-		// search °ª °ËÁõ
-		if (search.trim().equals(""))
-			search = null;
-		
-		// order °ª °ËÁõ
-		switch(order) {
-			case "id": case "nickname":
-			case "email": case "date":
-				break;
-			default:
-				order = "date";
-		}
-
-		// curPageNum °ª °ËÁõ
-		int pageCount = (userDAO.getDBCount(type, search) - 1) / 10 + 1;
-		
-		if (curPageNum < 0)
-			curPageNum = 1;
-		else if (curPageNum > pageCount)
-			curPageNum = pageCount;
-
-		
-		/***** request º¸³»±â */
-		ArrayList<User> userList = userDAO.getDBList(type, search, order, curPageNum);
-		
-		
-		request.setAttribute("PageCount", pageCount);	// ÆäÀÌÁö ¼ö
-		request.setAttribute("UserList", userList);		// »ç¿ëÀÚ ¸®½ºÆ®
-
-		// ÀÔ·Â¹ÞÀº Parameter ¹ÝÈ¯
-		request.setAttribute("type", this.type);
-		request.setAttribute("search", this.search);
-		request.setAttribute("order", this.order);
-		request.setAttribute("curPageNum", this.curPageNum);
-
-	}
-
-}
+/*
+ * package Admin;
+ * 
+ * import java.io.IOException; import java.util.ArrayList;
+ * 
+ * import javax.servlet.ServletException; import
+ * javax.servlet.annotation.WebServlet; import javax.servlet.http.HttpServlet;
+ * import javax.servlet.http.HttpServletRequest; import
+ * javax.servlet.http.HttpServletResponse;
+ * 
+ * import User.*; import Idea.*;
+ * 
+ * public class UserListAction implements Action {
+ * 
+ * private String type = "id"; // ï¿½Ë»ï¿½ ï¿½ï¿½ï¿½ï¿½ private String search = ""; // ï¿½Ë»ï¿½ï¿½ï¿½
+ * private String order = "date"; // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ private int curPageNum = 1;
+ * 
+ * public void execute(HttpServletRequest request, HttpServletResponse response)
+ * {
+ * 
+ * UserDAO userDAO = new UserDAO();
+ * 
+ *//***** Parameter ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ */
+/*
+ * if (request.getParameter("type") != null) type =
+ * request.getParameter("type");
+ * 
+ * if (request.getParameter("search") != null) search =
+ * request.getParameter("search");
+ * 
+ * if (request.getParameter("order") != null) order =
+ * request.getParameter("order");
+ * 
+ * if (request.getParameter("pageNum") != null) curPageNum =
+ * Integer.parseInt(request.getParameter("pageNum"));
+ * 
+ * 
+ *//***** Parameter ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ */
+/*
+ * 
+ * // type ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ switch(type) { case "id": case "nickname": case "email":
+ * break; default: type = "id"; }
+ * 
+ * // search ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ if (search.trim().equals("")) search = null;
+ * 
+ * // order ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ switch(order) { case "id": case "nickname": case "email":
+ * case "date": break; default: order = "date"; }
+ * 
+ * // curPageNum ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ int pageCount = (userDAO.getDBCount(type, search) - 1)
+ * / 10 + 1;
+ * 
+ * if (curPageNum < 0) curPageNum = 1; else if (curPageNum > pageCount)
+ * curPageNum = pageCount;
+ * 
+ * 
+ *//***** request ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ *//*
+							 * ArrayList<User> userList = userDAO.getDBList(type, search, order,
+							 * curPageNum);
+							 * 
+							 * 
+							 * request.setAttribute("PageCount", pageCount); // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½
+							 * request.setAttribute("UserList", userList); // ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Æ®
+							 * 
+							 * // ï¿½Ô·Â¹ï¿½ï¿½ï¿½ Parameter ï¿½ï¿½È¯ request.setAttribute("type", this.type);
+							 * request.setAttribute("search", this.search); request.setAttribute("order",
+							 * this.order); request.setAttribute("curPageNum", this.curPageNum);
+							 * 
+							 * }
+							 * 
+							 * }
+							 */

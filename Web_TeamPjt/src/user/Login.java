@@ -1,4 +1,4 @@
-package user;
+package User;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -20,31 +20,30 @@ public class Login extends HttpServlet {
 		String address = null;
 		request.setCharacterEncoding("utf-8");
 		String action = request.getParameter("action");
+		HttpSession session = request.getSession();
 		if (action == null || action.equals("list")) {
 			address = "view/index.jsp";
 		} else if (action.equals("view")) {
 			//System.out.println(request.getParameter("id"));
-			UserBean event = dao.getEvent(request.getParameter("id"));
+			User event = dao.getDB(request.getParameter("id"));
 			request.setAttribute("event", event);
 			address = "view/viewview.jsp";
 		} else if (action.equals("add")) {
-			UserBean event = new UserBean();
+			User event = new User();
 			event.setId((request.getParameter("id")));
 			event.setPwd(request.getParameter("pwd"));
 			event.setNickname(request.getParameter("nickname"));
 			event.setEmail(request.getParameter("email"));
 			event.setNumber(request.getParameter("number"));
-			event.setInterest(request.getParameter("interest"));
-			event.setInterest1(request.getParameter("interest1"));
+			event.setPlatform(request.getParameter("interest"));
+			event.setGenre(request.getParameter("interest1"));
 			
 			if (event.getId() == "" || event.getPwd() == "" || event.getNickname() == "" || event.getEmail() == ""
 					|| event.getNumber() == "") {
 				address = "view/joinAction.jsp";
 				request.setAttribute("flag", "1");
 			} else {
-				if (dao.addid(event) == 1) {
-					request.setAttribute("event", event);
-					HttpSession session = request.getSession();
+				if (dao.insertDB(event)) {
 					session.setAttribute("userid", event.getId());
 					address = "view/main.jsp";
 				} else {
@@ -54,25 +53,29 @@ public class Login extends HttpServlet {
 			}
 
 		} else if (action.equals("checkid")) {
-			UserBean event = new UserBean();
-			event.setId((request.getParameter("id")));
-			event.setPwd(request.getParameter("pwd"));
+			User event = new User();
+			String id=request.getParameter("id");
+			String pwd=request.getParameter("pwd");
 			
-			if (dao.authenticate(event)) {
-				address = "view/main.jsp";
-				request.setAttribute("userinfo", event);
-				HttpSession session = request.getSession();
-				session.setAttribute("userid", event.getId());
-			} else {
-				address = "view/login_fail.jsp";
-				request.setAttribute("userinfo", event);
+			event=dao.getDB(request.getParameter("id"));
+			if(event.getId()==null) {
+				address="view/login_fail.jsp";
+			}
+			else {
+				if(event.getPwd().equals(pwd)) {
+					address="view/main.jsp";
+					session.setAttribute("userid", event.getId());
+				}
+				else {
+					address="view/login_fail.jsp";
+				}
 			}
 		} else if (action.equals("logout")) {
 			address = "view/logout.jsp";
 		}else if (action.equals("mypage")) {
 			address = "view/mypage.jsp";
 		}else if (action.equals("modify")) {
-			address = "view/update.jsp";
+			
 		}
 		RequestDispatcher dispatcher = request.getRequestDispatcher(address);
 		dispatcher.forward(request, response);
