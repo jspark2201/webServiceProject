@@ -1,3 +1,9 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+    <%@page import="note.*" %>
+    <%@page import="notification.*" %>
+    <%@page import="java.util.ArrayList" %>
+    <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!doctype html>
 <html lang="ko">
 <head>
@@ -5,15 +11,38 @@
 <meta name="viewport"
 	content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <title>IDEARIA</title>
-
-<link rel="shortcut icon" href="../img/favicon/ecology.png">
-<link rel="stylesheet" href="../css/myPage/myPage1.css">
-<link rel="stylesheet" href="../css/bootstrap.min.css">
-<link rel="stylesheet" href="../css/googleFont.css">
+<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+<link rel="shortcut icon" href="/Web_TeamPjt/img/favicon/ecology.png">
+<link rel="stylesheet" href="/Web_TeamPjt/css/myPage/myPage1.css">
+<link rel="stylesheet" href="/Web_TeamPjt/css/bootstrap.min.css">
+<link rel="stylesheet" href="/Web_TeamPjt/css/googleFont.css">
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500&display=swap" rel="stylesheet">
+<script type="text/javascript" src="https://code.jquery.com/jquery-3.2.0.min.js" ></script>
+<script type="text/javascript">
+/* $(function(){
+  $('#noteModalTitle').text('이름을 입력하세요');
+}); */
+var title2;
+var receiveID;
+
+function sendTitle(title, giveID, comment) {
+	$('#noteModalTitle').text(title);
+	$('#noteModalWriter').text(giveID);
+	$('#noteModalContent').text(comment);
+	title2 = title;
+	receiveID = giveID;
+}
+
+function writeTitle() {	//모달창에서 보내기를 눌렀을 
+	$('#reSendTitle').val("re:"+title2);
+	$('#writeModalTitle').text("re:"+title2);
+	$('#receiveID').val(receiveID);
+}
+</script>
 
 </head>
 <body>
+
 	<!-- Navigation -->
 	<nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
 		<div class="container">
@@ -51,7 +80,7 @@
 			</div>
 		</div>
 	</nav>
-	
+		
 	<div style="height:80px; background-color:#FFCE1E; margin-bottom:30px;	">
 	</div>
 
@@ -59,7 +88,7 @@
 	
 	<!-- Page Content -->
   <div class="container" style="padding:80px; background-color:#ffffff; border:1px solid #a6a6a6; margin-bottom:50px;">
-
+		
   
 	  <!-- Nav tabs -->
 	  <ul class="nav nav-tabs" role="tablist">
@@ -86,50 +115,43 @@
 				<table class="table">
 					<thead>
 						<tr>
-							<th></th>
-							<th>이름</th>
-							<th>Email</th>
+							<th>보낸 사람</th>
+							<th>이메일</th>
+							<th>제목</th>
 							<th>내용</th>
 						</tr>
 					</thead>
 					<tbody>
+					
+<%--  					<%
+					NoteDAO dao = new NoteDAO();
+					
+					ArrayList<NoteDTO> list = dao.noteList();
+					for(NoteDTO dto:list) {
+					%> --%>
+					
+					<%
+					NoteDAO dao = new NoteDAO();
+					ArrayList<NoteDTO> list = dao.noteList();
+					request.setAttribute("list", list);
+					%>
+					
+					<c:forEach var="n" items="${list}">
 						<tr>
-							<td>1</td>
-							<td>Kent</td>
-							<td>clarkkent@mail.com</td>
-							<td><a data-toggle="modal" data-target="#mailModal">a</a></td>
+							<td ><a name="giveID">${n.giveID}</a></td>
+							<td><a name="giveEmail">${n.giveEmail}</a></td>
+							<td>${n.title} </td>
+							<td><a id="noteContent" data-toggle="modal" data-target="#mailModal" onclick="sendTitle('${n.title}', '${n.giveID}', '${n.comment}')">${n.comment}</a></td>
 						</tr>
-						<tr>
-							<td>2</td>
-							
-							<td>Carter</td>
-							<td>johncarter@mail.com</td>
-							<td><a data-toggle="modal" data-target="#mailModal">b</a></td>
-						</tr>
-						<tr>
-							<td>3</td>
-							<td>Parker</td>
-							<td>peterparker@mail.com</td>
-							<td><a data-toggle="modal" data-target="#mailModal">c</a></td>
-						</tr>
-						<tr>
-							<td>4</td>
-							<td>Parker</td>
-							<td>peterparker@mail.com</td>
-							<td><a data-toggle="modal" data-target="#mailModal">d</a></td>
-						</tr>
-						<tr>
-							<td>5</td>
-							<td>Parker</td>
-							<td>peterparker@mail.com</td>
-							<td><a data-toggle="modal" data-target="#mailModal">e</a></td>
-						</tr>
-						<tr>
-							<td>6</td>
-							<td>Parker</td>
-							<td>peterparker@mail.com</td>
-							<td><a data-toggle="modal" data-target="#mailModal">f</a></td>
-						</tr>
+					</c:forEach>
+					
+
+<%-- 					<%
+					}
+					%> --%>
+					
+					
+					
 					</tbody>
 				</table>
 				<p class="p_400" style="color:#cccccc;">쪽지 내용을 클릭하시면 상세 보기가 가능합니다.</p>
@@ -171,56 +193,33 @@
 	    <table class="table">
 					<thead>
 						<tr>
-							<th></th>
-							<th>이름</th>
-							<th>Email</th>
+
+							<th>보낸 사람</th>
+							<th>이메일</th>
 							<th>내용</th>
+							<th>아이디어 제목</th>
 							<th>아이디어 링크</th>
 						</tr>
 					</thead>
 					<tbody>
+					<%
+						NotificationDAO dao2 = new NotificationDAO();
+					
+						ArrayList<NotificationDTO> list2 = dao2.notificationList();
+						for(NotificationDTO dto:list2) {
+					%>
 						<tr>
-							<td>1</td>
-							<td>Kent</td>
-							<td>clarkkent@mail.com</td>
+							<td><%=dto.getGiveID() %></td>
+							<td><%=dto.getGiveEmail() %></td>
 							<td>컨택 요청이 들어왔습니다.</td>
-							<td><a href="">링크1</a></td>
+							<td><%=dto.getIdeaTitle() %></td>
+							<%-- <td><a href="../Notification?data=<%=dto.getIdeaLink() %>"><%=dto.getIdeaLink() %></a></td> --%>
+							<td><a href=""><%=dto.getIdeaLink() %></a></td>
 						</tr>
-						<tr>
-							<td>2</td>
-							<td>Carter</td>
-							<td>johncarter@mail.com</td>
-							<td>컨택 요청이 들어왔습니다.</td>
-							<td><a href="">링크2</a></td>
-						</tr>
-						<tr>
-							<td>3</td>
-							<td>Parker</td>
-							<td>peterparker@mail.com</td>
-							<td>컨택 요청이 들어왔습니다.</td>
-							<td><a href="">링크3</a></td>
-						</tr>
-						<tr>
-							<td>4</td>
-							<td>Parker</td>
-							<td>peterparker@mail.com</td>
-							<td>컨택 요청이 들어왔습니다.</td>
-							<td><a href="">링크4</a></td>
-						</tr>
-						<tr>
-							<td>5</td>
-							<td>Parker</td>
-							<td>peterparker@mail.com</td>
-							<td>컨택 요청이 들어왔습니다.</td>
-							<td><a href="">링크5</a></td>
-						</tr>
-						<tr>
-							<td>6</td>
-							<td>Parker</td>
-							<td>peterparker@mail.com</td>
-							<td>컨택 요청이 들어왔습니다.</td>
-							<td><a href="">링크6</a></td>
-						</tr>
+					<%
+						}	
+					%>
+
 					</tbody>
 				</table>
 	    
@@ -238,8 +237,6 @@
   </div>
   <!-- /.container -->
 
-
-
 	<!-- Footer -->
 	<footer class="py-5 bg-dark">
 		<div class="container">
@@ -249,7 +246,7 @@
 		<!-- /.container -->
 	</footer>
 	
-	
+
 	
 	
 	
@@ -279,31 +276,73 @@
       </div>
     </div>
   </div>
+
   
   <!-- 쪽지 MODAL -->
+  <form>
   <div class="modal fade" id="mailModal">
     <div class="modal-dialog modal-xl">
       <div class="modal-content">
       
+
         <!-- Modal Header -->
-        <div class="modal-header">
-          <h4 class="modal-title">Modal Heading</h4>
+       <div class="modal-header">
+          <h4 class="modal-title" id="noteModalTitle">쪽지 제목</h4>
           <button type="button" class="close" data-dismiss="modal">&times;</button>
         </div>
         
         <!-- Modal body -->
         <div class="modal-body">
-          Modal body..
+        <p id="noteModalWriter" class="a_500">작성자 : </p>
+        <hr>
+          	<p id="noteModalContent" class="a_400">쪽지 내용..</p>
         </div>
         
         <!-- Modal footer -->
         <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-secondary" data-dismiss="modal" data-toggle="modal" data-target="#response_mailModal" ><a onclick="writeTitle()" class="a_400">답장하기</a></button>
+          <button type="button" class="btn btn-secondary" data-dismiss="modal"><a class="a_400">닫기</a></button>
         </div>
         
       </div>
     </div>
   </div>
+  </form>
+  
+       
+    <!-- 쪽지 작성 MODAL -->
+    <form action="../SendNote?action=send" method="post">
+   		<div class="modal fade" id="response_mailModal">
+    		<div class="modal-dialog modal-xl">
+      			<div class="modal-content">
+      	        	<!-- Modal Header -->
+        			<div class="modal-header">
+				         <h4 id="writeModalTitle" class="modal-title">쪽지 제목</h4>
+				         <button type="button" class="close" data-dismiss="modal">&times;</button>
+        			</div>
+        	
+			        <!-- Modal body -->
+			        <div class="modal-body">
+			        <hr>
+			          	<textarea name="sendContent" class="a_400" id="field" placeholder="보내실 내용을 입력하여 주세요.(200자)" maxlength="200" rows="10" cols="40"></textarea>
+			        </div>
+        
+			        <!-- Modal footer -->
+			        <div class="modal-footer">
+			        	<input id="receiveID" name="noteRecevieID" type="hidden" value="aaa"></input>
+			        	<input id="reSendTitle" name="sendTitle" type="hidden" value="abc"></input>
+			          <button type="submit" class="btn btn-secondary">보내기</button>
+			          <button type="button" class="btn btn-secondary" data-dismiss="modal"><a class="a_400">닫기</a></button>
+			        </div>
+      			</div>
+    		</div>
+  		</div>
+    </form>
+
+
+    
+  
+  
 
 	<!-- Bootstrap core JavaScript -->
 	<script src="../vendor/jquery/jquery.min.js"></script>

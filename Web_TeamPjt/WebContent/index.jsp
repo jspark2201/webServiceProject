@@ -8,8 +8,6 @@
 </head>
 <body>
 
-
-
 	<p>안녕하세요</p>
 </body>
 </html>

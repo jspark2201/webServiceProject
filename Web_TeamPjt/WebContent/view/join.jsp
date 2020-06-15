@@ -5,15 +5,15 @@
 <head>
 <meta charset="UTF-8">
 <title>IDEARIA</title>
-<link rel="shortcut icon" href="../img/favicon/ecology.png">
+<link rel="shortcut icon" href="/Web_TeamPjt/img/favicon/ecology.png">
 
-<link href="../css/googleFont.css" rel="stylesheet">
-<link href="../css/join/join.css" rel="stylesheet">
+<link href="/Web_TeamPjt/css/googleFont.css" rel="stylesheet">
+<link href="/Web_TeamPjt/css/join/join.css" rel="stylesheet">
 <!-- Bootstrap core CSS -->
 <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 
 <!-- Custom styles for this template -->
-<link href="../css/bootstrap.min.css" rel="stylesheet">
+<link href="/Web_TeamPjt/css/bootstrap.min.css" rel="stylesheet">
 
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500&display=swap" rel="stylesheet">
 
