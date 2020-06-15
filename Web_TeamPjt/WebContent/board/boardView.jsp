@@ -1,4 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
+<%-- <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ page import="java.sql.*"%>
 <%@ page import="service.*"%>
@@ -42,7 +42,7 @@
 		List<Board> clist = boardDao.SelectParticipantsBoard(boardNo);//참여중 개발자
 		List<Board> tlist = boardDao.SelectTempParticipantsBoard(boardNo);//신청한 참여자
 		String[] platform = new String[4];
-		int goodState = boardDao.goodState(boardNo, id);
+		//int goodState = boardDao.goodState(boardNo, id);
 		System.out.print("좋아요 상태: "+goodState);
 		//나의 좋아요 상태 
 
@@ -519,4 +519,4 @@
 	}
 </script>
 </body>
-</html>
+</html> --%>

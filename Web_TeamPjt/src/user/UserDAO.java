@@ -48,22 +48,29 @@ public class UserDAO {
 		connect();
 
 		String sql = "insert into user(id,pwd,nickname,email,number) values(?,?,?,?,?)";
-		String sql2 = "insert into user_favorite(user_id, %s, %s) values(?,1,1)";
-		sql2 = String.format(sql2, user.getPlatform(), user.getGenre());
+		String sql2 = "insert into user_favorite(user_id,%s,%s) values(?,1,1)";
+		sql2 = String.format(sql2,user.getPlatform(),user.getGenre());
 		System.out.println(sql2);
 
 		try {
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, user.getId());
+			System.out.println("1");
 			pstmt.setString(2, user.getPwd()); // TODO: 비번 암호화!!
+			System.out.println("2");
 			pstmt.setString(3, user.getNickname());
+			System.out.println("3");
 			pstmt.setString(4, user.getEmail());
+			System.out.println("4");
 			pstmt.setString(5, user.getNumber());
 			pstmt.executeUpdate();
-
+			System.out.println("5");
 			pstmt = conn.prepareStatement(sql2);
+			System.out.println("6");
 			pstmt.setString(1, user.getId());
+			System.out.println(user.getId());
 			pstmt.executeUpdate();
+			System.out.println("6");
 		} catch (SQLException e) {
 			System.out.println("insertDB 에러");
 			return false;

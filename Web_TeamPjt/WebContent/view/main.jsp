@@ -50,7 +50,7 @@
 					<li class="nav-item"><a class="nav-link a_400"
 						href='/Web_TeamPjt/Login?action=logout'>로그아웃</a></li>
 					<li class="nav-item"><a class="nav-link a_400"
-						href='/Web_TeamPjt/Login?action=mypage'>마이페이지</a></li>
+						href='/Web_TeamPjt/Login?action=mypage&id=<%=user.getId()%>'>마이페이지</a></li>
 				</ul>
 			</div>
 		</div>

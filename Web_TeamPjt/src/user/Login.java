@@ -2,6 +2,7 @@ package User;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
 
 import javax.servlet.RequestDispatcher;
@@ -18,6 +19,7 @@ public class Login extends HttpServlet {
 			throws ServletException, IOException {
 		UserDAO dao = new UserDAO();
 		String address = null;
+		SHA sha=new SHA();
 		request.setCharacterEncoding("utf-8");
 		String action = request.getParameter("action");
 		HttpSession session = request.getSession();
@@ -31,7 +33,12 @@ public class Login extends HttpServlet {
 		} else if (action.equals("add")) {
 			User event = new User();
 			event.setId((request.getParameter("id")));
-			event.setPwd(request.getParameter("pwd"));
+			try {
+				event.setPwd(sha.sha256(request.getParameter("pwd")));
+			} catch (NoSuchAlgorithmException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 			event.setNickname(request.getParameter("nickname"));
 			event.setEmail(request.getParameter("email"));
 			event.setNumber(request.getParameter("number"));
@@ -57,12 +64,18 @@ public class Login extends HttpServlet {
 			User event = new User();
 			String id = request.getParameter("id");
 			String pwd = request.getParameter("pwd");
-
+			
+			try {
+			 pwd = sha.sha256(pwd);
+			} catch (NoSuchAlgorithmException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 			event = dao.getDB(request.getParameter("id"));
 			if (event.getId() == null) {
 				address = "view/login_fail.jsp";
 			} else {
-				if (event.getPwd().equals(pwd)) {
+				if ((event.getPwd()).equals(pwd)) {
 					address = "view/main.jsp";
 					session.setAttribute("user", event);
 					session.setAttribute("userID", event.getId());
@@ -73,12 +86,20 @@ public class Login extends HttpServlet {
 		} else if (action.equals("logout")) {
 			address = "view/logout.jsp";
 		} else if (action.equals("mypage")) {
+			User event = dao.getDB(request.getParameter("id"));
+			request.setAttribute("event", event);
 			address = "view/mypage.jsp";
 		} else if (action.equals("modify")) {
 			address = "view/login.jsp";
 		} else if (action.equals("mcheckid")) {
 			String id = request.getParameter("id");
 			String pwd = request.getParameter("pwd");
+			try {
+				pwd=sha.sha256(pwd);
+			} catch (NoSuchAlgorithmException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 			User user1 = (User) session.getAttribute("user");
 			System.out.println(user1.getId());
 			System.out.println(user1.getPwd());

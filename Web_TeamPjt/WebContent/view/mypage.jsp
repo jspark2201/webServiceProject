@@ -15,7 +15,7 @@
 <link
 	href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500&display=swap"
 	rel="stylesheet">
-
+<jsp:useBean id="event" class="User.User" scope="request" />
 </head>
 <body>
 	<%
@@ -37,7 +37,7 @@
 			<div class="collapse navbar-collapse" id="navbarResponsive">
 				<ul class="navbar-nav ml-auto">
 					<li class="nav-item active"><a class="nav-link a_400" href="#">랭킹
-							보기 <%= userid %><span class="sr-only">(current)</span>
+							보기 <%=userid%><span class="sr-only">(current)</span>
 					</a></li>
 					<li class="nav-item active"><a class="nav-link a_400" href="#">아이디어
 							보기 <span class="sr-only">(current)</span>
@@ -146,15 +146,68 @@
 				</ul>
 			</div>
 			<div id="menu1" class="container tab-pane fade">
-				<br>
-				<p class="p_400" style="color: #cccccc;">개인정보 조회 및 수정은 인증이
+	<div class="container info_container">
+
+		<div class="row">
+			<div
+				class="col-xs-12 col-sm-8 col-md-6 col-sm-offset-2 col-md-offset-3">
+				<form role="form" method="post" action="/Web_TeamPjt/Login">
+					<div class="row" style="margin-top:30px; margin-bottom:15px;">
+  						<div class="col-sm-4 a_400" style="margin-top:5px;">닉네임:</div>
+  						<div class="col-sm-8"><input type="text" name="nickname" value="<jsp:getProperty name="event" property="nickname" /> "
+									class="form-control input-lg" placeholder="Nickname"
+									tabindex="6"></div>
+					</div>
+					<div class="row" style="margin-top:30px; margin-bottom:15px;">
+  						<div class="col-sm-4 a_400" style="margin-top:5px;">이메일:</div>
+  						<div class="col-sm-8"><input type="text" name="email" value="<jsp:getProperty name="event" property="email" /> "
+									class="form-control input-lg" placeholder="Email"
+									tabindex="6"></div>
+					</div>
+					<div class="row" style="margin-top:30px; margin-bottom:15px;">
+  						<div class="col-sm-4 a_400" style="margin-top:5px;">전화번호:</div>
+  						<div class="col-sm-8"><input type="text" name="number" value="<jsp:getProperty name="event" property="number" /> "
+									class="form-control input-lg" placeholder="Phone"
+									tabindex="6"></div>
+					</div>
+					<div class="row" style="margin-top:30px; margin-bottom:15px;">
+  						<div class="col-sm-5 a_400" style="margin-top:5px;">프로젝트 플랫폼</div>
+  						<div class="col-sm-7">
+  							<div class="form-group ">
+			                  <select id="test" name="interest" class="form-control a_400" style="width:50% ">
+			                     <option value=web>WEB</option>
+			                     <option value=android>안드로이드</option>
+			                     <option value=embebed>임베디드</option>
+			                     <option value=ios>IOS</option>
+			                  </select>
+			               </div>
+						</div>
+					</div>
+            <div class="row" style="margin-top:30px; margin-bottom:15px;">
+  						<div class="col-sm-5 a_400" style="margin-top:5px;">흥미 분야</div>
+  						<div class="col-sm-7">
+  							<div class="form-group ">
+			                  <select id="test1" name="interest" class="form-control a_400" style="width:50% ">
+			                     <option value=health>운동</option>
+			                     <option value=psychology>심리학</option>
+			                     <option value=game>게임</option>
+			                  </select>
+			               </div>
+						</div>
+					</div>
+    
+         <script>
+     	window.onload = function () {
+    		$("#test").val("<jsp:getProperty name="event" property="platform" />").attr("selected", "selected");
+    		$("#test1").val("<jsp:getProperty name="event" property="genre" />").attr("selected", "selected");
+    	}
+         </script>
+         				<p class="p_400" style="color: #cccccc;">개인정보 조회 및 수정은 인증이
 					필요합니다.</p>
 				<button type="button" class="btn btn-outline-dark"
-					onclick="location.href='../Login?action=view&id=<%=userid %>'"
-					style="margin-right: 20px;">개인정보 조회</button>
-				<button type="button" class="btn btn-outline-dark"
 					onclick="location.href='/Web_TeamPjt/Login?action=modify'"
-					style="margin-right: 20px;">개인정보 수정</button></div>
+					style="margin-right: 20px;">개인정보 수정</button>
+			</div>
 			<div id="menu2" class="container tab-pane fade">
 				<br>
 				<div id="home" class="container tab-pane active">

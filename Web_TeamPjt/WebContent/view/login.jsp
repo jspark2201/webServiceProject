@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ page import="User.User"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -17,7 +18,12 @@
 
 </head>
 <body>
-
+<%
+		User user = null;
+	if (session.getAttribute("user") != null) {
+		user = (User) session.getAttribute("user");
+	}
+	%>
 
 
 	<div class="jumbotron jumbotron-fluid">
@@ -38,8 +44,8 @@
 						<h2>Please Sign In</h2>
 						<hr class="colorgraph">
 						<div class="form-group">
-							<input type="text" name="id" 
-								class="form-control input-lg" placeholder="id">
+							<input type="text" name="id" value=<%=user.getId()%>
+								class="form-control input-lg" placeholder="id" readonly>
 						</div>
 						<div class="form-group">
 							<input type="password" name="pwd"

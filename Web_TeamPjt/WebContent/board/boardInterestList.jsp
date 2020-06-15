@@ -1,4 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
+<%-- <%@ page language="java" contentType="text/html; charset=UTF-8"
    pageEncoding="UTF-8"%>
 <%@ page import="java.sql.*"%>
 <%@ page import="java.util.*"%>
@@ -19,7 +19,7 @@
 <link rel="stylesheet" href="/Web_TeamPjt/css/googleFont.css">
 <link
    href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500&display=swap"
-   rel="stylesheet">
+   rel="stylesheet<!--  -->">
 
 </head>
 <body>
@@ -311,4 +311,4 @@
    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
    <script type="text/javascript" src="/Web_TeamPjt/js/alertScript.js"></script>
 </body>
-</html>
+</html> --%>
