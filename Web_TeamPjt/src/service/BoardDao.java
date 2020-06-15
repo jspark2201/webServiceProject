@@ -11,11 +11,11 @@ import java.util.List;
 
 public class BoardDao {
 	  private final String driverClassName = "org.mariadb.jdbc.Driver";
-	    private final String url = "jdbc:mariadb://localhost:3308/developers";
+	    private final String url = "jdbc:mariadb://localhost:3306/developers";
 	    private final String username = "root";
-	    private final String password = "3819";
+	    private final String password = "qwe123!@#";
 	    
-	    // 테이블 : idea , 기능 : 데이터 삭제 
+	    // �뀒�씠釉� : idea , 湲곕뒫 : �뜲�씠�꽣 �궘�젣 
 	    public int deleteBoard(Board board) {
 	        int rowCount = 0;
 	        Connection connection = null;
@@ -35,7 +35,7 @@ public class BoardDao {
 	        }
 	        return rowCount;
 	    }
-	    // 테이블 : idea , 기능 :  글 삭제되었을 경우 idea_Favorite데이터 삭제 
+	    // �뀒�씠釉� : idea , 湲곕뒫 :  湲� �궘�젣�릺�뿀�쓣 寃쎌슦 idea_Favorite�뜲�씠�꽣 �궘�젣 
 	    public int deleteIdea_Favorite_Board(Board board) {
 	        int rowCount = 0;
 	        Connection connection = null;
@@ -54,7 +54,7 @@ public class BoardDao {
 	        }
 	        return rowCount;
 	    }
-	    // 테이블 : idea , 기능 :  글 삭제되었을 경우 good데이터 삭제 
+	    // �뀒�씠釉� : idea , 湲곕뒫 :  湲� �궘�젣�릺�뿀�쓣 寃쎌슦 good�뜲�씠�꽣 �궘�젣 
 	    public int deleteGoodBoard(Board board) {
 	        int rowCount = 0;
 	        Connection connection = null;
@@ -75,7 +75,7 @@ public class BoardDao {
 	        return rowCount;
 	    }
 	    
-	    // 테이블 : idea , 기능 : 글 삭제되었을 경우 참가자데이터 삭제 
+	    // �뀒�씠釉� : idea , 湲곕뒫 : 湲� �궘�젣�릺�뿀�쓣 寃쎌슦 李멸��옄�뜲�씠�꽣 �궘�젣 
 	    public int deleteParticipantsBoard(Board board) {
 	        int rowCount = 0;
 	        Connection connection = null;
@@ -95,7 +95,7 @@ public class BoardDao {
 	        }
 	        return rowCount;
 	    }
-	    // 테이블 : idea , 기능 :  글 삭제되었을 경우 댓글데이터 삭제 
+	    // �뀒�씠釉� : idea , 湲곕뒫 :  湲� �궘�젣�릺�뿀�쓣 寃쎌슦 �뙎湲��뜲�씠�꽣 �궘�젣 
 	    public int deleteCommentBoard(Board board) {
 	        int rowCount = 0;
 	        Connection connection = null;
@@ -115,7 +115,7 @@ public class BoardDao {
 	        }
 	        return rowCount;
 	    }
-	    // 테이블 : idea , 기능 :   글 삭제되었을 경우 사진데이터 삭제 
+	    // �뀒�씠釉� : idea , 湲곕뒫 :   湲� �궘�젣�릺�뿀�쓣 寃쎌슦 �궗吏꾨뜲�씠�꽣 �궘�젣 
 	    public int deletePictureBoard(Board board) {
 	        int rowCount = 0;
 	        Connection connection = null;
@@ -136,7 +136,7 @@ public class BoardDao {
 	        return rowCount;
 	    }
 	    
-	    // 테이블 : good , 기능 : 좋아요기능  
+	    // �뀒�씠釉� : good , 湲곕뒫 : 醫뗭븘�슂湲곕뒫  
 	    public int InsertGood(Board board) {
 	        int rowCount = 0;
 	        Connection connection = null;
@@ -148,7 +148,7 @@ public class BoardDao {
 	            connection = this.getConnection();
 	            statement = connection.prepareStatement(sql);
 	            statement.setInt(1, board.getId());
-	            statement.setString(2,board.getId2());//일단 유저가 없으니 임시
+	            statement.setString(2,board.getId2());//�씪�떒 �쑀��媛� �뾾�쑝�땲 �엫�떆
 	           
 	            rowCount = statement.executeUpdate();
 	            
@@ -160,7 +160,7 @@ public class BoardDao {
 	        return rowCount;
 	    }
 	    
-	    // 테이블 : idea , 기능 : 모집 완료기능  
+	    // �뀒�씠釉� : idea , 湲곕뒫 : 紐⑥쭛 �셿猷뚭린�뒫  
 	    public int updateDeadline(Board board) {
 	        int rowCount = 0;
 	        Connection connection = null;
@@ -180,7 +180,7 @@ public class BoardDao {
 	        return rowCount;
 	    }
 	    
-	    //개발완료 버튼
+	    //媛쒕컻�셿猷� 踰꾪듉
 	    public int updateCompleteline(Board board) {
 	        int rowCount = 0;
 	        Connection connection = null;
@@ -199,7 +199,7 @@ public class BoardDao {
 	        }
 	        return rowCount;
 	    }
-	    //개발완료 버튼 클릭시 complete_date추가
+	    //媛쒕컻�셿猷� 踰꾪듉 �겢由��떆 complete_date異붽�
 	    public int updateCompletedate(Board board) {
 	        int rowCount = 0;
 	        Connection connection = null;
@@ -219,7 +219,7 @@ public class BoardDao {
 	    }
 	    
 	    
-	    // 테이블 : participants , 기능 : 컨택시, 참가자 추가  
+	    // �뀒�씠釉� : participants , 湲곕뒫 : 而⑦깮�떆, 李멸��옄 異붽�  
 	    public int InsertParticipants(Board board) {
 	        int rowCount = 0;
 	        Connection connection = null;
@@ -246,7 +246,7 @@ public class BoardDao {
 
 	    
 
-	    //신청개발자->참여 개발자
+	    //�떊泥�媛쒕컻�옄->李몄뿬 媛쒕컻�옄
 	    public int updateParticipants(Board board) {
 	        int rowCount = 0;
 	        Connection connection = null;
@@ -269,7 +269,7 @@ public class BoardDao {
 	        return rowCount;
 	    }
 	    
-	    //신청개발자거절 및 참여 중 개발자 거절
+	    //�떊泥�媛쒕컻�옄嫄곗젅 諛� 李몄뿬 以� 媛쒕컻�옄 嫄곗젅
 	    public int deleteParticipants(Board board) {
 	        int rowCount = 0;
 	        Connection connection = null;
@@ -293,7 +293,7 @@ public class BoardDao {
 	    }
 	    
 
-	    //참가자 수 업데이트
+	    //李멸��옄 �닔 �뾽�뜲�씠�듃
 	    public int UpdateParticipantsNum(Board board) {
 	        int rowCount = 0;
 	        Connection connection = null;
@@ -313,7 +313,7 @@ public class BoardDao {
 	        return rowCount;
 	    }
 	    
-	    // 테이블 : comment , 기능 : 댓글등록  
+	    // �뀒�씠釉� : comment , 湲곕뒫 : �뙎湲��벑濡�  
 	    public int InsertComment(Board board) {
 	        int rowCount = 0;
 	        Connection connection = null;
@@ -337,7 +337,7 @@ public class BoardDao {
 	        return rowCount;
 	    }
 	    
-	    // 테이블 : idea , 기능 :boardDetailView 하나의 데이터 가져오기
+	    // �뀒�씠釉� : idea , 湲곕뒫 :boardDetailView �븯�굹�쓽 �뜲�씠�꽣 媛��졇�삤湲�
 	    public Board selectBoardByKey(int id) {
 	        Board board = null;
 	        Connection connection = null;
@@ -383,7 +383,7 @@ public class BoardDao {
 	    
 
 	    
-	    // 테이블 : idea , 기능 : 참가자카운터 가져오기
+	    // �뀒�씠釉� : idea , 湲곕뒫 : 李멸��옄移댁슫�꽣 媛��졇�삤湲�
 	    public int participantsCount(int id) {
 	        int rowCount = 0;
 	        Connection connection = null;
@@ -407,7 +407,7 @@ public class BoardDao {
 	        return rowCount;
 	    }
 	    
-	    // 테이블 : idea , 기능 : 좋아요 카운터 가져오기
+	    // �뀒�씠釉� : idea , 湲곕뒫 : 醫뗭븘�슂 移댁슫�꽣 媛��졇�삤湲�
 	    public int goodCount(int id) {
 	        int rowCount = 0;
 	        Connection connection = null;
@@ -430,7 +430,7 @@ public class BoardDao {
 	        return rowCount;
 	    }
 	    
-	    // 테이블 : idea , 기능 : 나의 좋아요 상태
+	    // �뀒�씠釉� : idea , 湲곕뒫 : �굹�쓽 醫뗭븘�슂 �긽�깭
 	    public int goodState(int boardNo, String userId) {
 	        int rowCount = 0;
 	        Connection connection = null;
@@ -454,7 +454,7 @@ public class BoardDao {
 	        return rowCount;
 	    }
 	    
-	    //아이디어 상태 확인
+	    //�븘�씠�뵒�뼱 �긽�깭 �솗�씤
 	    public int participantsState(int id) {
 	        int rowCount = 0;
 	        Connection connection = null;
@@ -477,7 +477,7 @@ public class BoardDao {
 	        return rowCount;
 	    }
 	    
-	    // 테이블 :idea , 기능 : 한 페이지의 데이터 등록일순으로 가져오기 
+	    // �뀒�씠釉� :idea , 湲곕뒫 : �븳 �럹�씠吏��쓽 �뜲�씠�꽣 �벑濡앹씪�닚�쑝濡� 媛��졇�삤湲� 
 	    public List<Board> selectBoardListPerPage(int beginRow, int pagePerRow) {
 	        List<Board> list = new ArrayList<Board>();
 	        Connection connection = null;
@@ -513,7 +513,7 @@ public class BoardDao {
 	        return list;
 	    }
 	    
-	    // 테이블 :idea , 기능 : 한 페이지의 데이터 좋아요순으로 가져오기 (미완)
+	    // �뀒�씠釉� :idea , 湲곕뒫 : �븳 �럹�씠吏��쓽 �뜲�씠�꽣 醫뗭븘�슂�닚�쑝濡� 媛��졇�삤湲� (誘몄셿)
 	    public List<Board> selectGoodBoardListPerPage(int beginRow, int pagePerRow) {
 	        List<Board> list = new ArrayList<Board>();
 	        Connection connection = null;
@@ -548,7 +548,7 @@ public class BoardDao {
 	        return list;
 	    }
 	    	    
-	    // 테이블 : idea , 기능 :검색된 글 가져오기
+	    // �뀒�씠釉� : idea , 湲곕뒫 :寃��깋�맂 湲� 媛��졇�삤湲�
 	    public List<Board> selectSearchBoardListPerPage(String str, int beginRow, int pagePerRow) {
 	    	List<Board> list = new ArrayList<Board>();
 	        Connection connection = null;
@@ -589,7 +589,7 @@ public class BoardDao {
 	        return list;
 	    }
 	    
-	    // 테이블 : idea , 기능 :필터 글 가져오기
+	    // �뀒�씠釉� : idea , 湲곕뒫 :�븘�꽣 湲� 媛��졇�삤湲�
 	    public List<Board> selectFavoriteBoardListPerPage(String target1, String target2, int beginRow, int pagePerRow) {
 	    	List<Board> list = new ArrayList<Board>();
 	        Connection connection = null;
@@ -630,7 +630,7 @@ public class BoardDao {
 	    }
 	    
 	    
-	    // 테이블 : idea , 기능 :댓글가져오기
+	    // �뀒�씠釉� : idea , 湲곕뒫 :�뙎湲�媛��졇�삤湲�
 	    public List<Board> selectComments(int commentId) {
 	    	List<Board> mlist = new ArrayList<Board>();
 	        Connection connection = null;
@@ -664,7 +664,7 @@ public class BoardDao {
 
 	    
 	    
-	    // 테이블 : idea , 기능 : 모집중인 페이지의 데이터 가져오기 
+	    // �뀒�씠釉� : idea , 湲곕뒫 : 紐⑥쭛以묒씤 �럹�씠吏��쓽 �뜲�씠�꽣 媛��졇�삤湲� 
 	    public List<Board> selectRecruitBoardListPerPage(int beginRow, int pagePerRow) {
 	        List<Board> list = new ArrayList<Board>();
 	        Connection connection = null;
@@ -700,7 +700,7 @@ public class BoardDao {
 	        return list;
 	    }
 	    
-	    // 테이블 : idea , 기능 : 완료된 페이지의 데이터 가져오기 
+	    // �뀒�씠釉� : idea , 湲곕뒫 : �셿猷뚮맂 �럹�씠吏��쓽 �뜲�씠�꽣 媛��졇�삤湲� 
 	    public List<Board> selectCompleteBoardListPerPage(int beginRow, int pagePerRow) {
 	        List<Board> list = new ArrayList<Board>();
 	        Connection connection = null;
@@ -736,7 +736,7 @@ public class BoardDao {
 	        return list;
 	    }
 	    
-	    // 테이블 : idea , 기능 : 전체 로우 카운터 가져오기
+	    // �뀒�씠釉� : idea , 湲곕뒫 : �쟾泥� 濡쒖슦 移댁슫�꽣 媛��졇�삤湲�
 	    public int selectTotalBoardCount() {
 	        int rowCount = 0;
 	        Connection connection = null;
@@ -758,7 +758,7 @@ public class BoardDao {
 	        return rowCount;
 	    }
 	    
-	    //필터 검색 카운터
+	    //�븘�꽣 寃��깋 移댁슫�꽣
 	    public int selectFavoriteTotalBoardCount(String target1, String target2) {
 	        int rowCount = 0;
 	        Connection connection = null;
@@ -781,7 +781,7 @@ public class BoardDao {
 	        return rowCount;
 	    }
 	    
-	    // 테이블 :idea, 기능 : 전체 모집중인 로우 카운터 가져오기
+	    // �뀒�씠釉� :idea, 湲곕뒫 : �쟾泥� 紐⑥쭛以묒씤 濡쒖슦 移댁슫�꽣 媛��졇�삤湲�
 	    public int selectTotalRecruitBoardCount() {
 	        int rowCount = 0;
 	        Connection connection = null;
@@ -803,7 +803,7 @@ public class BoardDao {
 	        return rowCount;
 	    }
 	    
-	    // 테이블 :idea, 기능 : 검색 로우 카운터 가져오기
+	    // �뀒�씠釉� :idea, 湲곕뒫 : 寃��깋 濡쒖슦 移댁슫�꽣 媛��졇�삤湲�
 	    public int selectTotalSearchBoardCount(String str) {
 	        int rowCount = 0;
 	        Connection connection = null;
@@ -831,7 +831,7 @@ public class BoardDao {
 	    }
 	    
 	    
-	    // 테이블 : idea , 기능 : 전체 완료된 로우 카운터 가져오기
+	    // �뀒�씠釉� : idea , 湲곕뒫 : �쟾泥� �셿猷뚮맂 濡쒖슦 移댁슫�꽣 媛��졇�삤湲�
 	    public int selectTotalCompleteBoardCount() {
 	        int rowCount = 0;
 	        Connection connection = null;
@@ -852,7 +852,7 @@ public class BoardDao {
 	        }
 	        return rowCount;
 	    }
-	    // 테이블 : idea , 기능 : 아이디어 작성
+	    // �뀒�씠釉� : idea , 湲곕뒫 : �븘�씠�뵒�뼱 �옉�꽦
 	    public int insertBoard(Board board) {
 	        int rowCount = 0;
 	        Connection connection = null;
@@ -878,7 +878,7 @@ public class BoardDao {
 	    }
 	    
 	    
-	    // 테이블 : idea , 기능 : 데이터 수정 
+	    // �뀒�씠釉� : idea , 湲곕뒫 : �뜲�씠�꽣 �닔�젙 
 	    public int updateBoard(Board board) {
 	        int rowCount = 0;
 	        Connection connection = null;
@@ -900,7 +900,7 @@ public class BoardDao {
 	        return rowCount;
 	    }
 	    
-	    //아이디어 등록시 사진 포함
+	    //�븘�씠�뵒�뼱 �벑濡앹떆 �궗吏� �룷�븿
 	    public int insertPicturesBoard(Board board) {
 	        int rowCount = 0;
 	        Connection connection = null;
@@ -922,7 +922,7 @@ public class BoardDao {
 	        return rowCount;
 	    }
 	    
-	    // 테이블 : idea , 기능 : 사진데이터 수정 
+	    // �뀒�씠釉� : idea , 湲곕뒫 : �궗吏꾨뜲�씠�꽣 �닔�젙 
 	    public int updatePicturesBoard(Board board) {
 	        int rowCount = 0;
 	        Connection connection = null;
@@ -943,7 +943,7 @@ public class BoardDao {
 	    }
 	    
 	    
-	    //아이디어 등록시 장르 플랫폼 포함
+	    //�븘�씠�뵒�뼱 �벑濡앹떆 �옣瑜� �뵆�옯�뤌 �룷�븿
 	    public int insertTypeBoard(Board board) {
 	        int rowCount = 0;
 	        Connection connection = null;
@@ -971,7 +971,7 @@ public class BoardDao {
 	        return rowCount;
 	    }
 	    
-	    //아이디어 수정시 장르 플랫폼 수정
+	    //�븘�씠�뵒�뼱 �닔�젙�떆 �옣瑜� �뵆�옯�뤌 �닔�젙
 	    public int updateTypeBoard(Board board) {
 	        int rowCount = 0;
 	        Connection connection = null;
@@ -990,7 +990,7 @@ public class BoardDao {
 	            statement.setBoolean(5,board.isHealth());
 	            statement.setBoolean(6,board.isPsychology());
 	            statement.setBoolean(7,board.isGame());
-	            statement.setInt(8,board.getId());//추후 수정
+	            statement.setInt(8,board.getId());//異뷀썑 �닔�젙
 	            rowCount = statement.executeUpdate();
 	        } catch (Exception e) {
 	            e.printStackTrace();
@@ -1003,7 +1003,7 @@ public class BoardDao {
 
 	    
 	    
-	    // 테이블 : idea , 기능 : photo와 idea_favorite insert해주기 위해 idea테이블의 max값을 가져옴
+	    // �뀒�씠釉� : idea , 湲곕뒫 : photo�� idea_favorite insert�빐二쇨린 �쐞�빐 idea�뀒�씠釉붿쓽 max媛믪쓣 媛��졇�샂
 	    public int maxBoard() {
 	        int rowCount = 0;
 	        Connection connection = null;
@@ -1025,7 +1025,7 @@ public class BoardDao {
 	        return rowCount;
 	    }
 	    
-	    // 테이블 : idea , 기능 :참가자 명단 중 참여 개발자 보기 
+	    // �뀒�씠釉� : idea , 湲곕뒫 :李멸��옄 紐낅떒 以� 李몄뿬 媛쒕컻�옄 蹂닿린 
 	    public List<Board> SelectParticipantsBoard(int id) {
 	    	List<Board> list = new ArrayList<Board>();
 	        Connection connection = null;
@@ -1057,7 +1057,7 @@ public class BoardDao {
 	        }
 	        return list;
 	    }
-	    // 테이블 : idea , 기능 :참가자 명단 중 신청 개발자 보기 
+	    // �뀒�씠釉� : idea , 湲곕뒫 :李멸��옄 紐낅떒 以� �떊泥� 媛쒕컻�옄 蹂닿린 
 	    public List<Board> SelectTempParticipantsBoard(int id) {
 	    	List<Board> list = new ArrayList<Board>();
 	        Connection connection = null;
@@ -1089,7 +1089,7 @@ public class BoardDao {
 	        }
 	        return list;
 	    }
-	    // 테이블 : 댓글 , 기능 :  댓글삭제
+	    // �뀒�씠釉� : �뙎湲� , 湲곕뒫 :  �뙎湲��궘�젣
 	    public int deleteComment(int id) {
 	        int rowCount = 0;
 	        Connection connection = null;
