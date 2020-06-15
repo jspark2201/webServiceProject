@@ -41,7 +41,7 @@ public class NoteDAO {
         return conn;
     }
 	
-	public ArrayList<NoteDTO> noteList() {
+	public ArrayList<NoteDTO> noteList(String id) {
 		ArrayList<NoteDTO> list = new ArrayList<NoteDTO>();
         Connection conn = null; // DB�젒�냽 媛앹껜
         PreparedStatement pstmt = null; // SQL�떎�뻾媛앹껜
@@ -49,7 +49,7 @@ public class NoteDAO {
  
         try {
             conn = dbConn(); // db�뿰寃� �궎
-            String sql = "select * from NOTE where receiveID='jspark'";
+            String sql = "select * from NOTE where receiveID='" + id +"'";
             pstmt = conn.prepareStatement(sql); // sql�쓣 �떎�뻾�떆�궎�뒗 媛앹껜 留뚮뱾�뼱吏�
             rs = pstmt.executeQuery(); // �떎�뻾 �썑 寃곌낵 媛믪씠 rs�뿉 �꽆�뼱�샂
  
@@ -159,7 +159,7 @@ public class NoteDAO {
             pstmt.setString(3, giveID);
             pstmt.setString(4, giveEmail);
             pstmt.setString(5, title);
-            pstmt.setString(6, "연락바랍니다");
+            pstmt.setString(6, "connect");
         	return pstmt.executeUpdate();
         	
         } catch(Exception e) {	

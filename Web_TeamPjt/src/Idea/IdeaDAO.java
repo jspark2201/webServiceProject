@@ -159,7 +159,7 @@ public class IdeaDAO {
 	
 	public ArrayList getDBTopList() {
 		connect();
-		
+		System.out.println("GETDBTOP----------------------");
 		String sql = "SELECT idea.id as id, writer, title, state, good_cnt, src AS image_src from idea" + 
 				"    JOIN (select idea_id, COUNT(*) AS good_cnt from good" + 
 				"          where registration_date > last_day(now() - interval 1 month)" + 
@@ -167,7 +167,7 @@ public class IdeaDAO {
 				"          group by idea_id ORDER BY COUNT(*) desc) as tmp ON idea.id = tmp.idea_id" + 
 				"    LEFT JOIN pictures ON idea.id = pictures.idea_id" +
 				"    WHERE state < 3" +
-				"    limit 5;";
+				"    limit 3;";
 		
 		ArrayList<Idea> ideas = new ArrayList<Idea>();
 		

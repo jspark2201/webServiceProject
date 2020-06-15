@@ -113,7 +113,7 @@
 					<li class="nav-item"><a class="nav-link a_400"
 						onclick="logoutAlert()">로그아웃</a></li>
 					<li class="nav-item"><a class="nav-link a_400"
-						href="<%=request.getContextPath()%>/view/myPage.jsp">마이페이지</a></li>
+						href="<%=request.getContextPath()%>/mypage/myPage.jsp">마이페이지</a></li>
 				</ul>
 			</div>
 		</div>
@@ -513,8 +513,7 @@
 									</form>
 								</div>
 								<div class="col-sm-3">
-									<form action="../SendNote?action=send2" method="post">
-										<button type="submit">
+									<form action="/Web_TeamPjt/SendNote" method="post">
 											<input name="participantsId"
 												value="<%=participant.getId2()%>" type="hidden" /> 
 												<input
@@ -523,7 +522,10 @@
 												<input name="mail"
 												value=<%=mail%> type="hidden" /> 
 												<input name="title" value=<%=title%> type="hidden" />
-												<input name="boardNo" value=<%=boardNo%> type="hidden" />  쪽지
+												<input name="boardNo" value=<%=boardNo%> type="hidden" /> 
+												<input name="action" value="send2" type="hidden" /> 
+										<button type="submit">
+										 쪽지
 										</button>
 									</form>
 								</div>

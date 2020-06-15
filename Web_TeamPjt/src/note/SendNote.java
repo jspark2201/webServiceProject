@@ -10,6 +10,9 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
+import User.*;
 
 @WebServlet("/SendNote")
 public class SendNote extends HttpServlet {
@@ -24,10 +27,13 @@ public class SendNote extends HttpServlet {
 //		
 //	
 //		out.close();
-
+		System.out.println("ddddddddddddddddddddddddddddddddddddddddddddddddddddd");
 		
 		String address = null;
 		String action = request.getParameter("action");		
+		
+		HttpSession session = request.getSession();
+
 		
 		if(action.equals("send")) {
 			NoteDAO dao = new NoteDAO();
@@ -44,10 +50,11 @@ public class SendNote extends HttpServlet {
 			
 			out.println("<p>"+row+"</p>");
 			
-			dao.sendNote(receiveID, "jspark", "jspark@gmail.com", sendTitle, sendContent);
+			User user = (User) session.getAttribute("user");
+			dao.sendNote(receiveID, user.getId(), user.getEmail(), sendTitle, sendContent);
 			request.setAttribute("dataobject", action); 
 			
-			address = "/view/myPage.jsp";
+			address = "/mypage";
 			
 			response.sendRedirect(request.getContextPath() + address);
 			
@@ -58,7 +65,7 @@ public class SendNote extends HttpServlet {
 			String mail= request.getParameter("mail");
 			String title = request.getParameter("title");			
 			NoteDAO dao = new NoteDAO();
-			
+			System.out.println(boardNo+"  "+userId+"  "+mail+"  "+title);
 			dao.sendNote2(participantsId, userId, mail, title);
 			address="/board/boardView.jsp?boardNo="+boardNo;
 			response.sendRedirect(request.getContextPath() + address);

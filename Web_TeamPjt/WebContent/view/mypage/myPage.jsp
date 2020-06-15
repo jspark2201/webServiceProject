@@ -129,11 +129,9 @@
 			<li class="nav-item"><a class="nav-link a_500"
 				style="color: #FFCE1E;" data-toggle="tab" href="#menu1">개인정보</a></li>
 			<li class="nav-item"><a class="nav-link a_500"
-				style="color: #FFCE1E;" data-toggle="tab" href="#menu2">아이디어</a></li>
+				style="color: #FFCE1E;" data-toggle="tab" href="#menu2">포트폴리오</a></li>
 			<li class="nav-item"><a class="nav-link a_500"
-				style="color: #FFCE1E;" data-toggle="tab" href="#menu3">포트폴리오</a></li>
-			<li class="nav-item"><a class="nav-link a_500"
-				style="color: #FFCE1E;" data-toggle="tab" href="#menu4">알림</a></li>
+				style="color: #FFCE1E;" data-toggle="tab" href="#menu3">알림</a></li>
 		</ul>
 
 		<!-- Tab panes -->
@@ -152,7 +150,7 @@
 					<tbody>
 						<%
 							NoteDAO dao = new NoteDAO();
-						ArrayList<NoteDTO> list3 = dao.noteList();
+						ArrayList<NoteDTO> list3 = dao.noteList(session.getAttribute("userID").toString());
 						request.setAttribute("list3", list3);
 						%>
 
@@ -189,20 +187,8 @@
 				<button type="button" class="btn btn-outline-dark">개인정보 수정</button>
 			</div>
 			<hr>
+			
 			<div id="menu2" class="container tab-pane fade">
-				<br>
-				<div id="home" class="container tab-pane active">
-					<br>
-					<ul class="pagination justify-content-center">
-						<li class="page-item"><a class="page-link" href="#">Previous</a></li>
-						<li class="page-item"><a class="page-link" href="#">1</a></li>
-						<li class="page-item"><a class="page-link" href="#">2</a></li>
-						<li class="page-item"><a class="page-link" href="#">3</a></li>
-						<li class="page-item"><a class="page-link" href="#">Next</a></li>
-					</ul>
-				</div>
-			</div>
-			<div id="menu3" class="container tab-pane fade">
 				<p class="p_400" style="color: #cccccc;">외부 홈페이지의 포트폴리오 업로드가
 					가능합니다.</p>
 				<button type="button" class="btn btn-outline-dark"
@@ -390,7 +376,7 @@ if (list.get(i).getState() == 1 && Ptype == 0) {
 						</ul>
 				</div>
 			</div>
-			<div id="menu4" class="container tab-pane fade">
+			<div id="menu3" class="container tab-pane fade">
 				<br>
 				<table class="table">
 					<thead>

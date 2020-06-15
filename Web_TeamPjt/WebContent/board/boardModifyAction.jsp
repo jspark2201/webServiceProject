@@ -29,9 +29,9 @@
 
 		Board board = new Board();
 		board.setId(Id);
-
+		String uid = (String) session.getAttribute("userID");//사용자 세션
 		String Title = multi.getParameter("title");
-
+		board.setWriter(uid);
 		String[] platform = multi.getParameterValues("interest_1");
 		if (platform.length == 1) {
 			if (platform[0].equals("web")) {

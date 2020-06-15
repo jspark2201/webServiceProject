@@ -33,6 +33,7 @@
 	if (session.getAttribute("user") != null) {
 		user = (User) session.getAttribute("user");
 	}
+		System.out.println(user.getId()+"!!!");
 	%>
    <!-- Navigation -->
    <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
@@ -46,15 +47,14 @@
          </button>
          <div class="collapse navbar-collapse" id="navbarResponsive">
             <ul class="navbar-nav ml-auto">
-               <li class="nav-item active"><a class="nav-link a_400" href="#">아이디어
+               <li class="nav-item active"><a class="nav-link a_400" href="/Web_TeamPjt/board/boardList.jsp">아이디어
                      보기 <span class="sr-only">(current)</span>
                </a></li>
-               <li class="nav-item active"><a class="nav-link a_400" href="#">프로젝트
+               <li class="nav-item active"><a class="nav-link a_400" href="/Web_TeamPjt/board/boardAddForm.jsp">프로젝트
                      시작하기 <span class="sr-only">(current)</span>
                </a></li>
                <li class="nav-item active"><a class="nav-link a_400"
                   data-toggle="modal" data-target="#guideModal">이용가이드 </a></li>
-               <!-- <li class="nav-item"><a class="nav-link" href="#">회원가입</a></li> -->
                <li class="nav-item"><a class="nav-link a_400"
                   onclick="logoutAlert()">로그아웃</a></li>
                <li class="nav-item"><a class="nav-link a_400" href="/Web_TeamPjt/mypage?id=<%=user.getId()%>">마이페이지</a></li>
@@ -126,16 +126,11 @@
                <p class="rank_a a_500" style="font-family: 'Black Han Sans', sans-serif;">RANK</p>
             </div>
      
-             
-   <!-- Image Showcases -->
-  <section class="showcase">
-    <div class="container-fluid p-0">
-      <div class="row no-gutters">
-			<%
+             <%
 				Integer id[] = new Integer[3];
 				String imageSrc[] = new String[3];
 				String title[] = new String[3];
-				String content[] = new String[3];
+				int goodCnt[] = new int[3];
 				
 				ideas = ideaDAO.getDBTopList();
 				
@@ -143,44 +138,51 @@
 					if (i < ideas.size()) {
 						id[i] = ideas.get(i).getId();
 						imageSrc[i] = ideas.get(i).getImageSrc();
+						
+						System.out.println(imageSrc[i]);
+						
 						title[i] = ideas.get(i).getTitle();
-						content[i] = ideas.get(i).getContent();
+						goodCnt[i] = ideas.get(i).getGoodCount();
 					}
 					else {
 						id[i] = 0;
 						imageSrc[i] = "/Web_TeamPjt/img/main/main_1.jpg";
 						title[i] = "title";
-						content[i] = "content";
+						goodCnt[i] = 0;
 					}
 				}	
 				
 				
 			%>
-        <div class="col-lg-6 order-lg-2 text-white showcase-img" style="background-image: url('<%=imageSrc[0]%>');"></div>
+   <!-- Image Showcases -->
+  <section class="showcase">
+    <div class="container-fluid p-0">
+      <div class="row no-gutters">
+        <div class="col-lg-6 order-lg-2 text-white showcase-img" style="background-image: url('/Web_TeamPjt/img/main/main_1.jpg');"></div>
         <div class="col-lg-6 order-lg-1 my-auto showcase-text">
-          <h2 style="font-family: 'Black Han Sans', sans-serif;">1</h2><a class="a_400" href="#"><%=title[0] %></a>
-          <p class="lead mb-0"><%=content[0] %></p>
+          <h1 style="font-family: 'Black Han Sans', sans-serif; font-size:4rem;">1</h1><a style="font-family: 'Black Han Sans', sans-serif; font-size:4rem;" class="a_400" href="#"><%=title[0] %></a>
+          <h2 class="lead mb-0 a_400" style="font-family: 'Black Han Sans', sans-serif; font-size:3rem;">482개의 좋아요를 받았습니다.</h2>
         </div>
       </div>
       <div class="row no-gutters">
-        <div class="col-lg-6 text-white showcase-img" style="background-image: url('<%=imageSrc[1]%>');"></div>
+        <div class="col-lg-6 text-white showcase-img" style="background-image: url('/Web_TeamPjt/img/main/mouse.jfif');"></div>
         <div class="col-lg-6 my-auto showcase-text">
-          <h2 style="font-family: 'Black Han Sans', sans-serif;">2</h2><a class="a_400" href="#"><%=title[1] %></a>
-          <p class="lead mb-0"><%=content[1] %></p>
+          <h1 style="font-family: 'Black Han Sans', sans-serif; font-size:4rem;">2</h1><a style="font-family: 'Black Han Sans', sans-serif; font-size:4rem;" class="a_400" href="#"><%=title[1] %></a>
+          <h2 class="lead mb-0" style="font-family: 'Black Han Sans', sans-serif; font-size:3rem;">420개의 좋아요를 받았습니다.</h2>
         </div>
       </div>
       <div class="row no-gutters">
-        <div class="col-lg-6 order-lg-2 text-white showcase-img" style="background-image: url('<%=imageSrc[2]%>');"></div>
+        <div class="col-lg-6 order-lg-2 text-white showcase-img" style="background-image: url('/Web_TeamPjt/img/main/mini.jfif');"></div>
         <div class="col-lg-6 order-lg-1 my-auto showcase-text">
-          <h2 style="font-family: 'Black Han Sans', sans-serif;">3</h2><a class="a_400" href="#"><%=title[2] %></a>
-          <p class="lead mb-0"><%=content[2] %></p>
+          <h1 style="font-family: 'Black Han Sans', sans-serif; font-size:4rem;">3</h1><a style="font-family: 'Black Han Sans', sans-serif; font-size:4rem;" class="a_400" href="#"><%=title[2] %></a>
+          <h2 class="lead mb-0" style="font-family: 'Black Han Sans', sans-serif; font-size:3rem;">351개의 좋아요를 받았습니다.</h2>
         </div>
       </div>
     </div>
   </section>
    
    
-   
+
    
    <!-- Testimonials -->
   <section class="testimonials text-center bg-light">
@@ -188,7 +190,9 @@
       <h2 class="mb-5" style="font-family: 'Black Han Sans', sans-serif; font-size:3rem;">NEW</h2>
       <div class="row">
       
-      <%
+        <%--  <%
+         String content[] = new String[3];
+         
       	ideas = ideaDAO.getDBList();
       	for (int i=0;i<3; i++) {
 			if (i < ideas.size()) {
@@ -201,26 +205,36 @@
 				id[i] = 0;
 				imageSrc[i] = "/Web_TeamPjt/img/main/main_1.jpg";
 				title[i] = "title";
-				content[i] = "content";
+				content[i] = "None";
 			}
-      %>
-      
+      %> --%>
         <div class="col-lg-4">
           <div class="testimonial-item mx-auto mb-5 mb-lg-0">
-            <img class="img-fluid rounded-circle mb-3" style="height:200px; width:200px;" src="<%=imageSrc[i] %>" alt="">
-            <h5>title[i]</h5>
-            <p class="font-weight-light mb-0"><%=content[i] %></p>
+            <img class="img-fluid rounded-circle mb-3" style="height:200px; width:200px;" src="/Web_TeamPjt/img/main/fa0.jfif" alt="">
+            <h5  style="font-family: 'Black Han Sans', sans-serif; font-size:3rem;">CAT POJECT!</h5>
+            <p  style="font-family: 'Black Han Sans', sans-serif; font-size:2rem;" class="font-weight-light mb-0">CAT POJECT!</p>
           </div>
         </div>
-        
-        <%
+       <%--    <%
 	      	}
 
-        %>
-      </div>
+        %> --%>
+        <div class="col-lg-4">
+          <div class="testimonial-item mx-auto mb-5 mb-lg-0">
+            <img class="img-fluid rounded-circle mb-3" style="height:200px; width:200px;" src="/Web_TeamPjt/img/main/fa1.jfif" alt="">
+            <h5  style="font-family: 'Black Han Sans', sans-serif; font-size:3rem;">ANIMAL POJECT!</h5>
+            <p  style="font-family: 'Black Han Sans', sans-serif; font-size:2rem;" class="font-weight-light mb-0">COME IN!</p>
+          </div>
+        </div>
+  		<div class="col-lg-4">
+          <div class="testimonial-item mx-auto mb-5 mb-lg-0">
+            <img class="img-fluid rounded-circle mb-3" style="height:200px; width:200px;" src="/Web_TeamPjt/img/main/fa2.jfif" alt="">
+            <h5  style="font-family: 'Black Han Sans', sans-serif; font-size:3rem;">BUTTERFLY POJECT!</h5>
+            <p  style="font-family: 'Black Han Sans', sans-serif; font-size:2rem;" class="font-weight-light mb-0">PLEASE JOIN US!</p>
+          </div>
+        </div>
     </div>
   </section>
-  
   
    <!-- Footer -->
    <footer class="py-5 bg-dark">

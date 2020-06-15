@@ -305,7 +305,7 @@
 		<li class="page-item"><a class="page-link"
 			href="<%=request.getContextPath()%>/board/boardSearchList.jsp?currentPage=<%=currentPage + 1%>">다음</a>
 		</li>
-		<%
+		<%}
 			}
 		%>
 	</div>

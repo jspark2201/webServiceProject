@@ -82,8 +82,8 @@
 	} catch (Exception e) {
 		e.printStackTrace();
 	}
-
-	String Src = "..\\upload\\" + filename1;
+	System.out.print(realFolder+filename1);
+	String Src = "\\Web_TeamPjt\\upload\\" + filename1;
 
 	String Requirements = multi.getParameter("requirements");
 

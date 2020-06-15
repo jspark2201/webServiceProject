@@ -23,6 +23,7 @@
 <body>
 
 	<%
+
 		if (request.getParameter("boardNo") == null) {
 		response.sendRedirect(request.getContextPath() + "/board/boardList.jsp");
 	} else {

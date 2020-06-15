@@ -36,7 +36,7 @@
 			<div class="collapse navbar-collapse" id="navbarResponsive">
 				<ul class="navbar-nav ml-auto">
 					<li class="nav-item active">
-						<a class="nav-link a_400" href="#">아이디어 보기
+						<a class="nav-link a_400" href="/Web_TeamPjt/service">랭킹보기
 							<span class="sr-only">(current)</span>
 						</a>
 					</li>
