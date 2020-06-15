@@ -13,7 +13,7 @@ public class BoardDao {
 	  private final String driverClassName = "org.mariadb.jdbc.Driver";
 	    private final String url = "jdbc:mariadb://localhost:3306/developers";
 	    private final String username = "root";
-	    private final String password = "qwe123!@#";
+	    private final String password = "smdtlr12";
 	    
 	    // �뀒�씠釉� : idea , 湲곕뒫 : �뜲�씠�꽣 �궘�젣 
 	    public int deleteBoard(Board board) {

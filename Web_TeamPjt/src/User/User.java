@@ -9,7 +9,6 @@ public class User {
 	private String date;
 	private String platform;
 	private String genre;
-
 	
 	public String getId() {
 		return id;
@@ -17,22 +16,9 @@ public class User {
 	public void setId(String id) {
 		this.id = id;
 	}
-	public String getGenre() {
-		return genre;
-	}
-	public void setGenre(String genre) {
-		this.genre = genre;
-	}
 	public String getPwd() {
 		return pwd;
 	}
-	public String getPlatform() {
-		return platform;
-	}
-	public void setPlatform(String platform) {
-		this.platform = platform;
-	}
-	
 	public void setPwd(String pwd) {
 		this.pwd = pwd;
 	}
@@ -59,7 +45,6 @@ public class User {
 	}
 	public void setDate(String date) {
 		this.date = date;
-		this.date = this.date.substring(0,10);
 	}
 	public String getPlatform() {
 		return platform;
@@ -73,6 +58,5 @@ public class User {
 	public void setGenre(String genre) {
 		this.genre = genre;
 	}
-	
 	
 }

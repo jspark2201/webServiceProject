@@ -17,7 +17,7 @@ public class NoteDAO {
             // db연결 문자열 but 이방법은 보안에 취약하다. ..
             String url = "jdbc:mysql://localhost:3306/TUTORIAL";
             String id = "root"; // mysql 접속아이디
-            String pwd = "31362201"; // mysql 접속 비번
+            String pwd = "smdtlr12"; // mysql 접속 비번
             // db 접속
             conn = DriverManager.getConnection(url, id, pwd);
             System.out.println("db접속 성공");

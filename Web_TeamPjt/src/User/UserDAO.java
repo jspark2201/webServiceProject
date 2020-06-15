@@ -21,7 +21,7 @@ public class UserDAO
       
       // 2. DB �뿰寃�
       try {
-         conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/developers", "root", "qwe123!@#");
+         conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/developers", "root", "smdtlr12");
 
       }
       catch (Exception e) {

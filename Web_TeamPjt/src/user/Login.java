@@ -21,6 +21,16 @@ public class Login extends HttpServlet {
 		request.setCharacterEncoding("utf-8");
 		String action = request.getParameter("action");
 		HttpSession session = request.getSession();
+		
+		/*
+		 * ACTION :
+		 * list : 
+		 * checkID: 로그인
+		 * view : 
+		 * add :
+		 * 
+		 * */
+		
 		if (action == null || action.equals("list")) {
 			address = "view/index.jsp";
 		} else if (action.equals("view")) {
