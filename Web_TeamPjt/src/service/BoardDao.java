@@ -74,6 +74,7 @@ public class BoardDao {
 	        }
 	        return rowCount;
 	    }
+	    
 	    // 테이블 : idea , 기능 : 글 삭제되었을 경우 참가자데이터 삭제 
 	    public int deleteParticipantsBoard(Board board) {
 	        int rowCount = 0;
@@ -179,7 +180,46 @@ public class BoardDao {
 	        return rowCount;
 	    }
 	    
-	    // 테이블 : participants , 기능 : 컨택기능, 참가자 추가  
+	    //개발완료 버튼
+	    public int updateCompleteline(Board board) {
+	        int rowCount = 0;
+	        Connection connection = null;
+	        PreparedStatement statement = null;
+	        String sql = "UPDATE idea SET state=? WHERE id=?";
+	        try {
+	            connection = this.getConnection();
+	            statement = connection.prepareStatement(sql);
+	            statement.setInt(1, 3);
+	            statement.setInt(2, board.getId());
+	            rowCount = statement.executeUpdate();
+	        } catch (Exception e) {
+	            e.printStackTrace();
+	        } finally {
+	            this.close(connection, statement, null);
+	        }
+	        return rowCount;
+	    }
+	    //개발완료 버튼 클릭시 complete_date추가
+	    public int updateCompletedate(Board board) {
+	        int rowCount = 0;
+	        Connection connection = null;
+	        PreparedStatement statement = null;
+	        String sql = "UPDATE idea SET complete_date=now() WHERE id=?";
+	        try {
+	            connection = this.getConnection();
+	            statement = connection.prepareStatement(sql);
+	            statement.setInt(1, board.getId());
+	            rowCount = statement.executeUpdate();
+	        } catch (Exception e) {
+	            e.printStackTrace();
+	        } finally {
+	            this.close(connection, statement, null);
+	        }
+	        return rowCount;
+	    }
+	    
+	    
+	    // 테이블 : participants , 기능 : 컨택시, 참가자 추가  
 	    public int InsertParticipants(Board board) {
 	        int rowCount = 0;
 	        Connection connection = null;
@@ -202,6 +242,9 @@ public class BoardDao {
 	        }
 	        return rowCount;
 	    }
+	    
+
+	    
 
 	    //신청개발자->참여 개발자
 	    public int updateParticipants(Board board) {
@@ -281,7 +324,7 @@ public class BoardDao {
 	            connection = this.getConnection();
 	            statement = connection.prepareStatement(sql);
 	            statement.setString(1, board.getContent2());
-	            statement.setString(2,board.getId2());//일단 유저가 없으니 임시
+	            statement.setString(2,board.getId2());
 	            statement.setInt(3, board.getId());
 	          
 	            rowCount = statement.executeUpdate();
@@ -386,6 +429,31 @@ public class BoardDao {
 	        }
 	        return rowCount;
 	    }
+	    
+	    // 테이블 : idea , 기능 : 나의 좋아요 상태
+	    public int goodState(int boardNo, String userId) {
+	        int rowCount = 0;
+	        Connection connection = null;
+	        PreparedStatement statement = null;
+	        ResultSet resultset = null;
+	        String sql = "SELECT count(*) FROM good WHERE idea_id=? and user_id=?";
+	        try {
+	            connection = this.getConnection();
+	            statement = connection.prepareStatement(sql);
+	            statement.setInt(1, boardNo);
+	            statement.setString(2,  userId);
+	            resultset = statement.executeQuery();
+	            if(resultset.next()) {
+	                rowCount = resultset.getInt(1);
+	            }
+	        } catch (Exception e) {
+	            e.printStackTrace();
+	        } finally {
+	            this.close(connection, statement, resultset);
+	        }
+	        return rowCount;
+	    }
+	    
 	    //아이디어 상태 확인
 	    public int participantsState(int id) {
 	        int rowCount = 0;
@@ -415,10 +483,11 @@ public class BoardDao {
 	        Connection connection = null;
 	        PreparedStatement statement = null;
 	        ResultSet resultset = null;
-	        String sql = "SELECT i.id, i.title, i.writer, i.registration_date, p.src "
-	        		+ "FROM idea i, pictures p "
-	        		+ "WHERE i.id=p.idea_id "
-	        		+ "ORDER BY id DESC LIMIT ?, ?";
+	        
+	        String sql =  "SELECT i.id, i.title, i.writer, i.registration_date, p.src "
+	                 + "FROM idea i, pictures p  "
+	                 + "WHERE i.id=p.idea_id "
+	                 + "ORDER BY id DESC LIMIT ?, ?";
 	        try {
 	            connection = this.getConnection();
 	            statement = connection.prepareStatement(sql);
@@ -427,12 +496,12 @@ public class BoardDao {
 	            resultset = statement.executeQuery();
 	            while(resultset.next()) {
 	                Board board = new Board();
-	                board.setId(resultset.getInt("id"));
-	                board.setTitle(resultset.getString("title"));
-	                board.setWriter(resultset.getString("writer"));
-	                board.setRegistration_date(resultset.getString("registration_date"));
-	                board.setSrc(resultset.getString("src"));
-	
+	                board.setId(resultset.getInt(1));
+	                board.setTitle(resultset.getString(2));
+	                board.setWriter(resultset.getString(3));
+	                board.setRegistration_date(resultset.getString(4));
+	                board.setSrc(resultset.getString(5));	
+	                
 	                
 	                list.add(board);
 	            }
@@ -444,7 +513,7 @@ public class BoardDao {
 	        return list;
 	    }
 	    
-	    // 테이블 :idea , 기능 : 한 페이지의 데이터 좋아요순으로 가져오기 
+	    // 테이블 :idea , 기능 : 한 페이지의 데이터 좋아요순으로 가져오기 (미완)
 	    public List<Board> selectGoodBoardListPerPage(int beginRow, int pagePerRow) {
 	        List<Board> list = new ArrayList<Board>();
 	        Connection connection = null;
@@ -531,15 +600,14 @@ public class BoardDao {
 	        		+ "i.state, p.src "
 	        		+ "FROM idea i, pictures p, idea_favorite f "
 	        		+ "WHERE i.id=p.idea_id and i.id=f.idea_id and p.idea_id=f.idea_id and "
-	        		+ "( f.? = 1 or f.? =1) "
+	        		+ "(%s=1 or %s=1 ) "
 	        		+ "ORDER BY id DESC LIMIT ?, ?";
+	        sql=String.format(sql, target1, target2); 
 	        try {
 	            connection = this.getConnection();
 	            statement = connection.prepareStatement(sql);
-	            statement.setString(1, target1);
-	            statement.setString(2, target2);
-	            statement.setInt(3, beginRow);
-	            statement.setInt(4, pagePerRow);
+	            statement.setInt(1, beginRow);
+	            statement.setInt(2, pagePerRow);
 	            resultset = statement.executeQuery();
 	            
 	            while(resultset.next()) {
@@ -675,6 +743,29 @@ public class BoardDao {
 	        PreparedStatement statement = null;
 	        ResultSet resultset = null;
 	        String sql = "SELECT COUNT(*) FROM idea";
+	        try {
+	            connection = this.getConnection();
+	            statement = connection.prepareStatement(sql);
+	            resultset = statement.executeQuery();
+	            if(resultset.next()) {
+	                rowCount = resultset.getInt(1);
+	            }
+	        } catch (Exception e) {
+	            e.printStackTrace();
+	        } finally {
+	            this.close(connection, statement, resultset);
+	        }
+	        return rowCount;
+	    }
+	    
+	    //필터 검색 카운터
+	    public int selectFavoriteTotalBoardCount(String target1, String target2) {
+	        int rowCount = 0;
+	        Connection connection = null;
+	        PreparedStatement statement = null;
+	        ResultSet resultset = null;
+	        String sql = "SELECT COUNT(*) FROM idea i, idea_favorite f where %s=1 or %s=1";
+	        sql=String.format(sql, target1, target2);
 	        try {
 	            connection = this.getConnection();
 	            statement = connection.prepareStatement(sql);
@@ -862,7 +953,7 @@ public class BoardDao {
 	        try {
 	            connection = this.getConnection();
 	            statement = connection.prepareStatement(sql);
-	            statement.setInt(1,board.getRow());//추후 수정
+	            statement.setInt(1,board.getRow());
 	            statement.setBoolean(2,board.isWeb());
 	            statement.setBoolean(3,board.isAndroid());
 	            statement.setBoolean(4,board.isEmbeded());

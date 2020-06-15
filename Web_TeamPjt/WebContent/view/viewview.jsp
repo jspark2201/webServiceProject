@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
-<jsp:useBean id="event" class="user.UserBean" scope="request" />
+<jsp:useBean id="event" class="User.UserBean" scope="request" />
 
 <html>
 <head>
