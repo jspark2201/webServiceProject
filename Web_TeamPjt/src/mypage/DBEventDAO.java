@@ -245,10 +245,10 @@ public class DBEventDAO {
 		try {
 
 			ResultSet rset = stmt.executeQuery(SQL);
-			System.out.println("test : "+rset.getString(1));
-			
+			while (rset.next()) {
+
 				return rset.getString(2);
-			
+			}
 		} catch (SQLException sqex) {
 			System.out.println("SQLException: " + sqex.getMessage());
 			System.out.println("SQLState: " + sqex.getSQLState());
@@ -256,7 +256,6 @@ public class DBEventDAO {
 		}
 		return null;
 	}
-	
 
 	public int getPortfolilID(String userID, String registration_date, String complete_date) {
 
@@ -602,12 +601,12 @@ public class DBEventDAO {
 		return -1; // 데이터베이스 오류
 
 	}
-	
-	public int updateIdeaFavorite(int ideaID, boolean web, boolean android, boolean embeded, boolean ios, boolean health,
-			boolean psychology, boolean game){
+
+	public int updateIdeaFavorite(int ideaID, boolean web, boolean android, boolean embeded, boolean ios,
+			boolean health, boolean psychology, boolean game) {
 
 		String SQL = "UPDATE idea_favorite SET web=?, android=?,embeded=?,ios=?,health=?,psychology=?,game=? WHERE bbsID = ?";
-		
+
 		try {
 
 			PreparedStatement pstmt = conn.prepareStatement(SQL);

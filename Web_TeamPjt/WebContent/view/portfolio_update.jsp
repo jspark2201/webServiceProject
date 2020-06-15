@@ -402,7 +402,7 @@
               console.log(2);
            }else{
         	   
-        	   reader.readAsDataURL("<%if(picsrc==null) {%>http://placehold.it/400x400<%}else{ %> <%=picsrc %><%} %>");
+        	   reader.readAsDataURL("http://placehold.it/400x400");
            }
 			
         })
