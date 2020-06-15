@@ -1,26 +1,46 @@
 package notification;
 
+import java.io.FileReader;
+import java.io.Reader;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
+import java.util.Properties;
 
 import note.NoteDTO;
+import java.io.Reader;
+import java.util.Properties;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
+import java.io.IOException;
 
 public class NotificationDAO {
+	private String jdbc_driver;
+	private String jdbc_url;
+	private String id;
+	private String pwd;
 	public Connection dbConn() {
         Connection conn = null; // db접속 객체
         try {
+			Properties properties = new Properties();
+			Reader reader;
+			reader = new FileReader("db.properties");
+			properties.load(reader);
+
+			jdbc_driver = properties.getProperty("jdbc_driver");
+			jdbc_url = properties.getProperty("jdbc_url");
+			id = properties.getProperty("id");
+			pwd = properties.getProperty("pwd");
             // mysql jdbc driver 로딩
-            Class.forName("com.mysql.jdbc.Driver");
+            Class.forName(jdbc_driver);
  
             // db연결 문자열 but 이방법은 보안에 취약하다. ..
-            String url = "jdbc:mysql://localhost:3306/TUTORIAL";
-            String id = "root"; // mysql 접속아이디
-            String pwd = "31362201"; // mysql 접속 비번
+            
             // db 접속
-            conn = DriverManager.getConnection(url, id, pwd);
+            conn = DriverManager.getConnection(jdbc_url, id, pwd);
             System.out.println("db접속 성공");
         } catch (Exception e) {
             // db관련작업은 반드시 익셉션 처리

@@ -1,32 +1,49 @@
-package User;
+package user;
 
 import java.sql.*;
 import java.util.ArrayList;
+import java.io.Reader;
+import java.util.Properties;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
+import java.io.IOException;
 
 public class UserDAO
 {
    private Connection conn = null;
    private PreparedStatement pstmt = null;
-   
+	private String jdbc_driver;
+	private String jdbc_url;
+	private String id;
+	private String pwd;
+	
    private void connect()
    {
-      // 1. Driver 留곹겕
+
       try {
-         Class.forName("org.mariadb.jdbc.Driver");
-      }
-      catch (Exception e) {
-         System.out.println("DB 留곹겕 �떎�뙣");
-         return;
-      }
+    	  Properties properties = new Properties();
+			Reader reader;
+			reader = new FileReader("db.properties");
+			properties.load(reader);
+
+			jdbc_driver = properties.getProperty("jdbc_driver");
+			jdbc_url = properties.getProperty("jdbc_url");
+			id = properties.getProperty("id");
+			pwd = properties.getProperty("pwd");
+          // 1. Driver 留곹겕
+    	  
+         Class.forName(jdbc_driver);
+
       
       // 2. DB �뿰寃�
-      try {
-         conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/developers", "root", "qwe123!@#");
+
+         conn = DriverManager.getConnection(jdbc_url, id,pwd);
 
       }
       catch (Exception e) {
          System.out.println("DB �뿰寃� �떎�뙣 : " + e);
-      }
+      } 
    }
    
    private void disconnect()
