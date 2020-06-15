@@ -24,7 +24,7 @@
 	<!-- Navigation -->
 	<nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
 		<div class="container">
-			<a class="navbar-brand" href="#" style="color:#FFCE1E;" class="a_500">WEB SERVICE PJ</a>
+			<a class="navbar-brand" href="/Web_TeamPjt/service" style="color:#FFCE1E;" class="a_500">WEB SERVICE PJ</a>
 			<button class="navbar-toggler" type="button" data-toggle="collapse"
 				data-target="#navbarResponsive" aria-controls="navbarResponsive"
 				aria-expanded="false" aria-label="Toggle navigation">
@@ -38,7 +38,7 @@
 					<li class="nav-item active"><a class="nav-link a_400"
 						data-toggle="modal" data-target="#aboutModal">About</a></li>
 					<li class="nav-item"><a class="nav-link a_400"
-						href='/Web_TeamPjt/view/join.jsp'>회원가입</a></li>
+						href='/Web_TeamPjt/user/register'>회원가입</a></li>
 					<li class="nav-item"><a class="nav-link a_400"
 						data-toggle="modal" data-target="#loginModal">로그인</a></li>
 						
@@ -105,7 +105,7 @@
 						<div class="row" style="margin-top: 20px">
 							<div
 								class="col-xs-12 col-sm-8 col-md-6 col-sm-offset-2 col-md-offset-3">
-								<form role="form" method="post" action="/Web_TeamPjt/Login">
+								<form role="form" method="post" action="/Web_TeamPjt/user/login">
 									<fieldset>
 										<h2>Please Sign In</h2>
 										<hr class="colorgraph">
@@ -123,12 +123,11 @@
 										<hr class="colorgraph">
 										<div class="row">
 											<div class="col-xs-6 col-sm-6 col-md-6">
-												<input type="hidden" name="action" value="checkid">
 												<input type="submit"
 													class="btn btn-lg btn-success btn-block" value="Sign In">
 											</div>
 											<div class="col-xs-6 col-sm-6 col-md-6">
-												<a href="" class="btn btn-lg btn-primary btn-block">Register</a>
+												<a href="/Web_TeamPjt/user/register" class="btn btn-lg btn-primary btn-block">Register</a>
 											</div>
 										</div>
 									</fieldset>
@@ -138,7 +137,7 @@
 								<input type="password" name="password" id="password"
 									class="form-control input-lg" placeholder="Password">
 							</div>
-								<img class="question_img" src="../img/login/question.png" alt="">
+								<img class="question_img" src="/Web_TeamPjt/img/login/question.png" alt="">
 								<a href="#" data-toggle="modal" data-target="#myModal">Forgot Password?</a>
 							<hr class="colorgraph">
 							<div style="text-align:center;">
