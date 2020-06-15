@@ -34,8 +34,9 @@
 		List<Board> mlist = boardDao.selectComments(boardNo);//댓글 리스트
 		int cnt = mlist.size();//댓글 수
 		String id = (String) session.getAttribute("userID");//사용자 세션
-
-
+		String mail = boardDao.ideaWriter(id);//아이디어 제공자의 이메일
+		String title = board.getTitle();
+		//System.out.println("메일"+mail);
 		int goodCount = boardDao.goodCount(boardNo);//좋아요 수
 		int participantsState = boardDao.participantsState(boardNo);//아이디어의 상태(모집 중, 모집 완료)
 		int participantsCount = boardDao.participantsCount(boardNo);//참여자 수
@@ -194,7 +195,7 @@
 				</form>
 
 			</div>
-			<div class="row a_400" style="font-size: 2rem; margin: 30px;">
+			<div class="a_400" style="font-size: 2rem; margin: 30px;">
 				<%=board.getTitle()%>
 			</div>
 
@@ -276,11 +277,12 @@
 					</div>
 				</div>
 
+
+				<%
+					for (Board comment : mlist) {
+				%>
 				<!-- Single Comment -->
 				<div class="media mb-4">
-					<%
-						for (Board comment : mlist) {
-					%>
 
 					<img class="d-flex mr-3 rounded-circle"
 						src="http://placehold.it/50x50" alt="">
@@ -292,6 +294,7 @@
 					<%
 						if (id.equals("admin") || id.equals(board.getWriter()) || id.equals(comment.getWriter())) {//세션 추가
 					%>
+
 					<form
 						action="<%=request.getContextPath()%>/board/boardCommentDeleteAction.jsp"
 						method="post">
@@ -303,6 +306,7 @@
 						<button type="submit" class="btn btn-primary" value="댓글삭제">댓글
 							삭제</button>
 					</form>
+
 					<%
 						}
 					%>
@@ -311,40 +315,42 @@
 					}
 				%>
 
+
 			</div>
 		</div>
+		<!-- /.row -->
+
+		<%
+			if (id.equals("admin") || id.equals(board.getWriter())) {//세션 추가
+		%>
+		<div class="row">
+			<form
+				action="<%=request.getContextPath()%>/board/boardModifyForm.jsp"
+				method="post">
+				<input name="boardNo" value="<%=request.getParameter("boardNo")%>"
+					type="hidden" />
+				<button class="btn btn-outline-warning" onclick="" type="submit">글
+					수정</button>
+			</form>
+
+			<form
+				action="<%=request.getContextPath()%>/board/boardRemoveAction.jsp"
+				method="post">
+				<input name="boardNo" value="<%=request.getParameter("boardNo")%>"
+					type="hidden" />
+				<button onclick="deleteAlert()" type="submit"
+					class="btn btn-outline-danger">글 삭제</button>
+			</form>
+
+		</div>
+		<%
+			}
+		%>
+
+		<%
+			}
+		%>
 	</div>
-	<!-- /.row -->
-
-	<%
-		if (id.equals("admin") || id.equals(board.getWriter())) {//세션 추가
-	%>
-	<div class="row">
-		<form action="<%=request.getContextPath()%>/board/boardModifyForm.jsp"
-			method="post">
-			<input name="boardNo" value="<%=request.getParameter("boardNo")%>"
-				type="hidden" />
-			<button class="btn btn-outline-warning" onclick="" type="submit">글
-				수정</button>
-		</form>
-
-		<form
-			action="<%=request.getContextPath()%>/board/boardRemoveAction.jsp"
-			method="post">
-			<input name="boardNo" value="<%=request.getParameter("boardNo")%>"
-				type="hidden" />
-			<button onclick="deleteAlert()" type="submit"
-				class="btn btn-outline-danger">글 삭제</button>
-		</form>
-
-	</div>
-	<%
-		}
-	%>
-
-	<%
-		}
-	%>
 	<!-- /.container -->
 
 	<!-- Footer -->
@@ -394,9 +400,14 @@
 		List<Board> mlist = boardDao.selectComments(boardNo);//댓글 리스트
 		int goodCount = boardDao.goodCount(boardNo);//좋아요 수
 		int participantsCount = boardDao.participantsCount(boardNo);//참여자 수
+		String id = (String) session.getAttribute("userID");//사용자 세션
+		String mail = boardDao.ideaWriter(id);//아이디어 제공자의 이메일
+		String title = board.getTitle();
+		System.out.println("나와라" + id + title + "메일" + mail);
 		int cnt = mlist.size();
 		List<Board> clist = boardDao.SelectParticipantsBoard(boardNo);//완료된 참여자
 		List<Board> tlist = boardDao.SelectTempParticipantsBoard(boardNo);//신청한 참여자
+		System.out.println(clist.size());
 	%>
 
 	<div class="modal fade" id="memberModal">
@@ -415,18 +426,24 @@
 				<div class="modal-body">
 					<div class="container">
 						<div class="row">
-							<a class="a_400">개발자 : </a>
+							<a class="a_400">개발자 : <%=board.getWriter()%></a>
 						</div>
 						<div class="row">
-							<a class="a_400">참여 개발자 : </a>
+							<a class="a_400">참여 개발자 : <%
+								for (Board participant : clist) {
+							%> <%=participant.getId2()%>, <%
+ 	}
+ %>
+							</a>
 						</div>
 						<hr>
 						<a class="a_400" style="font-size: 1rem;">신청한 개발자</a>
-						<%
-							for (Board participant : tlist) {
-						%>
 						<div class="row" style="text-align: center;">
 							<div class="row" style="text-align: center;">
+								<%
+									for (Board participant : tlist) {
+								%>
+
 								<div class="col-sm-3">
 									<a class="a_400"><%=participant.getNickname()%></a>
 								</div>
@@ -459,21 +476,23 @@
 										</button>
 									</form>
 								</div>
+								<%
+									}
+								%>
 							</div>
 						</div>
-						<%
-							}
-						%>
+
+
 
 
 						<hr>
 						<a class="a_400" style="font-size: 1rem;">참여중 개발자</a>
-
-						<%
-							for (Board participant : clist) {
-						%>
 						<div class="row" style="text-align: center;">
 							<div class="row" style="text-align: center;">
+								<%
+									for (Board participant : clist) {
+								%>
+
 								<div class="col-sm-3">
 									<a class="a_400"><%=participant.getNickname()%></a>
 								</div>
@@ -481,7 +500,6 @@
 									<a class="a_400"><%=participant.getRegistration_date()%></a>
 								</div>
 								<div class="col-sm-3">
-
 									<form
 										action="<%=request.getContextPath()%>/board/RejectAction.jsp"
 										method="post">
@@ -494,11 +512,27 @@
 										</button>
 									</form>
 								</div>
+								<div class="col-sm-3">
+									<form action="../SendNote?action=send2" method="post">
+										<button type="submit">
+											<input name="participantsId"
+												value="<%=participant.getId2()%>" type="hidden" /> 
+												<input
+												name="id" value=<%=id%>
+												type="hidden" /> 
+												<input name="mail"
+												value=<%=mail%> type="hidden" /> 
+												<input name="title" value=<%=title%> type="hidden" />
+												<input name="boardNo" value=<%=boardNo%> type="hidden" />  쪽지
+										</button>
+									</form>
+								</div>
+								<%
+									}
+								%>
 							</div>
 						</div>
-						<%
-							}
-						%>
+
 					</div>
 				</div>
 

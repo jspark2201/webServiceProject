@@ -12,9 +12,9 @@ import java.sql.Date;
 
 public class DBEventDAO {
 	private String jdbc_driver = "org.mariadb.jdbc.Driver";
-	private String jdbc_url = "jdbc:mariadb://localhost:3306/developers";
+	private String jdbc_url = "jdbc:mariadb://localhost:3308/developers";
 	private String id = "root";
-	private String pwd = "qwe123!@#";
+	private String pwd = "3819";
 	Connection conn = null;
 	Statement stmt = null;
 	private ResultSet rs;

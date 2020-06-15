@@ -15,7 +15,7 @@
 		response.sendRedirect(request.getContextPath() + "/board/boardList.jsp");
 	} else {
 		int Id = Integer.parseInt(request.getParameter("boardNo"));
-		String id = (String)session.getAttribute("id");//사용자 세션
+		String id = (String)session.getAttribute("userID");//사용자 세션
 		//String userID = "admin";
 		System.out.println("boardNo :" + Id);
 		Board board = new Board();

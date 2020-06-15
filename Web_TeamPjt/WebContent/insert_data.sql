@@ -1,14 +1,14 @@
 INSERT INTO developers.user (`id`, `pwd`, `nickname`, `email`, `number`,`date`) VALUES ('admin', '1111', 'mimi', 'gmail', '12345678901','2017-07-23');
 INSERT INTO developers.user (`id`, `pwd`, `nickname`, `email`, `number`,`date`) VALUES ('admin2', '2222', 'admin', 'gmail', '12332145678','2017-07-23');
 INSERT INTO developers.user (`id`, `pwd`, `nickname`, `email`, `number`,`date`) VALUES ('admin3', 'test', 'test', 'gmail', '12332145678','2017-07-23');
-
+select email from user where id='admin2';
 INSERT INTO developers.user_favorite(`user_id`,`web`, `android`, `embeded`, `ios`, `health`, `psychology`,`game`)
 VALUES ('admin', '0','0','0','1','0','0','1');
 INSERT INTO developers.user_favorite(`user_id`,`web`, `android`, `embeded`, `ios`, `health`, `psychology`,`game`)
 VALUES ('admin2', '0','0','0','1','0','0','1');
 INSERT INTO developers.user_favorite(`user_id`,`web`, `android`, `embeded`, `ios`, `health`, `psychology`,`game`)
 VALUES ('admin3', '0','0','0','1','0','0','1');
-
+select * from participants;
 //아이디어는 다섯개씩 만듦
 INSERT INTO developers.idea (`writer`, `title`, `content`, `requirements`, `registration_date`, `complete_date`, `number_participants`, `projectURL`, `state`) 
 VALUES ('admin', '첫번째아이디어', 'content1', '웹 모집', '2020-06-05', '2020-06-05', '0', 'https://www.naver.com/', '1');

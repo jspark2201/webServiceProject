@@ -21,7 +21,7 @@ public class NoteDAO {
 //            String pwd = "31362201"; // mysql �젒�냽 鍮꾨쾲
             // db �젒�냽
 //            conn = DriverManager.getConnection(url, id, pwd);
-        	conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/developers", "root", "qwe123!@#");
+        	conn = DriverManager.getConnection("jdbc:mysql://localhost:3308/developers", "root", "3819");
             System.out.println("db�젒�냽 �꽦怨�");
         } catch (Exception e) {
             // db愿��젴�옉�뾽�� 諛섎뱶�떆 �씡�뀎�뀡 泥섎━
@@ -134,6 +134,31 @@ public class NoteDAO {
         
         return -1;
 	}
+	
+	public int sendNote2(String receiveID, String giveID, String giveEmail, String title) {
+		Connection conn = null; // DB�젒�냽 媛앹껜
+        PreparedStatement pstmt = null; // SQL�떎�뻾媛앹껜
+        ResultSet rs = null; // 寃곌낵�뀑 泥섎━ 媛앹껜
+
+        try {
+        	conn = dbConn(); 
+            String sql = "INSERT INTO Note VALUES (?,?,?,?,?,?)";
+            pstmt = conn.prepareStatement(sql); // sql�쓣 �떎�뻾�떆�궎�뒗 媛앹껜 留뚮뱾�뼱吏�
+            pstmt.setInt(1, getNext());
+            pstmt.setString(2, receiveID);
+            pstmt.setString(3, giveID);
+            pstmt.setString(4, giveEmail);
+            pstmt.setString(5, title);
+            pstmt.setString(6, "연락바랍니다");
+        	return pstmt.executeUpdate();
+        	
+        } catch(Exception e) {	
+        	e.printStackTrace();
+        }
+        
+        return -1;
+	}
+	
 
 	
 	

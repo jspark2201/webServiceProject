@@ -16,7 +16,7 @@
 
 	<%
 		Board board = new Board();
-	String id = (String)session.getAttribute("userID");//사용자 세션
+	String id = (String) session.getAttribute("userID");//사용자 세션
 	String realFolder = "";
 	String filename1 = "";
 	int maxSize = 1024 * 1024 * 5;
@@ -83,26 +83,50 @@
 		e.printStackTrace();
 	}
 
-	String Src = realFolder + "\\" + filename1;
+	String Src = "..\\upload\\" + filename1;
 
 	String Requirements = multi.getParameter("requirements");
-	board.setWriter(id);
+
+	board.setWriter(id);//사용자 세션
 	board.setTitle(Title);
 	board.setContent(Content);
 	board.setSrc(Src);
 	board.setRequirements(Requirements);
 
-	BoardDao boardDao = new BoardDao();
-	boardDao.insertBoard(board);//아이디어테이블 추가
+	if (board.getWriter() == null) {
+		PrintWriter script = response.getWriter();
+		script.println("<script>");
+		script.println("alert('로그인을 하세요.')");
+		script.println("location.href = 'login.jsp'");
+		script.println("</script>");
+	} else if (board.getTitle() == null || board.getContent() == null || board.getSrc() == null
+			|| board.getRequirements() == null) {
 
-	int rowCount = boardDao.maxBoard();//가장 최근에 insert한  idea테이블의 id값 가져옴
+		PrintWriter script = response.getWriter();
+		script.println("<script>");
+		script.println("alert('입력이 안된 사항이 있습니다')");
+		script.println("history.back()");
+		script.println("</script>");
 
-	board.setRow(rowCount);
-	boardDao.insertPicturesBoard(board);//사진 테이블 추가
-	boardDao.insertTypeBoard(board);//타입 추가
-	boardDao.insertideaParticipants(board);//아이디어 제공자 참가자로 삽입
+	} else {
 
-	response.sendRedirect(request.getContextPath() + "/board/boardList.jsp");
+		BoardDao boardDao = new BoardDao();
+		boardDao.insertBoard(board);//아이디어테이블 추가
+
+		int rowCount = boardDao.maxBoard();//가장 최근에 insert한  idea테이블의 id값 가져옴
+
+		board.setRow(rowCount);
+		boardDao.insertPicturesBoard(board);//사진 테이블 추가
+		boardDao.insertTypeBoard(board);//타입 추가
+		boardDao.insertideaParticipants(board);//아이디어 제공자 참가자로 삽입
+
+		PrintWriter script = response.getWriter();
+
+		script.println("<script>");
+		script.println("alert('글쓰기 성공')");
+		script.println("</script>");
+		response.sendRedirect(request.getContextPath() + "/board/boardList.jsp");
+	}
 	%>
 </body>
 </html>

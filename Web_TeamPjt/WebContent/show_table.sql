@@ -16,3 +16,6 @@ select title from idea where id=8;
 select src from pictures where idea_id=8;
 select id,state, complete_date from idea where title='dddddd';
 dddddd
+select type from participants where idea_id=30;
+select id from idea where title='qwer'
+select writer from idea;

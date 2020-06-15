@@ -22,7 +22,7 @@ public class NotificationDAO {
 //            String pwd = "31362201"; // mysql 접속 비번
             // db 접속
 //            conn = DriverManager.getConnection(url, id, pwd);
-        	conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/developers", "root", "qwe123!@#");
+        	conn = DriverManager.getConnection("jdbc:mysql://localhost:3308/developers", "root", "q3819");
             System.out.println("db접속 성공");
         } catch (Exception e) {
             // db관련작업은 반드시 익셉션 처리

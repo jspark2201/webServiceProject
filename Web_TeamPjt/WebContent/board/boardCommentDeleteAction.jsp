@@ -2,6 +2,9 @@
 	pageEncoding="UTF-8"%>
 <%@ page import="java.sql.*"%>
 <%@ page import="service.*"%>
+<%@ page
+	import="com.oreilly.servlet.MultipartRequest,com.oreilly.servlet.multipart.DefaultFileRenamePolicy,java.util.*,java.io.*"%>
+
 
 <!DOCTYPE html>
 <html>
@@ -21,10 +24,9 @@
 
 		BoardDao boardDao = new BoardDao();
 		boardDao.deleteComment(Id);//댓글삭제
-
-		if (boardDao.deleteComment(Id) == 1) {
-			response.sendRedirect(request.getContextPath() + "/board/boardList.jsp?boardNo=" + boardNo);
-		}
+		
+		response.sendRedirect(request.getContextPath() + "/board/boardView.jsp?boardNo=" + boardNo);
+		
 	}
 	%>
 </body>
