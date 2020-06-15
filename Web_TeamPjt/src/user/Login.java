@@ -64,10 +64,10 @@ public class Login extends HttpServlet {
 			else {
 				if(event.getPwd().equals(pwd)) {
 					address="view/main.jsp";
-					session.setAttribute("userid", event.getId());
+					session.setAttribute("userID", event.getId());
 				}
 				else {
-					address="view/login_fail.jsp";
+					address="view/index.jsp";
 				}
 			}
 		} else if (action.equals("logout")) {

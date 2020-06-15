@@ -31,13 +31,13 @@
 	<%
 		//로긴한사람이라면	 userID라는 변수에 해당 아이디가 담기고 그렇지 않으면 null값
 
-	String userID = "admin3";
-	/*
-		if (session.getAttribute("userid") != null) {
+	String userID = null;
+	
+		if (session.getAttribute("userID") != null) {
 
-			userID = (String) session.getAttribute("userid");
+			userID = (String) session.getAttribute("userID");
 
-		}*/
+		}
 
 	int pageNumber = 1; //기본 페이지 넘버
 
@@ -398,8 +398,6 @@
 		</div>
 		<!-- /.container -->
 	</footer>
-
-
 
 
 

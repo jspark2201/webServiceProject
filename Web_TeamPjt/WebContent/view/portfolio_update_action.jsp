@@ -33,7 +33,7 @@
 <body>
 
 	<%
-		String userID = "admin3";
+		String userID = null;
 
 	if (session.getAttribute("userID") != null) {//유저아이디이름으로 세션이 존재하는 회원들은 
 

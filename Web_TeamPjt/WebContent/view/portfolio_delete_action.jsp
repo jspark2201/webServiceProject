@@ -33,13 +33,13 @@
 
 	<%
 	DBEventDAO DAO = DBEventDAO.getInstance();
-		String userID = "admin3";
-/*
+		String userID = null;
+
 		if (session.getAttribute("userID") != null) {//유저아이디이름으로 세션이 존재하는 회원들은 
 
 			userID = (String) session.getAttribute("userID");//유저아이디에 해당 세션값을 넣어준다.
 
-		}*/
+		}
 
 		if (userID == null) {
 

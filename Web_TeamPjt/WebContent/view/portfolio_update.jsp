@@ -31,15 +31,14 @@
 
 		//로긴한사람이라면	 userID라는 변수에 해당 아이디가 담기고 그렇지 않으면 null값
 
-		String userID = "admin3";
-/*
+		String userID = null;
 		if (session.getAttribute("userID") != null) {
 
 			userID = (String) session.getAttribute("userID");
 
 
 
-		} */
+		} 
 
 		//로그인 안한 경우
 

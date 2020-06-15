@@ -11,10 +11,10 @@
 	content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <title>IDEARIA</title>
 
-<link rel="shortcut icon" href="../img/favicon/ecology.png">
-<link rel="stylesheet" href="../css/main/main.css">
-<link rel="stylesheet" href="../css/bootstrap.min.css">
-<link rel="stylesheet" href="../css/googleFont.css">
+<link rel="shortcut icon" href="/Web_TeamPjt/img/favicon/ecology.png">
+<link rel="stylesheet" href="/Web_TeamPjt/css/main/main.css">
+<link rel="stylesheet" href="/Web_TeamPjt/css/bootstrap.min.css">
+<link rel="stylesheet" href="/Web_TeamPjt/css/googleFont.css">
 <link
 	href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500&display=swap"
 	rel="stylesheet">
@@ -65,7 +65,7 @@
 			<!-- Wrapper for carousel items -->
 			<div class="carousel-inner">
 				<div class="carousel-item active">
-					<img src="../img/main/main_1.jpg" alt="First Slide"
+					<img src="/Web_TeamPjt/img/main/main_1.jpg" alt="First Slide"
 						style="height: 500px; width: 100%;">
 					<div class="carousel-caption">
 						<p class="a_500"
@@ -77,11 +77,11 @@
 					</div>
 				</div>
 				<div class="carousel-item">
-					<img src="../img/main/main_2.jpg" alt="Second Slide"
+					<img src="/Web_TeamPjt/img/main/main_2.jpg" alt="Second Slide"
 						style="height: 500px; width: 100%;">
 				</div>
 				<div class="carousel-item">
-					<img src="../img/main/main_3.jpg" alt="Third Slide"
+					<img src="/Web_TeamPjt/img/main/main_3.jpg" alt="Third Slide"
 						style="height: 500px; width: 100%;">
 					<div class="carousel-caption">
 						<p class="a_500"
@@ -120,6 +120,22 @@
 
 				<%
 					ideas = ideaDAO.getDBTopList();
+				
+					int id=0;
+					String imageSrc = "/Web_TeamPjt/img/main/main_1.jpg";
+					String title = "blah";
+					int good_cnt = 0;
+					String state = "null";
+					String content = "null";
+					
+					if (ideas.size() != 0) {
+						imageSrc = ideas.get(0).getImageSrc();
+						title = ideas.get(0).getTitle();
+						content = ideas.get(0).getContent();
+						good_cnt = ideas.get(0).getGoodCount();
+						state = ideas.get(0).getState();
+					}
+
 				%>
 
 				<!-- Heading Row -->
@@ -127,13 +143,13 @@
 					<div class="col-md-7 mb-5">
 						<div class="card h-100">
 							<div class="card_img">
-								<img style="width: 100%; height: 100%;" alt="" src="<%=ideas.get(0).getImageSrc()%>"/>
+								<img style="width: 100%; height: 100%;" alt="" src="<%=imageSrc%>"/>
 							</div>
 							<div class="card-body">
 								<h4 class="card-title">
-									<a href="<%="#"+ideas.get(0).getId()%>" class="a_400" style="color: #FFCE1E"><%=ideas.get(0).getTitle()%></a>
+									<a href="<%="#"+id%>" class="a_400" style="color: #FFCE1E"><%=title%></a>
 								</h4>
-								<p class="card-text"><%=ideas.get(0).getContent()%></p>
+								<p class="card-text"><%=content%></p>
 							</div>
 							<div class="card-footer">
 								<a href="#" class="btn btn-primary btn-sm a_500">More Info</a>
@@ -153,9 +169,9 @@
 							<tbody>
 								<%
 									for (int i=1; i<5; i++) {
-										String title = "blah";
-										int good_cnt = 0;
-										String state = "null";
+										title = "blah";
+										good_cnt = 0;
+										state = "null";
 										
 										if (i < ideas.size()) {
 											title = ideas.get(i).getTitle();
@@ -190,7 +206,7 @@
 
 
 			<div class="new_div">
-				<img class="new_img" alt="alt" src="../img/main/new.png">
+				<img class="new_img" alt="alt" src="/Web_TeamPjt/img/main/new.png">
 				<p class="new_p a_500">새 게시물</p>
 			</div>
 
@@ -202,10 +218,10 @@
 				ideas = ideaDAO.getDBList();
 							
 				for (int i=0; i<3; i++) {
-					int id = 0;
-					String imageSrc = "../img/main/main_1.jpg";
-					String title = "blank";
-					String content = "blank";
+					id = 0;
+					imageSrc = "/Web_TeamPjt/img/main/main_1.jpg";
+					title = "blank";
+					content = "blank";
 					
 					if (i < ideas.size()) {
 						id = ideas.get(i).getId();
@@ -282,8 +298,8 @@
 	</div>
 
 	<!-- Bootstrap core JavaScript -->
-	<script src="../vendor/jquery/jquery.min.js"></script>
-	<script src="../vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+	<script src="/Web_TeamPjt/vendor/jquery/jquery.min.js"></script>
+	<script src="/Web_TeamPjt/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
 	<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
 		integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
@@ -292,7 +308,7 @@
 		src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
 		integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
 		crossorigin="anonymous"></script>
-	<script type="text/javascript" src="../js/alertScript.js"></script>
+	<script type="text/javascript" src="/Web_TeamPjt/js/alertScript.js"></script>
 	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
 </body>
 </html>

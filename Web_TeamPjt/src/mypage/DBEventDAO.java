@@ -14,7 +14,7 @@ public class DBEventDAO {
 	private String jdbc_driver = "org.mariadb.jdbc.Driver";
 	private String jdbc_url = "jdbc:mariadb://localhost:3306/developers";
 	private String id = "root";
-	private String pwd = "940525";
+	private String pwd = "qwe123!@#";
 	Connection conn = null;
 	Statement stmt = null;
 	private ResultSet rs;
@@ -73,7 +73,7 @@ public class DBEventDAO {
 
 		}
 
-		return ""; // 데이터베이스 오류
+		return ""; // �뜲�씠�꽣踰좎씠�뒪 �삤瑜�
 
 	}
 
@@ -120,7 +120,7 @@ public class DBEventDAO {
 
 		}
 
-		return -1; // 데이터베이스 오류
+		return -1; // �뜲�씠�꽣踰좎씠�뒪 �삤瑜�
 
 	}
 
@@ -174,7 +174,7 @@ public class DBEventDAO {
 
 		}
 
-		return -1; // 데이터베이스 오류
+		return -1; // �뜲�씠�꽣踰좎씠�뒪 �삤瑜�
 
 	}
 
@@ -212,7 +212,7 @@ public class DBEventDAO {
 
 		}
 
-		return null; // 데이터베이스 오류
+		return null; // �뜲�씠�꽣踰좎씠�뒪 �삤瑜�
 
 	}
 
@@ -236,7 +236,7 @@ public class DBEventDAO {
 
 		}
 
-		return -1; // 데이터베이스 오류
+		return -1; // �뜲�씠�꽣踰좎씠�뒪 �삤瑜�
 	}
 
 	public String getPict(int bbsID) {
@@ -262,7 +262,7 @@ public class DBEventDAO {
 		String SQL = "SELECT id FROM idea WHERE writer = ? and registration_date = ? and complete_date=?";
 
 		try {
-			System.out.println("여기까진왔다");
+			System.out.println("�뿬湲곌퉴吏꾩솕�떎");
 			PreparedStatement pstmt = conn.prepareStatement(SQL);
 
 			pstmt.setString(1, userID);
@@ -317,7 +317,7 @@ public class DBEventDAO {
 
 		}
 
-		return -1; // 데이터베이스 오류
+		return -1; // �뜲�씠�꽣踰좎씠�뒪 �삤瑜�
 
 	}
 
@@ -444,7 +444,7 @@ public class DBEventDAO {
 		return list;
 
 	}
-	// bbsID 게시글 번호 가져오는 함수
+	// bbsID 寃뚯떆湲� 踰덊샇 媛��졇�삤�뒗 �븿�닔
 
 	public int getNext() {
 
@@ -462,7 +462,7 @@ public class DBEventDAO {
 
 			}
 
-			return 1;// 첫 번째 게시물인 경우
+			return 1;// 泥� 踰덉㎏ 寃뚯떆臾쇱씤 寃쎌슦
 
 		} catch (Exception e) {
 
@@ -470,10 +470,10 @@ public class DBEventDAO {
 
 		}
 
-		return -1; // 데이터베이스 오류
+		return -1; // �뜲�씠�꽣踰좎씠�뒪 �삤瑜�
 
 	}
-	// 10 단위 페이징 처리를 위한 함수
+	// 10 �떒�쐞 �럹�씠吏� 泥섎━瑜� �쐞�븳 �븿�닔
 
 	public boolean nextPage(String user, int pageNumber) {
 
@@ -565,7 +565,7 @@ public class DBEventDAO {
 		return null;
 	}
 
-	// 수정 함수
+	// �닔�젙 �븿�닔
 
 	public int update(int bbsID, String bbsTitle, String bbsContent, String registration_date, String complete_date,
 			int number_participants, String url) {
@@ -598,7 +598,7 @@ public class DBEventDAO {
 
 		}
 
-		return -1; // 데이터베이스 오류
+		return -1; // �뜲�씠�꽣踰좎씠�뒪 �삤瑜�
 
 	}
 
@@ -639,7 +639,7 @@ public class DBEventDAO {
 
 		}
 
-		return -1; // 데이터베이스 오류
+		return -1; // �뜲�씠�꽣踰좎씠�뒪 �삤瑜�
 
 	}
 
@@ -663,11 +663,11 @@ public class DBEventDAO {
 
 		}
 
-		return -1; // 데이터베이스 오류
+		return -1; // �뜲�씠�꽣踰좎씠�뒪 �삤瑜�
 
 	}
 
-	// 삭제 함수
+	// �궘�젣 �븿�닔
 
 	public int delete(int bbsID) {
 
@@ -687,7 +687,7 @@ public class DBEventDAO {
 
 		}
 
-		return -1; // 데이터베이스 오류
+		return -1; // �뜲�씠�꽣踰좎씠�뒪 �삤瑜�
 
 	}
 

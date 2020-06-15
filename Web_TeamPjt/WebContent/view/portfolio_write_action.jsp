@@ -46,16 +46,16 @@
 <body>
 
 	<%
-		String userID = "admin3";
+		String userID = null;
 
 	String realFolder = "";
 	String imgpath = "";
-	int maxSize = 1024 * 1024 * 5;
+	int maxSize = 720 * 720 * 5;
 	String encType = "UTF-8";
 	String savefile = "img";
 	ServletContext scontext = getServletContext();
 	realFolder = scontext.getRealPath(savefile);
-
+	System.out.println(realFolder);
 	PortfolioBean port = new PortfolioBean();
 	MultipartRequest multi;
 
@@ -77,7 +77,7 @@
 			imgFullPath = "..\\img\\" + imgpath;
 		}
 
-		/*
+		
 		if (session.getAttribute("userID") != null) {//유저아이디이름으로 세션이 존재하는 회원들은 
 		
 			userID = (String) session.getAttribute("userID");//유저아이디에 해당 세션값을 넣어준다.
@@ -95,8 +95,7 @@
 			script.println("location.href = 'login.jsp'");
 		
 			script.println("</script>");
-		"C:/Users/ansdu/web_front/webServiceProject/Web_TeamPjt/WebContent/view/ex_detail.jsp"
-		} else {}*/
+		}
 
 		if (port.getBbs_title() == null || port.getBbsContent() == null) {
 
