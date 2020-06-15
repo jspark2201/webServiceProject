@@ -5,6 +5,13 @@ public class NotificationDTO {
 	private String receiveID;
 	private String giveID;
 	private String giveEmail;
+	private String ideaTitle;
+	public String getIdeaTitle() {
+		return ideaTitle;
+	}
+	public void setIdeaTitle(String ideaTitle) {
+		this.ideaTitle = ideaTitle;
+	}
 	private String ideaLink;
 	
 	public int getNotiNumber() {
