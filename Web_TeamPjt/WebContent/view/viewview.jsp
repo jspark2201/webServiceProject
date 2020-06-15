@@ -47,6 +47,6 @@
 		</td>
 	</tr>
 	</table>
-	<br><a href="/teamproject/Login?action=list">메인페이지로 돌아가기</a>
+	<br><a href="/teamproject/mypage">마이페이지로 돌아가기</a>
 </body>
 </html>

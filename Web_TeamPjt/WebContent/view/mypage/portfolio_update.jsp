@@ -4,7 +4,7 @@
 <%@ page import="java.io.PrintWriter"%>
 
 <%@ page import="mypage.PortfolioBean"%>
-
+<%@ page import="java.util.Vector"%>
 <%@ page import="mypage.DBEventDAO"%>
 
 <!doctype html>
@@ -32,7 +32,6 @@
 		//로긴한사람이라면	 userID라는 변수에 해당 아이디가 담기고 그렇지 않으면 null값
 
 		String userID = null;
-
 		if (session.getAttribute("userID") != null) {
 
 			userID = (String) session.getAttribute("userID");
@@ -51,7 +50,7 @@
 
 			script.println("alert('로그인을 하세요.')");
 
-			script.println("location.href = 'login.jsp'");
+			script.println("location.href = '/Web_TeamPjt/Login/'");
 
 			script.println("</script>");
 
@@ -77,14 +76,16 @@
 
 			script.println("alert('유효하지 않은 글 입니다.')");
 
-			script.println("location.href = 'portfolio.jsp'");
+			script.println("location.href = '/Web_TeamPjt/mypage/'");
 
 			script.println("</script>");
 
 		}
-
-		PortfolioBean port = new DBEventDAO().getPortfolio(bbsID);
-
+		DBEventDAO DAO = DBEventDAO.getInstance();
+		PortfolioBean port = DAO.getPortfolio(bbsID);
+		
+		String picsrc = DAO.getPict(bbsID);
+		System.out.println("테스트 : " +picsrc);
 		if (!userID.equals(port.getUserID())) {
 
 			PrintWriter script = response.getWriter();
@@ -93,7 +94,7 @@
 
 			script.println("alert('권한이 없습니다.')");
 
-			script.println("location.href = 'portfolio.jsp'");
+			script.println("location.href = '/Web_TeamPjt/mypage/'");
 
 			script.println("</script>");				
 
@@ -155,7 +156,7 @@
 
 			<div class="row margin30">
 				<div class="col-sm-4">
-					<a class="a_500"><%= port.getBbs_title() %></a>
+					<a class="a_500">프로젝트 제목</a>
 				</div>
 				<div class="col-sm-8">
 					<input type="text" class="form-control" id="usr" style="width: 50%"
@@ -170,9 +171,10 @@
 						type="file" name="pictsrc" id="pictsrc" />
 				</div>
 				<div class="col-sm-8">
+				
 					<img class="img-fluid rounded mb-4 mb-lg-0" id='preview'
 						style="height: 100%; width: 400px;"
-						src="http://placehold.it/400x400" alt="">
+						src="<%if(picsrc==null) {%>http://placehold.it/400x400<%}else{ %> <%=picsrc %><%} %>" alt="">
 				</div>
 			</div>
 
@@ -182,11 +184,11 @@
 				</div>
 				<div class="col-sm-8">
 					<input type="date" class="form-control" placeholder="시작 날짜"
-						name="registrationDate"><a> ~ </a><input type="date"
-						class="form-control" placeholder="종료 날짜" name="completeDate">
+						name="registrationDate" value="<%=port.getRegistrationDate()%>"><a> ~ </a><input type="date"
+						class="form-control" placeholder="종료 날짜" value="<%=port.getCompleteDate()%>" name="completeDate">
 				</div>
 			</div>
-
+			<%Vector tmp =DAO.getFavorite(bbsID); %>
 			<div class="row margin15">
 				<div class="col-sm-4">
 					<a class="a_500">프로젝트 플랫폼</a>
@@ -195,10 +197,19 @@
 					<div class="form-group ">
 						<select id="interest_1" name="favorite" class="form-control a_400"
 							style="width: 50%">
-							<option value="web">WEB</option>
-							<option value="android">안드로이드</option>
-							<option value="embeded">임베디드</option>
-							<option value="ios">IOS</option>
+							<option value="web" <%if(tmp.get(0).equals("web")){%>
+												selected
+												<%} %>
+							>WEB</option>
+							<option value="android"<%if(tmp.get(0).equals("android")){%>
+												selected
+												<%} %>>안드로이드</option>
+							<option value="embeded"<%if(tmp.get(0).equals("embeded")){%>
+												selected
+												<%} %>>임베디드</option>
+							<option value="ios"<%if(tmp.get(0).equals("ios")){%>
+												selected
+												<%} %>>IOS</option>
 						</select>
 					</div>
 				</div>
@@ -211,9 +222,15 @@
 					<div class="form-group ">
 						<select id="interest_1" name="favorite" class="form-control a_400"
 							style="width: 50%">
-							<option value="health">건강</option>
-							<option value="pychology">심리학</option>
-							<option value="game">게임</option>
+							<option value="health"<%if(tmp.get(1).equals("health")){%>
+												selected
+												<%} %>>건강</option>
+							<option value="pychology"<%if(tmp.get(1).equals("pychology")){%>
+												selected
+												<%} %>>심리학</option>
+							<option value="game"<%if(tmp.get(1).equals("game")){%>
+												selected
+												<%} %>>게임</option>
 						</select>
 					</div>
 				</div>
@@ -224,7 +241,7 @@
 				</div>
 				<div class="col-sm-8">
 					<input type="number" style="width: 50%" placeholder="참여 인원"
-										name="participantsNumber" min="1" max="10" id="usr">
+										name="participantsNumber" value="<%=port.getParticipantsNumber()%>" min="1" max="10" id="usr">
 								
 				</div>
 			</div>
@@ -234,7 +251,7 @@
 				</div>
 				<div class="col-sm-8">
 					<input type="text" class="form-control" placeholder="프로젝트 링크"
-										name="projectUrl" id="usr">
+										name="projectUrl" value="<%=port.getProjectUrl()%>" id="usr">
 				</div>
 			</div>
 			<div class="row margin30">
@@ -243,9 +260,8 @@
 				</div>
 				<div class="col-sm-8">
 					<textarea class="a_400" id="field" name="bbsContent"
-						placeholder="소개하시려는 아이디어 프로젝트를 쉽게 풀어서 작성하여 주십시오."
-						value="<%= port.getBbsContent() %>" maxlength="3000" rows="10"
-						cols="40"></textarea>
+						 maxlength="3000" rows="10"
+						cols="40" placeholder="소개하시려는 아이디어 프로젝트를 쉽게 풀어서 작성하여 주십시오."><%= port.getBbsContent() %></textarea>
 
 					<div class="message"></div>
 				</div>
@@ -384,6 +400,7 @@
               reader.readAsDataURL(get_file[0]);
               console.log(2);
            }else{
+        	   
         	   reader.readAsDataURL("http://placehold.it/400x400");
            }
 			

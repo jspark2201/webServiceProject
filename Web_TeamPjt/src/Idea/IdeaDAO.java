@@ -1,28 +1,40 @@
 package Idea;
 
+import java.io.FileReader;
+import java.io.Reader;
 import java.sql.*;
 import java.util.ArrayList;
-
+import java.util.Properties;
+import java.io.Reader;
+import java.util.Properties;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
+import java.io.IOException;
 
 public class IdeaDAO {
 
 	private Connection conn = null;
 	private PreparedStatement pstmt = null;
-	
+	private String jdbc_driver;
+	private String jdbc_url;
+	private String id;
+	private String pwd;
 	private void connect()
 	{
 		// 1. Driver �ε�
 		try {
-			Class.forName("org.mariadb.jdbc.Driver");
-		}
-		catch (Exception e) {
-			System.out.println("�ε� ����");
-			return;
-		}
+			Properties properties = new Properties();
+			properties.load((getClass().getResourceAsStream("../config/db.properties")));
+
+			jdbc_driver = properties.getProperty("jdbc_driver");
+			jdbc_url = properties.getProperty("jdbc_url");
+			id = properties.getProperty("id");
+			pwd = properties.getProperty("pwd");
+			
+			Class.forName(jdbc_driver);
 		
-		// 2. DB�� ����
-		try {
-			conn = DriverManager.getConnection("jdbc:mariadb://localhost:3308/developers", "root", "3819");
+			conn = DriverManager.getConnection(jdbc_url, id, pwd);
 
 		}
 		catch (Exception e) {
