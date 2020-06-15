@@ -5,7 +5,7 @@
 <%@ page import="java.io.PrintWriter"%>
 
 <%@ page import="mypage.PortfolioBean"%>
-
+<%@ page import="java.util.Vector"%>
 <%@ page import="mypage.DBEventDAO"%>
 
 <!doctype html>
@@ -74,8 +74,8 @@
 			script.println("</script>");
 
 		}
-
-		PortfolioBean port = new DBEventDAO().getPortfolio(bbsID);
+		DBEventDAO bbsDAO = DBEventDAO.getInstance();
+		PortfolioBean port = bbsDAO.getPortfolio(bbsID);
 
 	%>
 
@@ -133,7 +133,8 @@
 		<hr class="hr1">
 		<div class="row">
 			<div class="row a_400" style="font-size: 2rem; margin: 30px;">
-				<%= port.getBbs_title() %>.
+				<%= port.getBbs_title() %>
+				<a style="font-size:1rem;">			<%Vector tmp =bbsDAO.getFavorite(bbsID); %> <%=(String)tmp.get(0) %>/ <%=(String)tmp.get(1) %></a>
 			</div>
 
 
@@ -142,13 +143,33 @@
 				<!-- class="col-lg-8" -->
 
 				<!-- Preview Image -->
-				<img class="img-fluid rounded" src="http://placehold.it/900x300"
+				<img class="img-fluid rounded" src="
+				<%
+				if (bbsDAO.getPic(bbsID) == null){%>
+							http://placehold.it/900x300
+						<%}else{%>
+							<%=bbsDAO.getPic(bbsID)%>
+							<% }%>
+				"
 					alt="">
 
 				<hr class="hr1">
 
-				<!-- Date/Time -->
-				<p>Posted on January 1, 2017 at 12:00 PM</p>
+        <!-- Date/Time -->
+        <div class="row a_400" style="font-size:1.5rem; margin:30px; ">
+			프로젝트 기간
+		</div>
+        <p style="text-align:center;"><%= port.getRegistrationDate() %> ~ <%= port.getCompleteDate() %></p>
+<div class="row a_400" style="font-size:1.5rem; margin:30px; ">
+			프로젝트 참여인원
+		</div>
+        <p style="text-align:center;" class="a_400;"><%= port.getParticipantsNumber() %> 명</p>
+        <hr class="hr1">
+		<div class="row a_400" style="font-size:1.5rem; margin:30px; ">
+			프로젝트 URL
+		</div>
+        <!-- 프로젝트 URL -->
+        <a href="http://naver.com" style="text-align:center;"><%= port.getProjectUrl() %></a>
 
 				<hr class="hr1">
 
@@ -171,16 +192,26 @@
 		<hr>
 		<%if(userID != null && userID.equals(port.getUserID())){ %>
 
-
-		<button type="button" class="btn btn-outline-warning" onclick="">글수정</button>
-		<form action="portfolio_delete_action.jsp" method="post">
+		
+		<div class="row">
+			<button type="button" class="btn btn-outline-warning" onclick="location.href='portfolio_update.jsp?bbsID=<%= bbsID %>'">글수정</button>
+					</button>
+			<form action="portfolio_delete_action.jsp"  method="post">
+				<input name="bbsID" value="<%= bbsID %>" type="hidden" />
+				<button type="submit" method="post" class="btn btn-outline-danger" onclick="">
+					<a class="a_400">삭제하기</a>
+				</button>
+			</form>
+		<%}%>
+		</div>
+		<%-- <form action="portfolio_delete_action.jsp" method="post">
 			<input name="bbsID" value="<%= bbsID %>" type="hidden" />
 			<button type="submit" method="post" class="btn btn-outline-danger"
 				style="position: absolute; right: 3%; bottom: 3%;" onclick="">
 				<a class="a_400">삭제하기</a>
 			</button>
 		</form>
-		<%}%>
+		<%}%> --%>
 	</div>
 	<!-- /.container -->
 

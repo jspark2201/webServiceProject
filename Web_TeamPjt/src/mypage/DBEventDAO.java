@@ -7,6 +7,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.Vector;
 import java.sql.Date;
 
 public class DBEventDAO {
@@ -17,6 +18,15 @@ public class DBEventDAO {
 	Connection conn = null;
 	Statement stmt = null;
 	private ResultSet rs;
+
+	private static DBEventDAO uniqueInstance;
+
+	public static DBEventDAO getInstance() {
+		if (uniqueInstance == null) {
+			uniqueInstance = new DBEventDAO();
+		}
+		return uniqueInstance;
+	}
 
 	public DBEventDAO() {
 		try {
@@ -71,7 +81,7 @@ public class DBEventDAO {
 			String complete_date, int number_participants, String projectUrl) {
 
 		String SQL = "INSERT INTO idea(writer,title,content,registration_date,complete_date,number_participants,projectURL,state) VALUES(?, ?, ?, ?, ?, ?, ?, ?)";
-		
+
 		int result;
 		try {
 
@@ -94,12 +104,11 @@ public class DBEventDAO {
 			pstmt.setInt(8, 5);
 
 			result = pstmt.executeUpdate();
-			
-			
+
 			System.out.println("success");
 
 			System.out.println(result);
-			
+
 			if (writeparticipants(userID, registration_date, complete_date) == -1)
 				return -1;
 
@@ -119,8 +128,8 @@ public class DBEventDAO {
 		String SQL = "INSERT INTO pictures(src, idea_id) VALUES(?,?)";
 		try {
 			PreparedStatement pstmt = conn.prepareStatement(SQL);
-			pstmt.setString(1,pictSRC);
-			pstmt.setInt(2,ideaID);
+			pstmt.setString(1, pictSRC);
+			pstmt.setInt(2, ideaID);
 			return pstmt.executeUpdate();
 		} catch (SQLException sqex) {
 			System.out.println("SQLException: " + sqex.getMessage());
@@ -166,6 +175,44 @@ public class DBEventDAO {
 		}
 
 		return -1; // 데이터베이스 오류
+
+	}
+
+	public Vector getFavorite(int ideaID) {
+		String SQL = "SELECT * FROM idea_favorite WHERE idea_id '" + ideaID + "'";
+		Vector result = new Vector();
+		try {
+
+			ResultSet rset = stmt.executeQuery(SQL);
+
+			while (rset.next()) {
+
+				if (rset.getBoolean(2))
+					result.add(new String("web"));
+				else if (rset.getBoolean(3))
+					result.add(new String("android"));
+				else if (rset.getBoolean(4))
+					result.add(new String("embeded"));
+				else if (rset.getBoolean(5))
+					result.add(new String("ios"));
+				if (rset.getBoolean(6))
+					result.add(new String("health"));
+				else if (rset.getBoolean(7))
+					result.add(new String("psychology"));
+				else if (rset.getBoolean(8))
+					result.add(new String("game"));
+			}
+			System.out.print("success");
+			System.out.print(result.get(0));
+			return result;
+
+		} catch (SQLException sqex) {
+			System.out.println("SQLException: " + sqex.getMessage());
+			System.out.println("SQLState: " + sqex.getSQLState());
+
+		}
+
+		return null; // 데이터베이스 오류
 
 	}
 
@@ -248,7 +295,7 @@ public class DBEventDAO {
 			PreparedStatement pstmt = conn.prepareStatement(SQL);
 
 			int ideaID = getPortfolilID(userID, registration_date, complete_date);
-			
+
 			System.out.println(ideaID);
 			if (ideaID == -1)
 				return -1;
@@ -520,7 +567,8 @@ public class DBEventDAO {
 
 	// 수정 함수
 
-	public int update(int bbsID, String bbsTitle, String bbsContent,Date registration_date,Date complete_date, int number_participants, String url) {
+	public int update(int bbsID, String bbsTitle, String bbsContent, String registration_date, String complete_date,
+			int number_participants, String url) {
 
 		String SQL = "UPDATE idea SET bbsTitle = ?, bbsContent = ?, registration_date=?,complete_date=?,number_participants=?, projectURL=? WHERE bbsID = ?";
 
@@ -532,13 +580,12 @@ public class DBEventDAO {
 
 			pstmt.setString(2, bbsContent);
 
+			pstmt.setDate(3, Date.valueOf(registration_date));
 
-			pstmt.setDate(3, registration_date);
-
-			pstmt.setDate(4, complete_date);
+			pstmt.setDate(4, Date.valueOf(complete_date));
 
 			pstmt.setInt(5, number_participants);
-			
+
 			pstmt.setString(6, url);
 
 			pstmt.setInt(7, bbsID);
@@ -554,7 +601,7 @@ public class DBEventDAO {
 		return -1; // 데이터베이스 오류
 
 	}
-	
+
 	public int updatePict(int bbsID, String src) {
 
 		String SQL = "UPDATE idea SET src=? WHERE idea_id = ?";
@@ -566,7 +613,6 @@ public class DBEventDAO {
 			pstmt.setString(1, src);
 
 			pstmt.setInt(2, bbsID);
-
 
 			return pstmt.executeUpdate();
 
@@ -603,7 +649,7 @@ public class DBEventDAO {
 		return -1; // 데이터베이스 오류
 
 	}
-	
+
 	public int getPtype(int bbsID, String user) {
 
 		String SQL = "SELECT type FROM participants WHERE idea_id = ? and user_id = ?";

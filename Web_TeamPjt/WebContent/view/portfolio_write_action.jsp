@@ -74,7 +74,7 @@
 		imgpath = multi.getFilesystemName("pictsrc");
 		String imgFullPath = null;
 		if (imgpath != null) {
-			imgFullPath =  "..\\img\\" + imgpath;
+			imgFullPath = "..\\img\\" + imgpath;
 		}
 
 		/*
@@ -117,15 +117,17 @@
 			game = false;
 			result = DAO.writePortfolio(port.getBbs_title(), userID, port.getBbsContent(), port.getRegistrationDate(),
 			port.getCompleteDate(), port.getParticipantsNumber(), port.getProjectUrl());
-			
-			System.out.println("왜안되 "+ result);
 
 			int portID = DAO.getPortfolilID(userID, port.getRegistrationDate(), port.getCompleteDate());
-			
-			port.setPictsrc(imgFullPath);
 
-			result2 = DAO.writePict(port.getPictsrc(), portID);
+			if (imgFullPath != null) {
 
+		port.setPictsrc(imgFullPath);
+
+		result2 = DAO.writePict(port.getPictsrc(), portID);
+			}
+			else
+				result2 = 1;
 			String[] favorite = multi.getParameterValues("favorite");
 			for (int i = 0; i < favorite.length; i++) {
 

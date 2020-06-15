@@ -32,7 +32,7 @@
 <body>
 
 	<%
-
+	DBEventDAO DAO = DBEventDAO.getInstance();
 		String userID = "admin3";
 /*
 		if (session.getAttribute("userID") != null) {//유저아이디이름으로 세션이 존재하는 회원들은 
@@ -77,7 +77,7 @@
 
 		}
 
-		PortfolioBean port = new DBEventDAO().getPortfolio(bbsID);
+		PortfolioBean port = DAO.getPortfolio(bbsID);
 		System.out.println("bbsId:"+port.getUserID());
 		if(!userID.equals(port.getUserID())) {
 
@@ -95,7 +95,7 @@
 
 		else{
 
-			DBEventDAO DAO = new DBEventDAO();
+
 
 			int result = DAO.delete(bbsID);
 

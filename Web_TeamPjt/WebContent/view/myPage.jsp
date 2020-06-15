@@ -205,7 +205,7 @@
 
 				<div class="row">
 					<%
-						DBEventDAO bbsDAO = new DBEventDAO();
+						DBEventDAO bbsDAO = DBEventDAO.getInstance();
 					System.out.println(userID);
 					ArrayList<PortfolioBean> list = bbsDAO.getList(userID, pageNumber);
 
@@ -242,14 +242,23 @@
 							<%}else if(list.get(i).getState()==5) {%>
 							#0000FF
 							<%} %>"; border-width: 5px;">
+
 							<div class="card_img">
-								<img style="width: 100%; height: 100%;" alt=""
-									src="<%=imgSRC%>">
+							<% String link;
+							if(list.get(i).getState()==5){ 
+								  link =  "portfolioView.jsp?bbsID="+ list.get(i).getBbs_id();
+								 }
+								 else{
+									 link = "../board/boardView.jsp?boardNo="+list.get(i).getBbs_id();
+								 }%>
+								<a href="<%=link%>"> <img
+									style="width: 100%; height: 100%;" alt="" src="<%=imgSRC%>">
+								</a>
 							</div>
 							<div class="card-body">
 								<h4 class="card-title">
-									<a href="portfolioView.jsp?bbsID=<%=list.get(i).getBbs_id()%>" class="a_400" style="color: #FFCE1E">
-									 <%=list.get(i).getBbs_title()%>
+									<a href="<%=link%>" class="a_400"
+										style="color: #FFCE1E"> <%=list.get(i).getBbs_title()%>
 									</a>
 								</h4>
 								<p class="card-text">
@@ -274,6 +283,7 @@
 									<form action="portfolio_delete_action.jsp" method="post">
 										<input name="bbsID" value="<%=list.get(i).getBbs_id()%>"
 											type="hidden" />
+											<a class="a_400">상태값!</a>
 										<button type="submit" method="post"
 											class="btn btn-outline-danger btn-sm"
 											style="position: absolute; right: 3%; bottom: 3%;" onclick="">
@@ -452,7 +462,7 @@
 						<hr class="hr1" style="margin-top: 50px;">
 
 						<form method="post" action="portfolio_write_action.jsp"
-							name="writeport"enctype="multipart/form-data">
+							name="writeport" enctype="multipart/form-data">
 							<div class="row" style="margin-top: 30px; margin-bottom: 30px;">
 								<div class="col-sm-4">
 									<a class="a_500">프로젝트 제목</a>
@@ -466,11 +476,11 @@
 								<div class="col-sm-4">
 									<a class="a_500">이미지 첨부</a> <label
 										class="btn-bs-file btn btn-lg btn-warning"> Browse <input
-										type="file" name="pictsrc" />
+										type="file" name="pictsrc" id="pictsrc" />
 								</div>
 								<div class="col-sm-8">
-									<img class="img-fluid rounded mb-4 mb-lg-0"
-										src="http://placehold.it/400x400" alt="">
+									<img class="img-fluid rounded mb-4 mb-lg-0" id='preview' style="height:100%; width:400px;"
+					src="http://placehold.it/400x400" alt="">
 								</div>
 							</div>
 							<div class="row" style="margin-top: 30px; margin-bottom: 30px;">
@@ -552,7 +562,8 @@
 			</div> -->
 							<hr class="hr1" style="margin-top: 20px; margin-bottom: 30px;">
 							<div style="text-align: center; margin-bottom: 30px;">
-								<button type="submit" class="btn btn-warning a_400" onclick="document.location.reload()">게시하기</button>
+								<button type="submit" class="btn btn-warning a_400"
+									onclick="document.location.reload()">게시하기</button>
 							</div>
 						</form>
 
@@ -594,6 +605,39 @@
 					});
 		});
 		
+		
+        var upload = document.querySelector('#pictsrc');
+        var preview = document.querySelector('#preview');
+        upload.addEventListener('change', function(e) {
+           var get_file = e.target.files;
+           var image = document.createElement('img');
+           /* FileReader 객체 생성 */
+           var reader = new FileReader();
+           /* reader 시작시 함수 구현 */
+           reader.onload = (function(aImg) {
+              console.log(1);
+
+              return function(e) {
+                 console.log(3);
+                 /* base64 인코딩 된 스트링 데이터 */
+                 aImg.src = e.target.result
+              }
+           })(preview)
+
+           if (get_file) {
+              /* 
+                  get_file[0] 을 읽어서 read 행위가 종료되면 loadend 이벤트가 트리거 되고 
+                  onload 에 설정했던 return 으로 넘어간다.
+                  이와 함게 base64 인코딩 된 스트링 데이터가 result 속성에 담겨진다.
+               */
+              reader.readAsDataURL(get_file[0]);
+              console.log(2);
+           }else{
+        	   reader.readAsDataURL("http://placehold.it/400x400");
+           }
+			
+        })
+
 	</script>
 </body>
 </html>
