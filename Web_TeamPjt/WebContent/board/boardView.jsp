@@ -146,7 +146,17 @@
 			<div class="col-sm-2"
 				style="width: 100%; text-align: right; margin-left: 80%;">
 				<a class="text-muted" style="font-size: 10px;">Number of likes</a><br>
-				<a class="h4"><%=goodCount%></a> <img alt="" src="../img/heart.png"
+				<a class="h4"><%=goodCount%></a>
+				<form
+					action="<%=request.getContextPath()%>/board/boardGoodAction.jsp"
+					method="post">
+					<input name="boardNo" value="<%=request.getParameter("boardNo")%>"
+						type="hidden" />
+					<button type="submit" class="btn btn-outline-danger" id="likeBtn">
+						 <img alt="" src="../img/heart2.png"style="margin-bottom: 5px;">
+					</button>
+				</form>
+				<img alt="" src="../img/heart.png"
 					style="height: 32px; width: 32px; margin-bottom: 10px;">
 			</div>
 			<div class="row a_400" style="font-size: 2rem; margin: 30px;">
@@ -163,9 +173,7 @@
 				<hr class="hr1">
 
 				<!-- Date/Time -->
-				<p>Posted on</p>
-				<p><%=board.getRegistration_date()%>
-					<%=board.getWriter()%></p>
+				<p>Posted on <%=board.getRegistration_date()%> <%=board.getWriter()%></p>
 
 				<hr class="hr1">
 				<%=platform[0]%>
@@ -201,16 +209,7 @@
 					}
 				%>
 				<hr class="hr1">
-				<form
-					action="<%=request.getContextPath()%>/board/boardGoodAction.jsp"
-					method="post">
-					<input name="boardNo" value="<%=request.getParameter("boardNo")%>"
-						type="hidden" />
-					<button type="submit" class="btn btn-outline-danger" id="likeBtn">
-						<a class="a_400">좋아요</a><img alt="" src="../img/heart2.png"
-							style="margin-bottom: 5px;">
-					</button>
-				</form>
+
 
 				<form
 					action="<%=request.getContextPath()%>/board/boardContactAction.jsp"

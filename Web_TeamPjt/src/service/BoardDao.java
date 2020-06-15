@@ -521,7 +521,7 @@ public class BoardDao {
 	    }
 	    
 	    // 테이블 : idea , 기능 :필터 글 가져오기
-	    public List<Board> selectFavoriteBoardListPerPage(Board board, int beginRow, int pagePerRow) {
+	    public List<Board> selectFavoriteBoardListPerPage(String target1, String target2, int beginRow, int pagePerRow) {
 	    	List<Board> list = new ArrayList<Board>();
 	        Connection connection = null;
 	        PreparedStatement statement = null;
@@ -529,34 +529,29 @@ public class BoardDao {
 
 	        String sql = "SELECT i.id, i.title, i.writer, i.registration_date, "
 	        		+ "i.state, p.src "
-	        		+ "FROM idea i, pictures p, idea_favorite f"
+	        		+ "FROM idea i, pictures p, idea_favorite f "
 	        		+ "WHERE i.id=p.idea_id and i.id=f.idea_id and p.idea_id=f.idea_id and "
-	        		+ "( web = ? or android = ? or embeded=? or ios=? or health=? or psychology=? or game=?) "
+	        		+ "( f.? = 1 or f.? =1) "
 	        		+ "ORDER BY id DESC LIMIT ?, ?";
 	        try {
 	            connection = this.getConnection();
 	            statement = connection.prepareStatement(sql);
-	            statement.setBoolean(1,board.isWeb());
-	            statement.setBoolean(2,board.isAndroid());
-	            statement.setBoolean(3,board.isEmbeded());
-	            statement.setBoolean(4,board.isIos());
-	            statement.setBoolean(5,board.isHealth());
-	            statement.setBoolean(6,board.isPsychology());
-	            statement.setBoolean(7,board.isGame());
-	            statement.setInt(8, beginRow);
-	            statement.setInt(9, pagePerRow);
+	            statement.setString(1, target1);
+	            statement.setString(2, target2);
+	            statement.setInt(3, beginRow);
+	            statement.setInt(4, pagePerRow);
 	            resultset = statement.executeQuery();
+	            
 	            while(resultset.next()) {
-	                Board board1 = new Board();
+	                Board board = new Board();                
+	                board.setId(resultset.getInt("id"));
+	                board.setTitle(resultset.getString("title"));
+	                board.setWriter(resultset.getString("writer"));
+	                board.setRegistration_date(resultset.getString("registration_date"));
+	                board.setState(resultset.getInt("State"));
+	                board.setSrc(resultset.getString("src"));
 	                
-	                board1.setId(resultset.getInt("id"));
-	                board1.setTitle(resultset.getString("title"));
-	                board1.setWriter(resultset.getString("writer"));
-	                board1.setRegistration_date(resultset.getString("registration_date"));
-	                board1.setState(resultset.getInt("State"));
-	                board1.setSrc(resultset.getString("src"));
-	                
-	                list.add(board1);
+	                list.add(board);
 	            }
 	        } catch (Exception e) {
 	            e.printStackTrace();

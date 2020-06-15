@@ -20,6 +20,7 @@
 <link
 	href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500&display=swap"
 	rel="stylesheet">
+
 </head>
 <body>
 	<!-- Navigation -->
@@ -53,6 +54,7 @@
 
 	<div style="height: 100px; background-color: #FFCE1E;"></div>
 	<div style="height: 5px; background-color: #b0aea9;"></div>
+
 	<!-- Carousel -->
 	<div class="bs-example">
 		<div id="myCarousel" class="carousel slide" data-ride="carousel">
@@ -107,22 +109,33 @@
 	</div>
 
 	<%
-int currentPage = 1;
-if(request.getParameter("currentPage") != null) {
-    currentPage = Integer.parseInt(request.getParameter("currentPage"));
-}
-BoardDao boardDao = new BoardDao();
-int totalRowCount = boardDao.selectTotalRecruitBoardCount();
-int pagePerRow = 4; 
-int beginRow = (currentPage-1)*pagePerRow;
-List<Board> list = boardDao.selectRecruitBoardListPerPage(beginRow, pagePerRow);
-%>
+		int currentPage = 1;
+	if (request.getParameter("currentPage") != null) {
+		currentPage = Integer.parseInt(request.getParameter("currentPage"));
+	}
+
+	String[] platform = request.getParameterValues("interest_1");
+
+	String interest1=platform[0];
+	String[] genre = request.getParameterValues("interest_2");
+	String interest2=genre[0];
+	
+
+	System.out.println(genre[0]);
+
+	BoardDao boardDao = new BoardDao();
+	int totalRowCount = boardDao.selectTotalBoardCount();
+	int pagePerRow = 9;
+	int beginRow = (currentPage - 1) * pagePerRow;
+	List<Board> list = boardDao.selectFavoriteBoardListPerPage(interest1, interest2, beginRow, pagePerRow);
+	%>
+
 	<!-- 필터링 박스  -->
 	<div class="row">
 		<div class="col-md-12" style="margin-bottom: 10px;">
 			<label class="btn btn-warning"></label> <a
-				href="<%=request.getContextPath()%>/board/boardList.jsp"
-				class="a_400" style="color: #333333;">전체 아이디어 보기</a> <label
+				href="<%=request.getContextPath()%>/board/boardRecruitList.jsp"
+				class="a_400" style="color: #333333;">모집 중 아이디어 보기</a> <label
 				class="btn btn-warning"></label> <a
 				href="<%=request.getContextPath()%>/board/boardCompleteList.jsp"
 				class="a_400" style="color: #333333;">모집 완료 아이디어 보기</a>
@@ -134,32 +147,39 @@ List<Board> list = boardDao.selectRecruitBoardListPerPage(beginRow, pagePerRow);
 			<div class="card acik-renk-form">
 				<div class="card-body">
 					<p class="font-weight-light text-dark">흥미분야</p>
-					<div class="row">
-						<div class="col-md-4">
-							<div class="form-group ">
-								<select id="interest_1" class="form-control a_400">
-									<option>WEB</option>
-									<option>안드로이드</option>
-									<option>임베디드</option>
-									<option>IOS</option>
-								</select>
+					<form name='interest' method='post'
+						action="<%=request.getContextPath()%>/board/boardInterestList.jsp">
+						<div class="row">
+							<div class="col-md-4">
+								<div class="form-group ">
+									<select id="interest_1" name="interest_1"
+										class="form-control a_400">
+										<option value="web">WEB</option>
+										<option value="android">안드로이드</option>
+										<option value="embeded">임베디드</option>
+										<option value="ios">IOS</option>
+									</select>
+								</div>
+							</div>
+							<div class="col-md-4">
+								<div class="form-group ">
+									<select id="interest_2" name="interest_2"
+										class="form-control a_400">
+										<option value="health">건강</option>
+										<option value="psychology">심리학</option>
+										<option value="game">게임</option>
+									</select>
+								</div>
+							</div>
+							<div class="col-md-4">
+								<button type="submit" class="btn btn-warning  pl-5 pr-5 a_500">검색</button>
 							</div>
 						</div>
-						<div class="col-md-4">
-							<div class="form-group ">
-								<select id="interest_2" class="form-control a_400">
-									<option>건강</option>
-									<option>심리학</option>
-									<option>안드로이드</option>
-									<option>게임</option>
-								</select>
-							</div>
-						</div>
-					</div>
+					</form>
 
 					<p class="font-weight-light text-dark">검색</p>
 					<FORM name='search' method='post'
-						action='<%=request.getContextPath()%>/board/boardSearchAction.jsp'>
+						action="<%=request.getContextPath()%>/board/boardSearchAction.jsp">
 						<div class="row">
 							<div class="col-md-9">
 								<div class="form-group ">
@@ -177,10 +197,9 @@ List<Board> list = boardDao.selectRecruitBoardListPerPage(beginRow, pagePerRow);
 		</div>
 	</div>
 
-
 	<div class="row">
 		<%
-            for(Board b : list) {
+			for (Board b : list) {
 		%>
 		<div class="col-lg-4 col-sm-6 portfolio-item"
 			style="margin-bottom: 30px">
@@ -200,40 +219,42 @@ List<Board> list = boardDao.selectRecruitBoardListPerPage(beginRow, pagePerRow);
 				</div>
 			</div>
 		</div>
-		<%        
-            }
-%>
+		<%
+			}
+		%>
 	</div>
-	<div>
-		<a href="<%=request.getContextPath()%>/board/boardAddForm.jsp">작성하기</a>
-	</div>
+
+	<form action="<%=request.getContextPath()%>/board/boardAddForm.jsp"
+		method="post">
+		<button class="btn btn-outline-warning" onclick="" type="submit">작성하기</button>
+	</form>
+
 	<%
-    int lastPage = totalRowCount/pagePerRow;
-    if(totalRowCount%pagePerRow != 0) {
-        lastPage++;
-    }
-%>
+		int lastPage = totalRowCount / pagePerRow;
+	if (totalRowCount % pagePerRow != 0) {
+		lastPage++;
+	}
+	%>
 	<div>
 		<%
-        if(currentPage>1) {
-%>
+			if (currentPage > 1) {
+		%>
 
 		<li class="page-item"><a class="page-link"
-			href="<%=request.getContextPath()%>/board/boardRecruitList.jsp?currentPage=<%=currentPage-1%>">이전</a>
+			href="<%=request.getContextPath()%>/board/boardList.jsp?currentPage=<%=currentPage - 1%>">이전</a>
 		</li>
 		<%
-        }
-        if(currentPage < lastPage) {
-%>
+			}
+		if (currentPage < lastPage) {
+		%>
 		<li class="page-item"><a class="page-link"
-			href="<%=request.getContextPath()%>/board/boardRecruitList.jsp?currentPage=<%=currentPage+1%>">다음</a>
+			href="<%=request.getContextPath()%>/board/boardList.jsp?currentPage=<%=currentPage + 1%>">다음</a>
 		</li>
 
 		<%
-        }
-%>
+			}
+		%>
 	</div>
-
 
 	<!-- /.container -->
 	<!-- Footer -->
@@ -244,6 +265,9 @@ List<Board> list = boardDao.selectRecruitBoardListPerPage(beginRow, pagePerRow);
 		</div>
 		<!-- /.container -->
 	</footer>
+
+
+
 	<!-- MODAL  -->
 
 	<!-- GUIDE -->
@@ -252,37 +276,38 @@ List<Board> list = boardDao.selectRecruitBoardListPerPage(beginRow, pagePerRow);
 			<div class="modal-content">
 
 				<!-- Modal Header -->
-				<div class="modal-header">
-					<div class="modal-header" style="text-align: center;">
-						<h4 class="modal-title a_400">-이용가이드-</h4>
-					</div>
-
-					<!-- Modal body -->
-					<div class="modal-body">Modal body/Web_TeamPjt</div>
-
-					<!-- Modal footer -->
-					<div class="modal-footer">
-						<button type="button" class="btn btn-secondary"
-							data-dismiss="modal">Close</button>
-					</div>
-
+				<div class="modal-header" style="text-align: center;">
+					<h4 class="modal-title a_400">-이용가이드-</h4>
+					<button type="button" class="close" data-dismiss="modal">&times;</button>
 				</div>
+
+				<!-- Modal body -->
+				<div class="modal-body">Modal body/Web_TeamPjt</div>
+
+				<!-- Modal footer -->
+				<div class="modal-footer">
+					<button type="button" class="btn btn-secondary"
+						data-dismiss="modal">Close</button>
+				</div>
+
 			</div>
 		</div>
+	</div>
 
-		<!-- Bootstrap core JavaScript -->
-		<script src="/Web_TeamPjt/vendor/jquery/jquery.min.js"></script>
-		<script src="/Web_TeamPjt/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
-		<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
-			integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
-			crossorigin="anonymous"></script>
-		<script
-			src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
-			integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
-			crossorigin="anonymous"></script>
-		<!-- alert -->
-		<script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
-		<script type="text/javascript" src="/Web_TeamPjt/js/alertScript.js"></script>
+	<!-- Bootstrap core JavaScript -->
+	<script src="/Web_TeamPjt/vendor/jquery/jquery.min.js"></script>
+	<script src="/Web_TeamPjt/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+	<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+		integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+		crossorigin="anonymous"></script>
+	<script
+		src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+		integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+		crossorigin="anonymous"></script>
+	<!-- alert -->
+	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
+	<script type="text/javascript" src="/Web_TeamPjt/js/alertScript.js"></script>
 </body>
 </html>

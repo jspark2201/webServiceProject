@@ -99,14 +99,19 @@
 				<div class="col-sm-4">
 					<a class="a_500">이미지 첨부</a> <label
 						class="btn-bs-file btn btn-lg btn-warning"> Browse <input
-						type="file" name="filename1" size=40>
+						type="file" name="filename1" id="filename1" size=40>
 					</label>
+
 				</div>
-				<div class="col-sm-8">
-					<img class="img-fluid rounded mb-4 mb-lg-0"
-						src="http://placehold.it/400x400" alt="">
+				<div>
+					<div class="col-sm-8">
+						<img class="img-fluid rounded mb-4 mb-lg-0" id='preview'
+							style="height: 100%; width: 400px;"
+							src="http://placehold.it/400x400" alt="">
+					</div>
 				</div>
 			</div>
+			
 			<div class="row margin15">
 				<div class="col-sm-4">
 					<a class="a_500">프로젝트 플랫폼</a>
@@ -171,10 +176,43 @@
 
 			</div>
 		</FORM>
+		<script>
+		
+			var upload = document.querySelector('#filename1');
+			var preview = document.querySelector('#preview');
+			upload.addEventListener('change', function(e) {
+				var get_file = e.target.files;
+				var image = document.createElement('img');
+				/* FileReader 객체 생성 */
+				var reader = new FileReader();
+				/* reader 시작시 함수 구현 */
+				reader.onload = (function(aImg) {
+					console.log(1);
 
+					return function(e) {
+						console.log(3);
+						/* base64 인코딩 된 스트링 데이터 */
+						aImg.src = e.target.result
+					}
+				})(preview)
+
+				if (get_file) {
+					/* 
+					    get_file[0] 을 읽어서 read 행위가 종료되면 loadend 이벤트가 트리거 되고 
+					    onload 에 설정했던 return 으로 넘어간다.
+					    이와 함게 base64 인코딩 된 스트링 데이터가 result 속성에 담겨진다.
+					 */
+					reader.readAsDataURL(get_file[0]);
+					console.log(2);
+				} else {
+					reader.readAsDataURL("http://placehold.it/400x400");
+				}
+
+			})
+		</script>
 		<%
 			}
 		%>
-	
+
 </body>
 </html>

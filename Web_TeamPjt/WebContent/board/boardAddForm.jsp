@@ -83,11 +83,15 @@
 					</label>
 
 				</div>
-				<div class="col-sm-8">
-					<img class="img-fluid rounded mb-4 mb-lg-0"
-						src="http://placehold.it/400x400" alt="">
+				<div>
+					<div class="col-sm-8">
+						<img class="img-fluid rounded mb-4 mb-lg-0" id='preview'
+							style="height: 100%; width: 400px;"
+							src="http://placehold.it/400x400" alt="">
+					</div>
 				</div>
 			</div>
+
 			<div class="row margin15">
 				<div class="col-sm-4">
 					<a class="a_500">프로젝트 플랫폼</a>
@@ -168,7 +172,7 @@
 						/* base64 인코딩 된 스트링 데이터 */
 						aImg.src = e.target.result
 					}
-				})(image)
+				})(preview)
 
 				if (get_file) {
 					/* 
@@ -178,9 +182,10 @@
 					 */
 					reader.readAsDataURL(get_file[0]);
 					console.log(2);
+				} else {
+					reader.readAsDataURL("http://placehold.it/400x400");
 				}
 
-				preview.appendChild(image);
 			})
 		</script>
 </body>

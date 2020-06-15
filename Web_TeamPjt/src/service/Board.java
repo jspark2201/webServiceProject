@@ -27,7 +27,22 @@ public class Board {
 	private String nickname;
 	private int row;
 	private int participants_num;
+	private String target1;
+	private String target2;
 	
+	public String getTarget1() {
+		return target1;
+	}
+	public void setTarget1(String target1) {
+		this.target1 = target1;
+	}
+	public String getTarget2() {
+		return target2;
+	}
+	public void setTarget2(String target2) {
+		this.target2 = target2;
+	}
+
 	public int getParticipants_num() {
 		return participants_num;
 	}
