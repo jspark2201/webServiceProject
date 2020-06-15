@@ -223,23 +223,33 @@
 						<div class="card h-100"
 							style="border-color:
 							<%int Ptype = bbsDAO.getPtype(list.get(i).getBbs_id(),userID);
-							if(list.get(i).getState()==1 &&Ptype ==0) {%>
+							String state = null;
+							if(list.get(i).getState()==1 &&Ptype ==0) {
+							state ="모집 중";%>
 							#ADFF2F
-							<%}else if(list.get(i).getState()==2 &&Ptype ==0) {%>
+							<%}else if(list.get(i).getState()==2 &&Ptype ==0) {
+							state ="진행 중";%>
 							#008000 
-							<%}else if(list.get(i).getState()==2 &&Ptype ==0) {%>
+							<%}else if(list.get(i).getState()==3 &&Ptype ==0) {
+							state ="완료";%>
 							#006400 
-							<%}else if(list.get(i).getState()==1 &&Ptype ==1) {%>
+							<%}else if(list.get(i).getState()==1 &&Ptype ==1) {
+								state ="모집 중(신청)";%>
 							#FFA07A 
-							<%}else if(list.get(i).getState()==1 &&Ptype ==2) {%>
+							<%}else if(list.get(i).getState()==1 &&Ptype ==2) {
+							state ="모집 중(참가)";%>
 							#FF7F50 
-							<%}else if(list.get(i).getState()==2 &&Ptype ==2) {%>
+							<%}else if(list.get(i).getState()==2 &&Ptype ==2) {
+							state ="진행 중";%>
 							#FFA500 
-							<%}else if(list.get(i).getState()==3 &&Ptype ==2) {%>
+							<%}else if(list.get(i).getState()==3 &&Ptype ==2) {
+							state ="완료";%>
 							#FF8C00 
-							<%}else if(list.get(i).getState()==4) {%>
+							<%}else if(list.get(i).getState()==4) {
+							state ="개발중단";%>
 							#A9A9A9 
-							<%}else if(list.get(i).getState()==5) {%>
+							<%}else if(list.get(i).getState()==5) {
+							state ="외부 프로젝트";%>
 							#0000FF
 							<%} %>"; border-width: 5px;">
 
@@ -265,7 +275,8 @@
 									<%
 										if (list.get(i).getBbsContent().length() > 30) {
 									%>
-									<%=list.get(i).getBbsContent().substring(0, 31)%>
+									
+									<%//=list.get(i).getBbsContent().substring(0, 31)%>
 									<%
 										} else {
 									%>
@@ -283,7 +294,7 @@
 									<form action="portfolio_delete_action.jsp" method="post">
 										<input name="bbsID" value="<%=list.get(i).getBbs_id()%>"
 											type="hidden" />
-											<a class="a_400">상태값!</a>
+											<a class="a_400"><%=state %></a>
 										<button type="submit" method="post"
 											class="btn btn-outline-danger btn-sm"
 											style="position: absolute; right: 3%; bottom: 3%;" onclick="">
