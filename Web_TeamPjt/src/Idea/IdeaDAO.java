@@ -201,6 +201,8 @@ public class IdeaDAO {
 		return ideas;
 	}
 	
+	
+	
 	public ArrayList getDBList()
 	{
 		connect();

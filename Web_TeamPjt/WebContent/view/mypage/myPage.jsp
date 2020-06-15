@@ -82,7 +82,7 @@
 	<!-- Navigation -->
 	<nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
 		<div class="container">
-			<a class="navbar-brand" href="#" style="color: #FFCE1E;"
+			<a class="navbar-brand" href="/Web_TeamPjt/" style="color: #FFCE1E;"
 				class="a_500">WEB SERVICE PJ</a>
 			<button class="navbar-toggler" type="button" data-toggle="collapse"
 				data-target="#navbarResponsive" aria-controls="navbarResponsive"

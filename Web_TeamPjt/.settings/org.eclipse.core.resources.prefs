@@ -1,4 +1,5 @@
 eclipse.preferences.version=1
+encoding//src/User/UserDAO.java=UTF-8
 encoding//src/mypage/DBEventDAO.java=UTF-8
 encoding//src/note/NoteDAO.java=UTF-8
 encoding//src/service/BoardDao.java=UTF-8
