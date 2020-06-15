@@ -56,24 +56,24 @@
 		<div class="row">
 			<div
 				class="col-xs-12 col-sm-8 col-md-6 col-sm-offset-2 col-md-offset-3">
-				<form role="form" method="post" action="../Login">
+				<form role="form" method="post" action="/Web_TeamPjt/Login">
 					<h2>
 						개인정보수정
 					</h2>
 					<hr class="colorgraph">
 						<div class="col-xs-12 col-sm-6 col-md-6">
 							<div class="form-group">
-								<input type="text" name="nickname"
+								<input type="text" name="nickname" value="<jsp:getProperty name="event" property="nickname" /> "
 									class="form-control input-lg" placeholder="Nickname"
 									tabindex="6">
 							</div>
 						</div>
 					<div class="form-group">
-						<input type="email" name="email" class="form-control input-lg"
+						<input type="email" name="email" value="<jsp:getProperty name="event" property="email" />" class="form-control input-lg"
 							placeholder="Email Address" tabindex="4">
 					</div>
 					<div class="form-group">
-						<input type="phone" name="number" class="form-control input-lg"
+						<input type="phone" name="number" value="<jsp:getProperty name="event" property="number" />" class="form-control input-lg"
 							placeholder="Phone Number" tabindex="4">
 					</div>
 					<div class="row" style="margin-top:30px;margin-bottom:30px;">
@@ -82,7 +82,7 @@
             </div>
             <div class="col-sm-8">
                <div class="form-group ">
-                  <select name="interest" class="form-control a_400" style="width:50%">
+                  <select id="test" name="interest" class="form-control a_400" style="width:50% ">
                      <option value=web>WEB</option>
                      <option value=android>안드로이드</option>
                      <option value=embebed>임베디드</option>
@@ -91,23 +91,28 @@
                </div>
             </div>
          </div>
-         
          <div class="row" style="margin-top:30px;margin-bottom:30px;">
             <div class="col-sm-4">
                <a class="a_500">흥미 분야</a> 
             </div>
             <div class="col-sm-8">
                <div class="form-group ">
-                  <select name="interest1" class="form-control a_400"
-                   style="width:50%">
+                  <select id="test1" name="interest1" class="form-control a_400" style="width:50% ">
                      <option value=health>건강</option>
                      <option value=psychology>심리학</option>
                      <option value=game>게임</option>
                   </select>
-                  
+			                  
                </div>
             </div>
          </div>
+         <script>
+     	window.onload = function () {
+    		$("#test").val("<jsp:getProperty name="event" property="platform" />").attr("selected", "selected");
+    		$("#test1").val("<jsp:getProperty name="event" property="genre" />").attr("selected", "selected");
+    	}
+         </script>
+         
                <div class="row">
                   <div class="col-xs-8 col-sm-9 col-md-9">
                      By clicking <strong class="label label-primary">Register</strong>,
@@ -122,7 +127,7 @@
                <hr class="colorgraph">
                <div class="row">
                   <div class="col-xs-12 col-md-6">
-                  	<input type="hidden" name="action" value="add">
+                  	<input type="hidden" name="action" value="update">
                      <input type="submit" value="Register"
                         class="btn btn-primary btn-block btn-lg" tabindex="7">
                   </div>

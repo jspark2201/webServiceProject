@@ -1,6 +1,8 @@
+<%@page import="User.User"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <!DOCTYPE html>
+
 <html lang="ko">
 <head>
 <meta charset="utf-8">
@@ -19,9 +21,9 @@
 </head>
 <body>
 	<%
-		String userid = null;
-	if (session.getAttribute("userid") != null) {
-		userid = (String) session.getAttribute("userid");
+		User user = null;
+	if (session.getAttribute("user") != null) {
+		user = (User) session.getAttribute("user");
 	}
 	%>
 	<!-- Navigation -->
@@ -48,7 +50,7 @@
 					<li class="nav-item"><a class="nav-link a_400"
 						href='/Web_TeamPjt/Login?action=logout'>로그아웃</a></li>
 					<li class="nav-item"><a class="nav-link a_400"
-						href='/Web_TeamPjt/view/mypage.jsp'>마이페이지</a></li>
+						href='/Web_TeamPjt/Login?action=mypage'>마이페이지</a></li>
 				</ul>
 			</div>
 		</div>

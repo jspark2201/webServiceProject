@@ -20,8 +20,8 @@
 <body>
 	<%
 		String userid = null;
-	if (session.getAttribute("userid") != null) {
-		userid = (String) session.getAttribute("userid");
+	if (session.getAttribute("userID") != null) {
+		userid = (String) session.getAttribute("userID");
 	}
 	%>
 	<!-- Navigation -->
@@ -153,7 +153,7 @@
 					onclick="location.href='../Login?action=view&id=<%=userid %>'"
 					style="margin-right: 20px;">개인정보 조회</button>
 				<button type="button" class="btn btn-outline-dark"
-					onclick="location.href='../Login?action=modify'"
+					onclick="location.href='/Web_TeamPjt/Login?action=modify'"
 					style="margin-right: 20px;">개인정보 수정</button></div>
 			<div id="menu2" class="container tab-pane fade">
 				<br>
