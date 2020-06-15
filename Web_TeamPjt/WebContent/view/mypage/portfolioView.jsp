@@ -69,7 +69,7 @@
 
 			script.println("alert('유효하지 않은 글 입니다.')");
 
-			script.println("location.href = 'mypage.jsp'");
+			script.println("location.href = '/Web_TeamPjt/mypage/'");
 
 			script.println("</script>");
 
@@ -194,7 +194,7 @@
 
 		
 		<div class="row">
-			<button type="button" class="btn btn-outline-warning" onclick="location.href='portfolio_update.jsp?bbsID=<%= bbsID %>'">글수정</button>
+			<button type="button" class="btn btn-outline-warning" onclick="location.href='/Web_TeamPjt/mypage/portfolio/update/?bbsID=<%= bbsID %>'">글수정</button>
 					</button>
 			<form action="portfolio_delete_action.jsp"  method="post">
 				<input name="bbsID" value="<%= bbsID %>" type="hidden" />
