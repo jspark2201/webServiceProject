@@ -13,14 +13,16 @@ public class NotificationDAO {
         Connection conn = null; // db접속 객체
         try {
             // mysql jdbc driver 로딩
-            Class.forName("com.mysql.jdbc.Driver");
+//            Class.forName("com.mysql.jdbc.Driver");
+        	Class.forName("org.mariadb.jdbc.Driver");
  
             // db연결 문자열 but 이방법은 보안에 취약하다. ..
-            String url = "jdbc:mysql://localhost:3306/TUTORIAL";
-            String id = "root"; // mysql 접속아이디
-            String pwd = "31362201"; // mysql 접속 비번
+//            String url = "jdbc:mysql://localhost:3306/TUTORIAL";
+//            String id = "root"; // mysql 접속아이디
+//            String pwd = "31362201"; // mysql 접속 비번
             // db 접속
-            conn = DriverManager.getConnection(url, id, pwd);
+//            conn = DriverManager.getConnection(url, id, pwd);
+        	conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/developers", "root", "qwe123!@#");
             System.out.println("db접속 성공");
         } catch (Exception e) {
             // db관련작업은 반드시 익셉션 처리
