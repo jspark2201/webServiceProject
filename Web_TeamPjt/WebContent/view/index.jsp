@@ -121,7 +121,12 @@
 											alt=""> <a href="#" data-toggle="modal"
 											data-target="#myModal">Forgot Password?</a>
 										<hr class="colorgraph">
-										<div class="row">
+										<div style="text-align:center;">
+										<input type="hidden" name="action" value="checkid">
+											<button type="submit" class="btn btn-primary" style="margin-right:10px;"><a class="a_400">로그인</a></button>
+											<button type="button" class="btn btn-info"><a class="a_400">회원가입</a></button>
+										</div>
+										<!-- <div class="row">
 											<div class="col-xs-6 col-sm-6 col-md-6">
 												<input type="hidden" name="action" value="checkid">
 												<input type="submit"
@@ -130,37 +135,68 @@
 											<div class="col-xs-6 col-sm-6 col-md-6">
 												<a href="" class="btn btn-lg btn-primary btn-block">Register</a>
 											</div>
-										</div>
+										</div> -->
 									</fieldset>
 								</form>
 							</div>
-							<div class="form-group">
-								<input type="password" name="password" id="password"
-									class="form-control input-lg" placeholder="Password">
-							</div>
-								<img class="question_img" src="../img/login/question.png" alt="">
-								<a href="#" data-toggle="modal" data-target="#myModal">Forgot Password?</a>
-							<hr class="colorgraph">
-							<div style="text-align:center;">
-								<button type="button" class="btn btn-primary" style="margin-right:10px;"><a class="a_400">로그인</a></button>
-								<button type="button" class="btn btn-info"><a class="a_400">회원가입</a></button>
-							</div>
-						</fieldset>
-					</form>
 				</div>
 			</div>
 		</div>
-       </div>
        <!-- Modal footer -->
        <div class="modal-footer">
          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
        </div>
-       
      </div>
    </div>
- </div>
 
+<!-- 	
+	<div class="modal fade" id="loginModal">
+		<div class="modal-dialog modal-dialog-centered">
+			<div class="modal-content">
+				Modal body
+				<div class="modal-body">
+					<div class="container">
+						<div class="row" style="margin-top: 20px">
+							<div
+								class="col-xs-12 col-sm-8 col-md-6 col-sm-offset-2 col-md-offset-3">
+								<form role="form" method="post" action="/Web_TeamPjt/Login.do">
+									<fieldset>
+										<h2>Please Sign In</h2>
+										<hr class="colorgraph">
+										<div class="form-group">
+											<input type="text" name="id"
+												class="form-control input-lg" placeholder="Email Address">
+										</div>
+										<div class="form-group">
+											<input type="password" name="pwd"
+												class="form-control input-lg" placeholder="Password">
+										</div>
+										<img class="question_img" src="/Web_TeamPjt/img/login/question.png"
+											alt=""> <a href="#" data-toggle="modal"
+											data-target="#myModal">Forgot Password?</a>
+										<hr class="colorgraph">
+										<div style="text-align:center;">
+											
+											<input type="submit" class="btn btn-primary" style="margin-right:10px;" data-toggle="modal" data-target="#loginModal"><a class="a_400">로그인</a></button>
+											<input type="hidden" name="action" value="checkid">
+											<button type="submit" class="btn btn-primary" style="margin-right:10px;" value="Sign In"><a class="a_400">로그인</a></button>
+											<button type="button" class="btn btn-info" href='/Web_TeamPjt/view/join.jsp'><a class="a_400">회원가입</a></button>
+										</div>
+									</fieldset>
+								</form>
+							</div>
+						</div>
+					</div>
+				</div>
+				Modal footer
+				<div class="modal-footer">
+					<button type="button" class="btn btn-secondary"
+						data-dismiss="modal">Close</button>
+				</div>
 
+			</div>
+		</div>
+	</div> -->
 
 <!-- ABOUT -->
 <!-- The Modal -->
@@ -183,7 +219,6 @@
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
         </div>
-        
       </div>
     </div>
   </div>

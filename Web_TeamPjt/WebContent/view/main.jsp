@@ -18,6 +18,11 @@
 <link
 	href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500&display=swap"
 	rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Black+Han+Sans&display=swap" rel="stylesheet">
+
+  <!-- Custom styles for this template -->
+  <link href="/Web_TeamPjt/css/main/landing-page.min.css" rel="stylesheet">
+  <link href="/Web_TeamPjt/css/main/simple-line-icons.css" rel="stylesheet">
 
 </head>
 <body>
@@ -109,15 +114,75 @@
 		ArrayList<Idea> ideas = null;		
 	%>
 	<!-- Page Content -->
-	<div class="container">
-		<div style="width: 100%; padding: 30px; margin: 30px;">
-			<div style="width: 100%; min-height: 500px;">
-				<div class="rank_div">
-					<img class="rank_img" alt="alt"
-						src="/Web_TeamPjt/img/main/crown.png">
-					<p class="rank_a a_500">실시간 랭킹</p>
+	<div class="rank_div">
+					<p class="rank_a a_500" style="font-family: 'Black Han Sans', sans-serif;">RANK</p>
 				</div>
+				
+				
+				
+	<!-- Image Showcases -->
+  <section class="showcase">
+    <div class="container-fluid p-0">
+      <div class="row no-gutters">
 
+        <div class="col-lg-6 order-lg-2 text-white showcase-img" style="background-image: url('/Web_TeamPjt/img/main/main_1.jpg');"></div>
+        <div class="col-lg-6 order-lg-1 my-auto showcase-text">
+          <h2 style="font-family: 'Black Han Sans', sans-serif;">1</h2><a class="a_400" href="#">제목</a>
+          <p class="lead mb-0">When you use a theme created by Start Bootstrap, you know that the theme will look great on any device, whether it's a phone, tablet, or desktop the page will behave responsively!</p>
+        </div>
+      </div>
+      <div class="row no-gutters">
+        <div class="col-lg-6 text-white showcase-img" style="background-image: url('/Web_TeamPjt/img/main/main_2.jpg');"></div>
+        <div class="col-lg-6 my-auto showcase-text">
+          <h2 style="font-family: 'Black Han Sans', sans-serif;">2</h2><a class="a_400" href="#">제목</a>
+          <p class="lead mb-0">Newly improved, and full of great utility classes, Bootstrap 4 is leading the way in mobile responsive web development! All of the themes on Start Bootstrap are now using Bootstrap 4!</p>
+        </div>
+      </div>
+      <div class="row no-gutters">
+        <div class="col-lg-6 order-lg-2 text-white showcase-img" style="background-image: url('/Web_TeamPjt/img/main/main_3.jpg');"></div>
+        <div class="col-lg-6 order-lg-1 my-auto showcase-text">
+          <h2 style="font-family: 'Black Han Sans', sans-serif;">3</h2><a class="a_400" href="#">제목</a>
+          <p class="lead mb-0">Landing Page is just HTML and CSS with a splash of SCSS for users who demand some deeper customization options. Out of the box, just add your content and images, and your new landing page will be ready to go!</p>
+        </div>
+      </div>
+    </div>
+  </section>
+	
+	
+	
+	
+	<!-- Testimonials -->
+  <section class="testimonials text-center bg-light">
+    <div class="container">
+      <h2 class="mb-5" style="font-family: 'Black Han Sans', sans-serif; font-size:3rem;">NEW</h2>
+      <div class="row">
+        <div class="col-lg-4">
+          <div class="testimonial-item mx-auto mb-5 mb-lg-0">
+            <img class="img-fluid rounded-circle mb-3" style="height:200px; width:200px;" src="/Web_TeamPjt/img/main/main_1.jpg" alt="">
+            <h5>Margaret E.</h5>
+            <p class="font-weight-light mb-0">"This is fantastic! Thanks so much guys!"</p>
+          </div>
+        </div>
+        <div class="col-lg-4">
+          <div class="testimonial-item mx-auto mb-5 mb-lg-0">
+            <img class="img-fluid rounded-circle mb-3" style="height:200px; width:200px;" src="/Web_TeamPjt/img/main/main_1.jpg" alt="">
+            <h5>Fred S.</h5>
+            <p class="font-weight-light mb-0">"Bootstrap is amazing. I've been using it to create lots of super nice landing pages."</p>
+          </div>
+        </div>
+        <div class="col-lg-4">
+          <div class="testimonial-item mx-auto mb-5 mb-lg-0">
+            <img class="img-fluid rounded-circle mb-3" style="height:200px; width:200px;" src="/Web_TeamPjt/img/main/main_1.jpg" alt="">
+            <h5>Sarah W.</h5>
+            <p class="font-weight-light mb-0">"Thanks so much for making these free resources available to us!"</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  
+  
+	<%-- 
 				<%
 					ideas = ideaDAO.getDBTopList();
 				
@@ -137,77 +202,14 @@
 					}
 
 				%>
-
-				<!-- Heading Row -->
-				<div class="row align-items-center my-5">
-					<div class="col-md-7 mb-5">
-						<div class="card h-100">
-							<div class="card_img">
-								<img style="width: 100%; height: 100%;" alt="" src="<%=imageSrc%>"/>
-							</div>
-							<div class="card-body">
-								<h4 class="card-title">
-									<a href="<%="#"+id%>" class="a_400" style="color: #FFCE1E"><%=title%></a>
-								</h4>
-								<p class="card-text"><%=content%></p>
-							</div>
-							<div class="card-footer">
-								<a href="#" class="btn btn-primary btn-sm a_500">More Info</a>
-							</div>
-						</div>
-					</div>
-					<div class="col-md-5 a_500">
-						<table class="table table-hover">
-							<thead>
-								<tr>
-									<th>Rank</th>
-									<th>Title</th>
-									<th>Like</th>
-									<th>State</th>
-								</tr>
-							</thead>
-							<tbody>
-								<%
-									for (int i=1; i<5; i++) {
-										title = "blah";
-										good_cnt = 0;
-										state = "null";
-										
-										if (i < ideas.size()) {
-											title = ideas.get(i).getTitle();
-											good_cnt = ideas.get(i).getGoodCount();
-											state = ideas.get(i).getState();
-										}
-										
-								%>
-										<tr>
-											<td><%=i+1 %></td>
-											<td><%=title%></td>
-											<td><%=good_cnt%></td>
-											<td><%=state%></td>
-										</tr>
-								<%
-									}
-								
-								%>
-							</tbody>
-						</table>
-					</div>
-				</div>
-				<!-- /.row -->
-			</div>
-
-
-
-
+				
 
 			<hr>
 
 
 
 			<div class="new_div">
-				<img class="new_img" alt="alt" src="/Web_TeamPjt/img/main/new.png">
-				<p class="new_p a_500">새 게시물</p>
+				<p class="new_p a_500" style="font-family: 'Black Han Sans', sans-serif; font-size:2rem;">새 게시물</p>
 			</div>
 
 
@@ -242,22 +244,18 @@
 							</h4>
 							<p class="card-text"><%=content%></p>
 						</div>
-						<div class="card-footer">
-							<a href="#" class="btn btn-primary btn-sm a_500">More Info</a>
-						</div>
 					</div>
 				</div>
 				<%	
 				}
 			
 			%>
-
+			</div>
 			</div>
 			<!-- /.row -->
 		</div>
 	</div>
-	<!-- /.container -->
-
+ --%>
 	<!-- Footer -->
 	<footer class="py-5 bg-dark">
 		<div class="container">

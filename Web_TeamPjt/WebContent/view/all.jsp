@@ -9,8 +9,10 @@
 <title>IDEARIA</title>
 
 <link rel="shortcut icon" href="../img/favicon/ecology.png">
-<link rel="stylesheet" href="../css/all/all.css">
-<link rel="stylesheet" href="../css/card.css">
+<link rel="stylesheet" href="/Web_TeamPjt/css/all/new-age.min.css">
+<link rel="stylesheet" href="/Web_TeamPjt/css/all/one-page-wonder.min.css">
+<link rel="stylesheet" href="/Web_TeamPjt/css/all/all.css">
+
 <link rel="stylesheet" href="../css/bootstrap.min.css">
 <link rel="stylesheet" href="../css/googleFont.css">
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500&display=swap" rel="stylesheet">
@@ -97,10 +99,7 @@
 	<div style="height:5px; background-color:#b0aea9; margin-bottom:40px;">
 	</div>
 	
-	
-	<!-- Page Content -->
 	<div class="container">
-	
 		<!-- 필터링 박스  -->
 		<div class="row">
             <div class="col-md-12" style="margin-bottom:10px;">
@@ -164,124 +163,126 @@
                 </div>
             </div>
         </div>
-
-		<hr>
+	</div>
+	
 		
-		<div class="row">
-			<div class="col-lg-4 col-sm-6 portfolio-item" style="margin-bottom:30px">
-				<div class="card h-100">
-					<div class="card_img">
-						<img style="width:100%; height:100%;" alt="" src="../img/main/main_1.jpg">
-					</div>
-					<hr>
-						<p class="a_400" style="text-align:center;">기간 입력!</p>
-					<hr>
-					<div class="card-body">
-						<h4 class="card-title">
-							<a href="#" class="a_400" style="color:#FFCE1E">Project One</a>
-						</h4>
-						<p class="card-text">Lorem ipsum dolor sit amet, consectetur
-							adipisicing elit. Amet numquam aspernatur eum quasi sapiente
-							nesciunt? Voluptatibus sit, repellat sequi itaque deserunt,
-							dolores in, nesciunt, illum tempora ex quae? Nihil, dolorem!</p>
-					</div>
-				</div>
-			</div>
-			<div class="col-lg-4 col-sm-6 portfolio-item" style="margin-bottom:30px">
-				<div class="card h-100">
-					<div class="card_img">
-						<img style="width:100%; height:100%;" alt="" src="../img/main/main_1.jpg">
-					</div>
-					<hr>
-						<p class="a_400" style="text-align:center;">기간 입력!</p>
-					<hr>
-					<div class="card-body">
-						<h4 class="card-title">
-							<a href="#" class="a_400" style="color:#FFCE1E">Project Two</a>
-						</h4>
-						<p class="card-text">Lorem ipsum dolor sit amet, consectetur
-							adipiscing elit. Nam viverra euismod odio, gravida pellentesque
-							urna varius vitae.</p>
-					</div>
-				</div>
-			</div>
-			<div class="col-lg-4 col-sm-6 portfolio-item" style="margin-bottom:30px">
-				<div class="card h-100">
-					<div class="card_img">
-						<img style="width:100%; height:100%;" alt="" src="../img/main/main_1.jpg">
-					</div>
-					<hr>
-						<p class="a_400" style="text-align:center;">기간 입력!</p>
-					<hr>
-					<div class="card-body">
-						<h4 class="card-title">
-							<a href="#" class="a_400" style="color:#FFCE1E">Project Three</a>
-						</h4>
-						<p class="card-text">Lorem ipsum dolor sit amet, consectetur
-							adipisicing elit. Quos quisquam, error quod sed cumque, odio
-							distinctio velit nostrum temporibus necessitatibus et facere
-							atque iure perspiciatis mollitia recusandae vero vel quam!</p>
-					</div>
-				</div>
-			</div>
-			<div class="col-lg-4 col-sm-6 portfolio-item" style="margin-bottom:30px">
-				<div class="card h-100">
-					<div class="card_img">
-						<img style="width:100%; height:100%;" alt="" src="../img/main/main_1.jpg">
-					</div>
-					<hr>
-						<p class="a_400" style="text-align:center;">기간 입력!</p>
-					<hr>
-					<div class="card-body">
-						<h4 class="card-title">
-							<a href="#" class="a_400" style="color:#FFCE1E">Project Four</a>
-						</h4>
-						<p class="card-text">Lorem ipsum dolor sit amet, consectetur
-							adipiscing elit. Nam viverra euismod odio, gravida pellentesque
-							urna varius vitae.</p>
-					</div>
-				</div>
-			</div>
-			<div class="col-lg-4 col-sm-6 portfolio-item" style="margin-bottom:30px">
-				<div class="card h-100">
-					<div class="card_img">
-						<img style="width:100%; height:100%;" alt="" src="../img/main/main_1.jpg">
-					</div>
-					<hr>
-						<p class="a_400" style="text-align:center;">기간 입력!</p>
-					<hr>
-					<div class="card-body">
-						<h4 class="card-title">
-							<a href="#" class="a_400" style="color:#FFCE1E">Project Five</a>
-						</h4>
-						<p class="card-text">Lorem ipsum dolor sit amet, consectetur
-							adipiscing elit. Nam viverra euismod odio, gravida pellentesque
-							urna varius vitae.</p>
-					</div>
-				</div>
-			</div>
-			<div class="col-lg-4 col-sm-6 portfolio-item" style="margin-bottom:30px">
-				<div class="card h-100">
-					<div class="card_img">
-						<img style="width:100%; height:100%;" alt="" src="../img/main/main_1.jpg">
-					</div>
-					<hr>
-						<p class="a_400" style="text-align:center;">기간 입력!</p>
-					<hr>
-					<div class="card-body">
-						<h4 class="card-title">
-							<a href="#" class="a_400" style="color:#FFCE1E">Project Six</a>
-						</h4>
-						<p class="card-text">Lorem ipsum dolor sit amet, consectetur
-							adipisicing elit. Itaque earum nostrum suscipit ducimus nihil
-							provident, perferendis rem illo, voluptate atque, sit eius in
-							voluptates, nemo repellat fugiat excepturi! Nemo, esse.</p>
-					</div>
-				</div>
-			</div>
-		</div>
+        
+        
+    <section>
+	    <div class="container">
+	      <div class="row align-items-center">
+	        <div class="col-lg-6 order-lg-2">
+	          <div class="p-5">
+	            <img style="height:400px;width:400px;" class="img-fluid rounded-circle" src="/Web_TeamPjt/img/main/main_1.jpg" alt="">
+	          </div>
+	        </div>
+	        <div class="col-lg-6 order-lg-1">
+	          <div class="p-5">
+	            <h2 class="display-4">For those about to rock...</h2>
+	            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quod aliquid, mollitia odio veniam sit iste esse assumenda amet aperiam exercitationem, ea animi blanditiis recusandae! Ratione voluptatum molestiae adipisci, beatae obcaecati.</p>
+	          	<a href="#contact" class="btn btn-outline btn-xl js-scroll-trigger" style="color:#FFCE1E;">Let's Get Started!</a>
+	          </div>
+	        </div>
+	      </div>
+	    </div>
+  	</section>
+  	 <section>
+    <div class="container">
+      <div class="row align-items-center">
+        <div class="col-lg-6">
+          <div class="p-5">
+            <img style="height:400px;width:400px;" class="img-fluid rounded-circle" src="/Web_TeamPjt/img/main/main_1.jpg" alt="">
+          </div>
+        </div>
+        <div class="col-lg-6">
+          <div class="p-5">
+            <h2 class="display-4">We salute you!</h2>
+            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quod aliquid, mollitia odio veniam sit iste esse assumenda amet aperiam exercitationem, ea animi blanditiis recusandae! Ratione voluptatum molestiae adipisci, beatae obcaecati.</p>
+          	<a href="#contact" class="btn btn-outline btn-xl js-scroll-trigger" style="color:#FFCE1E;">Let's Get Started!</a>
+          </div>
+        </div>
+      </div>
+    </div>
+ 	 </section>
+ 	  <section>
+	    <div class="container">
+	      <div class="row align-items-center">
+	        <div class="col-lg-6 order-lg-2">
+	          <div class="p-5">
+	            <img style="height:400px;width:400px;" class="img-fluid rounded-circle" src="/Web_TeamPjt/img/main/main_1.jpg" alt="">
+	          </div>
+	        </div>
+	        <div class="col-lg-6 order-lg-1">
+	          <div class="p-5">
+	            <h2 class="display-4">For those about to rock...</h2>
+	            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quod aliquid, mollitia odio veniam sit iste esse assumenda amet aperiam exercitationem, ea animi blanditiis recusandae! Ratione voluptatum molestiae adipisci, beatae obcaecati.</p>
+	          	<a href="#contact" class="btn btn-outline btn-xl js-scroll-trigger" style="color:#FFCE1E;">Let's Get Started!</a>
+	          </div>
+	        </div>
+	      </div>
+	    </div>
+  	</section>
+  	 <section>
+    <div class="container">
+      <div class="row align-items-center">
+        <div class="col-lg-6">
+          <div class="p-5">
+            <img style="height:400px;width:400px;" class="img-fluid rounded-circle" src="/Web_TeamPjt/img/main/main_1.jpg" alt="">
+          </div>
+        </div>
+        <div class="col-lg-6">
+          <div class="p-5">
+            <h2 class="display-4">We salute you!</h2>
+            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quod aliquid, mollitia odio veniam sit iste esse assumenda amet aperiam exercitationem, ea animi blanditiis recusandae! Ratione voluptatum molestiae adipisci, beatae obcaecati.</p>
+          	<a href="#contact" class="btn btn-outline btn-xl js-scroll-trigger" style="color:#FFCE1E;">Let's Get Started!</a>
+          </div>
+        </div>
+      </div>
+    </div>
+ 	 </section>
+ 	  <section>
+	    <div class="container">
+	      <div class="row align-items-center">
+	        <div class="col-lg-6 order-lg-2">
+	          <div class="p-5">
+	            <img style="height:400px;width:400px;" class="img-fluid rounded-circle" src="/Web_TeamPjt/img/main/main_1.jpg" alt="">
+	          </div>
+	        </div>
+	        <div class="col-lg-6 order-lg-1">
+	          <div class="p-5">
+	            <h2 class="display-4">For those about to rock...</h2>
+	            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quod aliquid, mollitia odio veniam sit iste esse assumenda amet aperiam exercitationem, ea animi blanditiis recusandae! Ratione voluptatum molestiae adipisci, beatae obcaecati.</p>
+	          	<a href="#contact" class="btn btn-outline btn-xl js-scroll-trigger" style="color:#FFCE1E;">Let's Get Started!</a>
+	          </div>
+	        </div>
+	      </div>
+	    </div>
+  	</section>
+  	 <section>
+    <div class="container">
+      <div class="row align-items-center">
+        <div class="col-lg-6">
+          <div class="p-5">
+            <img style="height:400px;width:400px;" class="img-fluid rounded-circle" src="/Web_TeamPjt/img/main/main_1.jpg" alt="">
+          </div>
+        </div>
+        <div class="col-lg-6">
+          <div class="p-5">
+            <h2 class="display-4">We salute you!</h2>
+            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quod aliquid, mollitia odio veniam sit iste esse assumenda amet aperiam exercitationem, ea animi blanditiis recusandae! Ratione voluptatum molestiae adipisci, beatae obcaecati.</p>
+          	<a href="#contact" class="btn btn-outline btn-xl js-scroll-trigger" style="color:#FFCE1E;">Let's Get Started!</a>
+          </div>
+        </div>
+      </div>
+    </div>
+ 	 </section>
+  	
+  
+  
+  
 
-		<!-- Pagination -->
+
+  <!-- Pagination -->
 		<ul class="pagination justify-content-center">
 			<li class="page-item"><a class="page-link" href="#"
 				aria-label="Previous"> <span aria-hidden="true">&laquo;</span> <span
@@ -295,9 +296,8 @@
 					class="sr-only">Next</span>
 			</a></li>
 		</ul>
+
 	
-	</div>
-	<!-- /.container -->
 	<!-- Footer -->
 	<footer class="py-5 bg-dark">
 		<div class="container">
