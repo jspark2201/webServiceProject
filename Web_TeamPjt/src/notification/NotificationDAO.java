@@ -54,6 +54,7 @@ public class NotificationDAO {
             	dto.setReceiveID(rs.getString("receiveID"));
             	dto.setGiveID(rs.getString("giveID"));
             	dto.setGiveEmail(rs.getString("giveEmail"));
+            	dto.setIdeaTitle(rs.getString("ideaTitle"));
             	dto.setIdeaLink(rs.getString("ideaLink"));
                 
                 //ArrayList에 추가

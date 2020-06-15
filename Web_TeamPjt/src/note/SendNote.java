@@ -2,6 +2,7 @@ package note;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -10,25 +11,58 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-@WebServlet("/SandNote")
+@WebServlet("/SendNote")
 public class SendNote extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		response.setContentType("text/html;charset=utf-8");
-		
-		String send = request.getParameter("send");		
-		
 		PrintWriter out = response.getWriter();
+//		PrintWriter out = response.getWriter();
+//		
+//		out.println("<p>"+action+"</p>");
+//		
+//	
+//		out.close();
+
+		
+		String address = null;
+		String action = request.getParameter("action");		
+		
+		if(action.equals("send")) {
+			NoteDAO dao = new NoteDAO();
+			
+			String giveID = request.getParameter("");
+			String receiveID = request.getParameter("noteRecevieID");
+			String receiveEmail = request.getParameter("");
+			String sendTitle = request.getParameter("sendTitle");
+			String sendContent = request.getParameter("sendContent");
+			
+			out.println("<p>"+sendContent+"</p>");
 	
-		out.println("<p>"+send+"</p>");
+			int row = dao.getNext();
+			
+			out.println("<p>"+row+"</p>");
+			
+			dao.sendNote(receiveID, "jspark", "jspark@gmail.com", sendTitle, sendContent);
+			request.setAttribute("dataobject", action); //객체를 request객체에 담음 (data가 문자열이 아니어도 가능)
+			
+			address = "/view/myPage.jsp";
+			
+			response.sendRedirect(request.getContextPath() + address);
+			
+		} else {
+
+			out.println("<p>"+action+"</p>");
+			
 		
-		
-		out.close();
-		
+			out.close();
+		}
 		
 
-
+//		RequestDispatcher dispatcher = request.getRequestDispatcher(address);
+//
+//		dispatcher.forward(request, response);
 
 		      
 //		      if (action == null || action.equals("list")) {

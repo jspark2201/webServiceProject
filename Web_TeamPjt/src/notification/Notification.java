@@ -20,24 +20,20 @@ public class Notification extends HttpServlet {
 
 		response.setContentType("text/html;charset=utf-8");
 		
-		
-		
+	
 //		PrintWriter out = response.getWriter();
 //	
+//		String data = request.getParameter("data");		
 //		out.println("<p>"+data+"</p>");
 //		
 //		
 //		
 //		out.close();
 //		
-		
+//		
 		String data = request.getParameter("data");		
 
-		request.setAttribute("dataobject", data); //객체를 request객체에 담음 (data가 문자열이 아니어도 가능)
 
-		RequestDispatcher dispatcher = request.getRequestDispatcher("view/detail.jsp");
-
-		dispatcher.forward(request, response);
 		
 
 		
