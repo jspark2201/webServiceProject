@@ -38,9 +38,14 @@ public class MypageController extends HttpServlet {
 		String com = uri.substring(conPath.length());
 
 		String viewPage = null;
+		
+		UserDAO userDAO = new UserDAO();
 
-		if (com.contentEquals("/mypage"))
+		if (com.contentEquals("/mypage")) {
+			User event = userDAO.getDB(request.getParameter("id")); 
+			request.setAttribute("event", event); 
 			viewPage = "/view/mypage/myPage.jsp";
+		}
 		
 		else if(com.contentEquals("/mypage/portfolio_view"))
 			viewPage = "/view/mypage/portfolioView.jsp";
@@ -51,8 +56,13 @@ public class MypageController extends HttpServlet {
 		else if(com.contentEquals("/mypage/portfolio_update"))
 			viewPage = "/view/mypage/portfolio_update.jsp";
 		
+		else if(com.contentEquals("/mypage/portfolio_update_action"))
+			viewPage = "/view/mypage/portfolio_update_action.jsp";
+		
 		else if(com.contentEquals("/mypage/portfolio_delete"))
 			viewPage = "/view/mypage/portfolio_delete_action.jsp";
+		
+		
 		
 		
 		RequestDispatcher dispatcher = request.getRequestDispatcher(viewPage);

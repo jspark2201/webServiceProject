@@ -67,22 +67,23 @@ public class UserDAO {
 		String sql = "insert into user(id,pwd,nickname,email,number) values(?,?,?,?,?)";
 		String sql2 = "insert into user_favorite(user_id, %s, %s) values(?,1,1)";
 		sql2 = String.format(sql2, user.getPlatform(), user.getGenre());
-		System.out.println(sql2);
 
 		try {
-			pstmt = conn.prepareStatement(sql);
+			
+ 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, user.getId());
 			pstmt.setString(2, user.getPwd()); // TODO:
 			pstmt.setString(3, user.getNickname());
 			pstmt.setString(4, user.getEmail());
 			pstmt.setString(5, user.getNumber());
 			pstmt.executeUpdate();
+			System.out.println(1);
 
 			pstmt = conn.prepareStatement(sql2);
 			pstmt.setString(1, user.getId());
 			pstmt.executeUpdate();
 		} catch (SQLException e) {
-			System.out.println("insertDB �뿉�윭");
+			System.out.println("insertDB Error");
 			return false;
 		} finally {
 			disconnect();

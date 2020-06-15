@@ -151,7 +151,7 @@
 		<hr class="hr1">
 
 		<form method="post"
-			action="/Web_TeamPjt/mypage/portfolio_update?bbsID=<%= bbsID %> ">
+			action="/Web_TeamPjt/mypage/portfolio_update_action" enctype="multipart/form-data">
 
 
 			<div class="row margin30">
@@ -171,10 +171,11 @@
 						type="file" name="pictsrc" id="pictsrc" />
 				</div>
 				<div class="col-sm-8">
-				
+
 					<img class="img-fluid rounded mb-4 mb-lg-0" id='preview'
 						style="height: 100%; width: 400px;"
-						src="<%if(picsrc==null) {%>http://placehold.it/400x400<%}else{ %> <%=picsrc %><%} %>" alt="">
+						src="<%if(picsrc==null) {%>http://placehold.it/400x400<%}else{ %> <%=picsrc %><%} %>"
+						alt="">
 				</div>
 			</div>
 
@@ -184,8 +185,9 @@
 				</div>
 				<div class="col-sm-8">
 					<input type="date" class="form-control" placeholder="시작 날짜"
-						name="registrationDate" value="<%=port.getRegistrationDate()%>"><a> ~ </a><input type="date"
-						class="form-control" placeholder="종료 날짜" value="<%=port.getCompleteDate()%>" name="completeDate">
+						name="registrationDate" value="<%=port.getRegistrationDate()%>"><a>
+						~ </a><input type="date" class="form-control" placeholder="종료 날짜"
+						value="<%=port.getCompleteDate()%>" name="completeDate">
 				</div>
 			</div>
 			<%Vector tmp =DAO.getFavorite(bbsID); %>
@@ -197,19 +199,14 @@
 					<div class="form-group ">
 						<select id="interest_1" name="favorite" class="form-control a_400"
 							style="width: 50%">
-							<option value="web" <%if(tmp.get(0).equals("web")){%>
-												selected
-												<%} %>
-							>WEB</option>
-							<option value="android"<%if(tmp.get(0).equals("android")){%>
-												selected
-												<%} %>>안드로이드</option>
-							<option value="embeded"<%if(tmp.get(0).equals("embeded")){%>
-												selected
-												<%} %>>임베디드</option>
-							<option value="ios"<%if(tmp.get(0).equals("ios")){%>
-												selected
-												<%} %>>IOS</option>
+							<option value="web" <%if(tmp.get(0).equals("web")){%> selected
+								<%} %>>WEB</option>
+							<option value="android" <%if(tmp.get(0).equals("android")){%>
+								selected <%} %>>안드로이드</option>
+							<option value="embeded" <%if(tmp.get(0).equals("embeded")){%>
+								selected <%} %>>임베디드</option>
+							<option value="ios" <%if(tmp.get(0).equals("ios")){%> selected
+								<%} %>>IOS</option>
 						</select>
 					</div>
 				</div>
@@ -222,15 +219,12 @@
 					<div class="form-group ">
 						<select id="interest_1" name="favorite" class="form-control a_400"
 							style="width: 50%">
-							<option value="health"<%if(tmp.get(1).equals("health")){%>
-												selected
-												<%} %>>건강</option>
-							<option value="pychology"<%if(tmp.get(1).equals("pychology")){%>
-												selected
-												<%} %>>심리학</option>
-							<option value="game"<%if(tmp.get(1).equals("game")){%>
-												selected
-												<%} %>>게임</option>
+							<option value="health" <%if(tmp.get(1).equals("health")){%>
+								selected <%} %>>건강</option>
+							<option value="pychology" <%if(tmp.get(1).equals("pychology")){%>
+								selected <%} %>>심리학</option>
+							<option value="game" <%if(tmp.get(1).equals("game")){%> selected
+								<%} %>>게임</option>
 						</select>
 					</div>
 				</div>
@@ -241,8 +235,10 @@
 				</div>
 				<div class="col-sm-8">
 					<input type="number" style="width: 50%" placeholder="참여 인원"
-										name="participantsNumber" value="<%=port.getParticipantsNumber()%>" min="1" max="10" id="usr">
-								
+						name="participantsNumber"
+						value="<%=port.getParticipantsNumber()%>" min="1" max="10"
+						id="usr">
+
 				</div>
 			</div>
 			<div class="row margin30">
@@ -251,7 +247,7 @@
 				</div>
 				<div class="col-sm-8">
 					<input type="text" class="form-control" placeholder="프로젝트 링크"
-										name="projectUrl" value="<%=port.getProjectUrl()%>" id="usr">
+						name="projectUrl" value="<%=port.getProjectUrl()%>" id="usr">
 				</div>
 			</div>
 			<div class="row margin30">
@@ -260,8 +256,8 @@
 				</div>
 				<div class="col-sm-8">
 					<textarea class="a_400" id="field" name="bbsContent"
-						 maxlength="3000" rows="10"
-						cols="40" placeholder="소개하시려는 아이디어 프로젝트를 쉽게 풀어서 작성하여 주십시오."><%= port.getBbsContent() %></textarea>
+						maxlength="3000" rows="10" cols="40"
+						placeholder="소개하시려는 아이디어 프로젝트를 쉽게 풀어서 작성하여 주십시오."><%= port.getBbsContent() %></textarea>
 
 					<div class="message"></div>
 				</div>
@@ -270,13 +266,14 @@
 				<div class="col-sm-4"><a class="a_500">해시태그</a></div>
 				<div class="col-sm-8">.col-sm-8</div>
 			</div> -->
+			<hr class="hr1" style="margin-top: 20px; margin-bottom: 80px;">
+			<div style="text-align: center; margin-bottom: 80px;">
+				<!-- <button type="button" class="btn btn-secondary a_400">임시저장</button> -->
+				<input name="bbsID" value="<%=bbsID%>" type="hidden" />
+				<button type="submit" class="btn btn-warning a_400">게시하기</button>
+				<!-- <p class="p_400" style="color:#cccccc;">임시저장한 아이디어 프로젝트는 [마이페이지]에서 재 작성 하실 수 있습니다.</p> -->
+			</div>
 		</form>
-		<hr class="hr1" style="margin-top: 20px; margin-bottom: 80px;">
-		<div style="text-align: center; margin-bottom: 80px;">
-			<!-- <button type="button" class="btn btn-secondary a_400">임시저장</button> -->
-			<button type="button" class="btn btn-warning a_400">게시하기</button>
-			<!-- <p class="p_400" style="color:#cccccc;">임시저장한 아이디어 프로젝트는 [마이페이지]에서 재 작성 하실 수 있습니다.</p> -->
-		</div>
 	</div>
 
 	<!-- Footer -->

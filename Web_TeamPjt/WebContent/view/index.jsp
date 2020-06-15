@@ -121,40 +121,24 @@
 											alt=""> <a href="#" data-toggle="modal"
 											data-target="#myModal">Forgot Password?</a>
 										<hr class="colorgraph">
-										<div class="row">
-											<div class="col-xs-6 col-sm-6 col-md-6">
-												<input type="submit"
-													class="btn btn-lg btn-success btn-block" value="Sign In">
-											</div>
-											<div class="col-xs-6 col-sm-6 col-md-6">
-												<a href="/Web_TeamPjt/user/register" class="btn btn-lg btn-primary btn-block">Register</a>
-											</div>
+										<div style="text-align:center;">
+										<input type="hidden" name="action" value="checkid">
+											<button type="submit" class="btn btn-primary" style="margin-right:10px;"><a class="a_400">로그인</a></button>
+											<button type="button" class="btn btn-info"><a class="a_400">회원가입</a></button>
 										</div>
 									</fieldset>
 								</form>
 							</div>
-							<div class="form-group">
-								<input type="password" name="password" id="password"
-									class="form-control input-lg" placeholder="Password">
-							</div>
-								<img class="question_img" src="/Web_TeamPjt/img/login/question.png" alt="">
-								<a href="#" data-toggle="modal" data-target="#myModal">Forgot Password?</a>
-							<hr class="colorgraph">
-							<div style="text-align:center;">
-								<button type="button" class="btn btn-primary" style="margin-right:10px;"><a class="a_400">로그인</a></button>
-								<button type="button" class="btn btn-info"><a class="a_400">회원가입</a></button>
-							</div>
-						</fieldset>
-					</form>
 				</div>
 			</div>
 		</div>
-       </div>
        <!-- Modal footer -->
        <div class="modal-footer">
          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
        </div>
-       
+     </div>
+   </div>
+
      </div>
    </div>
  </div>

@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
    pageEncoding="UTF-8"%>
+<%@ page import="User.User"%>
 <%@ page import="Idea.Idea"%>
 <%@ page import="Idea.IdeaDAO"%>
 <%@ page import="java.util.ArrayList"%>
@@ -26,6 +27,13 @@
 
 </head>
 <body>
+
+	<%
+		User user = null;
+	if (session.getAttribute("user") != null) {
+		user = (User) session.getAttribute("user");
+	}
+	%>
    <!-- Navigation -->
    <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
       <div class="container">
@@ -49,7 +57,7 @@
                <!-- <li class="nav-item"><a class="nav-link" href="#">회원가입</a></li> -->
                <li class="nav-item"><a class="nav-link a_400"
                   onclick="logoutAlert()">로그아웃</a></li>
-               <li class="nav-item"><a class="nav-link a_400" href="/Web_TeamPjt/mypage">마이페이지</a></li>
+               <li class="nav-item"><a class="nav-link a_400" href="/Web_TeamPjt/mypage?id=<%=user.getId()%>">마이페이지</a></li>
             </ul>
          </div>
       </div>

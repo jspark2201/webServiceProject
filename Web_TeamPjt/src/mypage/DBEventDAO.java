@@ -589,7 +589,7 @@ public class DBEventDAO {
 	public int update(int bbsID, String bbsTitle, String bbsContent, String registration_date, String complete_date,
 			int number_participants, String url) {
 
-		String SQL = "UPDATE idea SET bbsTitle = ?, bbsContent = ?, registration_date=?,complete_date=?,number_participants=?, projectURL=? WHERE bbsID = ?";
+		String SQL = "UPDATE idea SET title = ?, content = ?, registration_date=?,complete_date=?,number_participants=?, projectURL=? WHERE id = ?";
 
 		try {
 

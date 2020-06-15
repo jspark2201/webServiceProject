@@ -194,7 +194,7 @@
 
 		
 		<div class="row">
-			<button type="button" class="btn btn-outline-warning" onclick="location.href='/Web_TeamPjt/mypage/portfolio_update/?bbsID=<%= bbsID %>'">글수정</button>
+			<button type="button" class="btn btn-outline-warning" onclick="location.href='/Web_TeamPjt/mypage/portfolio_update?bbsID=<%= bbsID %>'">글수정</button>
 					</button>
 			<form action="/Web_TeamPjt/mypage/portfolio_delete"  method="post">
 				<input name="bbsID" value="<%= bbsID %>" type="hidden" />

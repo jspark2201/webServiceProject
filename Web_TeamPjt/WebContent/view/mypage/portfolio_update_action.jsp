@@ -124,7 +124,7 @@
 
 		} else {
 
-			if (request.getParameter("bbsTitle") == null || request.getParameter("bbsContent") == null) {
+			if (multi.getParameter("bbsTitle") == null || multi.getParameter("bbsContent") == null) {
 
 		PrintWriter script = response.getWriter();
 
@@ -145,7 +145,7 @@
 
 			port.setPictsrc(imgFullPath);
 
-			result2 = DAO.updatePict(bbsID, port.getPictsrc() );
+			result2 = DAO.updatePict(bbsID, port.getPictsrc());
 		} else
 			result2 = 1;
 		boolean web = false, android = false, embeded = false, ios = false, health = false, psychology = false,
@@ -187,7 +187,7 @@
 
 			script.println("<script>");
 
-			script.println("location.href='/Web_TeamPjt/mypage/'");
+			script.println("location.href='/Web_TeamPjt/mypage'");
 
 			//script.println("history.back()");
 
@@ -196,7 +196,6 @@
 		}
 
 			}
-
 		}
 	} catch (Exception e) {
 		e.printStackTrace();

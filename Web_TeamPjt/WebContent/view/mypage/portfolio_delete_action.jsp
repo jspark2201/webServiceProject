@@ -71,7 +71,7 @@
 
 			script.println("alert('유효하지 않은 글 입니다')");
 
-			script.println("location.href='myPage.jsp'");
+			script.println("location.href='/Web_TeamPjt/mypage'");
 
 			script.println("</script>");
 
@@ -87,7 +87,7 @@
 
 			script.println("alert('권한이 없습니다')");
 
-			script.println("location.href='/Web_TeamPjt/mypage/'");
+			script.println("location.href='/Web_TeamPjt/mypage'");
 
 			script.println("</script>");			
 
@@ -117,7 +117,7 @@
 
 				script.println("<script>");
 
-				script.println("location.href='/Web_TeamPjt/mypage/'");
+				script.println("location.href='/Web_TeamPjt/mypage'");
 
 				script.println("</script>");
 
