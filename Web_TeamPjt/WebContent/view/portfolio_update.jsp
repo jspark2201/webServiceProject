@@ -182,10 +182,10 @@
 				<div class="col-sm-4">
 					<a class="a_500">프로젝트 진행 기간</a>
 				</div>
-				<div class="col-sm-8">
-					<input type="date" class="form-control" placeholder="시작 날짜"
+				<div class="col-sm-8" style="margin-bottom:30px;">
+					<input type="date" class="form-control" style="width:50%;" placeholder="시작 날짜"
 						name="registrationDate" value="<%=port.getRegistrationDate()%>"><a> ~ </a><input type="date"
-						class="form-control" placeholder="종료 날짜" value="<%=port.getCompleteDate()%>" name="completeDate">
+						class="form-control" style="width:50%;" placeholder="종료 날짜" value="<%=port.getCompleteDate()%>" name="completeDate">
 				</div>
 			</div>
 			<%Vector tmp =DAO.getFavorite(bbsID); %>
@@ -250,7 +250,7 @@
 					<a class="a_500">프로젝트 링크</a>
 				</div>
 				<div class="col-sm-8">
-					<input type="text" class="form-control" placeholder="프로젝트 링크"
+					<input type="text" class="form-control" style="width:50%;" placeholder="프로젝트 링크"
 										name="projectUrl" value="<%=port.getProjectUrl()%>" id="usr">
 				</div>
 			</div>
