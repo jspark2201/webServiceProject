@@ -45,7 +45,7 @@ public class SendNote extends HttpServlet {
 			out.println("<p>"+row+"</p>");
 			
 			dao.sendNote(receiveID, "jspark", "jspark@gmail.com", sendTitle, sendContent);
-			request.setAttribute("dataobject", action); //객체를 request객체에 담음 (data가 문자열이 아니어도 가능)
+			request.setAttribute("dataobject", action); 
 			
 			address = "/view/myPage.jsp";
 			

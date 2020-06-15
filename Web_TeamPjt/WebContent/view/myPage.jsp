@@ -8,6 +8,10 @@
 
 <%@ page import="mypage.DBEventDAO"%>
 <%@ page import="java.util.ArrayList"%>
+<%@page import="note.*"%>
+<%@page import="notification.*"%>
+<%@page import="java.util.ArrayList"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!doctype html>
 <html lang="ko">
 <head>
@@ -15,7 +19,7 @@
 <meta name="viewport"
 	content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <title>IDEARIA</title>
-
+<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
 <link rel="shortcut icon" href="../img/favicon/ecology.png">
 <link rel="stylesheet" href="../css/myPage/myPage.css">
 <link rel="stylesheet" href="../css/bootstrap.min.css">
@@ -24,7 +28,29 @@
 <link
 	href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500&display=swap"
 	rel="stylesheet">
+<script type="text/javascript"
+	src="https://code.jquery.com/jquery-3.2.0.min.js"></script>
+<script type="text/javascript">
+/* $(function(){
+  $('#noteModalTitle').text('이름을 입력하세요');
+}); */
+var title2;
+var receiveID;
 
+function sendTitle(title, giveID, comment) {
+	$('#noteModalTitle').text(title);
+	$('#noteModalWriter').text(giveID);
+	$('#noteModalContent').text(comment);
+	title2 = title;
+	receiveID = giveID;
+}
+
+function writeTitle() {	//모달창에서 보내기를 눌렀을 
+	$('#reSendTitle').val("re:"+title2);
+	$('#writeModalTitle').text("re:"+title2);
+	$('#receiveID').val(receiveID);
+}
+</script>
 </head>
 <body>
 
@@ -107,6 +133,8 @@
 				style="color: #FFCE1E;" data-toggle="tab" href="#menu2">아이디어</a></li>
 			<li class="nav-item"><a class="nav-link a_500"
 				style="color: #FFCE1E;" data-toggle="tab" href="#menu3">포트폴리오</a></li>
+							<li class="nav-item"><a class="nav-link a_500"
+				style="color: #FFCE1E;" data-toggle="tab" href="#menu4">알림</a></li>
 		</ul>
 
 		<!-- Tab panes -->
@@ -116,50 +144,31 @@
 				<table class="table">
 					<thead>
 						<tr>
-							<th></th>
-							<th>이름</th>
-							<th>Email</th>
+							<th>보낸 사람</th>
+							<th>이메일</th>
+							<th>제목</th>
 							<th>내용</th>
 						</tr>
 					</thead>
 					<tbody>
-						<tr>
-							<td>1</td>
-							<td>Kent</td>
-							<td>clarkkent@mail.com</td>
-							<td><a data-toggle="modal" data-target="#mailModal">a</a></td>
-						</tr>
-						<tr>
-							<td>2</td>
+						<%
+					NoteDAO dao = new NoteDAO();
+					ArrayList<NoteDTO> list3 = dao.noteList();
+					request.setAttribute("list3", list3);
+					%>
 
-							<td>Carter</td>
-							<td>johncarter@mail.com</td>
-							<td><a data-toggle="modal" data-target="#mailModal">b</a></td>
-						</tr>
-						<tr>
-							<td>3</td>
-							<td>Parker</td>
-							<td>peterparker@mail.com</td>
-							<td><a data-toggle="modal" data-target="#mailModal">c</a></td>
-						</tr>
-						<tr>
-							<td>4</td>
-							<td>Parker</td>
-							<td>peterparker@mail.com</td>
-							<td><a data-toggle="modal" data-target="#mailModal">d</a></td>
-						</tr>
-						<tr>
-							<td>5</td>
-							<td>Parker</td>
-							<td>peterparker@mail.com</td>
-							<td><a data-toggle="modal" data-target="#mailModal">e</a></td>
-						</tr>
-						<tr>
-							<td>6</td>
-							<td>Parker</td>
-							<td>peterparker@mail.com</td>
-							<td><a data-toggle="modal" data-target="#mailModal">f</a></td>
-						</tr>
+						<c:forEach var="n" items="${list3}">
+							<tr>
+								<td><a name="giveID">${n.giveID}</a></td>
+								<td><a name="giveEmail">${n.giveEmail}</a></td>
+								<td>${n.title}</td>
+								<td><a id="noteContent" data-toggle="modal"
+									data-target="#mailModal"
+									onclick="sendTitle('${n.title}', '${n.giveID}', '${n.comment}')">${n.comment}</a></td>
+							</tr>
+						</c:forEach>
+
+
 					</tbody>
 				</table>
 				<p class="p_400" style="color: #cccccc;">쪽지 내용을 클릭하시면 상세 보기가
@@ -254,28 +263,27 @@
 							<%} %>"; border-width: 5px;">
 
 							<div class="card_img">
-							<% String link;
+								<% String link;
 							if(list.get(i).getState()==5){ 
 								  link =  "portfolioView.jsp?bbsID="+ list.get(i).getBbs_id();
 								 }
 								 else{
 									 link = "../board/boardView.jsp?boardNo="+list.get(i).getBbs_id();
 								 }%>
-								<a href="<%=link%>"> <img
-									style="width: 100%; height: 100%;" alt="" src="<%=imgSRC%>">
+								<a href="<%=link%>"> <img style="width: 100%; height: 100%;"
+									alt="" src="<%=imgSRC%>">
 								</a>
 							</div>
 							<div class="card-body">
 								<h4 class="card-title">
-									<a href="<%=link%>" class="a_400"
-										style="color: #FFCE1E"> <%=list.get(i).getBbs_title()%>
+									<a href="<%=link%>" class="a_400" style="color: #FFCE1E"> <%=list.get(i).getBbs_title()%>
 									</a>
 								</h4>
 								<p class="card-text">
 									<%
 										if (list.get(i).getBbsContent().length() > 30) {
 									%>
-									
+
 									<!-- <%//=list.get(i).getBbsContent().substring(0, 31)%>-->
 									<%
 										} else {
@@ -293,8 +301,7 @@
 								<div>
 									<form action="portfolio_delete_action.jsp" method="post">
 										<input name="bbsID" value="<%=list.get(i).getBbs_id()%>"
-											type="hidden" />
-											<a class="a_400"><%=state %></a>
+											type="hidden" /> <a class="a_400"><%=state %></a>
 										<button type="submit" method="post"
 											class="btn btn-outline-danger btn-sm"
 											style="position: absolute; right: 3%; bottom: 3%;" onclick="">
@@ -384,6 +391,53 @@
 						</ul>
 				</div>
 			</div>
+			<div id="menu4" class="container tab-pane fade">
+				<br>
+				<table class="table">
+					<thead>
+						<tr>
+
+							<th>보낸 사람</th>
+							<th>이메일</th>
+							<th>내용</th>
+							<th>아이디어 제목</th>
+							<th>아이디어 링크</th>
+						</tr>
+					</thead>
+					<tbody>
+						<%
+						NotificationDAO dao2 = new NotificationDAO();
+					
+						ArrayList<NotificationDTO> list2 = dao2.notificationList();
+						for(NotificationDTO dto:list2) {
+					%>
+						<tr>
+							<td><%=dto.getGiveID() %></td>
+							<td><%=dto.getGiveEmail() %></td>
+							<td>컨택 요청이 들어왔습니다.</td>
+							<td><%=dto.getIdeaTitle() %></td>
+							<%-- <td><a href="../Notification?data=<%=dto.getIdeaLink() %>"><%=dto.getIdeaLink() %></a></td> --%>
+							<td><a href=""><%=dto.getIdeaLink() %></a></td>
+						</tr>
+						<%
+						}	
+					%>
+
+					</tbody>
+				</table>
+
+				<div id="home" class="container tab-pane active">
+					<br>
+					<ul class="pagination justify-content-center">
+						<li class="page-item"><a class="page-link" href="#">Previous</a></li>
+						<li class="page-item"><a class="page-link" href="#">1</a></li>
+						<li class="page-item"><a class="page-link" href="#">2</a></li>
+						<li class="page-item"><a class="page-link" href="#">3</a></li>
+						<li class="page-item"><a class="page-link" href="#">Next</a></li>
+					</ul>
+				</div>
+			</div>
+
 		</div>
 	</div>
 	<!-- /.container -->
@@ -428,29 +482,66 @@
 	</div>
 
 	<!-- 쪽지 MODAL -->
-	<div class="modal fade" id="mailModal">
-		<div class="modal-dialog modal-xl">
-			<div class="modal-content">
+  <form>
+  <div class="modal fade" id="mailModal">
+    <div class="modal-dialog modal-xl">
+      <div class="modal-content">
+      
 
-				<!-- Modal Header -->
-				<div class="modal-header">
-					<h4 class="modal-title">Modal Heading</h4>
-					<button type="button" class="close" data-dismiss="modal">&times;</button>
-				</div>
-
-				<!-- Modal body -->
-				<div class="modal-body">Modal body..</div>
-
-				<!-- Modal footer -->
-				<div class="modal-footer">
-					<button type="button" class="btn btn-secondary"
-						data-dismiss="modal">Close</button>
-				</div>
-
-			</div>
-		</div>
-	</div>
-
+        <!-- Modal Header -->
+       <div class="modal-header">
+          <h4 class="modal-title" id="noteModalTitle">쪽지 제목</h4>
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+        </div>
+        
+        <!-- Modal body -->
+        <div class="modal-body">
+        <p id="noteModalWriter" class="a_500">작성자 : </p>
+        <hr>
+          	<p id="noteModalContent" class="a_400">쪽지 내용..</p>
+        </div>
+        
+        <!-- Modal footer -->
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal" data-toggle="modal" data-target="#response_mailModal" ><a onclick="writeTitle()" class="a_400">답장하기</a></button>
+          <button type="button" class="btn btn-secondary" data-dismiss="modal"><a class="a_400">닫기</a></button>
+        </div>
+        
+      </div>
+    </div>
+  </div>
+  </form>
+  
+       
+    <!-- 쪽지 작성 MODAL -->
+    <form action="../SendNote?action=send" method="post">
+   		<div class="modal fade" id="response_mailModal">
+    		<div class="modal-dialog modal-xl">
+      			<div class="modal-content">
+      	        	<!-- Modal Header -->
+        			<div class="modal-header">
+				         <h4 id="writeModalTitle" class="modal-title">쪽지 제목</h4>
+				         <button type="button" class="close" data-dismiss="modal">&times;</button>
+        			</div>
+        	
+			        <!— Modal body —>
+			        <div class="modal-body">
+			        <hr>
+			          	<textarea name="sendContent" class="a_400" id="field" placeholder="보내실 내용을 입력하여 주세요.(200자)" maxlength="200" rows="10" cols="40"></textarea>
+			        </div>
+        
+			        <!— Modal footer —>
+			        <div class="modal-footer">
+			        	<input id="receiveID" name="noteRecevieID" type="hidden" value="aaa"></input>
+			        	<input id="reSendTitle" name="sendTitle" type="hidden" value="abc"></input>
+			          <button type="submit" class="btn btn-secondary">보내기</button>
+			          <button type="button" class="btn btn-secondary" data-dismiss="modal"><a class="a_400">닫기</a></button>
+			        </div>
+      			</div>
+    		</div>
+  		</div>
+    </form>
+    
 	<!-- 포트폴리오 추가 모달 -->
 	<div class="modal fade" id="portfolioModal">
 		<div class="modal-dialog modal-dialog-scrollable"
@@ -488,8 +579,9 @@
 										type="file" name="pictsrc" id="pictsrc" />
 								</div>
 								<div class="col-sm-8">
-									<img class="img-fluid rounded mb-4 mb-lg-0" id='preview' style="height:100%; width:400px;"
-					src="http://placehold.it/400x400" alt="">
+									<img class="img-fluid rounded mb-4 mb-lg-0" id='preview'
+										style="height: 100%; width: 400px;"
+										src="http://placehold.it/400x400" alt="">
 								</div>
 							</div>
 							<div class="row" style="margin-top: 30px; margin-bottom: 30px;">
