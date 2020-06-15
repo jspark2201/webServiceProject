@@ -144,6 +144,31 @@ public class NoteDAO {
         
         return -1;
 	}
+	
+	public int sendNote2(String receiveID, String giveID, String giveEmail, String title) {
+		Connection conn = null; // DB�젒�냽 媛앹껜
+        PreparedStatement pstmt = null; // SQL�떎�뻾媛앹껜
+        ResultSet rs = null; // 寃곌낵�뀑 泥섎━ 媛앹껜
+
+        try {
+        	conn = dbConn(); 
+            String sql = "INSERT INTO Note VALUES (?,?,?,?,?,?)";
+            pstmt = conn.prepareStatement(sql); // sql�쓣 �떎�뻾�떆�궎�뒗 媛앹껜 留뚮뱾�뼱吏�
+            pstmt.setInt(1, getNext());
+            pstmt.setString(2, receiveID);
+            pstmt.setString(3, giveID);
+            pstmt.setString(4, giveEmail);
+            pstmt.setString(5, title);
+            pstmt.setString(6, "연락바랍니다");
+        	return pstmt.executeUpdate();
+        	
+        } catch(Exception e) {	
+        	e.printStackTrace();
+        }
+        
+        return -1;
+	}
+	
 
 	
 	

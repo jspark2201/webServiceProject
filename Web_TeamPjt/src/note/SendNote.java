@@ -51,7 +51,20 @@ public class SendNote extends HttpServlet {
 			
 			response.sendRedirect(request.getContextPath() + address);
 			
-		} else {
+		} else if(action.equals("send2")){
+			String boardNo=request.getParameter("boardNo");
+			String participantsId =request.getParameter("participantsId");
+			String userId = request.getParameter("id");
+			String mail= request.getParameter("mail");
+			String title = request.getParameter("title");			
+			NoteDAO dao = new NoteDAO();
+			
+			dao.sendNote2(participantsId, userId, mail, title);
+			address="/board/boardView.jsp?boardNo="+boardNo;
+			response.sendRedirect(request.getContextPath() + address);
+		}
+		
+		else {
 
 			out.println("<p>"+action+"</p>");
 			

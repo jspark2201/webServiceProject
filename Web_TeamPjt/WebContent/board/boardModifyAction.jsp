@@ -86,7 +86,7 @@
 		}
 
 		String Src = realFolder + "\\" + filename1;
-
+		
 		String Requirements = multi.getParameter("requirements");
 
 		board.setTitle(Title);
@@ -94,13 +94,35 @@
 		board.setSrc(Src);
 		board.setRequirements(Requirements);
 
-		BoardDao boardDao = new BoardDao();
-		boardDao.updateBoard(board);//아이디어 삽입
+		if (board.getWriter() == null) {
+			PrintWriter script = response.getWriter();
+			script.println("<script>");
+			script.println("alert('로그인을 하세요.')");
+			script.println("location.href = 'login.jsp'");
+			script.println("</script>");
+		} else if (board.getTitle() == null || board.getContent() == null || board.getSrc() == null
+				|| board.getRequirements() == null) {
 
-		boardDao.updatePicturesBoard(board);//사진 삽입
-		boardDao.updateTypeBoard(board);//타입 삽입
+			PrintWriter script = response.getWriter();
+			script.println("<script>");
+			script.println("alert('입력이 안된 사항이 있습니다')");
+			script.println("history.back()");
+			script.println("</script>");
 
-		response.sendRedirect(request.getContextPath() + "/board/boardView.jsp?boardNo=" + Id);
+		}else {
+			
+			BoardDao boardDao = new BoardDao();
+			boardDao.updateBoard(board);//아이디어 삽입
+
+			boardDao.updatePicturesBoard(board);//사진 삽입
+			boardDao.updateTypeBoard(board);//타입 삽입
+
+			response.sendRedirect(request.getContextPath() + "/board/boardView.jsp?boardNo=" + Id);
+		}
+		
+		
+		
+
 	}
 	%>
 </body>

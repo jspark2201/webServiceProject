@@ -433,6 +433,30 @@ public class BoardDao {
 	        return rowCount;
 	    }
 	    
+	    
+	    public String ideaWriter(String id) {
+	        String email = null;
+	        Connection connection = null;
+	        PreparedStatement statement = null;
+	        ResultSet resultset = null;
+	        String sql = "SELECT email from user where id=?";
+
+	        try {
+	            connection = this.getConnection();
+	            statement = connection.prepareStatement(sql);
+	            statement.setString(1, id);
+	            resultset = statement.executeQuery();
+	            if(resultset.next()) {
+	                email = resultset.getString(1);
+	            }
+	        } catch (Exception e) {
+	            e.printStackTrace();
+	        } finally {
+	            this.close(connection, statement, resultset);
+	        }
+	        return email;
+	    }
+	    
 	    // �뀒�씠釉� : idea , 湲곕뒫 : 醫뗭븘�슂 移댁슫�꽣 媛��졇�삤湲�
 	    public int goodCount(int id) {
 	        int rowCount = 0;
