@@ -73,7 +73,7 @@ public class IdeaDAO {
 		
 		try { // ���¿� ���� sql�� �޶��� ��.
 			sql = "update idea set title=?, content=?, requirements=?,"
-					+" number_participants=?, url=?, state=? where id=?";
+					+" number_participants=?, projectURL=?, state=? where id=?";
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, idea.getTitle());
 			pstmt.setString(2, idea.getContent());
@@ -139,10 +139,10 @@ public class IdeaDAO {
 			idea.setTitle(rs.getString("title"));
 			idea.setContent(rs.getString("content"));
 			idea.setRequirements(rs.getString("requirements"));
-			idea.setRegistration_date(rs.getString("registration_date"));
+			idea.setRegistration_date(rs.getString("reporting_date"));
 			idea.setComplete_date(rs.getString("complete_date"));
 			idea.setNumber_participants(rs.getInt("number_participants"));
-			idea.setUrl(rs.getString("url"));
+			idea.setUrl(rs.getString("projectURL"));
 			idea.setStateIdx(rs.getInt("state"));
 			
 			rs.close();
@@ -162,8 +162,8 @@ public class IdeaDAO {
 		System.out.println("GETDBTOP----------------------");
 		String sql = "SELECT idea.id as id, writer, title, state, good_cnt, src AS image_src from idea" + 
 				"    JOIN (select idea_id, COUNT(*) AS good_cnt from good" + 
-				"          where registration_date > last_day(now() - interval 1 month)" + 
-				"			 and registration_date <= last_day(now())" + 
+				"          where reporting_date > last_day(now() - interval 1 month)" + 
+				"			 and reporting_date <= last_day(now())" + 
 				"          group by idea_id ORDER BY COUNT(*) desc) as tmp ON idea.id = tmp.idea_id" + 
 				"    LEFT JOIN pictures ON idea.id = pictures.idea_id" +
 				"    WHERE state < 3" +
@@ -210,7 +210,7 @@ public class IdeaDAO {
 		String sql = "SELECT idea.id, title, content, src AS image_src from idea" + 
 				"    LEFT JOIN pictures ON idea.id = pictures.idea_id" + 
 				"    WHERE state = 0" +
-				"    ORDER BY registration_date DESC" + 
+				"    ORDER BY reporting_date DESC" + 
 				"    LIMIT 3;";
 		
 		ArrayList<Idea> ideas = new ArrayList<Idea>();
@@ -307,10 +307,10 @@ public class IdeaDAO {
 				idea.setTitle(rs.getString("title"));
 				idea.setContent(rs.getString("content"));
 				idea.setRequirements(rs.getString("requirements"));
-				idea.setRegistration_date(rs.getString("registration_date"));
+				idea.setRegistration_date(rs.getString("reporting_date"));
 				idea.setComplete_date(rs.getString("complete_date"));
 				idea.setNumber_participants(rs.getInt("number_participants"));
-				idea.setUrl(rs.getString("url"));
+				idea.setUrl(rs.getString("projectURL"));
 				idea.setStateIdx(rs.getInt("state"));
 				
 				ideas.add(idea);
@@ -318,7 +318,7 @@ public class IdeaDAO {
 			rs.close();
 		}
 		catch(SQLException e) {
-			System.out.println("getDBList ����");
+			System.out.println("getDBList:" + e);
 		}
 		finally {
 			disconnect();

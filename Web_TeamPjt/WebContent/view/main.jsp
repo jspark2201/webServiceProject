@@ -82,9 +82,6 @@
                   style="height: 500px; width: 100%;">
                <div class="carousel-caption">
                   <p class="a_500"
-                     style="font-size: 4rem; color: #ffffff; float: left;">아이디어
-                     랭킹전</p>
-                  <p class="a_500"
                      style="font-size: 2rem; color: #ffffff; float: left;">아이디어내고
                      해외여행가자!</p>
                </div>
@@ -155,26 +152,29 @@
 				
 			%>
    <!-- Image Showcases -->
-  <section class="showcase">
+  <section class="showcase" style="margin: 20px 50px;">
     <div class="container-fluid p-0">
       <div class="row no-gutters">
-        <div class="col-lg-6 order-lg-2 text-white showcase-img" style="background-image: url('/Web_TeamPjt/img/main/main_1.jpg');"></div>
+        <div class="col-lg-6 order-lg-2 text-white showcase-img" style="background-image: url('/Web_TeamPjt/img/main/smart.jfif');"></div>
         <div class="col-lg-6 order-lg-1 my-auto showcase-text">
-          <h1 style="font-family: 'Black Han Sans', sans-serif; font-size:4rem;">1</h1><a style="font-family: 'Black Han Sans', sans-serif; font-size:4rem;" class="a_400" href="#"><%=title[0] %></a>
+          <h1 style="font-family: 'Black Han Sans', sans-serif; font-size:4rem;">1</h1>
+          <a style="font-family: 'Black Han Sans', sans-serif; font-size:4rem;" class="a_400" href="#">체중 관리 어플리케이션</a>
           <h2 class="lead mb-0 a_400" style="font-family: 'Black Han Sans', sans-serif; font-size:3rem;">482개의 좋아요를 받았습니다.</h2>
         </div>
       </div>
       <div class="row no-gutters">
-        <div class="col-lg-6 text-white showcase-img" style="background-image: url('/Web_TeamPjt/img/main/mouse.jfif');"></div>
+        <div class="col-lg-6 text-white showcase-img" style="background-image: url('/Web_TeamPjt/img/main/gps.jfif');"></div>
         <div class="col-lg-6 my-auto showcase-text">
-          <h1 style="font-family: 'Black Han Sans', sans-serif; font-size:4rem;">2</h1><a style="font-family: 'Black Han Sans', sans-serif; font-size:4rem;" class="a_400" href="#"><%=title[1] %></a>
+          <h1 style="font-family: 'Black Han Sans', sans-serif; font-size:4rem;">2</h1>
+          <a style="font-family: 'Black Han Sans', sans-serif; font-size:4rem;" class="a_400" href="#">사커 GPS 연동 어플리케이션</a>
           <h2 class="lead mb-0" style="font-family: 'Black Han Sans', sans-serif; font-size:3rem;">420개의 좋아요를 받았습니다.</h2>
         </div>
       </div>
       <div class="row no-gutters">
-        <div class="col-lg-6 order-lg-2 text-white showcase-img" style="background-image: url('/Web_TeamPjt/img/main/mini.jfif');"></div>
+        <div class="col-lg-6 order-lg-2 text-white showcase-img" style="background-image: url('/Web_TeamPjt/img/main/paranormal.gif');"></div>
         <div class="col-lg-6 order-lg-1 my-auto showcase-text">
-          <h1 style="font-family: 'Black Han Sans', sans-serif; font-size:4rem;">3</h1><a style="font-family: 'Black Han Sans', sans-serif; font-size:4rem;" class="a_400" href="#"><%=title[2] %></a>
+          <h1 style="font-family: 'Black Han Sans', sans-serif; font-size:4rem;">3</h1>
+          <a style="font-family: 'Black Han Sans', sans-serif; font-size:4rem;" class="a_400" href="#">파라노말[보드게임]</a>
           <h2 class="lead mb-0" style="font-family: 'Black Han Sans', sans-serif; font-size:3rem;">351개의 좋아요를 받았습니다.</h2>
         </div>
       </div>
@@ -210,9 +210,8 @@
       %> --%>
         <div class="col-lg-4">
           <div class="testimonial-item mx-auto mb-5 mb-lg-0">
-            <img class="img-fluid rounded-circle mb-3" style="height:200px; width:200px;" src="/Web_TeamPjt/img/main/fa0.jfif" alt="">
-            <h5  style="font-family: 'Black Han Sans', sans-serif; font-size:3rem;">CAT POJECT!</h5>
-            <p  style="font-family: 'Black Han Sans', sans-serif; font-size:2rem;" class="font-weight-light mb-0">CAT POJECT!</p>
+            <img class="img-fluid rounded-circle mb-3" style="height:200px; width:200px;" src="/Web_TeamPjt/img/main/printer.jfif" alt="">
+            <p  style="font-family: 'Black Han Sans', sans-serif; font-size:2rem;" class="font-weight-light mb-0">핸드 프린터 어플</p>
           </div>
         </div>
        <%--    <%
@@ -221,16 +220,14 @@
         %> --%>
         <div class="col-lg-4">
           <div class="testimonial-item mx-auto mb-5 mb-lg-0">
-            <img class="img-fluid rounded-circle mb-3" style="height:200px; width:200px;" src="/Web_TeamPjt/img/main/fa1.jfif" alt="">
-            <h5  style="font-family: 'Black Han Sans', sans-serif; font-size:3rem;">ANIMAL POJECT!</h5>
-            <p  style="font-family: 'Black Han Sans', sans-serif; font-size:2rem;" class="font-weight-light mb-0">COME IN!</p>
+            <img class="img-fluid rounded-circle mb-3" style="height:200px; width:200px;" src="/Web_TeamPjt/img/main/ad.jfif" alt="">
+            <p  style="font-family: 'Black Han Sans', sans-serif; font-size:2rem;" class="font-weight-light mb-0">광고 차단 프로젝트</p>
           </div>
         </div>
   		<div class="col-lg-4">
           <div class="testimonial-item mx-auto mb-5 mb-lg-0">
-            <img class="img-fluid rounded-circle mb-3" style="height:200px; width:200px;" src="/Web_TeamPjt/img/main/fa2.jfif" alt="">
-            <h5  style="font-family: 'Black Han Sans', sans-serif; font-size:3rem;">BUTTERFLY POJECT!</h5>
-            <p  style="font-family: 'Black Han Sans', sans-serif; font-size:2rem;" class="font-weight-light mb-0">PLEASE JOIN US!</p>
+            <img class="img-fluid rounded-circle mb-3" style="height:200px; width:200px;" src="/Web_TeamPjt/img/main/record.jfif" alt="">
+            <p  style="font-family: 'Black Han Sans', sans-serif; font-size:2rem;" class="font-weight-light mb-0">활동 기록 어플</p>
           </div>
         </div>
     </div>

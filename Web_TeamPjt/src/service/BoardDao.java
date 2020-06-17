@@ -534,7 +534,7 @@ public class BoardDao {
 	        
 	        String sql =  "SELECT i.id, i.title, i.writer, i.registration_date, p.src "
 	                 + "FROM idea i, pictures p  "
-	                 + "WHERE i.id=p.idea_id "
+	                 + "WHERE i.id=p.idea_id and i.state < 5 "
 	                 + "ORDER BY id DESC LIMIT ?, ?";
 	        try {
 	            connection = this.getConnection();

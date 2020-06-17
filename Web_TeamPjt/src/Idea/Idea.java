@@ -76,7 +76,7 @@ public class Idea {
 	}
 	
 	public String getState() {
-		return IdeaState.getState(this.stateIdx);
+		return IdeaState.getState(this.stateIdx-1);
 	}
 	public int getGoodCount() {
 		return goodCount;

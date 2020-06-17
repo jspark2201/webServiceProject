@@ -205,7 +205,7 @@
 	          </div>
 	        </div>
 	        <div class="col-lg-6 order-lg-1">
-	          <div class="p-5">
+	          <div class="p-6">
 	          	<h2 class="display-4"><%=b.getTitle()%></h2>
 	            <a class="display-4" href="<%=request.getContextPath()%>/board/boardView.jsp?boardNo=<%=b.getId()%>"></a>
 	          	<a href="<%=request.getContextPath()%>/board/boardView.jsp?boardNo=<%=b.getId()%>" class="btn btn-outline btn-xl js-scroll-trigger" style="color:#FFCE1E;">Let's Get Started!</a>

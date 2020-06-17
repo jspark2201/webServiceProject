@@ -69,21 +69,25 @@ public class UserDAO {
 		sql2 = String.format(sql2, user.getPlatform(), user.getGenre());
 
 		try {
-			
- 			pstmt = conn.prepareStatement(sql);
+			System.out.println(user.getId());	
+			System.out.println(user.getPwd());	
+			System.out.println(user.getNickname());	
+			System.out.println(user.getEmail());	
+			System.out.println(user.getNumber());	
+
+			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, user.getId());
 			pstmt.setString(2, user.getPwd()); // TODO:
 			pstmt.setString(3, user.getNickname());
 			pstmt.setString(4, user.getEmail());
 			pstmt.setString(5, user.getNumber());
 			pstmt.executeUpdate();
-			System.out.println(1);
-
+		
 			pstmt = conn.prepareStatement(sql2);
 			pstmt.setString(1, user.getId());
 			pstmt.executeUpdate();
 		} catch (SQLException e) {
-			System.out.println("insertDB Error");
+			System.out.println("insertDB Error : " + e);
 			return false;
 		} finally {
 			disconnect();

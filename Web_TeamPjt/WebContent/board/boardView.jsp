@@ -168,9 +168,9 @@
 		<div class="row">
 			<div class="col-sm-2"
 				style="width: 100%; text-align: right; margin-left: 80%;">
-				<a class="text-muted" style="font-size: 10px;">Number of likes</a><br>
-				<a class="h4"><%=goodCount%></a>
-				<form
+				<a class="text-muted"  style="display:inlne-block; font-size: 10px;">Number of likes</a>
+				<a class="h4" style="display:inlne-block; "><%=goodCount%></a>
+				<form style="display: inline-block;"
 					action="<%=request.getContextPath()%>/board/boardGoodAction.jsp"
 					method="post">
 					<input name="boardNo" value="<%=request.getParameter("boardNo")%>"
@@ -195,8 +195,7 @@
 				</form>
 
 			</div>
-			<div class="a_400" style="font-size: 2rem; margin: 30px;">
-				<%=board.getTitle()%>
+			<div class="a_400" style="font-size: 2rem; margin: 30px; padding-left: 130px;">
 			</div>
 
 			<!-- Post Content Column -->
@@ -445,7 +444,7 @@
 								%>
 
 								<div class="col-sm-3">
-									<a class="a_400"><%=participant.getNickname()%></a>
+									<a class="a_400" href=".."><%=participant.getNickname()%></a>
 								</div>
 								<div class="col-sm-3" style="width: 600px;">
 									<a class="a_400"><%=participant.getRegistration_date()%></a>

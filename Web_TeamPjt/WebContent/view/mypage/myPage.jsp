@@ -130,8 +130,6 @@
 				style="color: #FFCE1E;" data-toggle="tab" href="#menu1">개인정보</a></li>
 			<li class="nav-item"><a class="nav-link a_500"
 				style="color: #FFCE1E;" data-toggle="tab" href="#menu2">포트폴리오</a></li>
-			<li class="nav-item"><a class="nav-link a_500"
-				style="color: #FFCE1E;" data-toggle="tab" href="#menu3">알림</a></li>
 		</ul>
 
 		<!-- Tab panes -->
@@ -179,15 +177,65 @@
 				</ul>
 			</div>
 			<div id="menu1" class="container tab-pane fade">
-				<br>
-				<p class="p_400" style="color: #cccccc;">개인정보 조회 및 수정은 인증이
-					필요합니다.</p>
-				<button type="button" class="btn btn-outline-dark"
-					style="margin-right: 20px;">개인정보 조회</button>
-				<button type="button" class="btn btn-outline-dark">개인정보 수정</button>
-			</div>
-			<hr>
 			
+			    <div class="row">
+			        <div class="col-xs-12 col-sm-8 col-md-6 col-sm-offset-2 col-md-offset-3">
+			            <form role="form" method="post" action="/Web_TeamPjt/Login">
+			                <div class="row" style="margin-top:30px; margin-bottom:15px;">
+			                    <div class="col-sm-4 a_400" style="margin-top:5px;">닉네임:</div>
+			                    <div class="col-sm-8"><input type="text" name="nickname" value=""
+			                        class="form-control input-lg" placeholder="Nickname"
+			                        tabindex="6"></div>
+			                </div>
+			                <div class="row" style="margin-top:30px; margin-bottom:15px;">
+			                    <div class="col-sm-4 a_400" style="margin-top:5px;">이메일:</div>
+			                    <div class="col-sm-8"><input type="text" name="email" value=""
+			                        class="form-control input-lg" placeholder="Email"
+			                        tabindex="6"></div>
+			                </div>
+			                <div class="row" style="margin-top:30px; margin-bottom:15px;">
+			                    <div class="col-sm-4 a_400" style="margin-top:5px;">전화번호:</div>
+			                    <div class="col-sm-8"><input type="text" name="number" value=""
+			                        class="form-control input-lg" placeholder="Phone"
+			                        tabindex="6"></div>
+			                </div>
+			                <div class="row" style="margin-top:30px; margin-bottom:15px;">
+			                    <div class="col-sm-5 a_400" style="margin-top:5px;">프로젝트 플랫폼</div>
+			                    <div class="col-sm-7">
+			                        <div class="form-group ">
+			                            <select id="test" name="interest" class="form-control a_400" style="width:50% ">
+			                                <option value=web>WEB</option>
+			                                <option value=android>안드로이드</option>
+			                                <option value=embebed>임베디드</option>
+			                                <option value=ios>IOS</option>
+			                            </select>
+			                        </div>
+			                    </div>
+			                </div>
+			                <div class="row" style="margin-top:30px; margin-bottom:15px;">
+			                    <div class="col-sm-5 a_400" style="margin-top:5px;">흥미 분야</div>
+			                    <div class="col-sm-7">
+			                        <div class="form-group ">
+			                            <select id="test1" name="interest" class="form-control a_400" style="width:50% ">
+			                                <option value=health>건강</option>
+			                                <option value=psychology>심리학</option>
+			                                <option value=game>게임</option>
+			                            </select>
+			                        </div>
+			                    </div>
+			                </div>
+			
+			                <p class="p_400" style="color: #cccccc;">개인정보 조회 및 수정은 인증이
+			                    필요합니다.</p>
+			                <button type="button" class="btn btn-outline-dark"
+			                    onclick="location.href='/Web_TeamPjt/user/update'" style="margin-right: 20px;">개인정보
+			                    수정</button>
+			        </div>
+			    </div>
+			</div>
+			
+			<hr>
+
 			<div id="menu2" class="container tab-pane fade">
 				<p class="p_400" style="color: #cccccc;">외부 홈페이지의 포트폴리오 업로드가
 					가능합니다.</p>
@@ -216,21 +264,21 @@
 						<div class="card h-100"
 							style="border-color:
 							<%int Ptype = bbsDAO.getPtype(list.get(i).getBbs_id(), userID);
-String state = null;
-if (list.get(i).getState() == 1 && Ptype == 0) {
-	state = "모집 중";%>
+							String state = null;
+							if (list.get(i).getState() == 1 && Ptype == 0) {
+								state = "모집 중";%>
 							#ADFF2F
 							<%} else if (list.get(i).getState() == 2 && Ptype == 0) {
-							state = "진행 중";%>
+									state = "진행 중";%>
 							#008000 
 							<%} else if (list.get(i).getState() == 3 && Ptype == 0) {
-							state = "완료";%>
+								state = "완료";%>
 							#006400 
 							<%} else if (list.get(i).getState() == 1 && Ptype == 1) {
 							state = "모집 중(신청)";%>
 							#FFA07A 
 							<%} else if (list.get(i).getState() == 1 && Ptype == 2) {
-								state = "모집 중(참가)";%>
+									state = "모집 중(참가)";%>
 							#FF7F50 
 							<%} else if (list.get(i).getState() == 2 && Ptype == 2) {
 							state = "진행 중";%>
@@ -242,7 +290,7 @@ if (list.get(i).getState() == 1 && Ptype == 0) {
 							state = "개발중단";%>
 							#A9A9A9 
 							<%} else if (list.get(i).getState() == 5) {
-							state = "외부 프로젝트";%>
+								state = "외부 프로젝트";%>
 							#0000FF
 							<%}%>"; border-width: 5px;">
 
@@ -284,7 +332,8 @@ if (list.get(i).getState() == 1 && Ptype == 0) {
 								</p>
 
 								<div>
-									<form action="/Web_TeamPjt/mypage/portfolio_delete" method="post">
+									<form action="/Web_TeamPjt/mypage/portfolio_delete"
+										method="post">
 										<input name="bbsID" value="<%=list.get(i).getBbs_id()%>"
 											type="hidden" /> <a class="a_400"><%=state%></a>
 										<button type="submit" method="post"
@@ -324,16 +373,19 @@ if (list.get(i).getState() == 1 && Ptype == 0) {
 							if (pageNumber - 2 > 0) {
 							%>
 							<li class="page-item"><a class="page-link"
-								href="/Web_TeamPjt/mypage/?pageNumber=<%=pageNumber - 2%>"> <%=pageNumber - 2%>
+								href="/Web_TeamPjt/mypage/?pageNumber=<%=pageNumber - 2%>">
+									<%=pageNumber - 2%>
 							</a></li>
 							<li class="page-item"><a class="page-link"
-								href="/Web_TeamPjt/mypage/?pageNumber=<%=pageNumber - 1%>"> <%=pageNumber - 1%>
+								href="/Web_TeamPjt/mypage/?pageNumber=<%=pageNumber - 1%>">
+									<%=pageNumber - 1%>
 							</a></li>
 							<%
 								} else if (pageNumber - 1 > 0) {
 							%>
 							<li class="page-item"><a class="page-link"
-								href="/Web_TeamPjt/mypage/?pageNumber=<%=pageNumber - 1%>"> <%=pageNumber - 1%>
+								href="/Web_TeamPjt/mypage/?pageNumber=<%=pageNumber - 1%>">
+									<%=pageNumber - 1%>
 							</a></li>
 							<%
 								}
@@ -345,10 +397,12 @@ if (list.get(i).getState() == 1 && Ptype == 0) {
 								if (pageNumber + 2 <= totalPageNum) {
 							%>
 							<li class="page-item"><a class="page-link"
-								href="/Web_TeamPjt/mypage/?pageNumber=<%=pageNumber + 1%>"> <%=pageNumber + 1%>
+								href="/Web_TeamPjt/mypage/?pageNumber=<%=pageNumber + 1%>">
+									<%=pageNumber + 1%>
 							</a></li>
 							<li class="page-item"><a class="page-link"
-								href="/Web_TeamPjt/mypage/?pageNumber=<%=pageNumber + 2%>"> <%=pageNumber + 2%>
+								href="/Web_TeamPjt/mypage/?pageNumber=<%=pageNumber + 2%>">
+									<%=pageNumber + 2%>
 							</a></li>
 
 
@@ -356,7 +410,8 @@ if (list.get(i).getState() == 1 && Ptype == 0) {
 								} else if (pageNumber + 1 <= totalPageNum) {
 							%>
 							<li class="page-item"><a class="page-link"
-								href="/Web_TeamPjt/mypage/?pageNumber=<%=pageNumber + 1%>"> <%=pageNumber + 1%>
+								href="/Web_TeamPjt/mypage/?pageNumber=<%=pageNumber + 1%>">
+									<%=pageNumber + 1%>
 							</a></li>
 
 							<%
@@ -376,53 +431,6 @@ if (list.get(i).getState() == 1 && Ptype == 0) {
 						</ul>
 				</div>
 			</div>
-			<div id="menu3" class="container tab-pane fade">
-				<br>
-				<table class="table">
-					<thead>
-						<tr>
-
-							<th>보낸 사람</th>
-							<th>이메일</th>
-							<th>내용</th>
-							<th>아이디어 제목</th>
-							<th>아이디어 링크</th>
-						</tr>
-					</thead>
-					<tbody>
-						<%
-							NotificationDAO dao2 = new NotificationDAO();
-
-						ArrayList<NotificationDTO> list2 = dao2.notificationList();
-						for (NotificationDTO dto : list2) {
-						%>
-						<tr>
-							<td><%=dto.getGiveID()%></td>
-							<td><%=dto.getGiveEmail()%></td>
-							<td>컨택 요청이 들어왔습니다.</td>
-							<td><%=dto.getIdeaTitle()%></td>
-							<%-- <td><a href="/Web_TeamPjt/Notification?data=<%=dto.getIdeaLink() %>"><%=dto.getIdeaLink() %></a></td> --%>
-							<td><a href=""><%=dto.getIdeaLink()%></a></td>
-						</tr>
-						<%
-							}
-						%>
-
-					</tbody>
-				</table>
-
-				<div id="home" class="container tab-pane active">
-					<br>
-					<ul class="pagination justify-content-center">
-						<li class="page-item"><a class="page-link" href="#">Previous</a></li>
-						<li class="page-item"><a class="page-link" href="#">1</a></li>
-						<li class="page-item"><a class="page-link" href="#">2</a></li>
-						<li class="page-item"><a class="page-link" href="#">3</a></li>
-						<li class="page-item"><a class="page-link" href="#">Next</a></li>
-					</ul>
-				</div>
-			</div>
-
 		</div>
 	</div>
 	<!-- /.container -->

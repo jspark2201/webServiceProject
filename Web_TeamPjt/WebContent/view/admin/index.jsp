@@ -189,9 +189,9 @@
 						datasets: [{
 							label: '가입자 통계',
 							data: [
-									<c:out value="${UserCount[0]}"/>,
-									<c:out value="${UserCount[1]}"/>,
 									<c:out value="${UserCount[2]}"/>,
+									<c:out value="${UserCount[1]}"/>,
+									<c:out value="${UserCount[0]}"/>,
 								],
 							backgroundColor: [ 'rgba(255, 99, 132, 0.2)', 'rgba(54, 162, 235, 0.2)', 'rgba(255, 206, 86, 0.2)'],
 							borderColor: [ 'rgba(255, 99, 132, 1)', 'rgba(54, 162, 235, 1)', 'rgba(255, 206, 86, 1)'],
